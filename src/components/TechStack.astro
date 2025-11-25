@@ -1,0 +1,150 @@
+---
+const techs = [
+    {
+        name: "HTML5",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    },
+    {
+        name: "CSS3",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    },
+    {
+        name: "JS",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    },
+    {
+        name: "Astro",
+        icon: "https://astro.build/assets/press/astro-icon-light-gradient.svg",
+    },
+    {
+        name: "React",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    },
+    {
+        name: "Tailwind",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+    },
+    {
+        name: "Node",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    },
+    {
+        name: "Git",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    },
+    {
+        name: "Figma",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    },
+];
+
+// Duplicamos muchas veces para que nunca se acabe la fila
+const loopTechs = [...techs, ...techs, ...techs, ...techs, ...techs];
+---
+
+<section
+    class="py-20 bg-neo-black overflow-hidden relative flex flex-col justify-center gap-12"
+>
+    <!-- Fila Superior: Rápida a la izquierda + Inclinada -->
+    <div
+        class="relative w-full -rotate-2 bg-black/50 border-y border-white/10 backdrop-blur-sm py-6 transform scale-110"
+    >
+        <!-- Sombra de neón detrás -->
+        <div class="absolute inset-0 bg-neo-cyan/5 blur-xl"></div>
+
+        <div class="scroller flex w-max">
+            {
+                loopTechs.map((t) => (
+                    <div class="mx-8 group transition-transform hover:scale-125">
+                        <img
+                            src={t.icon}
+                            alt={t.name}
+                            class="h-20 w-20 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
+                        />
+                    </div>
+                ))
+            }
+            <!-- Duplicamos contenido para el loop visual perfecto -->
+            {
+                loopTechs.map((t) => (
+                    <div class="mx-8 group transition-transform hover:scale-125">
+                        <img
+                            src={t.icon}
+                            alt={t.name}
+                            class="h-20 w-20 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <!-- Fila Inferior: Rápida a la derecha + Inclinada opuesta -->
+    <div
+        class="relative w-full rotate-1 bg-white/5 border-y border-neo-lime/30 backdrop-blur-sm py-6 transform scale-110"
+    >
+        <div class="absolute inset-0 bg-neo-lime/5 blur-xl"></div>
+
+        <div class="scroller-reverse flex w-max">
+            {
+                loopTechs.map((t) => (
+                    <div class="mx-8 group transition-transform hover:scale-125 hover:rotate-12">
+                        <img
+                            src={t.icon}
+                            alt={t.name}
+                            class="h-20 w-20 object-contain drop-shadow-[0_0_15px_rgba(204,255,0,0.3)]"
+                        />
+                    </div>
+                ))
+            }
+            {
+                loopTechs.map((t) => (
+                    <div class="mx-8 group transition-transform hover:scale-125 hover:rotate-12">
+                        <img
+                            src={t.icon}
+                            alt={t.name}
+                            class="h-20 w-20 object-contain drop-shadow-[0_0_15px_rgba(204,255,0,0.3)]"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Definimos la animación AQUÍ MISMO para que nada la bloquee */
+    .scroller {
+        animation: scrollLeft 20s linear infinite;
+    }
+
+    .scroller-reverse {
+        animation: scrollRight 25s linear infinite;
+    }
+
+    @keyframes scrollLeft {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        } /* Se mueve hasta la mitad porque duplicamos el contenido */
+    }
+
+    @keyframes scrollRight {
+        0% {
+            transform: translateX(-50%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    /* Si el usuario tiene activada la reducción de movimiento, lo respetamos (opcional) */
+    @media (prefers-reduced-motion: reduce) {
+        .scroller,
+        .scroller-reverse {
+            animation-duration: 100s;
+        }
+    }
+</style>

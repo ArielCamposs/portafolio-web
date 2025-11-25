@@ -1,0 +1,137 @@
+<nav
+    class="fixed w-full z-50 top-4 start-0 transition-all duration-300 px-4"
+    id="main-nav"
+>
+    <!-- Usamos md:justify-center para centrar en PC y gap para separar logo de menú -->
+    <div
+        class="max-w-fit mx-auto flex flex-wrap items-center justify-between md:justify-center md:gap-12 p-4 rounded-full transition-all duration-300"
+        id="nav-container"
+    >
+        <!-- Logo -->
+        <a href="#" class="flex items-center rtl:space-x-reverse group">
+            <span
+                class="self-center text-2xl font-black whitespace-nowrap text-white tracking-tighter group-hover:text-neo-lime transition-colors"
+            >
+                Ariel<span class="text-neo-pink">.</span>
+            </span>
+        </a>
+
+        <!-- Botón menú móvil (Visible solo en celular) -->
+        <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-white rounded-md md:hidden hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-neo-lime"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+        >
+            <span class="sr-only">Abrir menú</span>
+            <svg
+                class="w-6 h-6"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+            >
+                <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M1 1h15M1 7h15M1 13h15"></path>
+            </svg>
+        </button>
+
+        <!-- Menú de enlaces (Centrado junto al logo en PC) -->
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul
+                class="font-mono text-sm font-bold flex flex-col p-4 md:p-0 mt-4 border border-white/10 rounded-lg md:border-0 bg-neo-black md:bg-transparent md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0"
+            >
+                <li>
+                    <a
+                        href="#inicio"
+                        class="block py-2 px-3 text-white hover:text-neo-lime transition-colors text-center"
+                        >INICIO</a
+                    >
+                </li>
+
+                <li>
+                    <a
+                        href="#proyectos"
+                        class="block py-2 px-3 text-gray-400 hover:text-neo-cyan transition-colors text-center"
+                        >PROYECTOS</a
+                    >
+                </li>
+
+                <li>
+                    <a
+                        href="#sobre-mi"
+                        class="block py-2 px-3 text-gray-400 hover:text-neo-purple transition-colors text-center"
+                        >SOBRE MÍ</a
+                    >
+                </li>
+
+                <!-- Botón de Contacto -->
+                <li>
+                    <a
+                        href="#contacto"
+                        class="block py-2 px-6 text-white border border-white/30 hover:border-neo-lime hover:bg-neo-lime hover:text-black transition-all rounded-full text-center md:ml-4"
+                    >
+                        CONTACTAR
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const button = document.querySelector(
+        '[data-collapse-toggle="navbar-default"]',
+    );
+    const menu = document.getElementById("navbar-default");
+    const navContainer = document.getElementById("nav-container");
+
+    // Toggle Menú Móvil
+    if (button && menu) {
+        button.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+            // Al abrir en móvil, damos fondo sólido al contenedor para legibilidad
+            if (!menu.classList.contains("hidden")) {
+                navContainer.classList.add(
+                    "bg-neo-black",
+                    "border",
+                    "border-white/20",
+                );
+            } else {
+                navContainer.classList.remove(
+                    "bg-neo-black",
+                    "border",
+                    "border-white/20",
+                );
+            }
+        });
+    }
+
+    // Efecto "Isla Dinámica" al hacer scroll
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            // Cuando bajas, se crea una "pastilla" negra de fondo detrás de los botones centrados
+            navContainer?.classList.add(
+                "bg-neo-black/80",
+                "backdrop-blur-md",
+                "border",
+                "border-white/10",
+                "shadow-lg",
+            );
+        } else {
+            // Arriba del todo es invisible
+            navContainer?.classList.remove(
+                "bg-neo-black/80",
+                "backdrop-blur-md",
+                "border",
+                "border-white/10",
+                "shadow-lg",
+            );
+        }
+    });
+</script>
