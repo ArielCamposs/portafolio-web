@@ -1,80 +1,125 @@
-<section id="sobre-mi" class="py-24 relative overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-        <!-- Columna Texto -->
-        <div class="relative z-10 order-2 md:order-1">
-            <h2 class="text-4xl font-bold mb-6 text-white">
-                Más que código, creo <br />
-                <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
-                    >soluciones digitales</span
-                >
-            </h2>
-            <div class="space-y-4 text-slate-300 text-lg leading-relaxed">
-                <p>
-                    Hola, soy un Analista Programador formado en el prestigioso
-                    <strong class="text-white"
-                        >Instituto Profesional Duoc UC</strong
-                    >. Mi pasión es combinar la lógica técnica con el diseño
-                    creativo.
-                </p>
-                <p>
-                    Desde mi base en <strong class="text-white"
-                        >La Ligua, Valparaíso</strong
-                    >, trabajo de forma remota creando interfaces que no solo
-                    funcionan, sino que se sienten bien. Me especializo en el
-                    ecosistema de JavaScript moderno y la optimización de
-                    rendimiento.
-                </p>
+---
+// Datos simulados de "Niveles" para las barras de progreso
+const stats = [
+    { label: "Frontend (React/Astro)", level: 95 },
+    { label: "Backend (Node/PHP)", level: 80 },
+    { label: "UI/UX Design", level: 85 },
+    { label: "Database SQL", level: 75 }
+];
+---
+
+<section id="sobre-mi" class="py-32 bg-neo-black relative overflow-hidden">
+    
+    <!-- Fondo Grid Táctico -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none" 
+         style="background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), 
+         linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px); 
+         background-size: 50px 50px;">
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        
+        <!-- Contenedor Principal tipo "ID Card" Gigante -->
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 border-2 border-white/10 bg-[#111] p-6 md:p-12 relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            
+            <!-- Decoración Esquinas Tech -->
+            <div class="absolute -top-2 -left-2 w-8 h-8 border-t-4 border-l-4 border-neo-lime"></div>
+            <div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-4 border-r-4 border-neo-lime"></div>
+            <div class="absolute top-1/2 -left-3 w-1 h-20 bg-neo-pink"></div>
+            <div class="absolute top-1/2 -right-3 w-1 h-20 bg-neo-cyan"></div>
+
+            <!-- COLUMNA 1: IMAGEN & DATOS RÁPIDOS (4 columnas) -->
+            <div class="md:col-span-4 flex flex-col gap-6">
+                <!-- Marco de Foto con efecto Glitch estático -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-neo-lime translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
+                    <div class="relative border-2 border-white bg-neo-black overflow-hidden aspect-square">
+                        <!-- AQUÍ VA TU IMAGEN GENERADA TIPO CÓMIC -->
+                        <img 
+                            src="/generated-image.webp" 
+                            alt="Avatar Developer" 
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                        />
+                        <!-- Overlay de escaneo -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neo-lime/20 to-transparent h-full w-full animate-scan opacity-50 pointer-events-none"></div>
+                    </div>
+                </div>
+
+                <!-- Datos Rápidos -->
+                <div class="bg-white/5 p-4 border border-white/10 font-mono text-xs">
+                    <div class="flex justify-between border-b border-white/10 pb-2 mb-2">
+                        <span class="text-gray-400">UBICACIÓN:</span>
+                        <span class="text-neo-lime">LA LIGUA, CL</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/10 pb-2 mb-2">
+                        <span class="text-gray-400">ESTADO:</span>
+                        <span class="text-neo-cyan animate-pulse">DISPONIBLE</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">EXP:</span>
+                        <span class="text-white">+3 AÑOS</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- Pequeños datos destacados -->
-            <div class="grid grid-cols-2 gap-6 mt-8">
-                <div
-                    class="p-4 rounded-xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm"
-                >
-                    <span class="text-3xl font-bold text-cyan-400 block mb-1"
-                        >+3</span
-                    >
-                    <span class="text-sm text-slate-400"
-                        >Años de Experiencia</span
-                    >
+            <!-- COLUMNA 2: BIO & STATS (8 columnas) -->
+            <div class="md:col-span-8 flex flex-col justify-center">
+                
+                <!-- Encabezado -->
+                <div class="mb-8">
+                    <span class="bg-neo-pink text-black text-xs font-bold px-2 py-1 mb-4 inline-block transform -rotate-1">
+                        ANALISTA PROGRAMADOR
+                    </span>
+                    <h2 class="text-5xl md:text-6xl font-black text-white uppercase leading-[0.9] mb-6">
+                        DISEÑO EL FUTURO <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-neo-lime to-neo-cyan">PIXEL POR PIXEL</span>
+                    </h2>
+                    <p class="text-gray-300 text-lg leading-relaxed border-l-4 border-neo-purple pl-6">
+                        No soy el típico desarrollador que solo escribe código. Soy un <strong class="text-white">arquitecto digital</strong> formado en Duoc UC, obsesionado con el rendimiento y la estética. 
+                        Transformo ideas abstractas en interfaces funcionales que tus clientes amarán usar.
+                    </p>
                 </div>
-                <div
-                    class="p-4 rounded-xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm"
-                >
-                    <span class="text-3xl font-bold text-purple-400 block mb-1"
-                        >100%</span
-                    >
-                    <span class="text-sm text-slate-400"
-                        >Clientes Satisfechos</span
-                    >
-                </div>
-            </div>
-        </div>
 
-        <!-- Columna Imagen (Efecto Marco Creativo) -->
-        <div class="relative order-1 md:order-2 flex justify-center">
-            <!-- Elementos decorativos de fondo -->
-            <div
-                class="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-purple-600 rounded-full blur-3xl opacity-20 animate-pulse"
-            >
-            </div>
-
-            <!-- Foto Placeholder (Reemplazar con tu foto real) -->
-            <div
-                class="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border-2 border-slate-700 rotate-3 hover:rotate-0 transition-transform duration-500 shadow-2xl shadow-purple-500/20"
-            >
-                <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
-                    alt="Foto de Perfil"
-                    class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-                <!-- Overlay gradiente sutil -->
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"
-                >
+                <!-- Barras de Habilidad (Stats) -->
+                <div class="space-y-6">
+                    <h3 class="text-neo-lime font-mono text-sm tracking-widest border-b border-white/20 pb-2 mb-4">
+                        // SISTEMAS_OPERATIVOS
+                    </h3>
+                    
+                    {stats.map((stat) => (
+                        <div class="group">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-bold text-white group-hover:text-neo-cyan transition-colors">{stat.label}</span>
+                                <span class="text-xs font-mono text-neo-lime">{stat.level}%</span>
+                            </div>
+                            <div class="h-2 w-full bg-white/10 relative overflow-hidden">
+                                <!-- Barra de progreso animada -->
+                                <div class="h-full bg-gradient-to-r from-neo-cyan to-neo-purple absolute top-0 left-0 transition-all duration-1000 group-hover:brightness-150" 
+                                     style={`width: ${stat.level}%`}></div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
+
+                <!-- Botón de Descarga CV (Opcional) -->
+                <div class="mt-10">
+                    <a href="#" class="inline-flex items-center gap-2 text-white hover:text-neo-lime transition-colors font-bold border-b-2 border-transparent hover:border-neo-lime pb-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        DESCARGAR CURRÍCULUM_V2.0
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    @keyframes scan {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+    }
+    .animate-scan {
+        animation: scan 3s linear infinite;
+    }
+</style>

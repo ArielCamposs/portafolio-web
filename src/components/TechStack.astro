@@ -1,150 +1,90 @@
 ---
 const techs = [
-    {
-        name: "HTML5",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-    },
-    {
-        name: "CSS3",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-    },
-    {
-        name: "JS",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-    },
-    {
-        name: "Astro",
-        icon: "https://astro.build/assets/press/astro-icon-light-gradient.svg",
-    },
-    {
-        name: "React",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-        name: "Tailwind",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-    },
-    {
-        name: "Node",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-    },
-    {
-        name: "Git",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-    },
-    {
-        name: "Figma",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-    },
+    { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "Astro", icon: "https://astro.build/assets/press/astro-icon-light-gradient.svg" },
+    { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+    // Usamos iconos blancos para que se vean en el fondo oscuro
+    { name: "GitHub", icon: "https://www.svgrepo.com/show/349375/github.svg" }, 
+    { name: "Vercel", icon: "https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png" },
+    // Icono genérico para IA (Cerebro digital)
+    { name: "Inteligencia Artificial", icon: "https://img.icons8.com/fluency/96/artificial-intelligence.png" },
+    { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
 ];
 
-// Duplicamos muchas veces para que nunca se acabe la fila
-const loopTechs = [...techs, ...techs, ...techs, ...techs, ...techs];
+// Duplicamos para el efecto infinito (x4 veces para que nunca falten iconos en pantallas grandes)
+const loopTechs = [...techs, ...techs, ...techs, ...techs];
 ---
 
-<section
-    class="py-20 bg-neo-black overflow-hidden relative flex flex-col justify-center gap-12"
->
-    <!-- Fila Superior: Rápida a la izquierda + Inclinada -->
-    <div
-        class="relative w-full -rotate-2 bg-black/50 border-y border-white/10 backdrop-blur-sm py-6 transform scale-110"
-    >
-        <!-- Sombra de neón detrás -->
+<section class="py-24 bg-neo-black overflow-hidden relative flex flex-col justify-center gap-12">
+
+    <!-- Fila 1: Moviéndose a la IZQUIERDA -->
+    <!-- Agregamos 'invert' al contenedor de Vercel si es necesario, pero el logo blanco de GitHub ya ayuda -->
+    <div class="relative w-full -rotate-1 bg-white/5 border-y border-white/10 backdrop-blur-sm py-8">
         <div class="absolute inset-0 bg-neo-cyan/5 blur-xl"></div>
-
-        <div class="scroller flex w-max">
-            {
-                loopTechs.map((t) => (
-                    <div class="mx-8 group transition-transform hover:scale-125">
-                        <img
-                            src={t.icon}
-                            alt={t.name}
-                            class="h-20 w-20 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
-                        />
+        
+        <div class="scroller flex w-max items-center">
+            {loopTechs.map((t) => (
+                <div class="mx-8 group transition-transform hover:scale-125 cursor-pointer relative">
+                    <!-- Tooltip simple al hover -->
+                    <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-neo-lime text-black text-xs font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap rounded">
+                        {t.name}
                     </div>
-                ))
-            }
-            <!-- Duplicamos contenido para el loop visual perfecto -->
-            {
-                loopTechs.map((t) => (
-                    <div class="mx-8 group transition-transform hover:scale-125">
-                        <img
-                            src={t.icon}
-                            alt={t.name}
-                            class="h-20 w-20 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
-                        />
-                    </div>
-                ))
-            }
+                    <!-- Imagen con filtro para Vercel/GitHub si fuera necesario (en este caso usamos SVGs blancos donde aplica) -->
+                    <img 
+                        src={t.icon} 
+                        alt={t.name} 
+                        class={`h-16 w-16 md:h-20 md:w-20 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] ${t.name === 'Vercel' ? 'invert' : ''}`} 
+                    />
+                </div>
+            ))}
         </div>
     </div>
 
-    <!-- Fila Inferior: Rápida a la derecha + Inclinada opuesta -->
-    <div
-        class="relative w-full rotate-1 bg-white/5 border-y border-neo-lime/30 backdrop-blur-sm py-6 transform scale-110"
-    >
+    <!-- Fila 2: Moviéndose a la DERECHA -->
+    <div class="relative w-full rotate-2 bg-black/40 border-y border-neo-lime/20 backdrop-blur-sm py-8">
         <div class="absolute inset-0 bg-neo-lime/5 blur-xl"></div>
-
-        <div class="scroller-reverse flex w-max">
-            {
-                loopTechs.map((t) => (
-                    <div class="mx-8 group transition-transform hover:scale-125 hover:rotate-12">
-                        <img
-                            src={t.icon}
-                            alt={t.name}
-                            class="h-20 w-20 object-contain drop-shadow-[0_0_15px_rgba(204,255,0,0.3)]"
-                        />
+        
+        <div class="scroller-reverse flex w-max items-center">
+            {loopTechs.map((t) => (
+                <div class="mx-8 group transition-transform hover:scale-125 hover:-rotate-12 cursor-pointer relative">
+                     <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-neo-cyan text-black text-xs font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap rounded">
+                        {t.name}
                     </div>
-                ))
-            }
-            {
-                loopTechs.map((t) => (
-                    <div class="mx-8 group transition-transform hover:scale-125 hover:rotate-12">
-                        <img
-                            src={t.icon}
-                            alt={t.name}
-                            class="h-20 w-20 object-contain drop-shadow-[0_0_15px_rgba(204,255,0,0.3)]"
-                        />
-                    </div>
-                ))
-            }
+                    <img 
+                        src={t.icon} 
+                        alt={t.name} 
+                        class={`h-16 w-16 md:h-20 md:w-20 object-contain drop-shadow-[0_0_15px_rgba(204,255,0,0.3)] ${t.name === 'Vercel' ? 'invert' : ''}`} 
+                    />
+                </div>
+            ))}
         </div>
     </div>
+
 </section>
 
 <style>
-    /* Definimos la animación AQUÍ MISMO para que nada la bloquee */
+    /* ANIMACIONES MANUALES (Garantiza que funcione siempre) */
     .scroller {
-        animation: scrollLeft 20s linear infinite;
+        animation: scrollLeft 30s linear infinite;
     }
-
     .scroller-reverse {
-        animation: scrollRight 25s linear infinite;
+        animation: scrollRight 35s linear infinite;
     }
 
     @keyframes scrollLeft {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-50%);
-        } /* Se mueve hasta la mitad porque duplicamos el contenido */
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
     }
 
     @keyframes scrollRight {
-        0% {
-            transform: translateX(-50%);
-        }
-        100% {
-            transform: translateX(0);
-        }
+        0% { transform: translateX(-50%); }
+        100% { transform: translateX(0); }
     }
 
-    /* Si el usuario tiene activada la reducción de movimiento, lo respetamos (opcional) */
-    @media (prefers-reduced-motion: reduce) {
-        .scroller,
-        .scroller-reverse {
-            animation-duration: 100s;
-        }
+    /* Pausar al pasar el mouse para ver los detalles */
+    .scroller:hover, .scroller-reverse:hover {
+        animation-play-state: paused;
     }
 </style>

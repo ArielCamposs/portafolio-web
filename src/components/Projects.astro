@@ -1,53 +1,43 @@
 ---
-// Importamos los estilos necesarios de Swiper
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 
-// Datos de tus proyectos (Puedes editar esto con tu info real)
 const projects = [
   {
-    title: "E-COMMERCE LIGUA",
+    title: "TIENDA E-COMMERCE PRO",
     category: "Full Stack",
-    desc: "Plataforma de ventas hiper-local con integración de pagos Flow y panel de administración personalizado.",
-    img: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80", 
-    tags: ["Astro", "React", "Tailwind"],
-    link: "#"
+    desc: "Plataforma de comercio electrónico completa con gestión de carrito de compras, catálogo dinámico de productos y diseño totalmente responsivo adaptado a móviles.",
+    img: "tienda-ecommerce.webp", 
+    tags: ["React", "Tailwind CSS", "Vercel", "Vite"],
+    link: "https://tienda-ecommerce-ten.vercel.app/"
   },
   {
-    title: "DASHBOARD DUOC",
-    category: "System App",
-    desc: "Sistema de gestión académica con métricas en tiempo real y base de datos optimizada.",
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    tags: ["Vue.js", "Firebase", "Chart.js"],
-    link: "#"
+    title: "PELUQUERÍA DELTA",
+    category: "Landing Page",
+    desc: "Sitio web corporativo de alto impacto para salón de belleza, con secciones de servicios, galería de cortes y optimización SEO local para captación de clientes.",
+    img: "landing-page.webp", 
+    tags: ["Astro", "Tailwind", "Responsive"],
+    link: "https://landing-page-peluqueria-delta.vercel.app/"
   },
   {
-    title: "PORTAFOLIO V1",
-    category: "Frontend",
-    desc: "Mi primer sitio web experimental enfocado en animaciones CSS puras.",
-    img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-    tags: ["HTML5", "SCSS", "JS"],
-    link: "#"
+    title: "CATÁLOGO DIGITAL WEB",
+    category: "Product Showcase",
+    desc: "Solución digital para exhibición de inventario. Permite filtrar productos por categorías, ver detalles técnicos y contactar directamente por WhatsApp.",
+    img: "catalogo-web.webp", 
+    tags: ["React", "Vite", "CSS Modules"],
+    link: "https://pagina-web-catalogo.vercel.app/"
   },
-  {
-    title: "GAME HUB ZOO",
-    category: "Game Dev",
-    desc: "Interfaz web interactiva para comunidad de jugadores de Planet Zoo.",
-    img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&q=80",
-    tags: ["React", "Node.js", "Discord API"],
-    link: "#"
-  }
 ];
+
+const loopProjects = [...projects, ...projects, ...projects, ...projects];
 ---
 
 <section id="proyectos" class="py-32 bg-neo-black relative overflow-hidden">
     
-    <!-- Elementos decorativos de fondo (Manchas de luz neón) -->
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-neo-cyan/10 blur-[120px] rounded-full pointer-events-none"></div>
     <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-neo-pink/10 blur-[120px] rounded-full pointer-events-none"></div>
 
-    <!-- Título de la Sección con estilo Brutalista -->
     <div class="container mx-auto px-4 mb-20 relative z-10">
         <div class="flex flex-col items-start border-l-8 border-neo-lime pl-8">
             <span class="text-neo-lime font-mono text-xl tracking-widest mb-2">// SELECTED_WORKS</span>
@@ -58,128 +48,122 @@ const projects = [
         </div>
     </div>
     
-    <!-- Contenedor del Carrusel -->
     <div class="swiper mySwiper w-full px-4 md:px-12 pb-20">
         <div class="swiper-wrapper">
-            {projects.map((project) => (
-                <div class="swiper-slide max-w-[400px]">
-                    <!-- Tarjeta Cyber-Brutalista -->
-                    <article class="group relative h-full bg-[#111] border-2 border-white/20 hover:border-neo-lime transition-colors duration-300 flex flex-col">
+            {loopProjects.map((project) => (
+                <div class="swiper-slide max-w-[350px]">
+                    
+                    <!-- Tarjeta siempre iluminada y visible -->
+                    <article class="group relative h-full bg-[#111] border-2 border-white/20 hover:border-neo-lime hover:shadow-[0px_0px_20px_rgba(204,255,0,0.15)] transition-all duration-300 flex flex-col overflow-hidden">
                         
-                        <!-- Decoración de esquinas -->
                         <div class="absolute -top-1 -left-1 w-4 h-4 bg-neo-black border-t-2 border-l-2 border-white group-hover:border-neo-lime transition-colors z-20"></div>
                         <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-neo-black border-b-2 border-r-2 border-white group-hover:border-neo-lime transition-colors z-20"></div>
 
-                        <!-- Imagen con efecto glitch al hover -->
-                        <div class="relative aspect-[4/3] overflow-hidden border-b-2 border-white/10 group-hover:border-neo-lime/50 transition-colors">
-                            <div class="absolute inset-0 bg-neo-lime/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-overlay"></div>
+                        <div class="relative w-full h-48 overflow-hidden border-b-2 border-white/10 group-hover:border-neo-lime/50 transition-colors">
+                            <!-- Eliminado el overlay oscuro inicial -->
+                            <div class="absolute inset-0 bg-neo-lime/10 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-overlay"></div>
+                            
+                            <!-- Imagen A COLOR siempre (sin grayscale) -->
                             <img 
                                 src={project.img} 
                                 alt={project.title} 
-                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 ease-out" 
+                                class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ease-out" 
                             />
                             
-                            <!-- Etiqueta de Categoría Flotante -->
-                            <div class="absolute top-4 left-4 z-20">
-                                <span class="bg-neo-pink text-white text-xs font-bold px-3 py-1 uppercase tracking-wider shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                            <div class="absolute top-3 left-3 z-20">
+                                <span class="bg-neo-pink text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                                     {project.category}
                                 </span>
                             </div>
                         </div>
 
-                        <!-- Contenido de la tarjeta -->
-                        <div class="p-8 flex flex-col flex-grow">
-                            <h3 class="text-3xl font-black text-white mb-4 uppercase italic leading-none group-hover:text-neo-cyan transition-colors">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <!-- Título brillante siempre -->
+                            <h3 class="text-2xl font-black text-white mb-3 uppercase italic leading-none group-hover:text-neo-cyan transition-colors truncate">
                                 {project.title}
                             </h3>
                             
-                            <p class="text-gray-400 font-mono text-sm leading-relaxed mb-8 line-clamp-3 flex-grow">
+                            <p class="text-gray-300 font-mono text-xs leading-relaxed mb-6 line-clamp-3 flex-grow">
                                 {project.desc}
                             </p>
 
-                            <!-- Tags -->
-                            <div class="flex flex-wrap gap-2 mb-8">
+                            <div class="flex flex-wrap gap-2 mb-6">
                                 {project.tags.map(tag => (
-                                    <span class="px-2 py-1 border border-white/30 text-white/70 text-[10px] uppercase font-bold tracking-wider hover:bg-white hover:text-black transition-colors cursor-default">
+                                    <span class="px-2 py-1 border border-white/30 text-white text-[10px] uppercase font-bold tracking-wider hover:bg-white hover:text-black transition-colors cursor-default">
                                         #{tag}
                                     </span>
                                 ))}
                             </div>
 
-                            <!-- Botón de acción -->
-                            <a href={project.link} class="mt-auto w-full py-3 bg-white text-black font-black uppercase text-center tracking-widest hover:bg-neo-lime transition-colors group-hover:shadow-[5px_5px_0px_0px_rgba(255,255,255,0.2)]">
+                            <a 
+                                href={project.link} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="relative z-50 mt-auto w-full py-3 bg-white text-black text-sm font-black uppercase text-center tracking-widest hover:bg-neo-lime transition-colors group-hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] block"
+                            >
                                 Ver Proyecto >
                             </a>
                         </div>
                     </article>
+
                 </div>
             ))}
         </div>
-        
-        <!-- Paginación personalizada -->
         <div class="swiper-pagination !bottom-0"></div>
     </div>
 </section>
 
-<!-- Script de Inicialización de Swiper -->
 <script>
     import Swiper from 'swiper';
     import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
 
     const swiper = new Swiper(".mySwiper", {
         modules: [Pagination, EffectCoverflow, Autoplay],
-        effect: "coverflow", // Efecto 3D de tarjetas
+        effect: "coverflow",
         grabCursor: true,
-        centeredSlides: true,
+        centeredSlides: false,
         slidesPerView: "auto",
         loop: true,
+        speed: 600,
+        spaceBetween: 30,
         coverflowEffect: {
             rotate: 0,
             stretch: 0,
             depth: 100,
-            modifier: 2,
+            modifier: 1,
             slideShadows: false,
         },
         autoplay: {
-            delay: 3500,
+            delay: 2500,
             disableOnInteraction: false,
+            pauseOnMouseEnter: true,
         },
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
             dynamicBullets: true,
         },
-        // Ajustes responsivos
         breakpoints: {
-            320: {
-                slidesPerView: 1.2,
-                spaceBetween: 20
-            },
-            640: {
-                slidesPerView: 2,
-                spaceBetween: 30
-            },
-            1024: {
-                slidesPerView: 3,
-                spaceBetween: 40
-            }
+            320: { slidesPerView: 1.1, spaceBetween: 20, centeredSlides: true },
+            640: { slidesPerView: 2, spaceBetween: 30, centeredSlides: false },
+            1024: { slidesPerView: 3, spaceBetween: 40, centeredSlides: false },
+            1280: { slidesPerView: 4, spaceBetween: 40, centeredSlides: false }
         }
     });
 </script>
 
 <style>
-    /* Estilos específicos para los bullets del carrusel */
     :global(.swiper-pagination-bullet) {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         background: #333;
         opacity: 1;
-        border-radius: 0; /* Cuadrados en vez de círculos para seguir el estilo */
+        border-radius: 0;
         border: 1px solid #555;
+        margin: 0 6px !important;
     }
-    
     :global(.swiper-pagination-bullet-active) {
-        background: #ccff00; /* Color Neo Lime */
+        background: #ccff00;
         border-color: #ccff00;
         transform: scale(1.2);
     }
