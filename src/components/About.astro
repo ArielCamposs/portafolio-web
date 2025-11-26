@@ -101,18 +101,29 @@ const stats = [
                     ))}
                 </div>
 
-                <!-- Botón de Descarga CV Corregido -->
-<div class="mt-10">
+<!-- Botón CV Ultra Animado -->
+<div class="mt-12">
     <a 
         href="/curriculum.pdf" 
-        download="curriculum.pdf" 
+        download="Curriculum_Vitae_2025.pdf" 
         target="_blank"
-        class="inline-flex items-center gap-2 text-white hover:text-neo-lime transition-colors font-bold border-b-2 border-transparent hover:border-neo-lime pb-1 cursor-pointer"
+        class="group relative inline-flex items-center gap-3 px-8 py-4 bg-neo-black border border-white/20 text-white font-black tracking-widest uppercase overflow-hidden hover:text-black transition-colors duration-300"
     >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Fondo deslizante al Hover (Color Lima) -->
+        <div class="absolute inset-0 bg-neo-lime translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+        
+        <!-- Borde Glitch Animado (Esquinas) -->
+        <span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-neo-lime group-hover:border-black transition-colors"></span>
+        <span class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-neo-lime group-hover:border-black transition-colors"></span>
+        <span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-neo-lime opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-neo-lime opacity-0 group-hover:opacity-100 transition-opacity"></span>
+
+        <!-- Icono y Texto (Relative para estar sobre el fondo deslizante) -->
+        <svg class="w-5 h-5 relative z-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
         </svg>
-        DESCARGAR CURRÍCULUM_V2.0
+        
+        <span class="relative z-10">DESCARGAR CV_V2.0</span>
     </a>
 </div>
 
