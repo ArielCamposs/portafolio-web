@@ -121,11 +121,14 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
         modules: [Pagination, EffectCoverflow, Autoplay],
         effect: "coverflow",
         grabCursor: true,
-        centeredSlides: false,
-        slidesPerView: "auto",
+        centeredSlides: true, // IMPORTANTE: True para que la única tarjeta visible esté al medio
         loop: true,
-        speed: 600,
-        spaceBetween: 30,
+        speed: 500,
+        
+        // Configuración por defecto (Móvil primero)
+        slidesPerView: 1, // Mostramos 1 tarjeta completa
+        spaceBetween: 20, // Un poco de espacio por si acaso
+
         coverflowEffect: {
             rotate: 0,
             stretch: 0,
@@ -134,7 +137,7 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
             slideShadows: false,
         },
         autoplay: {
-            delay: 2500,
+            delay: 3000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
         },
@@ -143,11 +146,32 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
             clickable: true,
             dynamicBullets: true,
         },
+        // Ajustes responsivos
         breakpoints: {
-            320: { slidesPerView: 1.1, spaceBetween: 20, centeredSlides: true },
-            640: { slidesPerView: 2, spaceBetween: 30, centeredSlides: false },
-            1024: { slidesPerView: 3, spaceBetween: 40, centeredSlides: false },
-            1280: { slidesPerView: 4, spaceBetween: 40, centeredSlides: false }
+            // Celulares (menos de 640px): 1 sola tarjeta centrada
+            320: { 
+                slidesPerView: 1, 
+                spaceBetween: 20,
+                centeredSlides: true 
+            },
+            // Tablets (más de 640px): 2 tarjetas
+            640: { 
+                slidesPerView: 2, 
+                spaceBetween: 30, 
+                centeredSlides: false // En tablet ya no hace falta centrar estricto
+            },
+            // Desktop (más de 1024px): 3 tarjetas
+            1024: { 
+                slidesPerView: 3, 
+                spaceBetween: 40, 
+                centeredSlides: false 
+            },
+            // Pantallas grandes: 4 tarjetas
+            1280: { 
+                slidesPerView: 4, 
+                spaceBetween: 40, 
+                centeredSlides: false 
+            }
         }
     });
 </script>
