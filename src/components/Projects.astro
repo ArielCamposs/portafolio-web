@@ -48,10 +48,10 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
         </div>
     </div>
     
-    <div class="swiper mySwiper w-full px-4 md:px-12 pb-20">
+    <div class="swiper mySwiper w-full px-0 md:px-12 pb-20">
         <div class="swiper-wrapper">
             {loopProjects.map((project) => (
-                <div class="swiper-slide max-w-[350px]">
+                <div class="swiper-slide !w-[90vw] max-w-[350px] md:!w-auto">
                     
                     <!-- Tarjeta siempre iluminada y visible -->
                     <article class="group relative h-full bg-[#111] border-2 border-white/20 hover:border-neo-lime hover:shadow-[0px_0px_20px_rgba(204,255,0,0.15)] transition-all duration-300 flex flex-col overflow-hidden">
@@ -126,8 +126,8 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
         speed: 500,
         
         // Configuración por defecto (Móvil primero)
-        slidesPerView: 1, // Mostramos 1 tarjeta completa
-        spaceBetween: 20, // Un poco de espacio por si acaso
+        slidesPerView: 'auto', // Auto para que respete el ancho definido en la clase
+        spaceBetween: 10, // Espacio mínimo en móvil
 
         coverflowEffect: {
             rotate: 0,
@@ -150,8 +150,8 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
         breakpoints: {
             // Celulares (menos de 640px): 1 sola tarjeta centrada
             320: { 
-                slidesPerView: 1, 
-                spaceBetween: 20,
+                slidesPerView: 'auto', 
+                spaceBetween: 10,
                 centeredSlides: true 
             },
             // Tablets (más de 640px): 2 tarjetas
