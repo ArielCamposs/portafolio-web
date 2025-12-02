@@ -134,4 +134,19 @@
             );
         }
     });
+    // Cambiar color del link activo según scroll
+    const sections = document.querySelectorAll("section, div[id]");
+    const links = document.querySelectorAll("nav a[href^='#']");
+
+    function updateActiveLink() {
+        let index = sections.length;
+
+        while (--index && window.scrollY + 100 < sections[index].offsetTop) {}
+
+        links.forEach((link) => link.classList.remove("text-neo-lime"));
+        links[index]?.classList.add("text-neo-lime");
+    }
+
+    updateActiveLink();
+    window.addEventListener("scroll", updateActiveLink);
 </script>

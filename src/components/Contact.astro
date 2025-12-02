@@ -1,154 +1,173 @@
 <section
     id="contacto"
-    class="py-32 px-4 bg-neo-black border-t-4 border-neo-lime relative"
+    class="py-32 bg-neo-black relative overflow-hidden border-t-4 border-neo-lime"
 >
+    <!-- Efectos de fondo -->
     <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-neo-lime px-6 py-2 text-black font-black uppercase text-xl rotate-2 border-2 border-white shadow-neo z-20"
+        class="absolute top-0 right-0 w-[500px] h-[500px] bg-neo-cyan/10 blur-[120px] rounded-full pointer-events-none"
     >
-        ¿Trabajamos juntos?
+    </div>
+    <div
+        class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-neo-pink/10 blur-[120px] rounded-full pointer-events-none"
+    >
     </div>
 
-    <div
-        class="max-w-4xl mx-auto bg-[#111] p-8 md:p-12 border border-white/20 shadow-2xl relative overflow-hidden"
-    >
-        <!-- Decoración esquinas -->
+    <div class="container mx-auto px-4 max-w-5xl relative z-10">
+        <!-- Header -->
         <div
-            class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-neo-cyan"
+            class="flex flex-col items-start border-l-8 border-neo-pink pl-8 mb-16"
         >
-        </div>
-        <div
-            class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-neo-cyan"
-        >
-        </div>
-        <div
-            class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-neo-cyan"
-        >
-        </div>
-        <div
-            class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-neo-cyan"
-        >
-        </div>
-
-        <!-- FORMULARIO -->
-        <form
-            id="my-form"
-            action="https://formspree.io/f/xdkvjgno"
-            method="POST"
-            class="grid gap-8 font-mono"
-        >
-            <div class="group">
-                <label class="block text-neo-lime text-sm mb-2"
-                    >> INGRESA_TU_NOMBRE</label
-                >
-                <!-- Importante: name="name" -->
-                <input
-                    type="text"
-                    name="name"
-                    required
-                    class="w-full bg-black border-b-2 border-white/30 text-white p-4 focus:border-neo-lime focus:bg-white/5 outline-none transition-all placeholder:text-gray-700"
-                    placeholder="Ej: Juan Pérez"
-                />
-            </div>
-
-            <div class="group">
-                <label class="block text-neo-lime text-sm mb-2"
-                    >> INGRESA_TU_EMAIL</label
-                >
-                <!-- Importante: name="email" -->
-                <input
-                    type="email"
-                    name="email"
-                    required
-                    class="w-full bg-black border-b-2 border-white/30 text-white p-4 focus:border-neo-lime focus:bg-white/5 outline-none transition-all placeholder:text-gray-700"
-                    placeholder="nombre@empresa.com"
-                />
-            </div>
-
-            <div class="group">
-                <label class="block text-neo-lime text-sm mb-2"
-                    >> EJECUTAR_MENSAJE</label
-                >
-                <!-- Importante: name="message" -->
-                <textarea
-                    name="message"
-                    rows="4"
-                    required
-                    class="w-full bg-black border-2 border-white/30 text-white p-4 focus:border-neo-cyan outline-none transition-all"
-                    placeholder="Cuéntame tu idea..."></textarea>
-            </div>
-
-            <button
-                id="my-form-button"
-                type="submit"
-                class="w-full py-5 bg-neo-purple text-white font-black text-xl uppercase tracking-widest hover:bg-white hover:text-neo-purple hover:shadow-[0px_0px_20px_rgba(188,19,254,0.8)] transition-all border border-transparent hover:border-neo-purple"
+            <span class="text-neo-pink font-mono text-xl tracking-widest mb-2"
+                >// LETS_TALK</span
             >
-                [ ENVIAR DATOS ]
-            </button>
+            <h2
+                class="text-5xl md:text-7xl font-black text-white uppercase leading-none tracking-tighter"
+            >
+                ¿TIENES UN<br />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-neo-lime to-neo-cyan"
+                    >PROYECTO?</span
+                >
+            </h2>
+        </div>
 
-            <!-- Mensaje de estado -->
-            <p id="my-form-status" class="text-center mt-4 text-sm"></p>
-        </form>
+        <!-- CTA Buttons -->
+        <div
+            class="flex flex-col md:flex-row gap-6 mb-16 justify-center items-center"
+        >
+            <!-- WhatsApp Button - Brutalista -->
+            <a
+                href="https://wa.me/56931342699?text=Hola%20Ariel!%20Estoy%20interesado%20en%20un%20sitio%20web%20profesional."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group relative px-8 py-5 bg-[#25D366] text-black font-black text-lg uppercase tracking-wider border-4 border-white hover:shadow-[8px_8px_0px_0px_#ccff00] transition-all duration-300 hover:-translate-y-1 flex items-center gap-3"
+                aria-label="Contactar por WhatsApp"
+            >
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M20.52 3.48A11.91 11.91 0 0012.01.03 11.92 11.92 0 003.48 3.48 11.92 11.92 0 00.03 12.01c0 2.11.55 4.16 1.6 5.97L.2 23.09l4.27-1.2A11.9 11.9 0 0012 24c3.19 0 6.18-1.24 8.45-3.51A11.92 11.92 0 0023.97 12.01a11.9 11.9 0 00-3.45-8.53zM12 21.5a9.2 9.2 0 01-4.79-1.33l-.34-.21-2.53.71.68-2.48-.22-.36A9.21 9.21 0 012.5 12.01 9.5 9.5 0 1112 21.5z"
+                    ></path>
+                    <path
+                        d="M17.56 14.03c-.29-.15-1.72-.84-1.99-.93-.27-.09-.47-.14-.67.15-.2.29-.77.93-.95 1.12-.17.19-.33.22-.62.07-.29-.15-1.22-.45-2.33-1.44-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.6.13-.13.29-.33.44-.5.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.52.07-.79.37c-.27.3-1.03 1-1.03 2.45s1.05 2.85 1.2 3.05c.15.2 2.07 3.16 5.02 4.43 2.95 1.27 2.95.85 3.48.8.53-.05 1.72-.7 1.97-1.38.25-.68.25-1.26.18-1.38-.07-.12-.27-.2-.56-.35z"
+                    ></path>
+                </svg>
+                <span>HABLAR POR WHATSAPP</span>
+            </a>
+        </div>
+
+        <!-- Formulario -->
+        <div
+            class="max-w-3xl mx-auto bg-[#111] border-4 border-white/20 p-8 md:p-12 relative"
+        >
+            <!-- Esquinas decorativas -->
+            <div
+                class="absolute -top-1 -left-1 w-6 h-6 bg-neo-black border-t-4 border-l-4 border-neo-lime"
+            >
+            </div>
+            <div
+                class="absolute -top-1 -right-1 w-6 h-6 bg-neo-black border-t-4 border-r-4 border-neo-lime"
+            >
+            </div>
+            <div
+                class="absolute -bottom-1 -left-1 w-6 h-6 bg-neo-black border-b-4 border-l-4 border-neo-lime"
+            >
+            </div>
+            <div
+                class="absolute -bottom-1 -right-1 w-6 h-6 bg-neo-black border-b-4 border-r-4 border-neo-lime"
+            >
+            </div>
+
+            <form
+                action="https://formsubmit.co/ariel.campos.dev@gmail.com"
+                method="POST"
+                class="grid gap-6 font-mono"
+            >
+                <input type="hidden" name="_captcha" value="false" />
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="🚀 Nuevo mensaje desde tu portafolio"
+                />
+
+                <!-- Nombre -->
+                <div class="group">
+                    <label
+                        class="block text-neo-lime text-sm mb-2 font-bold tracking-wider"
+                        >> INGRESA_TU_NOMBRE</label
+                    >
+                    <input
+                        type="text"
+                        name="name"
+                        required
+                        placeholder="Ej: Juan Pérez"
+                        class="w-full bg-black border-2 border-white/30 text-white p-4 focus:border-neo-lime focus:bg-white/5 outline-none transition-all placeholder:text-gray-600 font-mono"
+                    />
+                </div>
+
+                <!-- Email -->
+                <div class="group">
+                    <label
+                        class="block text-neo-cyan text-sm mb-2 font-bold tracking-wider"
+                        >> INGRESA_TU_EMAIL</label
+                    >
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="nombre@empresa.com"
+                        class="w-full bg-black border-2 border-white/30 text-white p-4 focus:border-neo-cyan focus:bg-white/5 outline-none transition-all placeholder:text-gray-600 font-mono"
+                    />
+                </div>
+
+                <!-- Mensaje -->
+                <div class="group">
+                    <label
+                        class="block text-neo-pink text-sm mb-2 font-bold tracking-wider"
+                        >> EJECUTAR_MENSAJE</label
+                    >
+                    <textarea
+                        name="message"
+                        rows="5"
+                        required
+                        placeholder="Cuéntame tu idea de proyecto..."
+                        class="w-full bg-black border-2 border-white/30 text-white p-4 focus:border-neo-pink focus:bg-white/5 outline-none transition-all placeholder:text-gray-600 font-mono resize-none"
+                    ></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                    type="submit"
+                    class="w-full py-5 bg-neo-purple text-white font-black text-xl uppercase tracking-widest border-4 border-neo-purple hover:bg-white hover:text-neo-purple hover:border-white hover:shadow-[0px_0px_30px_rgba(188,19,254,0.6)] transition-all duration-300"
+                >
+                    [ ENVIAR MENSAJE ]
+                </button>
+            </form>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="mt-16 flex flex-wrap justify-center gap-6">
+            <a
+                href="https://github.com/ArielCamposs"
+                target="_blank"
+                class="px-6 py-3 border-2 border-white text-white font-bold uppercase hover:bg-white hover:text-black transition-all flex items-center gap-2"
+            >
+                <span>🐱‍💻</span>
+                <span>GitHub</span>
+            </a>
+            <a
+                href="https://www.linkedin.com/in/ariel-campos-a1688a324/"
+                target="_blank"
+                class="px-6 py-3 border-2 border-white text-white font-bold uppercase hover:bg-white hover:text-black transition-all flex items-center gap-2"
+            >
+                <span>🔗</span>
+                <span>LinkedIn</span>
+            </a>
+        </div>
+
+        <p
+            class="text-center text-gray-500 text-sm font-mono mt-12 border-t-2 border-white/10 pt-8"
+        >
+            © 2025 ARIEL CAMPOS — DISPONIBLE PARA EMPLEO Y PROYECTOS FREELANCE
+        </p>
     </div>
 </section>
-
-<!-- SCRIPT AJAX PARA EVITAR REDIRECCIÓN -->
-<script is:inline>
-    var form = document.getElementById("my-form");
-
-    async function handleSubmit(event) {
-        event.preventDefault();
-        var status = document.getElementById("my-form-status");
-        var btn = document.getElementById("my-form-button");
-        var data = new FormData(event.target);
-
-        // Cambiar estado botón
-        btn.disabled = true;
-        btn.innerText = "ENVIANDO...";
-
-        fetch(event.target.action, {
-            method: form.method,
-            body: data,
-            headers: {
-                Accept: "application/json",
-            },
-        })
-            .then((response) => {
-                if (response.ok) {
-                    status.innerHTML =
-                        "¡MENSAJE RECIBIDO! TE CONTACTARÉ PRONTO.";
-                    status.className =
-                        "text-center mt-4 text-neo-lime font-bold animate-pulse";
-                    form.reset();
-                    btn.innerText = "[ ENVIADO ]";
-                    setTimeout(() => {
-                        status.innerHTML = "";
-                        btn.disabled = false;
-                        btn.innerText = "[ ENVIAR DATOS ]";
-                    }, 5000);
-                } else {
-                    response.json().then((data) => {
-                        if (Object.hasOwn(data, "errors")) {
-                            status.innerHTML = data["errors"]
-                                .map((error) => error["message"])
-                                .join(", ");
-                        } else {
-                            status.innerHTML =
-                                "ERROR AL ENVIAR. REVISA TU CONEXIÓN.";
-                        }
-                        status.className =
-                            "text-center mt-4 text-red-500 font-bold";
-                        btn.disabled = false;
-                        btn.innerText = "[ REINTENTAR ]";
-                    });
-                }
-            })
-            .catch((error) => {
-                status.innerHTML = "ERROR DE RED. INTENTA MÁS TARDE.";
-                status.className = "text-center mt-4 text-red-500 font-bold";
-                btn.disabled = false;
-                btn.innerText = "[ REINTENTAR ]";
-            });
-    }
-
-    form.addEventListener("submit", handleSubmit);
-</script>

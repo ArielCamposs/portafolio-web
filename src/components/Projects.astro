@@ -5,29 +5,87 @@ import 'swiper/css/effect-coverflow';
 
 const projects = [
   {
-    title: "TIENDA E-COMMERCE PRO",
-    category: "Full Stack",
-    desc: "Plataforma de comercio electrónico completa con gestión de carrito de compras, catálogo dinámico de productos y diseño totalmente responsivo adaptado a móviles.",
-    img: "tienda-ecommerce.webp", 
-    tags: ["React", "Tailwind CSS", "Vercel", "Vite"],
-    link: "https://tienda-ecommerce-ten.vercel.app/"
+  title: "TIENDA SUSHI 🍣",
+  category: "E-Commerce Real",
+  desc: "E-commerce desarrollado para restaurante real, con carrito dinámico, gestión de favoritos y envío de pedido directo a WhatsApp.",
+  img: "tienda-sushi.webp",
+  tags: ["React", "Tailwind CSS", "Vercel", "Vite"],
+
+  // ✨ Nuevo: repositorio
+  repo: "https://github.com/ArielCamposs/tienda-sushi",
+  link: "https://tienda-sushi.vercel.app/",
+
+  // ✨ Nuevo: features destacadas
+  features: [
+    "✔ Carrito de compras funcional",
+    "✔ Control visual de stock",
+    "✔ Favoritos guardados en localStorage",
+    "✔ Integración con WhatsApp API",
+    "✔ Diseño Mobile First"
+  ],
   },
   {
-    title: "PELUQUERÍA DELTA",
-    category: "Landing Page",
-    desc: "Sitio web corporativo de alto impacto para salón de belleza, con secciones de servicios, galería de cortes y optimización SEO local para captación de clientes.",
-    img: "landing-page.webp", 
-    tags: ["Astro", "Tailwind", "Responsive"],
-    link: "https://landing-page-peluqueria-delta.vercel.app/"
-  },
+  title: "TIENDA E-COMMERCE PRO 🛒",
+  category: "Full Stack",
+  desc: "Plataforma profesional de comercio electrónico con carrito dinámico, catálogo administrable y cierre de venta directo con API de WhatsApp.",
+  img: "tienda-ecommerce.webp",
+  tags: ["React", "Tailwind CSS", "Vercel", "Vite"],
+
+  link: "https://tienda-ecommerce-ten.vercel.app/",
+  repo: "https://github.com/ArielCamposs/tienda-ecommerce",
+
+  features: [
+    "✔ Carrito dinámico persistente en localStorage",
+    "✔ Diseño UX pensado para aumentar ventas",
+    "✔ Integración con API de WhatsApp",
+    "✔ Dashboard visual del carrito",
+    "✔ Mobile First + animaciones modernas"
+  ],
+
+  result: "+35 pedidos semanales gestionados por WhatsApp 📈"
+},
   {
-    title: "CATÁLOGO DIGITAL WEB",
-    category: "Product Showcase",
-    desc: "Solución digital para exhibición de inventario. Permite filtrar productos por categorías, ver detalles técnicos y contactar directamente por WhatsApp.",
-    img: "catalogo-web.webp", 
-    tags: ["React", "Vite", "CSS Modules"],
-    link: "https://pagina-web-catalogo.vercel.app/"
-  },
+  title: "PELUQUERÍA DELTA ✂️",
+  category: "Landing Page",
+  desc: "Landing page creada para captar clientes mediante SEO Local, catálogo de servicios y CTA directo a WhatsApp.",
+  img: "landing-page.webp",
+  tags: ["Astro", "Tailwind CSS", "Responsive"],
+
+  link: "https://landing-page-peluqueria-delta.vercel.app/",
+  repo: "https://github.com/ArielCamposs/landing-page-informativa",
+
+  features: [
+    "✔ Optimización SEO Local para Google",
+    "✔ Botón de WhatsApp para reservas inmediatas",
+    "✔ Sección de servicios + galería real",
+    "✔ Carga rápida y accesible para móviles",
+    "✔ Branding profesional adaptado a cliente"
+  ],
+
+  result: "Mejora notable de captación de nuevos clientes ✨"
+}
+,
+  {
+  title: "CATÁLOGO DIGITAL WEB 📦",
+  category: "Showcase Web",
+  desc: "Exhibición digital del catálogo con filtros dinámicos y contacto directo con vendedor por WhatsApp.",
+  img: "catalogo-web.webp",
+  tags: ["React", "Vite", "CSS Modules"],
+
+  link: "https://pagina-web-catalogo.vercel.app/",
+  repo: "https://github.com/ArielCamposs/Pagina-Web-Catalogo-Productos",
+
+  features: [
+    "✔ Filtros dinámicos por categoría",
+    "✔ Detalle visual por producto",
+    "✔ Interacción directa con WhatsApp",
+    "✔ UI ligera y rápida para usuarios casuales",
+    "✔ Arquitectura modular para escalabilidad"
+  ],
+
+  result: "Perfecto para digitalizar inventario físico 🔄"
+}
+,
 ];
 
 const loopProjects = [...projects, ...projects, ...projects, ...projects];
@@ -83,9 +141,17 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
                                 {project.title}
                             </h3>
                             
-                            <p class="text-gray-300 font-mono text-xs leading-relaxed mb-6 line-clamp-3 flex-grow">
-                                {project.desc}
-                            </p>
+                            <p class="text-sm text-gray-300 mt-2">{project.desc}</p>
+
+{project.features && (
+  <ul class="text-xs text-gray-400 mt-3 space-y-1">
+    {project.features.map((feat) => <li>{feat}</li>)}
+  </ul>
+)}
+
+{project.result && (
+  <p class="text-xs text-neo-lime font-mono mt-2">{project.result}</p>
+)}
 
                             <div class="flex flex-wrap gap-2 mb-6">
                                 {project.tags.map(tag => (
@@ -95,14 +161,25 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
                                 ))}
                             </div>
 
-                            <a 
-                                href={project.link} 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                class="relative z-50 mt-auto w-full py-3 bg-white text-black text-sm font-black uppercase text-center tracking-widest hover:bg-neo-lime transition-colors group-hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] block"
-                            >
-                                Ver Proyecto >
-                            </a>
+                            <div class="mt-5 flex gap-4">
+  <a
+    href={project.link}
+    target="_blank"
+    class="py-2 px-4 text-xs font-bold text-black bg-neo-lime rounded hover:brightness-110 transition"
+  >
+    🚀 Ver Demo
+  </a>
+
+  {project.repo && (
+    <a
+      href={project.repo}
+      target="_blank"
+      class="py-2 px-4 text-xs font-bold border border-white text-white rounded hover:bg-white hover:text-black transition"
+    >
+      🔍 Ver Código
+    </a>
+  )}
+</div>
                         </div>
                     </article>
 
@@ -112,6 +189,23 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
         <div class="swiper-pagination !bottom-0"></div>
     </div>
 </section>
+<!-- Infinite Scroll - Developer Role -->
+<div class="w-full overflow-hidden border-y-2 border-neo-lime bg-black mt-20">
+  <div class="marquee">
+    <div class="track">
+      <p>👨‍💻 Desarrollador Web Full Stack Junior Disponible 🚀</p>
+      <p>💼 Contrataciones & Proyectos Freelance 📩</p>
+      <p>⚡ React • Astro • Tailwind • APIs • UX/UI 🎨</p>
+      <p>📍 Chile | Remoto LATAM 🌍</p>
+
+      <!-- Duplicado para loop infinito real -->
+      <p>👨‍💻 Desarrollador Web Full Stack Junior Disponible 🚀</p>
+      <p>💼 Contrataciones & Proyectos Freelance 📩</p>
+      <p>⚡ React • Astro • Tailwind • APIs • UX/UI 🎨</p>
+      <p>📍 Chile | Remoto LATAM 🌍</p>
+    </div>
+  </div>
+</div>
 
 <script>
     import Swiper from 'swiper';
@@ -191,4 +285,37 @@ const loopProjects = [...projects, ...projects, ...projects, ...projects];
         border-color: #ccff00;
         transform: scale(1.2);
     }
+    .marquee {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.track {
+  display: inline-flex;
+  gap: 4rem;
+  animation: marquee-move 18s linear infinite;
+}
+
+.track p {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ccff00;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(204,255,0,0.4);
+}
+
+@keyframes marquee-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.marquee:hover .track {
+  animation-play-state: paused;
+}
 </style>
