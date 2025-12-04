@@ -49,7 +49,7 @@ const socialLinks = [
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Visitar ${social.name}`}
-                    class={`text-gray-400 transition-all duration-300 transform hover:scale-125 ${social.color}`}
+                    class={`text-gray-400 transition-all duration-300 transform hover:scale-125 ${social.color} ${social.name === "WhatsApp" ? "hidden md:flex" : ""}`}
                 >
                     <svg
                         class="w-6 h-6 md:w-7 md:h-7"
