@@ -207,7 +207,7 @@ const projects = [
     border-radius: 50%;
     filter: blur(120px);
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 0.4;
   }
 
   .bg-orb-1 {
@@ -215,7 +215,7 @@ const projects = [
     right: -100px;
     width: 500px;
     height: 500px;
-    background: linear-gradient(135deg, #00ffff 0%, #bc13fe 100%);
+    background: linear-gradient(135deg, #5a8a9a 0%, #6b4f7c 100%);
     animation: float-orb 8s ease-in-out infinite;
   }
 
@@ -224,7 +224,7 @@ const projects = [
     left: -150px;
     width: 400px;
     height: 400px;
-    background: linear-gradient(135deg, #ff0099 0%, #ccff00 100%);
+    background: linear-gradient(135deg, #c25d85 0%, #b8996f 100%);
     animation: float-orb 10s ease-in-out infinite reverse;
   }
 
@@ -233,8 +233,8 @@ const projects = [
     right: 10%;
     width: 300px;
     height: 300px;
-    background: #ccff00;
-    opacity: 0.2;
+    background: #b8996f;
+    opacity: 0.15;
     animation: float-orb 6s ease-in-out infinite;
   }
 
@@ -246,7 +246,7 @@ const projects = [
   /* Decorative Lines */
   .deco-line {
     position: absolute;
-    background: linear-gradient(90deg, transparent, #ccff00, transparent);
+    background: linear-gradient(90deg, transparent, #b8996f, transparent);
     height: 1px;
     pointer-events: none;
   }
@@ -255,14 +255,14 @@ const projects = [
     top: 15%;
     left: 0;
     width: 100%;
-    opacity: 0.3;
+    opacity: 0.2;
   }
 
   .deco-line-2 {
     bottom: 25%;
     left: 0;
     width: 100%;
-    opacity: 0.2;
+    opacity: 0.15;
   }
 
   /* ===== HEADER ===== */
@@ -275,10 +275,10 @@ const projects = [
     display: inline-block;
     font-family: monospace;
     font-size: 1rem;
-    color: #ccff00;
+    color: #b8996f;
     letter-spacing: 0.2em;
     margin-bottom: 1rem;
-    text-shadow: 0 0 20px rgba(204, 255, 0, 0.5);
+    text-shadow: 0 0 20px rgba(184, 153, 111, 0.3);
   }
 
   .section-title {
@@ -291,7 +291,7 @@ const projects = [
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #ff0099 0%, #bc13fe 50%, #00ffff 100%);
+    background: linear-gradient(135deg, #c25d85 0%, #6b4f7c 50%, #5a8a9a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -372,14 +372,14 @@ const projects = [
     position: absolute;
     inset: -2px;
     border-radius: 26px;
-    background: linear-gradient(135deg, #ccff00 0%, #00ffff 50%, #ff0099 100%);
+    background: linear-gradient(135deg, #b8996f 0%, #5a8a9a 50%, #6b4f7c 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: 0;
   }
 
   .project-card:hover .card-glow {
-    opacity: 1;
+    opacity: 0.6;
   }
 
   .card-inner {
@@ -397,11 +397,11 @@ const projects = [
   }
 
   .project-card:hover .card-inner {
-    border-color: rgba(204, 255, 0, 0.3);
+    border-color: rgba(184, 153, 111, 0.3);
     transform: translateY(-8px);
     box-shadow: 
       0 25px 50px -12px rgba(0, 0, 0, 0.5),
-      0 0 60px -15px rgba(204, 255, 0, 0.3);
+      0 0 60px -15px rgba(184, 153, 111, 0.2);
   }
 
   /* ===== CARD IMAGE ===== */
@@ -439,14 +439,14 @@ const projects = [
     top: 1rem;
     left: 1rem;
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #ff0099 0%, #bc13fe 100%);
+    background: linear-gradient(135deg, #c25d85 0%, #6b4f7c 100%);
     color: white;
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(255, 0, 153, 0.4);
+    box-shadow: 0 4px 15px rgba(107, 79, 124, 0.3);
     z-index: 10;
   }
 
@@ -480,7 +480,7 @@ const projects = [
   }
 
   .action-btn.primary {
-    background: #ccff00;
+    background: #b8996f;
     color: #0a0a0a;
   }
 
@@ -495,7 +495,7 @@ const projects = [
   }
 
   .action-btn.primary:hover {
-    box-shadow: 0 0 20px rgba(204, 255, 0, 0.6);
+    box-shadow: 0 0 20px rgba(184, 153, 111, 0.5);
   }
 
   .action-btn.secondary:hover {
@@ -521,7 +521,7 @@ const projects = [
   }
 
   .project-card:hover .project-title {
-    color: #00ffff;
+    color: #5a8a9a;
   }
 
   .project-desc {
@@ -554,7 +554,7 @@ const projects = [
   }
 
   .feature-icon {
-    color: #ccff00;
+    color: #b8996f;
     font-size: 0.65rem;
   }
 
@@ -563,12 +563,12 @@ const projects = [
     display: inline-flex;
     align-items: center;
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, rgba(204, 255, 0, 0.15) 0%, rgba(0, 255, 255, 0.1) 100%);
-    border: 1px solid rgba(204, 255, 0, 0.3);
+    background: linear-gradient(135deg, rgba(184, 153, 111, 0.15) 0%, rgba(90, 138, 154, 0.1) 100%);
+    border: 1px solid rgba(184, 153, 111, 0.3);
     border-radius: 8px;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #ccff00;
+    color: #b8996f;
     margin-bottom: 1rem;
   }
 
@@ -593,9 +593,9 @@ const projects = [
   }
 
   .tech-tag:hover {
-    border-color: #ccff00;
-    color: #ccff00;
-    background: rgba(204, 255, 0, 0.1);
+    border-color: #b8996f;
+    color: #b8996f;
+    background: rgba(184, 153, 111, 0.1);
   }
 
   /* CTA Buttons */
@@ -610,19 +610,19 @@ const projects = [
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #ccff00 0%, #a8cc00 100%);
+    background: linear-gradient(135deg, #b8996f 0%, #9a8159 100%);
     color: #0a0a0a;
     font-size: 0.85rem;
     font-weight: 700;
     border-radius: 12px;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(204, 255, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(184, 153, 111, 0.3);
   }
 
   .btn-demo:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(204, 255, 0, 0.5);
+    box-shadow: 0 8px 25px rgba(184, 153, 111, 0.5);
   }
 
   .btn-demo svg {
@@ -656,8 +656,8 @@ const projects = [
   .marquee-container {
     width: 100%;
     overflow: hidden;
-    border-top: 2px solid #ccff00;
-    border-bottom: 2px solid #ccff00;
+    border-top: 2px solid #b8996f;
+    border-bottom: 2px solid #b8996f;
     background: #0a0a0a;
     margin-top: 4rem;
   }
@@ -680,9 +680,9 @@ const projects = [
   .track p {
     font-size: 0.85rem;
     font-weight: 700;
-    color: #ccff00;
+    color: #b8996f;
     text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+    text-shadow: 0 0 10px rgba(184, 153, 111, 0.3);
   }
 
   @keyframes marquee-move {

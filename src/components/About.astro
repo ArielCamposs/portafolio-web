@@ -23,16 +23,16 @@ const stats = [
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 border-2 border-white/10 bg-[#111] p-6 md:p-12 relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
             
             <!-- Decoración Esquinas Tech -->
-            <div class="absolute -top-2 -left-2 w-8 h-8 border-t-4 border-l-4 border-neo-lime"></div>
-            <div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-4 border-r-4 border-neo-lime"></div>
-            <div class="absolute top-1/2 -left-3 w-1 h-20 bg-neo-pink"></div>
+            <div class="absolute -top-2 -left-2 w-8 h-8 border-t-4 border-l-4 border-neo-gold"></div>
+            <div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-4 border-r-4 border-neo-gold"></div>
+            <div class="absolute top-1/2 -left-3 w-1 h-20 bg-neo-purple"></div>
             <div class="absolute top-1/2 -right-3 w-1 h-20 bg-neo-cyan"></div>
 
             <!-- COLUMNA 1: IMAGEN & DATOS RÁPIDOS (4 columnas) -->
             <div class="md:col-span-4 flex flex-col gap-6">
                 <!-- Marco de Foto con efecto Glitch estático -->
                 <div class="relative group">
-                    <div class="absolute inset-0 bg-neo-lime translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
+                    <div class="absolute inset-0 bg-neo-gold/30 translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
                     <div class="relative border-2 border-white bg-neo-black overflow-hidden aspect-square">
                         <!-- AQUÍ VA TU IMAGEN GENERADA TIPO CÓMIC -->
                         <img 
@@ -41,7 +41,7 @@ const stats = [
                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                         />
                         <!-- Overlay de escaneo -->
-                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neo-lime/20 to-transparent h-full w-full animate-scan opacity-50 pointer-events-none"></div>
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neo-gold/20 to-transparent h-full w-full animate-scan opacity-50 pointer-events-none"></div>
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@ const stats = [
                 <div class="bg-white/5 p-4 border border-white/10 font-mono text-xs">
                     <div class="flex justify-between border-b border-white/10 pb-2 mb-2">
                         <span class="text-gray-400">UBICACIÓN:</span>
-                        <span class="text-neo-lime">LA LIGUA, REGIÓN DE VALPARAÍSO, CHILE</span>
+                        <span class="text-neo-gold">LA LIGUA, REGIÓN DE VALPARAÍSO, CHILE</span>
                     </div>
                     <div class="flex justify-between border-b border-white/10 pb-2 mb-2">
                         <span class="text-gray-400">ESTADO:</span>
@@ -68,8 +68,8 @@ const stats = [
                 <!-- Encabezado -->
                 <div class="mb-8">
                     <p class="text-gray-300 text-lg leading-relaxed border-l-4 border-neo-purple pl-6">
-    Soy <strong class="text-white">Analista Programador Web</strong> con enfoque en desarrollo
-    frontend y experiencia en <strong class="text-neo-lime">React, Astro y Tailwind CSS</strong>.
+    Soy <strong class="text-white">Analista Programador Computacional</strong> con enfoque en desarrollo
+    frontend y experiencia en <strong class="text-neo-gold">React, Astro y Tailwind CSS</strong>.
     
     Me especializo en crear interfaces modernas, rápidas y enfocadas en la experiencia de usuario.
     
@@ -80,7 +80,7 @@ const stats = [
 
                 <!-- Barras de Habilidad (Stats) -->
                 <div class="space-y-6">
-                    <h3 class="text-neo-lime font-mono text-sm tracking-widest border-b border-white/20 pb-2 mb-4">
+                    <h3 class="text-neo-gold font-mono text-sm tracking-widest border-b border-white/20 pb-2 mb-4">
                         // SISTEMAS_OPERATIVOS
                     </h3>
                     
@@ -88,7 +88,7 @@ const stats = [
                         <div class="group">
                             <div class="flex justify-between mb-1">
                                 <span class="text-sm font-bold text-white group-hover:text-neo-cyan transition-colors">{stat.label}</span>
-                                <span class="text-xs font-mono text-neo-lime">{stat.level}%</span>
+                                <span class="text-xs font-mono text-neo-gold">{stat.level}%</span>
                             </div>
                             <div class="h-2 w-full bg-white/10 relative overflow-hidden">
                                 <!-- Barra de progreso animada -->
@@ -115,13 +115,13 @@ const stats = [
         class="group relative inline-flex items-center gap-3 px-8 py-4 bg-neo-black border border-white/20 text-white font-black tracking-widest uppercase overflow-hidden hover:text-black transition-colors duration-300"
     >
         <!-- Fondo deslizante al Hover (Color Lima) -->
-        <div class="absolute inset-0 bg-neo-lime translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+        <div class="absolute inset-0 bg-neo-gold translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
         
         <!-- Borde Glitch Animado (Esquinas) -->
-        <span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-neo-lime group-hover:border-black transition-colors"></span>
-        <span class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-neo-lime group-hover:border-black transition-colors"></span>
-        <span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-neo-lime opacity-0 group-hover:opacity-100 transition-opacity"></span>
-        <span class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-neo-lime opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-neo-gold group-hover:border-black transition-colors"></span>
+        <span class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-neo-gold group-hover:border-black transition-colors"></span>
+        <span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-neo-gold opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-neo-gold opacity-0 group-hover:opacity-100 transition-opacity"></span>
 
         <!-- Icono y Texto (Relative para estar sobre el fondo deslizante) -->
         <svg class="w-5 h-5 relative z-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">

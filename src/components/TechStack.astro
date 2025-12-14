@@ -28,7 +28,7 @@ const loopTechs = [...techs, ...techs, ...techs, ...techs];
             {loopTechs.map((t) => (
                 <div class="mx-8 group transition-transform hover:scale-125 cursor-pointer relative">
                     <!-- Tooltip simple al hover -->
-                    <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-neo-lime text-black text-xs font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap rounded">
+                    <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-neo-gold text-black text-xs font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap rounded">
                         {t.name}
                     </div>
                     <!-- Imagen con filtro para Vercel/GitHub si fuera necesario (en este caso usamos SVGs blancos donde aplica) -->
@@ -43,8 +43,8 @@ const loopTechs = [...techs, ...techs, ...techs, ...techs];
     </div>
 
     <!-- Fila 2: Moviéndose a la DERECHA -->
-    <div class="relative w-full rotate-2 bg-black/40 border-y border-neo-lime/20 backdrop-blur-sm py-8">
-        <div class="absolute inset-0 bg-neo-lime/5 blur-xl"></div>
+    <div class="relative w-full rotate-2 bg-black/40 border-y border-neo-gold/20 backdrop-blur-sm py-8">
+        <div class="absolute inset-0 bg-neo-gold/5 blur-xl"></div>
         
         <div class="scroller-reverse flex w-max items-center">
             {loopTechs.map((t) => (
@@ -55,7 +55,7 @@ const loopTechs = [...techs, ...techs, ...techs, ...techs];
                     <img 
                         src={t.icon} 
                         alt={t.name} 
-                        class={`h-16 w-16 md:h-20 md:w-20 object-contain drop-shadow-[0_0_15px_rgba(204,255,0,0.3)] ${t.name === 'Vercel' ? 'invert' : ''}`} 
+                        class={`h-16 w-16 md:h-20 md:w-20 object-contain drop-shadow-[0_0_15px_rgba(184,153,111,0.3)] ${t.name === 'Vercel' ? 'invert' : ''}`} 
                     />
                 </div>
             ))}
