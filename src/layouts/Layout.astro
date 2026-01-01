@@ -2,16 +2,46 @@
 import "@fontsource-variable/onest"; // Asegúrate de tener la fuente
 interface Props {
     title: string;
+    description?: string;
 }
-const { title } = Astro.props;
+const {
+    title,
+    description = "Ariel Campos - Analista Programador Web especializado en React, Astro y Tailwind CSS. Creando interfaces modernas y eficientes.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
-        <title>{title}</title>
         <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- SEO Primario -->
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+        <meta name="author" content="Ariel Campos" />
+        <meta
+            name="keywords"
+            content="Ariel Campos, Portafolio, Programador Web, Analista Programador, React, Astro, Tailwind CSS, Chile, Desarrollo Web"
+        />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://arielcampos.dev/" />
+        <!-- Actualizar con tu URL real -->
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content="/og-image.jpg" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://arielcampos.dev/" />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content="/og-image.jpg" />
     </head>
     <body
         class="bg-neo-black text-neo-white font-sans overflow-x-hidden selection:bg-neo-lime selection:text-black"

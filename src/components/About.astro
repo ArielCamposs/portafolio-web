@@ -92,8 +92,9 @@ const stats = [
                             </div>
                             <div class="h-2 w-full bg-white/10 relative overflow-hidden">
                                 <!-- Barra de progreso animada -->
-                                <div class="h-full bg-gradient-to-r from-neo-cyan to-neo-purple absolute top-0 left-0 transition-all duration-1000 group-hover:brightness-150" 
-                                     style={`width: ${stat.level}%`}></div>
+                                <div class="progress-bar h-full bg-gradient-to-r from-neo-cyan to-neo-purple absolute top-0 left-0 transition-all duration-1000 group-hover:brightness-150" 
+                                     data-level={stat.level}
+                                     style="width: 0%"></div>
                             </div>
                         </div>
                     ))}
@@ -146,3 +147,25 @@ const stats = [
         animation: scan 3s linear infinite;
     }
 </style>
+
+<script>
+    // Observador para animar barras de progreso al hacer scroll
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target as HTMLElement;
+                const width = bar.getAttribute('data-level');
+                bar.style.width = `${width}%`;
+                observer.unobserve(bar);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+        observer.observe(bar);
+    });
+</script>

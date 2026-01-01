@@ -136,13 +136,72 @@
 
                 <!-- Submit Button -->
                 <button
+                    id="submit-btn"
                     type="submit"
-                    class="w-full py-5 bg-neo-purple text-white font-black text-xl uppercase tracking-widest border-4 border-neo-purple hover:bg-white hover:text-neo-purple hover:border-white hover:shadow-[0px_0px_30px_rgba(188,19,254,0.6)] transition-all duration-300"
+                    class="w-full py-5 bg-neo-purple text-white font-black text-xl uppercase tracking-widest border-4 border-neo-purple hover:bg-white hover:text-neo-purple hover:border-white hover:shadow-[0px_0px_30px_rgba(188,19,254,0.6)] transition-all duration-300 flex justify-center items-center gap-2"
                 >
-                    [ ENVIAR MENSAJE ]
+                    <span>[ ENVIAR MENSAJE ]</span>
+                    <svg
+                        id="loading-spinner"
+                        class="w-6 h-6 animate-spin hidden"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><line x1="12" y1="2" x2="12" y2="6"></line><line
+                            x1="12"
+                            y1="18"
+                            x2="12"
+                            y2="22"></line><line
+                            x1="4.93"
+                            y1="4.93"
+                            x2="7.76"
+                            y2="7.76"></line><line
+                            x1="16.24"
+                            y1="16.24"
+                            x2="19.07"
+                            y2="19.07"></line><line
+                            x1="2"
+                            y1="12"
+                            x2="6"
+                            y2="12"></line><line x1="18" y1="12" x2="22" y2="12"
+                        ></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"
+                        ></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"
+                        ></line></svg
+                    >
                 </button>
             </form>
+
+            <!-- Success Message (initially hidden) -->
+            <div
+                id="form-success"
+                class="hidden mt-6 p-4 bg-green-500/20 border-2 border-green-500 text-green-400 font-mono text-center"
+            >
+                ¡MENSAJE ENVIADO CON ÉXITO! 🚀 ME PONDRÉ EN CONTACTO PRONTO.
+            </div>
         </div>
+
+        <script>
+            // Manejo de formulario (simulado para feedback visual)
+            const form = document.querySelector("form");
+            const btn = document.getElementById("submit-btn");
+            const spinner = document.getElementById("loading-spinner");
+            const successMsg = document.getElementById("form-success");
+
+            form?.addEventListener("submit", () => {
+                btn?.setAttribute("disabled", "true");
+                spinner?.classList.remove("hidden");
+                // FormSubmit hará el resto, redirigiendo o enviando.
+            });
+
+            // Función para copiar email (se puede llamar desde un botón futuro o al hacer click en el correo)
+            function copyEmail(email: string) {
+                navigator.clipboard.writeText(email);
+                alert("Email copiado al portapapeles: " + email);
+            }
+        </script>
 
         <!-- Redes Sociales -->
         <div class="mt-16 flex flex-wrap justify-center gap-6">
