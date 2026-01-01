@@ -89,9 +89,12 @@ const projects = [
     <div class="bento-grid">
       {projects.map((project, index) => (
         <article 
-          class={`project-card ${project.featured ? 'featured' : ''}`}
+          class={`project-card ${project.featured ? 'featured' : ''} spotlight-card`}
           style={`--delay: ${index * 0.1}s`}
         >
+          <!-- Spotlight Cursor Effect -->
+          <div class="spotlight"></div>
+
           <!-- Glow Border Effect -->
           <div class="card-glow"></div>
           
@@ -404,6 +407,30 @@ const projects = [
       0 0 60px -15px rgba(184, 153, 111, 0.2);
   }
 
+  /* Spotlight Effect */
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      400px circle at var(--x, 0px) var(--y, 0px),
+      rgba(184, 153, 111, 0.15),
+      transparent 80%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .spotlight-card:hover .spotlight {
+    opacity: 1;
+  }
+
   /* ===== CARD IMAGE ===== */
   .card-image {
     position: relative;
@@ -696,3 +723,33 @@ const projects = [
     animation-play-state: paused;
   }
 </style>
+
+<script>
+  // Spotlight Effect
+  const cards = document.querySelectorAll('.spotlight-card');
+  
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e: any) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      (card as HTMLElement).style.setProperty('--x', `${x}px`);
+      (card as HTMLElement).style.setProperty('--y', `${y}px`);
+    });
+  });
+
+  // Magnetic Projects Interaction (Optional addition for extra "wow")
+  const primaryBtns = document.querySelectorAll('.btn-demo');
+  primaryBtns.forEach(btn => {
+    btn.addEventListener('mousemove', (e: any) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      (btn as HTMLElement).style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      (btn as HTMLElement).style.transform = `translate(0px, 0px)`;
+    });
+  });
+</script>

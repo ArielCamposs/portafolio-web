@@ -18,6 +18,14 @@ const {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
 
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
         <!-- SEO Primario -->
         <title>{title}</title>
         <meta name="title" content={title} />
@@ -44,8 +52,15 @@ const {
         <meta property="twitter:image" content="/og-image.jpg" />
     </head>
     <body
-        class="bg-neo-black text-neo-white font-sans overflow-x-hidden selection:bg-neo-lime selection:text-black"
+        class="bg-neo-black text-neo-white font-outfit overflow-x-hidden selection:bg-neo-lime selection:text-black scroll-smooth"
     >
+        <!-- Custom Glow Cursor -->
+        <div
+            id="glow-cursor"
+            class="fixed w-[400px] h-[400px] bg-neo-purple/20 rounded-full blur-[100px] pointer-events-none z-[-1] opacity-0 transition-opacity duration-500"
+        >
+        </div>
+
         <!-- Fondo con Ruido (Noise Texture) -->
         <div
             class="fixed inset-0 opacity-[0.03] pointer-events-none z-50"
@@ -70,5 +85,94 @@ const {
         </div>
 
         <slot />
+
+        <style is:global>
+            :root {
+                --neo-gold: #b8996f;
+                --neo-purple: #6b4f7c;
+                --neo-cyan: #5a8a9a;
+            }
+            .font-outfit {
+                font-family: "Outfit", sans-serif;
+            }
+
+            /* Custom Scrollbar Premium */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #0a0a0a;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #1a1a1a;
+                border-radius: 10px;
+                border: 2px solid #0a0a0a;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #b8996f;
+            }
+
+            html.lenis {
+                height: auto;
+            }
+            .lenis.lenis-smooth {
+                scroll-behavior: auto;
+            }
+            .lenis.lenis-smooth [data-lenis-prevent] {
+                overscroll-behavior: contain;
+            }
+            .lenis.lenis-stopped {
+                overflow: hidden;
+            }
+        </style>
+
+        <!-- Lenis Smooth Scroll -->
+        <script
+            src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"
+        ></script>
+        <script>
+            // Initialize Lenis
+            // @ts-ignore
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: "vertical",
+                gestureDirection: "vertical",
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+                infinite: false,
+            });
+
+            function raf(time: any) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // Glow Cursor Logic
+            const cursor = document.getElementById("glow-cursor");
+            window.addEventListener("mousemove", (e) => {
+                if (cursor) {
+                    cursor.style.opacity = "1";
+                    cursor.style.left = `${e.clientX - 200}px`;
+                    cursor.style.top = `${e.clientY - 200}px`;
+                }
+            });
+
+            // Parallax Grid effect
+            const grid = document.querySelector(
+                ".fixed.inset-0.bg-\\[linear-gradient",
+            );
+            window.addEventListener("mousemove", (e) => {
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+                if (grid) {
+                    (grid as HTMLElement).style.transform =
+                        `perspective(1000px) rotateX(12deg) scale(1.25) translate(${moveX}px, ${moveY}px)`;
+                }
+            });
+        </script>
     </body>
 </html>
