@@ -97,13 +97,13 @@
             menu.classList.toggle("hidden");
             // Al abrir en móvil, damos fondo sólido al contenedor para legibilidad
             if (!menu.classList.contains("hidden")) {
-                navContainer.classList.add(
+                navContainer?.classList.add(
                     "bg-neo-black",
                     "border",
                     "border-white/20",
                 );
             } else {
-                navContainer.classList.remove(
+                navContainer?.classList.remove(
                     "bg-neo-black",
                     "border",
                     "border-white/20",
@@ -141,7 +141,10 @@
     function updateActiveLink() {
         let index = sections.length;
 
-        while (--index && window.scrollY + 100 < sections[index].offsetTop) {}
+        while (
+            --index &&
+            window.scrollY + 100 < (sections[index] as HTMLElement).offsetTop
+        ) {}
 
         links.forEach((link) => link.classList.remove("text-neo-gold"));
         links[index]?.classList.add("text-neo-gold");

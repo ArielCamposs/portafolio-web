@@ -33,15 +33,18 @@ const stats = [
                 <!-- Marco de Foto con efecto Glitch estático -->
                 <div class="relative group">
                     <div class="absolute inset-0 bg-neo-gold/30 translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
-                    <div class="relative border-2 border-white bg-neo-black overflow-hidden aspect-square">
-                        <!-- AQUÍ VA TU IMAGEN GENERADA TIPO CÓMIC -->
+                    <div class="relative border-2 border-white bg-neo-black overflow-hidden aspect-square magnetic-avatar">
+                        <!-- Glitch Layers -->
+                        <div class="glitch-layer glitch-1 absolute inset-0 opacity-0 bg-neo-gold mix-blend-color-dodge"></div>
+                        <div class="glitch-layer glitch-2 absolute inset-0 opacity-0 bg-neo-purple mix-blend-color-dodge"></div>
+                        
                         <img 
                             src="/generated-image.webp" 
                             alt="Avatar Developer" 
-                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            class="relative z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 avatar-img"
                         />
                         <!-- Overlay de escaneo -->
-                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neo-gold/20 to-transparent h-full w-full animate-scan opacity-50 pointer-events-none"></div>
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neo-gold/20 to-transparent h-full w-full animate-scan opacity-50 pointer-events-none z-20"></div>
                     </div>
                 </div>
 
@@ -146,6 +149,38 @@ const stats = [
     .animate-scan {
         animation: scan 3s linear infinite;
     }
+
+    /* Glitch Animation */
+    @keyframes glitch-anim-1 {
+        0% { clip-path: inset(80% 0 0 0); transform: translate(-5px, -5px); }
+        20% { clip-path: inset(20% 0 50% 0); transform: translate(5px, 5px); }
+        40% { clip-path: inset(50% 0 30% 0); transform: translate(-5px, 5px); }
+        60% { clip-path: inset(10% 0 70% 0); transform: translate(5px, -5px); }
+        80% { clip-path: inset(40% 0 40% 0); transform: translate(5px, 5px); }
+        100% { clip-path: inset(80% 0 0 0); transform: translate(-5px, -5px); }
+    }
+
+    @keyframes glitch-anim-2 {
+        0% { clip-path: inset(10% 0 80% 0); transform: translate(5px, 5px); }
+        20% { clip-path: inset(70% 0 10% 0); transform: translate(-5px, -5px); }
+        40% { clip-path: inset(30% 0 50% 0); transform: translate(5px, -5px); }
+        60% { clip-path: inset(50% 0 20% 0); transform: translate(-5px, 5px); }
+        80% { clip-path: inset(20% 0 70% 0); transform: translate(5px, -5px); }
+        100% { clip-path: inset(10% 0 80% 0); transform: translate(5px, 5px); }
+    }
+
+    .group:hover .glitch-1 {
+        opacity: 0.5;
+        animation: glitch-anim-1 0.2s infinite linear alternate-reverse;
+    }
+    .group:hover .glitch-2 {
+        opacity: 0.5;
+        animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
+    }
+    .group:hover .avatar-img {
+        filter: contrast(1.2) brightness(1.1);
+        transform: scale(1.05);
+    }
 </style>
 
 <script>
@@ -168,4 +203,18 @@ const stats = [
     document.querySelectorAll('.progress-bar').forEach(bar => {
         observer.observe(bar);
     });
+
+    // Magnetic Avatar Effect
+    const avatar = document.querySelector('.magnetic-avatar');
+    if (avatar) {
+        avatar.addEventListener('mousemove', (e: any) => {
+            const rect = (avatar as HTMLElement).getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            (avatar as HTMLElement).style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        });
+        avatar.addEventListener('mouseleave', () => {
+            (avatar as HTMLElement).style.transform = `translate(0px, 0px)`;
+        });
+    }
 </script>

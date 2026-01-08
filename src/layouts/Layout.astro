@@ -54,10 +54,24 @@ const {
     <body
         class="bg-neo-black text-neo-white font-outfit overflow-x-hidden selection:bg-neo-lime selection:text-black scroll-smooth"
     >
+        <!-- Background System -->
+        <div
+            id="stars-container"
+            class="fixed inset-0 pointer-events-none -z-20 overflow-hidden"
+        >
+        </div>
+
+        <!-- Scroll Progress Bar -->
+        <div
+            id="scroll-progress"
+            class="fixed top-0 left-0 h-1 bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan z-[100] w-0 transition-all duration-100"
+        >
+        </div>
+
         <!-- Custom Glow Cursor -->
         <div
             id="glow-cursor"
-            class="fixed w-[400px] h-[400px] bg-neo-purple/20 rounded-full blur-[100px] pointer-events-none z-[-1] opacity-0 transition-opacity duration-500"
+            class="fixed w-[400px] h-[400px] bg-neo-purple/20 rounded-full blur-[100px] pointer-events-none z-40 opacity-0 transition-all duration-500 ease-out mix-blend-screen"
         >
         </div>
 
@@ -124,6 +138,24 @@ const {
             .lenis.lenis-stopped {
                 overflow: hidden;
             }
+
+            /* Estilos mejorados para el cursor hover */
+            #glow-cursor {
+                transition:
+                    width 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                    height 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                    background-color 0.5s ease,
+                    opacity 0.5s ease,
+                    filter 0.5s ease;
+            }
+
+            #glow-cursor.cursor-active {
+                width: 650px;
+                height: 650px;
+                background-color: rgba(184, 153, 111, 0.4);
+                filter: blur(80px); /* Menos blur = más definido y brillante */
+                opacity: 0.8 !important;
+            }
         </style>
 
         <!-- Lenis Smooth Scroll -->
@@ -135,7 +167,8 @@ const {
             // @ts-ignore
             const lenis = new Lenis({
                 duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                easing: (t: number) =>
+                    Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                 direction: "vertical",
                 gestureDirection: "vertical",
                 smooth: true,
@@ -151,13 +184,79 @@ const {
             }
             requestAnimationFrame(raf);
 
-            // Glow Cursor Logic
+            // Glow Cursor Logic (Rediseñado)
             const cursor = document.getElementById("glow-cursor");
+
             window.addEventListener("mousemove", (e) => {
                 if (cursor) {
                     cursor.style.opacity = "1";
-                    cursor.style.left = `${e.clientX - 200}px`;
-                    cursor.style.top = `${e.clientY - 200}px`;
+                    // Centrado perfecto usando transform
+                    cursor.style.left = "0px";
+                    cursor.style.top = "0px";
+                    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+                }
+
+                // Parallax Particles
+                const stars = document.querySelectorAll(
+                    ".star",
+                ) as NodeListOf<HTMLElement>;
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.05;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.05;
+                stars.forEach((star) => {
+                    const depth = parseFloat(star.dataset.depth || "1");
+                    star.style.transform = `translate(${moveX * depth}px, ${moveY * depth}px)`;
+                });
+            });
+
+            // Particles Generation
+            const starsContainer = document.getElementById("stars-container");
+            if (starsContainer) {
+                for (let i = 0; i < 50; i++) {
+                    const star = document.createElement("div");
+                    star.className =
+                        "star absolute bg-white transition-transform duration-300 ease-out";
+                    const size = Math.random() * 3 + 1;
+                    const depth = Math.random() * 1.5 + 0.5;
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 100}%`;
+                    star.style.opacity = (Math.random() * 0.3 + 0.1).toString();
+                    star.style.borderRadius = "50%";
+                    star.dataset.depth = depth.toString();
+
+                    // Diferentes colores sutiles
+                    const colors = ["#b8996f", "#6b4f7c", "#5a8a9a", "#ffffff"];
+                    star.style.backgroundColor =
+                        colors[Math.floor(Math.random() * colors.length)];
+                    star.style.boxShadow = `0 0 ${size * 2}px ${star.style.backgroundColor}`;
+
+                    starsContainer.appendChild(star);
+                }
+            }
+
+            // Delegación de eventos para detectar hover en cualquier link o botón incluso si son dinámicos
+            document.addEventListener("mouseover", (e) => {
+                const target = e.target as HTMLElement;
+                if (
+                    target.closest(
+                        "a, button, [role='button'], .project-card, .tech-tag",
+                    )
+                ) {
+                    cursor?.classList.add("cursor-active");
+                } else {
+                    cursor?.classList.remove("cursor-active");
+                }
+            });
+
+            // Scroll Progress Bar Logic
+            const progressBar = document.getElementById("scroll-progress");
+            window.addEventListener("scroll", () => {
+                const totalHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.scrollY / totalHeight) * 100;
+                if (progressBar) {
+                    progressBar.style.width = `${progress}%`;
                 }
             });
 
