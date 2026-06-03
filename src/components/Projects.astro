@@ -1,6 +1,56 @@
 ---
 const projects = [
   {
+    title: "NITIV APP 📊",
+    category: "Plataforma SaaS",
+    desc: "Sistema integral de gestión escolar para equipos de convivencia, orientadores y docentes. Centraliza el seguimiento de casos, protocolos Mineduc y medición del clima escolar.",
+    img: "nitiv-saas.webp",
+    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Vercel"],
+    link: "https://nitiv-app-three.vercel.app/login",
+    featured: true,
+    objectFit: "contain",
+    features: [
+      "Gestión y trazabilidad de casos (PAEC/DEC)",
+      "Radar de competencia socioemocional CASEL",
+      "Encuestas anónimas de clima de aula",
+      "Asistente con Inteligencia Artificial",
+    ],
+    result: "92% de adopción docente 🚀"
+  },
+  {
+    title: "NITIV.CL 🚀",
+    category: "Landing Page",
+    desc: "Landing page de la plataforma Nitiv, diseñada para colegios chilenos. Presenta el SaaS, sus pilares, beneficios y permite cotizaciones a medida.",
+    img: "nitiv-landing.webp",
+    tags: ["Astro", "React", "Styled Components", "SEO", "Responsive"],
+    link: "https://nitiv.cl",
+    objectFit: "contain",
+    features: [
+      "Presentación interactiva de pilares",
+      "Sección de cotizaciones dinámicas",
+      "Optimización SEO y carga rápida",
+      "Formularios de contacto integrados",
+    ],
+    result: "Conversión de leads escolares 📈"
+  },
+  {
+    title: "PURA LANA 🧶",
+    category: "E-Commerce & Admin",
+    desc: "Tienda online de alta textilería artesanal de La Ligua, con carrito dinámico, checkout por transferencia bancaria y panel de administración para gestionar productos en tiempo real.",
+    img: "pura-lana.webp",
+    tags: ["HTML5", "CSS3", "JavaScript", "Supabase", "Vercel"],
+    link: "https://landingpage-puralana.vercel.app/",
+    featured: true,
+    objectFit: "contain",
+    features: [
+      "Carrito de compras dinámico",
+      "Panel de administración de productos",
+      "Base de datos en tiempo real (Supabase)",
+      "Checkout integrado por transferencia",
+    ],
+    result: "Gestión de stock autónoma 📈"
+  },
+  {
     title: "TIENDA SUSHI 🍣",
     category: "E-Commerce Real",
     desc: "E-commerce desarrollado para restaurante real, con carrito dinámico, gestión de favoritos y envío de pedido directo a WhatsApp.",
@@ -8,7 +58,6 @@ const projects = [
     tags: ["React", "Tailwind CSS", "Vercel", "Vite"],
     repo: "https://github.com/ArielCamposs/tienda-sushi",
     link: "https://tienda-sushi.vercel.app/",
-    featured: true,
     features: [
       "Carrito de compras funcional",
       "Control visual de stock",
@@ -17,7 +66,7 @@ const projects = [
     ],
   },
   {
-    title: "PELUQUERÍA DELTA ✂️",
+    title: "PELUQUERIA DELTA ✂️",
     category: "Landing Page",
     desc: "Landing page creada para captar clientes mediante SEO Local y CTA directo a WhatsApp.",
     img: "landing-page.webp",
@@ -27,9 +76,9 @@ const projects = [
     features: [
       "SEO Local optimizado",
       "WhatsApp directo",
-      "Carga ultra rápida",
+      "Carga ultra rapida",
     ],
-    result: "Mejora notable de captación ✨"
+    result: "Mejora notable de captacion ✨"
   },
 ];
 ---
@@ -39,8 +88,6 @@ const projects = [
   <div class="bg-orb bg-orb-1"></div>
   <div class="bg-orb bg-orb-2"></div>
   <div class="bg-orb bg-orb-3"></div>
-  
-  <!-- Decorative Lines -->
   <div class="deco-line deco-line-1"></div>
   <div class="deco-line deco-line-2"></div>
 
@@ -55,84 +102,80 @@ const projects = [
       <p class="section-subtitle">Proyectos reales que demuestran mis habilidades</p>
     </header>
 
-    <!-- Bento Grid -->
-    <div class="bento-grid">
+    <!-- Projects List -->
+    <div class="projects-list">
       {projects.map((project, index) => (
-        <article 
-          class={`project-card ${project.featured ? 'featured' : ''} spotlight-card`}
-          style={`--delay: ${index * 0.1}s`}
-        >
-          <!-- Spotlight Cursor Effect -->
-          <div class="spotlight"></div>
+        <article class="project-card" data-index={index}>
+          <div class={`card-layout ${index % 2 === 1 ? 'card-layout--flip' : ''}`}>
 
-          <!-- Glow Border Effect -->
-          <div class="card-glow"></div>
-          
-          <!-- Card Content -->
-          <div class="card-inner">
-            <!-- Image Section -->
-            <div class="card-image">
-              <img src={project.img} alt={project.title} loading="lazy" />
-              <div class="image-overlay"></div>
-              
-              <!-- Category Badge -->
-              <span class="category-badge">{project.category}</span>
-              
-              <!-- Quick Actions (visible on hover) -->
-              <div class="quick-actions">
-                <a href={project.link} target="_blank" class="action-btn primary" title="Ver Demo">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <!-- Image Side -->
+            <div class="card-media">
+              <div class="card-img-wrap">
+                <img
+                  src={project.img}
+                  alt={project.title}
+                  loading="lazy"
+                  class={project.objectFit ? 'img-contain' : 'img-cover'}
+                />
+              </div>
+              <div class="card-media-fade"></div>
+              <span class="card-badge">{project.category}</span>
+              <div class="card-hover-links">
+                <a href={project.link} target="_blank" class="hover-link hover-link--primary" title="Ver Demo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 </a>
                 {project.repo && (
-                  <a href={project.repo} target="_blank" class="action-btn secondary" title="Ver Código">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <a href={project.repo} target="_blank" class="hover-link hover-link--ghost" title="Ver Codigo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                   </a>
                 )}
               </div>
             </div>
 
-            <!-- Content Section -->
+            <!-- Content Side -->
             <div class="card-content">
-              <h3 class="project-title">{project.title}</h3>
-              <p class="project-desc">{project.desc}</p>
-              
-              <!-- Features List -->
-              {project.features && (
-                <ul class="features-list">
-                  {project.features.map((feat) => (
-                    <li>
-                      <span class="feature-icon">✦</span>
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <div class="card-content-inner">
+                <div class="card-meta">
+                  <span class="card-num">0{index + 1}</span>
+                  <span class="card-category-text">{project.category}</span>
+                </div>
 
-              <!-- Result Badge -->
-              {project.result && (
-                <div class="result-badge">{project.result}</div>
-              )}
+                <h3 class="card-title">{project.title}</h3>
+                <p class="card-desc">{project.desc}</p>
 
-              <!-- Tags -->
-              <div class="tags-container">
-                {project.tags.map((tag) => (
-                  <span class="tech-tag">#{tag}</span>
-                ))}
-              </div>
-
-              <!-- CTA Buttons -->
-              <div class="cta-buttons">
-                <a href={project.link} target="_blank" class="btn-demo">
-                  <span>Ver Demo</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-                {project.repo && (
-                  <a href={project.repo} target="_blank" class="btn-code">
-                    Código
-                  </a>
+                {project.features && (
+                  <ul class="card-features">
+                    {project.features.map((feat) => (
+                      <li>
+                        <span class="feat-dot">✦</span>
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
                 )}
+
+                {project.result && (
+                  <div class="card-result">{project.result}</div>
+                )}
+
+                <div class="card-tags">
+                  {project.tags.map((tag) => (
+                    <span class="card-tag">#{tag}</span>
+                  ))}
+                </div>
+
+                <div class="card-cta">
+                  <a href={project.link} target="_blank" class="btn-primary">
+                    <span>Ver Demo</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </a>
+                  {project.repo && (
+                    <a href={project.repo} target="_blank" class="btn-ghost">Codigo</a>
+                  )}
+                </div>
               </div>
             </div>
+
           </div>
         </article>
       ))}
@@ -144,116 +187,91 @@ const projects = [
 <div class="marquee-container">
   <div class="marquee">
     <div class="track">
-      <p>👨‍💻 Desarrollador Web Full Stack Junior Disponible 🚀</p>
-      <p>💼 Contrataciones & Proyectos Freelance 📩</p>
-      <p>⚡ React • Astro • Tailwind • APIs • UX/UI 🎨</p>
-      <p>📍 Chile | Remoto LATAM 🌍</p>
-      <p>👨‍💻 Desarrollador Web Full Stack Junior Disponible 🚀</p>
-      <p>💼 Contrataciones & Proyectos Freelance 📩</p>
-      <p>⚡ React • Astro • Tailwind • APIs • UX/UI 🎨</p>
-      <p>📍 Chile | Remoto LATAM 🌍</p>
+      <p>Desarrollador Web Full Stack Junior Disponible 🚀</p>
+      <p>Contrataciones &amp; Proyectos Freelance 📩</p>
+      <p>React &bull; Astro &bull; Tailwind &bull; APIs &bull; UX/UI 🎨</p>
+      <p>Chile | Remoto LATAM 🌍</p>
+      <p>Desarrollador Web Full Stack Junior Disponible 🚀</p>
+      <p>Contrataciones &amp; Proyectos Freelance 📩</p>
+      <p>React &bull; Astro &bull; Tailwind &bull; APIs &bull; UX/UI 🎨</p>
+      <p>Chile | Remoto LATAM 🌍</p>
     </div>
   </div>
 </div>
 
 <style>
-  /* ===== SECTION BASE ===== */
+  /* ===== SECTION ===== */
   .projects-section {
     position: relative;
-    padding: 8rem 0;
+    padding: 8rem 0 6rem;
     background: #0a0a0a;
     overflow: hidden;
-    min-height: 100vh;
   }
 
   .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
     position: relative;
     z-index: 10;
   }
 
-  /* ===== BACKGROUND EFFECTS ===== */
+  /* ===== BACKGROUND ORBS ===== */
   .bg-orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(120px);
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.35;
   }
-
   .bg-orb-1 {
-    top: -100px;
-    right: -100px;
-    width: 500px;
-    height: 500px;
-    background: linear-gradient(135deg, #5a8a9a 0%, #6b4f7c 100%);
+    top: -80px; right: -80px;
+    width: 480px; height: 480px;
+    background: linear-gradient(135deg, #5a8a9a, #6b4f7c);
     animation: float-orb 8s ease-in-out infinite;
   }
-
   .bg-orb-2 {
-    bottom: 20%;
-    left: -150px;
-    width: 400px;
-    height: 400px;
-    background: linear-gradient(135deg, #c25d85 0%, #b8996f 100%);
-    animation: float-orb 10s ease-in-out infinite reverse;
+    bottom: 15%; left: -120px;
+    width: 380px; height: 380px;
+    background: linear-gradient(135deg, #c25d85, #b8996f);
+    animation: float-orb 11s ease-in-out infinite reverse;
   }
-
   .bg-orb-3 {
-    top: 50%;
-    right: 10%;
-    width: 300px;
-    height: 300px;
+    top: 50%; right: 8%;
+    width: 280px; height: 280px;
     background: #b8996f;
-    opacity: 0.15;
+    opacity: 0.12;
     animation: float-orb 6s ease-in-out infinite;
   }
-
   @keyframes float-orb {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(30px, -30px) scale(1.1); }
+    50%       { transform: translate(25px, -25px) scale(1.08); }
   }
 
-  /* Decorative Lines */
   .deco-line {
     position: absolute;
     background: linear-gradient(90deg, transparent, #b8996f, transparent);
     height: 1px;
     pointer-events: none;
+    left: 0; width: 100%;
   }
-
-  .deco-line-1 {
-    top: 15%;
-    left: 0;
-    width: 100%;
-    opacity: 0.2;
-  }
-
-  .deco-line-2 {
-    bottom: 25%;
-    left: 0;
-    width: 100%;
-    opacity: 0.15;
-  }
+  .deco-line-1 { top: 12%; opacity: 0.18; }
+  .deco-line-2 { bottom: 22%; opacity: 0.12; }
 
   /* ===== HEADER ===== */
   .section-header {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
     text-align: center;
   }
-
   .code-tag {
     display: inline-block;
     font-family: monospace;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #b8996f;
     letter-spacing: 0.2em;
     margin-bottom: 1rem;
-    text-shadow: 0 0 20px rgba(184, 153, 111, 0.3);
+    text-shadow: 0 0 20px rgba(184,153,111,0.3);
   }
-
   .section-title {
     font-size: clamp(3rem, 10vw, 6rem);
     font-weight: 900;
@@ -262,393 +280,307 @@ const projects = [
     line-height: 0.9;
     letter-spacing: -0.02em;
   }
-
   .gradient-text {
     background: linear-gradient(135deg, #c25d85 0%, #6b4f7c 50%, #5a8a9a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
   .section-subtitle {
     margin-top: 1.5rem;
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255,255,255,0.55);
     font-weight: 300;
   }
 
-  /* ===== BENTO GRID ===== */
-  .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .bento-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .project-card.featured {
-      grid-column: span 2;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .bento-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    
-    .project-card.featured {
-      grid-column: span 2;
-      grid-row: span 1;
-    }
-    
-    .project-card.featured .card-inner {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-    }
-    
-    .project-card.featured .card-image {
-      height: 100%;
-      min-height: 400px;
-    }
-    
-    .project-card.featured .card-content {
-      padding: 2rem;
-    }
-  }
-
-  /* ===== PROJECT CARD ===== */
-  .project-card {
-    position: relative;
-    border-radius: 24px;
-    opacity: 0;
-    animation: fadeInUp 0.6s ease forwards;
-    animation-delay: var(--delay);
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Glow Effect */
-  .card-glow {
-    position: absolute;
-    inset: -2px;
-    border-radius: 26px;
-    background: linear-gradient(135deg, #b8996f 0%, #5a8a9a 50%, #6b4f7c 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 0;
-  }
-
-  .project-card:hover .card-glow {
-    opacity: 0.6;
-  }
-
-  .card-inner {
-    position: relative;
-    background: linear-gradient(145deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    overflow: hidden;
-    height: 100%;
+  /* ===== PROJECTS LIST ===== */
+  .projects-list {
     display: flex;
     flex-direction: column;
-    z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 2rem;
   }
 
-  .project-card:hover .card-inner {
-    border-color: rgba(184, 153, 111, 0.3);
-    transform: translateY(-8px);
-    box-shadow: 
-      0 25px 50px -12px rgba(0, 0, 0, 0.5),
-      0 0 60px -15px rgba(184, 153, 111, 0.2);
-  }
-
-  /* Spotlight Effect */
-  .spotlight-card {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .spotlight {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      400px circle at var(--x, 0px) var(--y, 0px),
-      rgba(184, 153, 111, 0.15),
-      transparent 80%
-    );
+  /* ===== SCROLL REVEAL ===== */
+  .project-card {
     opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 2;
-    pointer-events: none;
+    transform: translateY(56px);
+    transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
-  .spotlight-card:hover .spotlight {
+  .project-card.is-visible {
     opacity: 1;
+    transform: none;
   }
 
-  /* ===== CARD IMAGE ===== */
-  .card-image {
+  /* ===== CARD LAYOUT ===== */
+  .card-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+    border-radius: 22px;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(22,22,22,0.92), rgba(10,10,10,0.97));
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .card-layout:hover {
+    border-color: rgba(184,153,111,0.28);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.45), 0 0 50px rgba(184,153,111,0.07);
+    transform: translateY(-5px);
+  }
+
+  .card-layout--flip .card-media  { order: 2; }
+  .card-layout--flip .card-content { order: 1; }
+
+  /* ===== CARD MEDIA ===== */
+  .card-media {
     position: relative;
-    height: 220px;
     overflow: hidden;
   }
-
-  .card-image img {
+  .card-img-wrap {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    display: block;
+  }
+  .img-cover  { object-fit: cover; }
+  .img-contain {
+    object-fit: contain;
+    background: rgba(255,255,255,0.035);
+    padding: 1rem;
+  }
+  .card-layout:hover .card-img-wrap img {
+    transform: scale(1.04);
   }
 
-  .project-card:hover .card-image img {
-    transform: scale(1.1);
+  .card-media-fade {
+    display: none;
   }
 
-  .image-overlay {
+  .card-badge {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(10, 10, 10, 0.3) 50%,
-      rgba(10, 10, 10, 0.9) 100%
-    );
-    transition: opacity 0.4s ease;
-  }
-
-  .category-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #c25d85 0%, #6b4f7c 100%);
+    top: 1.1rem;
+    left: 1.1rem;
+    padding: 0.4rem 0.9rem;
+    background: linear-gradient(135deg, #c25d85, #6b4f7c);
     color: white;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(107, 79, 124, 0.3);
-    z-index: 10;
+    z-index: 5;
+    box-shadow: 0 4px 12px rgba(107,79,124,0.35);
   }
 
-  /* Quick Actions */
-  .quick-actions {
+  .card-hover-links {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    bottom: 1.1rem;
+    right: 1.1rem;
     display: flex;
     gap: 0.5rem;
     opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 10;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 5;
   }
-
-  .project-card:hover .quick-actions {
+  .card-layout:hover .card-hover-links {
     opacity: 1;
     transform: translateY(0);
   }
-
-  .action-btn {
-    width: 40px;
-    height: 40px;
+  .hover-link {
+    width: 40px; height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
   }
-
-  .action-btn.primary {
+  .hover-link--primary {
     background: #b8996f;
     color: #0a0a0a;
   }
-
-  .action-btn.secondary {
-    background: rgba(255, 255, 255, 0.2);
+  .hover-link--ghost {
+    background: rgba(255,255,255,0.18);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(8px);
   }
-
-  .action-btn:hover {
-    transform: scale(1.15);
-  }
-
-  .action-btn.primary:hover {
-    box-shadow: 0 0 20px rgba(184, 153, 111, 0.5);
-  }
-
-  .action-btn.secondary:hover {
-    background: white;
-    color: #0a0a0a;
+  .hover-link:hover {
+    transform: scale(1.12);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   }
 
   /* ===== CARD CONTENT ===== */
   .card-content {
-    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding: 2.5rem;
+  }
+  .card-content-inner {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    gap: 1.1rem;
   }
 
-  .project-title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
-    transition: color 0.3s ease;
-  }
-
-  .project-card:hover .project-title {
-    color: #5a8a9a;
-  }
-
-  .project-desc {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-
-  /* Features List */
-  .features-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .features-list li {
+  .card-meta {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.35rem 0.75rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 0.75rem;
   }
-
-  .feature-icon {
-    color: #b8996f;
-    font-size: 0.65rem;
-  }
-
-  /* Result Badge */
-  .result-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, rgba(184, 153, 111, 0.15) 0%, rgba(90, 138, 154, 0.1) 100%);
-    border: 1px solid rgba(184, 153, 111, 0.3);
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #b8996f;
-    margin-bottom: 1rem;
-  }
-
-  /* Tags */
-  .tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .tech-tag {
+  .card-num {
+    font-family: monospace;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #e8e8e8;
-    padding: 0.4rem 0.8rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #b8996f;
+    letter-spacing: 0.08em;
+  }
+  .card-category-text {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.12em;
   }
 
-  .tech-tag:hover {
-    border-color: #5a8a9a;
+  .card-title {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.15;
+    transition: color 0.3s ease;
+    margin: 0;
+  }
+  .card-layout:hover .card-title { color: #b8996f; }
+
+  .card-desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .card-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .card-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.58);
+  }
+  .feat-dot { color: #b8996f; font-size: 0.58rem; flex-shrink: 0; }
+
+  .card-result {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    background: linear-gradient(135deg, rgba(184,153,111,0.12), rgba(90,138,154,0.08));
+    border: 1px solid rgba(184,153,111,0.28);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #b8996f;
+    width: fit-content;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .card-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.45);
+    padding: 0.3rem 0.7rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: color 0.25s, border-color 0.25s, background 0.25s;
+  }
+  .card-tag:hover {
     color: #5a8a9a;
-    background: rgba(90, 138, 154, 0.1);
-    transform: translateY(-2px);
+    border-color: rgba(90,138,154,0.5);
+    background: rgba(90,138,154,0.08);
   }
 
-  /* CTA Buttons */
-  .cta-buttons {
+  .card-cta {
     display: flex;
     gap: 0.75rem;
-    margin-top: auto;
+    flex-wrap: wrap;
+    padding-top: 0.25rem;
   }
-
-  .btn-demo {
+  .btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #b8996f 0%, #9a8159 100%);
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, #b8996f, #9a8159);
     color: #0a0a0a;
     font-size: 0.85rem;
     font-weight: 700;
-    border-radius: 12px;
+    border-radius: 10px;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(184, 153, 111, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 14px rgba(184,153,111,0.3);
   }
-
-  .btn-demo:hover {
+  .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(184, 153, 111, 0.5);
+    box-shadow: 0 8px 24px rgba(184,153,111,0.5);
   }
+  .btn-primary svg { transition: transform 0.25s ease; }
+  .btn-primary:hover svg { transform: translateX(4px); }
 
-  .btn-demo svg {
-    transition: transform 0.3s ease;
-  }
-
-  .btn-demo:hover svg {
-    transform: translateX(4px);
-  }
-
-  .btn-code {
+  .btn-ghost {
     display: inline-flex;
     align-items: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.7rem 1.5rem;
     background: transparent;
-    color: white;
+    color: rgba(255,255,255,0.8);
     font-size: 0.85rem;
     font-weight: 600;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
+    border: 1.5px solid rgba(255,255,255,0.22);
+    border-radius: 10px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: border-color 0.25s, background 0.25s, color 0.25s;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.07);
+    color: white;
   }
 
-  .btn-code:hover {
-    border-color: white;
-    background: rgba(255, 255, 255, 0.1);
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .card-layout {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .card-media { height: 260px; order: 0 !important; }
+    .card-content { order: 1 !important; padding: 2rem 1.75rem; }
+    .card-layout:not(.card-layout--flip) .card-media-fade,
+    .card-layout--flip .card-media-fade {
+      background: linear-gradient(to bottom, transparent 50%, rgba(10,10,10,0.9));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-content { padding: 1.5rem; }
+    .card-title { font-size: 1.3rem; }
   }
 
   /* ===== MARQUEE ===== */
@@ -658,9 +590,8 @@ const projects = [
     border-top: 2px solid #b8996f;
     border-bottom: 2px solid #b8996f;
     background: #0a0a0a;
-    margin-top: 4rem;
+    margin-top: 5rem;
   }
-
   .marquee {
     position: relative;
     width: 100%;
@@ -668,69 +599,56 @@ const projects = [
     overflow: hidden;
     white-space: nowrap;
   }
-
   .track {
     display: inline-flex;
     gap: 3rem;
     padding: 0.75rem 0;
     animation: marquee-move 20s linear infinite;
   }
-
   .track p {
     font-size: 0.85rem;
     font-weight: 700;
     color: #b8996f;
     text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(184, 153, 111, 0.3);
+    text-shadow: 0 0 10px rgba(184,153,111,0.3);
   }
-
   @keyframes marquee-move {
-    0% { transform: translateX(0); }
+    0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
-
   .marquee-container:hover .track {
     animation-play-state: paused;
   }
 </style>
 
 <script>
-  // Spotlight & 3D Tilt Effect
-  const cards = document.querySelectorAll('.spotlight-card');
-  
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e: any) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
+  // Scroll Reveal
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+  );
 
-      (card as HTMLElement).style.setProperty('--x', `${x}px`);
-      (card as HTMLElement).style.setProperty('--y', `${y}px`);
-      (card as HTMLElement).querySelector('.card-inner')!.setAttribute('style', `transform: perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px);`);
-    });
-
-    card.addEventListener('mouseleave', () => {
-      (card as HTMLElement).querySelector('.card-inner')!.setAttribute('style', `transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px);`);
-    });
+  document.querySelectorAll('.project-card').forEach((card) => {
+    revealObserver.observe(card);
   });
 
-  // Magnetic Projects Interaction (Optional addition for extra "wow")
-  const primaryBtns = document.querySelectorAll('.btn-demo');
-  primaryBtns.forEach(btn => {
+  // Magnetic CTA buttons
+  document.querySelectorAll('.btn-primary').forEach((btn) => {
     btn.addEventListener('mousemove', (e: any) => {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      (btn as HTMLElement).style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+      (btn as HTMLElement).style.transform = `translateY(-2px) translate(${x * 0.15}px, ${y * 0.15}px)`;
     });
     btn.addEventListener('mouseleave', () => {
-      (btn as HTMLElement).style.transform = `translate(0px, 0px)`;
+      (btn as HTMLElement).style.transform = '';
     });
   });
 </script>
