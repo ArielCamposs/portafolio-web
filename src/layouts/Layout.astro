@@ -54,6 +54,51 @@ const {
     <body
         class="bg-neo-black text-neo-white font-outfit overflow-x-hidden selection:bg-neo-lime selection:text-black scroll-smooth"
     >
+        <!-- Pantalla de Carga (Loader) -->
+        <div
+            id="screen-loader"
+            class="fixed inset-0 z-[9999] bg-[#0a0a0a] flex flex-col items-center justify-center select-none overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)]"
+        >
+            <!-- Efectos de Luces Neo de Fondo -->
+            <div class="absolute top-[30%] left-[20%] w-[300px] h-[300px] bg-neo-purple/10 rounded-full blur-[80px] -z-10 animate-pulse"></div>
+            <div class="absolute bottom-[30%] right-[20%] w-[400px] h-[400px] bg-neo-cyan/10 rounded-full blur-[100px] -z-10"></div>
+
+            <div class="flex flex-col items-center gap-6">
+                <!-- Branding/Nombre -->
+                <div class="text-4xl sm:text-5xl md:text-7xl font-black tracking-wider flex select-none font-outfit">
+                    <!-- Ariel -->
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.1s">A</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.15s">r</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.2s">i</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.25s">e</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.3s">l</span>
+                    
+                    <!-- Espacio -->
+                    <span class="w-3 sm:w-4 md:w-6"></span>
+                    
+                    <!-- Campos -->
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.4s">C</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.45s">a</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.5s">m</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.55s">p</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.6s">o</span>
+                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.65s">s</span>
+                </div>
+
+                <!-- Subtítulo -->
+                <div class="overflow-hidden">
+                    <span class="loader-subtitle inline-block text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-neo-gold/80 opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: 0.75s;">
+                        Analista Programador Computacional
+                    </span>
+                </div>
+                
+                <!-- Barra de Carga -->
+                <div class="w-48 sm:w-64 h-[3px] bg-white/10 rounded-full overflow-hidden relative border border-white/5 shadow-inner">
+                    <div id="loader-bar" class="absolute top-0 left-0 h-full w-0 bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan transition-all duration-1200 ease-out shadow-[0_0_10px_rgba(184,153,111,0.5)]"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- Background System -->
         <div
             id="stars-container"
@@ -163,26 +208,105 @@ const {
             src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"
         ></script>
         <script>
-            // Initialize Lenis
-            // @ts-ignore
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t: number) =>
-                    Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                direction: "vertical",
-                gestureDirection: "vertical",
-                smooth: true,
-                mouseMultiplier: 1,
-                smoothTouch: false,
-                touchMultiplier: 2,
-                infinite: false,
-            });
+            // Pantalla de Carga (Loader) Logic
+            const loader = document.getElementById("screen-loader");
+            const loaderBar = document.getElementById("loader-bar");
+            const loaderChars = document.querySelectorAll(".loader-char");
+            const loaderSubtitle = document.querySelector(".loader-subtitle");
 
-            function raf(time: any) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
+            // Bloquear scroll inmediatamente
+            document.body.style.overflow = "hidden";
+
+            // Verificar si ya se visitó en esta sesión de forma segura
+            let hasVisited = false;
+            try {
+                hasVisited = sessionStorage.getItem("has-visited-portfolio") === "true";
+            } catch (e) {
+                console.warn("sessionStorage no accesible:", e);
             }
-            requestAnimationFrame(raf);
+
+            // Variable global para Lenis
+            let lenis: any = null;
+
+            // Función para desbloquear el sitio
+            const unlockSite = () => {
+                if (loader) {
+                    loader.style.display = "none";
+                }
+                document.body.style.overflow = "";
+                if (lenis && typeof lenis.start === 'function') {
+                    lenis.start();
+                }
+            };
+
+            if (hasVisited && loader) {
+                loader.style.transition = "none";
+                unlockSite();
+            } else {
+                setTimeout(() => {
+                    loaderChars.forEach((char) => {
+                        char.classList.remove("translate-y-8", "opacity-0", "blur-[2px]");
+                        char.classList.add("translate-y-0", "opacity-100", "blur-0");
+                    });
+                    if (loaderSubtitle) {
+                        loaderSubtitle.classList.remove("translate-y-4", "opacity-0");
+                        loaderSubtitle.classList.add("translate-y-0", "opacity-100");
+                    }
+                    if (loaderBar) {
+                        loaderBar.style.width = "100%";
+                    }
+                }, 100);
+
+                setTimeout(() => {
+                    if (loader) {
+                        loader.style.transform = "translateY(-100%)";
+                    }
+                    try {
+                        sessionStorage.setItem("has-visited-portfolio", "true");
+                    } catch (e) {
+                        // ignorar
+                    }
+                }, 1800);
+
+                setTimeout(() => {
+                    unlockSite();
+                }, 2500);
+            }
+
+            // Initialize Lenis de forma segura
+            try {
+                // @ts-ignore
+                if (typeof Lenis !== 'undefined') {
+                    // @ts-ignore
+                    lenis = new Lenis({
+                        duration: 1.2,
+                        easing: (t: number) =>
+                            Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                        direction: "vertical",
+                        gestureDirection: "vertical",
+                        smooth: true,
+                        mouseMultiplier: 1,
+                        smoothTouch: false,
+                        touchMultiplier: 2,
+                        infinite: false,
+                    });
+
+                    // Detener scroll si el loader aún está activo
+                    if (!hasVisited && lenis) {
+                        lenis.stop();
+                    }
+
+                    const raf = (time: any) => {
+                        if (lenis) lenis.raf(time);
+                        requestAnimationFrame(raf);
+                    };
+                    requestAnimationFrame(raf);
+                } else {
+                    console.warn("Lenis is not defined. Smooth scroll disabled.");
+                }
+            } catch (error) {
+                console.error("Error al inicializar Lenis:", error);
+            }
 
             // Glow Cursor Logic (Rediseñado)
             const cursor = document.getElementById("glow-cursor");
