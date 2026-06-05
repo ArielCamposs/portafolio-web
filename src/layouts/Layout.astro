@@ -1,12 +1,13 @@
 ---
 import "@fontsource-variable/onest"; // Asegúrate de tener la fuente
+import CodeBackground from "../components/CodeBackground.astro";
 interface Props {
     title: string;
     description?: string;
 }
 const {
     title,
-    description = "Ariel Campos - Analista Programador Web especializado en React, Astro y Tailwind CSS. Creando interfaces modernas y eficientes.",
+    description = "Ariel Campos - Analista Programador Web especializado en React, Astro, Next.js y Tailwind CSS. Creando interfaces modernas y eficientes.",
 } = Astro.props;
 ---
 
@@ -60,51 +61,97 @@ const {
             class="fixed inset-0 z-[9999] bg-[#0a0a0a] flex flex-col items-center justify-center select-none overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)]"
         >
             <!-- Efectos de Luces Neo de Fondo -->
-            <div class="absolute top-[30%] left-[20%] w-[300px] h-[300px] bg-neo-purple/10 rounded-full blur-[80px] -z-10 animate-pulse"></div>
-            <div class="absolute bottom-[30%] right-[20%] w-[400px] h-[400px] bg-neo-cyan/10 rounded-full blur-[100px] -z-10"></div>
+            <div
+                class="absolute top-[30%] left-[20%] w-[300px] h-[300px] bg-neo-purple/10 rounded-full blur-[80px] -z-10 animate-pulse"
+            >
+            </div>
+            <div
+                class="absolute bottom-[30%] right-[20%] w-[400px] h-[400px] bg-neo-cyan/10 rounded-full blur-[100px] -z-10"
+            >
+            </div>
 
             <div class="flex flex-col items-center gap-6">
                 <!-- Branding/Nombre -->
-                <div class="text-4xl sm:text-5xl md:text-7xl font-black tracking-wider flex select-none font-outfit">
+                <div
+                    class="text-4xl sm:text-5xl md:text-7xl font-black tracking-wider flex select-none font-outfit"
+                >
                     <!-- Ariel -->
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.1s">A</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.15s">r</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.2s">i</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.25s">e</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white" style="transition-delay: 0.3s">l</span>
-                    
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
+                        style="transition-delay: 0.1s">A</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
+                        style="transition-delay: 0.15s">r</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
+                        style="transition-delay: 0.2s">i</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
+                        style="transition-delay: 0.25s">e</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
+                        style="transition-delay: 0.3s">l</span
+                    >
+
                     <!-- Espacio -->
                     <span class="w-3 sm:w-4 md:w-6"></span>
-                    
+
                     <!-- Campos -->
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.4s">C</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.45s">a</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.5s">m</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.55s">p</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.6s">o</span>
-                    <span class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan" style="transition-delay: 0.65s">s</span>
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
+                        style="transition-delay: 0.4s">C</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
+                        style="transition-delay: 0.45s">a</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
+                        style="transition-delay: 0.5s">m</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
+                        style="transition-delay: 0.55s">p</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
+                        style="transition-delay: 0.6s">o</span
+                    >
+                    <span
+                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
+                        style="transition-delay: 0.65s">s</span
+                    >
                 </div>
 
                 <!-- Subtítulo -->
                 <div class="overflow-hidden">
-                    <span class="loader-subtitle inline-block text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-neo-gold/80 opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: 0.75s;">
+                    <span
+                        class="loader-subtitle inline-block text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-neo-gold/80 opacity-0 translate-y-4 transition-all duration-700 ease-out"
+                        style="transition-delay: 0.75s;"
+                    >
                         Analista Programador Computacional
                     </span>
                 </div>
-                
+
                 <!-- Barra de Carga -->
-                <div class="w-48 sm:w-64 h-[3px] bg-white/10 rounded-full overflow-hidden relative border border-white/5 shadow-inner">
-                    <div id="loader-bar" class="absolute top-0 left-0 h-full w-0 bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan transition-all duration-1200 ease-out shadow-[0_0_10px_rgba(184,153,111,0.5)]"></div>
+                <div
+                    class="w-48 sm:w-64 h-[3px] bg-white/10 rounded-full overflow-hidden relative border border-white/5 shadow-inner"
+                >
+                    <div
+                        id="loader-bar"
+                        class="absolute top-0 left-0 h-full w-0 bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan transition-all duration-1200 ease-out shadow-[0_0_10px_rgba(184,153,111,0.5)]"
+                    >
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Background System -->
-        <div
-            id="stars-container"
-            class="fixed inset-0 pointer-events-none -z-20 overflow-hidden"
-        >
-        </div>
+        <CodeBackground />
 
         <!-- Scroll Progress Bar -->
         <div
@@ -220,7 +267,8 @@ const {
             // Verificar si ya se visitó en esta sesión de forma segura
             let hasVisited = false;
             try {
-                hasVisited = sessionStorage.getItem("has-visited-portfolio") === "true";
+                hasVisited =
+                    sessionStorage.getItem("has-visited-portfolio") === "true";
             } catch (e) {
                 console.warn("sessionStorage no accesible:", e);
             }
@@ -234,7 +282,7 @@ const {
                     loader.style.display = "none";
                 }
                 document.body.style.overflow = "";
-                if (lenis && typeof lenis.start === 'function') {
+                if (lenis && typeof lenis.start === "function") {
                     lenis.start();
                 }
             };
@@ -245,12 +293,26 @@ const {
             } else {
                 setTimeout(() => {
                     loaderChars.forEach((char) => {
-                        char.classList.remove("translate-y-8", "opacity-0", "blur-[2px]");
-                        char.classList.add("translate-y-0", "opacity-100", "blur-0");
+                        char.classList.remove(
+                            "translate-y-8",
+                            "opacity-0",
+                            "blur-[2px]",
+                        );
+                        char.classList.add(
+                            "translate-y-0",
+                            "opacity-100",
+                            "blur-0",
+                        );
                     });
                     if (loaderSubtitle) {
-                        loaderSubtitle.classList.remove("translate-y-4", "opacity-0");
-                        loaderSubtitle.classList.add("translate-y-0", "opacity-100");
+                        loaderSubtitle.classList.remove(
+                            "translate-y-4",
+                            "opacity-0",
+                        );
+                        loaderSubtitle.classList.add(
+                            "translate-y-0",
+                            "opacity-100",
+                        );
                     }
                     if (loaderBar) {
                         loaderBar.style.width = "100%";
@@ -276,7 +338,7 @@ const {
             // Initialize Lenis de forma segura
             try {
                 // @ts-ignore
-                if (typeof Lenis !== 'undefined') {
+                if (typeof Lenis !== "undefined") {
                     // @ts-ignore
                     lenis = new Lenis({
                         duration: 1.2,
@@ -302,7 +364,9 @@ const {
                     };
                     requestAnimationFrame(raf);
                 } else {
-                    console.warn("Lenis is not defined. Smooth scroll disabled.");
+                    console.warn(
+                        "Lenis is not defined. Smooth scroll disabled.",
+                    );
                 }
             } catch (error) {
                 console.error("Error al inicializar Lenis:", error);
@@ -319,45 +383,8 @@ const {
                     cursor.style.top = "0px";
                     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
                 }
-
-                // Parallax Particles
-                const stars = document.querySelectorAll(
-                    ".star",
-                ) as NodeListOf<HTMLElement>;
-                const moveX = (e.clientX - window.innerWidth / 2) * 0.05;
-                const moveY = (e.clientY - window.innerHeight / 2) * 0.05;
-                stars.forEach((star) => {
-                    const depth = parseFloat(star.dataset.depth || "1");
-                    star.style.transform = `translate(${moveX * depth}px, ${moveY * depth}px)`;
-                });
             });
 
-            // Particles Generation
-            const starsContainer = document.getElementById("stars-container");
-            if (starsContainer) {
-                for (let i = 0; i < 50; i++) {
-                    const star = document.createElement("div");
-                    star.className =
-                        "star absolute bg-white transition-transform duration-300 ease-out";
-                    const size = Math.random() * 3 + 1;
-                    const depth = Math.random() * 1.5 + 0.5;
-                    star.style.width = `${size}px`;
-                    star.style.height = `${size}px`;
-                    star.style.left = `${Math.random() * 100}%`;
-                    star.style.top = `${Math.random() * 100}%`;
-                    star.style.opacity = (Math.random() * 0.3 + 0.1).toString();
-                    star.style.borderRadius = "50%";
-                    star.dataset.depth = depth.toString();
-
-                    // Diferentes colores sutiles
-                    const colors = ["#b8996f", "#6b4f7c", "#5a8a9a", "#ffffff"];
-                    star.style.backgroundColor =
-                        colors[Math.floor(Math.random() * colors.length)];
-                    star.style.boxShadow = `0 0 ${size * 2}px ${star.style.backgroundColor}`;
-
-                    starsContainer.appendChild(star);
-                }
-            }
 
             // Delegación de eventos para detectar hover en cualquier link o botón incluso si son dinámicos
             document.addEventListener("mouseover", (e) => {
