@@ -29,7 +29,7 @@ const stats = [
             <div class="absolute top-1/2 -right-3 w-1 h-20 bg-neo-cyan"></div>
 
             <!-- COLUMNA 1: IMAGEN & DATOS RÁPIDOS (4 columnas) -->
-            <div class="md:col-span-4 flex flex-col gap-6">
+            <div class="md:col-span-4 flex flex-col gap-6 scroll-reveal" data-stagger-index="1">
                 <!-- Marco de Foto con efecto Glitch estático -->
                 <div class="relative group">
                     <div class="absolute inset-0 bg-neo-gold/30 translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
@@ -69,7 +69,7 @@ const stats = [
             <div class="md:col-span-8 flex flex-col justify-center">
                 
                 <!-- Encabezado -->
-                <div class="mb-8">
+                <div class="mb-8 scroll-reveal" data-stagger-index="2">
                     <p class="text-gray-300 text-lg leading-relaxed border-l-4 border-neo-purple pl-6">
     Soy <strong class="text-white">Analista Programador Computacional</strong> con enfoque en desarrollo
     frontend y experiencia en <strong class="text-neo-gold">React, Astro y Tailwind CSS</strong>.
@@ -83,12 +83,12 @@ const stats = [
 
                 <!-- Barras de Habilidad (Stats) -->
                 <div class="space-y-6">
-                    <h3 class="text-neo-gold font-mono text-sm tracking-widest border-b border-white/20 pb-2 mb-4">
+                    <h3 class="text-neo-gold font-mono text-sm tracking-widest border-b border-white/20 pb-2 mb-4 scroll-reveal" data-stagger-index="3">
                         // SISTEMAS_OPERATIVOS
                     </h3>
                     
-                    {stats.map((stat) => (
-                        <div class="group">
+                    {stats.map((stat, index) => (
+                        <div class="group scroll-reveal" data-stagger-index={4 + index}>
                             <div class="flex justify-between mb-1">
                                 <span class="text-sm font-bold text-white group-hover:text-neo-cyan transition-colors">{stat.label}</span>
                                 <span class="text-xs font-mono text-neo-gold">{stat.level}%</span>
@@ -102,42 +102,62 @@ const stats = [
                         </div>
                     ))}
                 </div>
-                <!-- Logros Profesionales -->
-<ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 mt-10 text-sm font-mono">
-    <li class="border-l-4 border-neo-cyan pl-4">+3 proyectos desarrollados</li>
-    <li class="border-l-4 border-neo-cyan pl-4">SEO aplicado en sitios reales</li>
-    <li class="border-l-4 border-neo-cyan pl-4">Integración con APIs externas</li>
-    <li class="border-l-4 border-neo-cyan pl-4">Optimización de rendimiento web</li>
-</ul>
 
-<!-- Botón CV Ultra Animado -->
-<div class="mt-12">
-    <a 
-        href="/curriculum.pdf" 
-        download="Curriculum_Vitae_2025.pdf" 
-        target="_blank"
-        class="group relative inline-flex items-center gap-3 px-8 py-4 bg-neo-black border border-white/20 text-white font-black tracking-widest uppercase overflow-hidden hover:text-black transition-colors duration-300"
-    >
-        <!-- Fondo deslizante al Hover (Color Lima) -->
-        <div class="absolute inset-0 bg-neo-gold translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
-        
-        <!-- Borde Glitch Animado (Esquinas) -->
-        <span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-neo-gold group-hover:border-black transition-colors"></span>
-        <span class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-neo-gold group-hover:border-black transition-colors"></span>
-        <span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-neo-gold opacity-0 group-hover:opacity-100 transition-opacity"></span>
-        <span class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-neo-gold opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                <!-- Métricas Animadas (Logros) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
+                    <div class="bg-white/5 p-4 border border-white/10 text-center font-mono scroll-reveal" data-stagger-index="8">
+                        <div class="text-2xl md:text-3xl font-black text-neo-gold mb-1">
+                            +<span class="counter" data-target="3">0</span>
+                        </div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Proyectos</div>
+                    </div>
+                    <div class="bg-white/5 p-4 border border-white/10 text-center font-mono scroll-reveal" data-stagger-index="9">
+                        <div class="text-2xl md:text-3xl font-black text-neo-cyan mb-1">
+                            <span class="counter" data-target="98">0</span>%
+                        </div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Rendimiento</div>
+                    </div>
+                    <div class="bg-white/5 p-4 border border-white/10 text-center font-mono scroll-reveal" data-stagger-index="10">
+                        <div class="text-2xl md:text-3xl font-black text-neo-purple mb-1">
+                            +<span class="counter" data-target="10">0</span>
+                        </div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Tecnologías</div>
+                    </div>
+                    <div class="bg-white/5 p-4 border border-white/10 text-center font-mono scroll-reveal" data-stagger-index="11">
+                        <div class="text-2xl md:text-3xl font-black text-white mb-1">
+                            <span class="counter" data-target="100">0</span>%
+                        </div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Clean Code</div>
+                    </div>
+                </div>
 
-        <!-- Icono y Texto (Relative para estar sobre el fondo deslizante) -->
-        <svg class="w-5 h-5 relative z-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-        </svg>
-        
-        <span class="relative z-10">DESCARGAR CV_V2.0</span>
-    </a>
-</div>
+                <!-- Botón CV Ultra Animado -->
+                <div class="mt-12 scroll-reveal" data-stagger-index="12">
+                    <a 
+                        href="/curriculum.pdf" 
+                        download="Curriculum_Vitae_2025.pdf" 
+                        target="_blank"
+                        class="group relative inline-flex items-center gap-3 px-8 py-4 bg-neo-black border border-white/20 text-white font-black tracking-widest uppercase overflow-hidden hover:text-black transition-colors duration-300"
+                    >
+                        <!-- Fondo deslizante al Hover (Color Lima) -->
+                        <div class="absolute inset-0 bg-neo-gold translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+                        
+                        <!-- Borde Glitch Animado (Esquinas) -->
+                        <span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-neo-gold group-hover:border-black transition-colors"></span>
+                        <span class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-neo-gold group-hover:border-black transition-colors"></span>
+                        <span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-neo-gold opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                        <span class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-neo-gold opacity-0 group-hover:opacity-100 transition-opacity"></span>
 
+                        <!-- Icono y Texto (Relative para estar sobre el fondo deslizante) -->
+                        <svg class="w-5 h-5 relative z-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        
+                        <span class="relative z-10">DESCARGAR CV_V2.0</span>
+                    </a>
             </div>
         </div>
+
     </div>
 </section>
 

@@ -16,7 +16,24 @@ const projects = [
       "Asistente con Inteligencia Artificial",
     ],
     result: "92% de adopción docente 🚀",
-    ctaText: "Visitar App"
+    ctaText: "Ver App"
+  },
+  {
+    title: "NITIV.CL",
+    category: "Landing Page",
+    desc: "Landing page de la plataforma Nitiv, diseñada para colegios chilenos. Presenta el SaaS, sus pilares, beneficios y permite cotizaciones a medida.",
+    img: "nitiv-landing.webp",
+    tags: ["Astro", "React", "Styled Components", "SEO", "Responsive"],
+    link: "https://nitiv.cl",
+    objectFit: "contain",
+    features: [
+      "Presentación interactiva de pilares",
+      "Sección de cotizaciones dinámicas",
+      "Optimización SEO y carga rápida",
+      "Formularios de contacto integrados",
+    ],
+    result: "Conversión de leads escolares 📈",
+    ctaText: "Ver Página"
   },
   {
     title: "BITECRAFT 🍔",
@@ -35,24 +52,7 @@ const projects = [
       "Formularios validados con Zod y React Hook Form",
     ],
     result: "Experiencia de compra fluida 🚀",
-    ctaText: "Visitar Tienda"
-  },
-  {
-    title: "NITIV.CL",
-    category: "Landing Page",
-    desc: "Landing page de la plataforma Nitiv, diseñada para colegios chilenos. Presenta el SaaS, sus pilares, beneficios y permite cotizaciones a medida.",
-    img: "nitiv-landing.webp",
-    tags: ["Astro", "React", "Styled Components", "SEO", "Responsive"],
-    link: "https://nitiv.cl",
-    objectFit: "contain",
-    features: [
-      "Presentación interactiva de pilares",
-      "Sección de cotizaciones dinámicas",
-      "Optimización SEO y carga rápida",
-      "Formularios de contacto integrados",
-    ],
-    result: "Conversión de leads escolares 📈",
-    ctaText: "Visitar Web"
+    ctaText: "Ver Tienda"
   },
   {
     title: "TIENDA TEXTIL ADMINISTRABLE 🧶",
@@ -69,22 +69,26 @@ const projects = [
       "Base de datos en tiempo real (Supabase)",
       "Checkout integrado por transferencia",
     ],
-    result: "Gestión de stock autónoma 📈"
+    result: "Gestión de stock autónoma 📈",
+    ctaText: "Ver Tienda"
   },
   {
     title: "TIENDA SUSHI 🍣",
     category: "E-Commerce Real",
     desc: "E-commerce desarrollado para restaurante real, con carrito dinámico, gestión de favoritos y envío de pedido directo a WhatsApp.",
-    img: "tienda-sushi.webp",
+    img: "tienda-sushi.png",
     tags: ["React", "Tailwind CSS", "Vercel", "Vite"],
     repo: "https://github.com/ArielCamposs/tienda-sushi",
     link: "https://tienda-sushi.vercel.app/",
+    objectFit: "sushi",
     features: [
       "Carrito de compras funcional",
       "Control visual de stock",
       "Favoritos en localStorage",
       "Integración WhatsApp API",
     ],
+    result: "Pedidos directos a WhatsApp 📲",
+    ctaText: "Ver Tienda"
   },
   {
     title: "PELUQUERIA DELTA ✂️",
@@ -94,12 +98,14 @@ const projects = [
     tags: ["Astro", "Tailwind CSS", "Responsive"],
     link: "https://landing-page-peluqueria-delta.vercel.app/",
     repo: "https://github.com/ArielCamposs/landing-page-informativa",
+    objectFit: "contain",
     features: [
       "SEO Local optimizado",
       "WhatsApp directo",
       "Carga ultra rapida",
     ],
-    result: "Mejora notable de captacion ✨"
+    result: "Mejora notable de captacion ✨",
+    ctaText: "Ver Página"
   },
 ];
 ---
@@ -125,81 +131,80 @@ const projects = [
 
     <!-- Projects List -->
     <div class="projects-list">
-      {projects.map((project, index) => (
-        <article class="project-card" data-index={index}>
-          <div class={`card-layout ${index % 2 === 1 ? 'card-layout--flip' : ''}`}>
+      {projects.map((project, index) => {
+        // Alternating layouts: horizontal (0), vertical (1), editorial (2)
+        const layoutType = index % 3;
+        let layoutClass = "layout-horizontal";
+        let glowColor = "rgba(184, 153, 111, 0.25)"; // Gold default
+        let accentColor = "#b8996f";
+        
+        if (layoutType === 1) {
+          layoutClass = "layout-vertical";
+          glowColor = "rgba(90, 138, 154, 0.25)"; // Cyan
+          accentColor = "#5a8a9a";
+        } else if (layoutType === 2) {
+          layoutClass = "layout-editorial";
+          glowColor = "rgba(107, 79, 124, 0.25)"; // Purple
+          accentColor = "#6b4f7c";
+        }
 
-            <!-- Image Side -->
-            <div class="card-media">
-              <div class="card-img-wrap">
+        return (
+          <article 
+            class={`project-card scroll-reveal ${layoutClass}`} 
+            data-stagger-index={layoutType}
+            style={`--glow-color: ${glowColor}; --accent-color: ${accentColor};`}
+          >
+            <!-- Screenshot Dominante -->
+            <div class="project-image-wrap">
+              <div class="project-img-inner">
                 <img
                   src={project.img}
                   alt={project.title}
                   loading="lazy"
-                  class={project.objectFit ? 'img-contain' : 'img-cover'}
+                  class={project.objectFit === 'contain' ? 'img-contain' : project.objectFit === 'sushi' ? 'img-sushi' : 'img-cover'}
                 />
               </div>
-              <div class="card-media-fade"></div>
-              <span class="card-badge">{project.category}</span>
-              <div class="card-hover-links">
-                <a href={project.link} target="_blank" class="hover-link hover-link--primary" title={project.ctaText || "Ver Demo"}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span class="project-badge">{project.category}</span>
+            </div>
+
+            <!-- Content (Case Study Style) -->
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-num">0{index + 1}</span>
+                <span class="project-category-name">{project.category}</span>
+              </div>
+
+              <!-- Título Corto -->
+              <h3 class="project-title">{project.title}</h3>
+              
+              <!-- Frase de Impacto -->
+              <p class="project-impact-desc">{project.desc}</p>
+
+              <!-- Una sola métrica visible -->
+              {project.result ? (
+                <div class="project-metric">
+                  <span class="metric-icon">✦</span>
+                  <span class="metric-val">{project.result}</span>
+                </div>
+              ) : (
+                <div class="project-metric">
+                  <span class="metric-icon">✦</span>
+                  <span class="metric-val">Diseño 100% Adaptable ✨</span>
+                </div>
+              )}
+
+              <!-- Link de acceso directo -->
+              <div class="project-cta-links">
+                <a href={project.link} target="_blank" class="project-btn-small btn-solid">
+                  <span>{project.ctaText || "Ver App"}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 </a>
-                {project.repo && (
-                  <a href={project.repo} target="_blank" class="hover-link hover-link--ghost" title="Ver Codigo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                  </a>
-                )}
               </div>
             </div>
 
-            <!-- Content Side -->
-            <div class="card-content">
-              <div class="card-content-inner">
-                <div class="card-meta">
-                  <span class="card-num">0{index + 1}</span>
-                  <span class="card-category-text">{project.category}</span>
-                </div>
-
-                <h3 class="card-title">{project.title}</h3>
-                <p class="card-desc">{project.desc}</p>
-
-                {project.features && (
-                  <ul class="card-features">
-                    {project.features.map((feat) => (
-                      <li>
-                        <span class="feat-dot">✦</span>
-                        {feat}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {project.result && (
-                  <div class="card-result">{project.result}</div>
-                )}
-
-                <div class="card-tags">
-                  {project.tags.map((tag) => (
-                    <span class="card-tag">#{tag}</span>
-                  ))}
-                </div>
-
-                <div class="card-cta">
-                  <a href={project.link} target="_blank" class="btn-primary">
-                    <span>{project.ctaText || "Ver Demo"}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                  </a>
-                  {project.repo && (
-                    <a href={project.repo} target="_blank" class="btn-ghost">Codigo</a>
-                  )}
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </article>
-      ))}
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -318,290 +323,287 @@ const projects = [
   .projects-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 8rem; /* Gran separación para bloques independientes */
   }
 
-  /* ===== SCROLL REVEAL ===== */
+  /* ===== SCROLL REVEAL WITH BLUR ===== */
   .project-card {
     opacity: 0;
-    transform: translateY(56px);
-    transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(40px);
+    filter: blur(8px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity, filter;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
   }
   .project-card.is-visible {
     opacity: 1;
     transform: none;
+    filter: blur(0);
   }
 
-  /* ===== CARD LAYOUT ===== */
-  .card-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 420px;
-    border-radius: 22px;
-    overflow: hidden;
-    background: linear-gradient(145deg, rgba(22,22,22,0.92), rgba(10,10,10,0.97));
-    border: 1px solid rgba(255,255,255,0.07);
-    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1);
-  }
-  .card-layout:hover {
-    border-color: rgba(184,153,111,0.28);
-    box-shadow: 0 30px 70px rgba(0,0,0,0.45), 0 0 50px rgba(184,153,111,0.07);
-    transform: translateY(-5px);
-  }
-
-  .card-layout--flip .card-media  { order: 2; }
-  .card-layout--flip .card-content { order: 1; }
-
-  /* ===== CARD MEDIA ===== */
-  .card-media {
+  /* ===== SCREENSHOT DOMINANTE ===== */
+  .project-image-wrap {
     position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(22,22,22,0.9), rgba(10,10,10,0.95));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .project-img-inner {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
   }
-  .card-img-wrap {
+
+  .project-img-inner img {
     width: 100%;
     height: 100%;
-  }
-  .card-img-wrap img {
-    width: 100%;
-    height: 100%;
-    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
     display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
   .img-cover  { object-fit: cover; }
   .img-contain {
     object-fit: contain;
-    background: rgba(255,255,255,0.035);
-    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 2rem;
   }
-  .card-layout:hover .card-img-wrap img {
-    transform: scale(1.04);
+  .img-sushi {
+    object-fit: cover;
+    object-position: center;
+  }
+  @media (max-width: 899px) {
+    .img-sushi {
+      object-fit: contain;
+      background: #050505;
+      padding: 0;
+    }
   }
 
-  .card-media-fade {
-    display: none;
+  /* Image Hover Zoom & Glow */
+  .project-card:hover .project-image-wrap {
+    border-color: var(--accent-color, rgba(184, 153, 111, 0.4));
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px var(--glow-color);
+    transform: translateY(-4px);
   }
 
-  .card-badge {
+  .project-card:hover .project-img-inner img {
+    transform: scale(1.03);
+  }
+
+  .project-badge {
     position: absolute;
-    top: 1.1rem;
-    left: 1.1rem;
+    top: 1rem;
+    left: 1rem;
     padding: 0.4rem 0.9rem;
-    background: linear-gradient(135deg, #c25d85, #6b4f7c);
+    background: rgba(10, 10, 10, 0.85);
     color: white;
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 5;
-    box-shadow: 0 4px 12px rgba(107,79,124,0.35);
-  }
-
-  .card-hover-links {
-    position: absolute;
-    bottom: 1.1rem;
-    right: 1.1rem;
-    display: flex;
-    gap: 0.5rem;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 5;
-  }
-  .card-layout:hover .card-hover-links {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .hover-link {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    text-decoration: none;
-  }
-  .hover-link--primary {
-    background: #b8996f;
-    color: #0a0a0a;
-  }
-  .hover-link--ghost {
-    background: rgba(255,255,255,0.18);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.3);
     backdrop-filter: blur(8px);
   }
-  .hover-link:hover {
-    transform: scale(1.12);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
 
-  /* ===== CARD CONTENT ===== */
-  .card-content {
-    display: flex;
-    align-items: center;
-    padding: 2.5rem;
-  }
-  .card-content-inner {
-    width: 100%;
+  /* ===== CONTENT ===== */
+  .project-content {
     display: flex;
     flex-direction: column;
-    gap: 1.1rem;
+    gap: 1.2rem;
+    width: 100%;
   }
 
-  .card-meta {
+  .project-meta {
     display: flex;
     align-items: center;
     gap: 0.75rem;
   }
-  .card-num {
+  .project-num {
     font-family: monospace;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: #b8996f;
     letter-spacing: 0.08em;
   }
-  .card-category-text {
-    font-size: 0.72rem;
+  .project-card:hover .project-num {
+    color: var(--accent-color, #b8996f);
+  }
+  .project-category-name {
+    font-size: 0.75rem;
     font-weight: 600;
     color: rgba(255,255,255,0.35);
     text-transform: uppercase;
     letter-spacing: 0.12em;
   }
 
-  .card-title {
-    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  /* Título corto */
+  .project-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
     font-weight: 800;
     color: white;
-    line-height: 1.15;
+    line-height: 1.1;
+    margin: 0;
     transition: color 0.3s ease;
-    margin: 0;
   }
-  .card-layout:hover .card-title { color: #b8996f; }
-
-  .card-desc {
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.75;
-    margin: 0;
+  .project-card:hover .project-title {
+    color: var(--accent-color, #b8996f);
   }
 
-  .card-features {
-    list-style: none;
-    padding: 0;
+  /* Frase de impacto */
+  .project-impact-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
   }
-  .card-features li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.58);
-  }
-  .feat-dot { color: #b8996f; font-size: 0.58rem; flex-shrink: 0; }
 
-  .card-result {
+  /* Una sola métrica visible */
+  .project-metric {
     display: inline-flex;
     align-items: center;
-    padding: 0.4rem 1rem;
-    background: linear-gradient(135deg, rgba(184,153,111,0.12), rgba(90,138,154,0.08));
-    border: 1px solid rgba(184,153,111,0.28);
+    gap: 0.6rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #b8996f;
+    color: #e8e8e8;
     width: fit-content;
+    transition: border-color 0.4s ease, background-color 0.4s ease;
   }
-
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+  .project-card:hover .project-metric {
+    border-color: var(--accent-color, rgba(184, 153, 111, 0.3));
+    background: rgba(255, 255, 255, 0.05);
   }
-  .card-tag {
+  .metric-icon {
+    color: #b8996f;
     font-size: 0.7rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.45);
-    padding: 0.3rem 0.7rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    transition: color 0.25s, border-color 0.25s, background 0.25s;
+    transition: color 0.4s ease;
   }
-  .card-tag:hover {
-    color: #5a8a9a;
-    border-color: rgba(90,138,154,0.5);
-    background: rgba(90,138,154,0.08);
+  .project-card:hover .metric-icon {
+    color: var(--accent-color, #b8996f);
   }
 
-  .card-cta {
+  /* Dos links pequeños */
+  .project-cta-links {
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
     flex-wrap: wrap;
-    padding-top: 0.25rem;
+    padding-top: 0.5rem;
   }
-  .btn-primary {
+
+  .project-btn-small {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.5rem;
-    background: linear-gradient(135deg, #b8996f, #9a8159);
-    color: #0a0a0a;
-    font-size: 0.85rem;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    border-radius: 10px;
+    border-radius: 8px;
     text-decoration: none;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 4px 14px rgba(184,153,111,0.3);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease,
+                color 0.3s ease;
   }
-  .btn-primary:hover {
+
+  .btn-solid {
+    background: #b8996f;
+    color: #0a0a0a;
+    box-shadow: 0 4px 12px rgba(184,153,111,0.15);
+  }
+  .project-card:hover .btn-solid {
+    background: var(--accent-color, #b8996f);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-color, rgba(184, 153, 111, 0.2));
+  }
+  .btn-solid:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(184,153,111,0.5);
   }
-  .btn-primary svg { transition: transform 0.25s ease; }
-  .btn-primary:hover svg { transform: translateX(4px); }
 
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.7rem 1.5rem;
+  .btn-border {
     background: transparent;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.85rem;
-    font-weight: 600;
-    border: 1.5px solid rgba(255,255,255,0.22);
-    border-radius: 10px;
-    text-decoration: none;
-    transition: border-color 0.25s, background 0.25s, color 0.25s;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.18);
   }
-  .btn-ghost:hover {
-    border-color: rgba(255,255,255,0.6);
-    background: rgba(255,255,255,0.07);
+  .btn-border:hover {
+    border-color: var(--accent-color, #5a8a9a);
+    background: rgba(255, 255, 255, 0.04);
     color: white;
+    transform: translateY(-2px);
   }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 900px) {
-    .card-layout {
+  .project-btn-small svg {
+    transition: transform 0.25s ease;
+  }
+  .project-btn-small:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  /* ===== LAYOUT ALTERNATIVITY (DESKTOP) ===== */
+  @media (min-width: 900px) {
+    /* 1. Layout Horizontal: Imagen izquierda, contenido derecha */
+    .layout-horizontal {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4rem;
+    }
+
+    /* 2. Layout Vertical: Imagen arriba, contenido abajo */
+    .layout-vertical {
       grid-template-columns: 1fr;
-      min-height: auto;
+      gap: 3rem;
+      max-width: 960px;
+      margin: 0 auto;
     }
-    .card-media { height: 260px; order: 0 !important; }
-    .card-content { order: 1 !important; padding: 2rem 1.75rem; }
-    .card-layout:not(.card-layout--flip) .card-media-fade,
-    .card-layout--flip .card-media-fade {
-      background: linear-gradient(to bottom, transparent 50%, rgba(10,10,10,0.9));
+    .layout-vertical .project-image-wrap {
+      aspect-ratio: 21 / 9; /* Formato ultra ancho espectacular */
+    }
+    .layout-vertical .project-content {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .layout-vertical .project-cta-links {
+      justify-self: end;
+      align-self: center;
+    }
+
+    /* 3. Layout Editorial: Contenido izquierda, imagen derecha */
+    .layout-editorial {
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 4rem;
+    }
+    .layout-editorial .project-image-wrap {
+      order: 2; /* Empuja la imagen a la derecha */
+    }
+    .layout-editorial .project-content {
+      order: 1; /* Pone el texto a la izquierda */
     }
   }
 
-  @media (max-width: 480px) {
-    .card-content { padding: 1.5rem; }
-    .card-title { font-size: 1.3rem; }
+  /* ===== RESPONSIVE MOBILE ===== */
+  @media (max-width: 899px) {
+    .project-image-wrap {
+      aspect-ratio: 16 / 10;
+    }
+    .project-card {
+      gap: 2rem;
+    }
   }
 
   /* ===== MARQUEE ===== */
@@ -643,13 +645,26 @@ const projects = [
 </style>
 
 <script>
-  // Scroll Reveal
+  // Scroll Reveal with Staggering
+  let staggerDelay = 0;
+  let staggerTimer: any = null;
+
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
+          const card = entry.target as HTMLElement;
+          
+          // Apply sequential delays to cards entering the screen at the same time
+          card.style.transitionDelay = `${staggerDelay}ms`;
+          card.classList.add('is-visible');
+          revealObserver.unobserve(card);
+          
+          staggerDelay += 150;
+          if (staggerTimer) clearTimeout(staggerTimer);
+          staggerTimer = setTimeout(() => {
+            staggerDelay = 0;
+          }, 100);
         }
       });
     },
@@ -658,18 +673,5 @@ const projects = [
 
   document.querySelectorAll('.project-card').forEach((card) => {
     revealObserver.observe(card);
-  });
-
-  // Magnetic CTA buttons
-  document.querySelectorAll('.btn-primary').forEach((btn) => {
-    btn.addEventListener('mousemove', (e: any) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      (btn as HTMLElement).style.transform = `translateY(-2px) translate(${x * 0.15}px, ${y * 0.15}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      (btn as HTMLElement).style.transform = '';
-    });
   });
 </script>

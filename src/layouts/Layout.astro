@@ -248,6 +248,39 @@ const {
                 filter: blur(80px); /* Menos blur = más definido y brillante */
                 opacity: 0.8 !important;
             }
+
+            /* --- Global Premium Animations --- */
+            .scroll-reveal {
+                opacity: 0;
+                transform: translateY(24px);
+                filter: blur(4px);
+                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                            filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                will-change: transform, opacity, filter;
+            }
+
+            .scroll-reveal.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+
+            .reveal-marked {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+                filter: blur(12px);
+                transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                            filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+                will-change: transform, opacity, filter;
+            }
+
+            .reveal-marked.is-visible {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
         </style>
 
         <!-- Lenis Smooth Scroll -->
@@ -358,8 +391,17 @@ const {
                         lenis.stop();
                     }
 
+                    const progressBar = document.getElementById("scroll-progress");
                     const raf = (time: any) => {
-                        if (lenis) lenis.raf(time);
+                        if (lenis) {
+                            lenis.raf(time);
+                            // Update progress bar inside raf for maximum performance
+                            if (progressBar) {
+                                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                                const progress = totalHeight > 0 ? (lenis.scroll / totalHeight) * 100 : 0;
+                                progressBar.style.width = `${progress}%`;
+                            }
+                        }
                         requestAnimationFrame(raf);
                     };
                     requestAnimationFrame(raf);
@@ -400,28 +442,76 @@ const {
                 }
             });
 
-            // Scroll Progress Bar Logic
-            const progressBar = document.getElementById("scroll-progress");
-            window.addEventListener("scroll", () => {
-                const totalHeight =
-                    document.documentElement.scrollHeight - window.innerHeight;
-                const progress = (window.scrollY / totalHeight) * 100;
-                if (progressBar) {
-                    progressBar.style.width = `${progress}%`;
-                }
+            // Global Intersection Observer for Premium Scroll Reveal
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target as HTMLElement;
+                        const staggerIndex = el.getAttribute('data-stagger-index');
+                        if (staggerIndex) {
+                            el.style.transitionDelay = `${parseInt(staggerIndex) * 100}ms`;
+                        }
+                        el.classList.add('is-visible');
+                        revealObserver.unobserve(el);
+                    }
+                });
+            }, {
+                threshold: 0.05,
+                rootMargin: '0px 0px -50px 0px'
             });
 
-            // Parallax Grid effect
-            const grid = document.querySelector(
-                ".fixed.inset-0.bg-\\[linear-gradient",
-            );
+            document.querySelectorAll('.scroll-reveal, .reveal-marked').forEach((el) => {
+                revealObserver.observe(el);
+            });
+
+            // Intersection Observer for Metrics Counter
+            const countObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target as HTMLElement;
+                        const target = parseInt(counter.getAttribute('data-target') || '0');
+                        let count = 0;
+                        const duration = 1500; // 1.5s
+                        const stepTime = Math.max(Math.floor(duration / target), 16);
+                        
+                        const timer = setInterval(() => {
+                            count += Math.ceil(target / (duration / stepTime));
+                            if (count >= target) {
+                                counter.textContent = target.toString();
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = count.toString();
+                            }
+                        }, stepTime);
+                        
+                        countObserver.unobserve(counter);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.counter').forEach((c) => {
+                countObserver.observe(c);
+            });
+
+            // Parallax Grid & Background Blobs effect
+            const grid = document.querySelector(".fixed.inset-0.bg-\\[linear-gradient");
+            const bgBlobs = document.querySelectorAll("div.fixed.rounded-full.-z-10");
+            
             window.addEventListener("mousemove", (e) => {
-                const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-                const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+                const moveX = (e.clientX - window.innerWidth / 2);
+                const moveY = (e.clientY - window.innerHeight / 2);
+                
                 if (grid) {
                     (grid as HTMLElement).style.transform =
-                        `perspective(1000px) rotateX(12deg) scale(1.25) translate(${moveX}px, ${moveY}px)`;
+                        `perspective(1000px) rotateX(12deg) scale(1.25) translate(${moveX * 0.01}px, ${moveY * 0.01}px)`;
                 }
+                
+                bgBlobs.forEach((blob, idx) => {
+                    const factor = (idx + 1) * 0.008;
+                    (blob as HTMLElement).style.transform = `translate(${moveX * factor}px, ${moveY * factor}px)`;
+                });
             });
         </script>
     </body>

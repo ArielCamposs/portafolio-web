@@ -1,0 +1,289 @@
+---
+const services = [
+  {
+    title: "Páginas Web Profesionales",
+    description: "Sitios web rápidos y modernos que ayudan a tu negocio a verse profesional en internet y captar nuevos clientes.",
+    color: "neo-gold",
+    glowColor: "rgba(184, 153, 111, 0.2)"
+  },
+  {
+    title: "Tiendas Online (E-Commerce)",
+    description: "Tiendas virtuales fáciles de usar para vender tus productos, con carrito de compras y pedidos directo a tu WhatsApp.",
+    color: "neo-cyan",
+    glowColor: "rgba(90, 138, 154, 0.2)"
+  },
+  {
+    title: "Sistemas a la Medida",
+    description: "Programas personalizados para ordenar los datos de tu negocio, gestionar stock o automatizar tareas cotidianas.",
+    color: "neo-purple",
+    glowColor: "rgba(107, 79, 124, 0.2)"
+  },
+  {
+    title: "Mejora de Sitios Web",
+    description: "Mejoramos la velocidad y diseño de tu página web actual para que funcione rápido en celulares y no pierdas visitas.",
+    color: "neo-pink",
+    glowColor: "rgba(194, 93, 133, 0.2)"
+  }
+];
+---
+
+<section id="servicios" class="services-section">
+  <!-- Efectos de fondo sutiles -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(107,79,124,0.05),transparent_50%)] -z-10"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(90,138,154,0.03),transparent_50%)] -z-10"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="section-header scroll-reveal" data-stagger-index="0">
+      <span class="code-tag">// LO_QUE_PUEDO_CONSTRUIR</span>
+      <h2 class="section-title">
+        MIS <br/>
+        <span class="gradient-text">SERVICIOS</span>
+      </h2>
+      <p class="section-subtitle">Soluciones digitales claras, enfocadas en resultados para tu negocio</p>
+    </header>
+
+    <!-- Services Typographic List -->
+    <div class="services-list">
+      {services.map((service, index) => (
+        <div 
+          class="service-item scroll-reveal" 
+          data-stagger-index={index + 1}
+          style={`--glow-color: ${service.glowColor}; --accent-color: var(--${service.color});`}
+        >
+          <!-- Fila Principal (Número y Título) -->
+          <div class="service-left">
+            <span class="service-num">0{index + 1}</span>
+            <h3 class="service-title-interactive">
+              {service.title.split("").map((char, charIdx) => (
+                <span class="repel-char" style={`--char-index: ${charIdx};`}>{char === " " ? "\u00A0" : char}</span>
+              ))}
+            </h3>
+          </div>
+
+          <!-- Descripción -->
+          <div class="service-right">
+            <p class="service-desc-interactive">{service.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --neo-gold: #b8996f;
+    --neo-cyan: #5a8a9a;
+    --neo-purple: #6b4f7c;
+    --neo-pink: #c25d85;
+  }
+
+  .services-section {
+    position: relative;
+    padding: 8rem 0 6rem;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* ===== HEADER ===== */
+  .section-header {
+    margin-bottom: 5rem;
+    text-align: center;
+  }
+  .code-tag {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 0.95rem;
+    color: #b8996f;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(184,153,111,0.3);
+  }
+  .section-title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #b8996f 0%, #6b4f7c 50%, #5a8a9a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .section-subtitle {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+  }
+
+  /* ===== TYPOGRAPHIC LIST ===== */
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .service-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .service-item {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+      padding: 3.5rem 0;
+    }
+  }
+
+  .service-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .service-left {
+      gap: 3rem;
+    }
+  }
+
+  .service-num {
+    font-family: monospace;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.15);
+    transition: color 0.4s ease;
+    user-select: none;
+  }
+
+  .service-item:hover .service-num {
+    color: var(--accent-color);
+    text-shadow: 0 0 15px var(--glow-color);
+  }
+
+  /* Interactive Title Styling */
+  .service-title-interactive {
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    line-height: 1.1;
+    cursor: default;
+  }
+
+  /* Base state: Entrance animation styling */
+  .repel-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(24px) scale(0.9);
+    filter: blur(4px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.3s ease;
+    transition-delay: calc(var(--char-index) * 15ms);
+    will-change: transform, opacity, filter;
+  }
+
+  /* When the service item becomes visible in scroll reveal, reset the transitions and delays */
+  .service-item.is-visible .repel-char {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    /* Set faster transition for hover repulsion and eliminate the stagger delay */
+    transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), 
+                color 0.3s ease, 
+                opacity 0.8s ease, 
+                filter 0.8s ease;
+    transition-delay: 0s;
+  }
+
+  /* Description Styling */
+  .service-right {
+    width: 100%;
+  }
+
+  .service-desc-interactive {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.6;
+    margin: 0;
+    transition: color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, color;
+  }
+
+  .service-item:hover .service-desc-interactive {
+    color: rgba(255, 255, 255, 0.8);
+    transform: translateX(12px);
+  }
+
+  /* Border color shift on hover */
+  .service-item:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+</style>
+
+<script>
+  // Mouse Repulsion Effect
+  const items = document.querySelectorAll('.service-item');
+  items.forEach(item => {
+      const chars = item.querySelectorAll('.repel-char');
+      
+      item.addEventListener('mousemove', (e: any) => {
+          const mouseX = e.clientX;
+          const mouseY = e.clientY;
+          
+          chars.forEach(char => {
+              const rect = char.getBoundingClientRect();
+              const charX = rect.left + rect.width / 2;
+              const charY = rect.top + rect.height / 2;
+              
+              const dx = charX - mouseX;
+              const dy = charY - mouseY;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+              const radius = 80; // repulsion radius
+              
+              if (distance < radius) {
+                  const force = (radius - distance) / radius; // 0 to 1
+                  const angle = Math.atan2(dy, dx);
+                  
+                  // Push letters away from the mouse cursor
+                  const pushX = Math.cos(angle) * force * 18; // Max push 18px
+                  const pushY = Math.sin(angle) * force * 18;
+                  
+                  (char as HTMLElement).style.transform = `translate(${pushX}px, ${pushY}px)`;
+                  (char as HTMLElement).style.color = 'var(--accent-color)';
+              } else {
+                  (char as HTMLElement).style.transform = '';
+                  (char as HTMLElement).style.color = '';
+              }
+          });
+      });
+      
+      item.addEventListener('mouseleave', () => {
+          chars.forEach(char => {
+              (char as HTMLElement).style.transform = '';
+              (char as HTMLElement).style.color = '';
+          });
+      });
+  });
+</script>
