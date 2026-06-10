@@ -152,10 +152,11 @@ const projects = [
           <article 
             class={`project-card scroll-reveal ${layoutClass}`} 
             data-stagger-index={layoutType}
+            data-project-index={index}
             style={`--glow-color: ${glowColor}; --accent-color: ${accentColor};`}
           >
             <!-- Screenshot Dominante -->
-            <div class="project-image-wrap">
+            <div class="project-image-wrap open-drawer-trigger" data-parallax-speed="-0.04">
               <div class="project-img-inner">
                 <img
                   src={project.img}
@@ -168,14 +169,14 @@ const projects = [
             </div>
 
             <!-- Content (Case Study Style) -->
-            <div class="project-content">
+            <div class="project-content" data-parallax-speed="0.04">
               <div class="project-meta">
                 <span class="project-num">0{index + 1}</span>
                 <span class="project-category-name">{project.category}</span>
               </div>
 
               <!-- Título Corto -->
-              <h3 class="project-title">{project.title}</h3>
+              <h3 class="project-title open-drawer-trigger">{project.title}</h3>
               
               <!-- Frase de Impacto -->
               <p class="project-impact-desc">{project.desc}</p>
@@ -193,12 +194,17 @@ const projects = [
                 </div>
               )}
 
-              <!-- Link de acceso directo -->
+              <!-- Link de acceso directo y Botón de Drawer -->
               <div class="project-cta-links">
-                <a href={project.link} target="_blank" class="project-btn-small btn-solid">
-                  <span>{project.ctaText || "Ver App"}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                </a>
+                <button class="project-btn-small btn-solid open-drawer-trigger cursor-pointer border-0 outline-none">
+                  <span>Detalles ✦</span>
+                </button>
+                {project.link && (
+                  <a href={project.link} target="_blank" class="project-btn-small btn-border">
+                    <span>Ver App</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  </a>
+                )}
               </div>
             </div>
 
@@ -644,34 +650,59 @@ const projects = [
   }
 </style>
 
-<script>
-  // Scroll Reveal with Staggering
-  let staggerDelay = 0;
-  let staggerTimer: any = null;
+<script define:vars={{ projects }}>
+  document.querySelectorAll(".project-card").forEach((card) => {
+    const index = parseInt(card.getAttribute("data-project-index") || "0");
+    const projectData = projects[index];
 
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const card = entry.target as HTMLElement;
-          
-          // Apply sequential delays to cards entering the screen at the same time
-          card.style.transitionDelay = `${staggerDelay}ms`;
-          card.classList.add('is-visible');
-          revealObserver.unobserve(card);
-          
-          staggerDelay += 150;
-          if (staggerTimer) clearTimeout(staggerTimer);
-          staggerTimer = setTimeout(() => {
-            staggerDelay = 0;
-          }, 100);
-        }
+    // Triggers that open the drawer
+    const triggers = card.querySelectorAll(".open-drawer-trigger");
+    triggers.forEach((trigger) => {
+      trigger.style.cursor = "pointer";
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Dispatch open-project-drawer custom event
+        const event = new CustomEvent("open-project-drawer", {
+          detail: projectData
+        });
+        window.dispatchEvent(event);
       });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-  );
-
-  document.querySelectorAll('.project-card').forEach((card) => {
-    revealObserver.observe(card);
+    });
   });
+
+  // Vertical Parallax Scroll Effect for images and text in Project Cards (Desktop only)
+  const parallaxEls = document.querySelectorAll("[data-parallax-speed]");
+  
+  const handleParallax = () => {
+    if (window.innerWidth < 900) {
+      parallaxEls.forEach((el) => {
+        el.style.transform = "";
+      });
+      return;
+    }
+    
+    const scrolled = window.scrollY;
+    const viewportCenter = scrolled + window.innerHeight / 2;
+
+    parallaxEls.forEach((el) => {
+      const speed = parseFloat(el.getAttribute("data-parallax-speed") || "0");
+      const rect = el.getBoundingClientRect();
+      const elementTop = rect.top + scrolled;
+      const elementHeight = rect.height;
+      const elementCenter = elementTop + elementHeight / 2;
+      
+      const distance = viewportCenter - elementCenter;
+      const translation = distance * speed;
+      
+      // Apply translation
+      el.style.transform = `translateY(${translation}px)`;
+    });
+  };
+
+  window.addEventListener("scroll", handleParallax);
+  window.addEventListener("resize", handleParallax);
+  // Run once initially to position correctly
+  setTimeout(handleParallax, 500);
 </script>

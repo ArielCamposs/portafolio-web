@@ -1,0 +1,230 @@
+---
+---
+<div
+    id="project-drawer-overlay"
+    class="fixed inset-0 z-[100] bg-black/75 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-500 ease-out"
+></div>
+
+<div
+    id="project-drawer"
+    class="fixed top-0 right-0 h-full w-full sm:w-[500px] md:w-[600px] bg-neo-black border-l border-white/10 z-[101] shadow-2xl translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col font-mono"
+>
+    <!-- Header -->
+    <div class="p-6 border-b border-white/10 flex justify-between items-center bg-[#0a0a0a]">
+        <span class="text-neo-gold text-xs font-bold tracking-widest" id="drawer-category">// DETALLES_PROYECTO</span>
+        <button
+            id="close-drawer-btn"
+            class="group flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-white transition-colors uppercase cursor-pointer bg-transparent border-0 outline-none"
+        >
+            <span>[ Cerrar ]</span>
+            <span class="w-8 h-8 flex items-center justify-center border border-white/20 rounded-full group-hover:border-white transition-colors text-xs">✕</span>
+        </button>
+    </div>
+
+    <!-- Scrollable Content -->
+    <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-8 custom-scrollbar">
+        <!-- Title and Main Tagline -->
+        <div class="space-y-4">
+            <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight uppercase" id="drawer-title">
+                Cargando...
+            </h2>
+            <div id="drawer-tags" class="flex flex-wrap gap-2 pt-2">
+                <!-- Dynamic tags -->
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="space-y-2">
+            <span class="text-neo-cyan text-xs font-bold tracking-widest block">// DESCRIPCIÓN</span>
+            <p class="text-gray-300 text-sm font-sans leading-relaxed" id="drawer-desc">
+                ...
+            </p>
+        </div>
+
+        <!-- Accordion Items (Ome Duo Style) -->
+        <div class="space-y-4 pt-2">
+            <!-- Item 1: Características -->
+            <div class="accordion-item border border-white/10 rounded-lg overflow-hidden bg-white/5">
+                <button class="accordion-header w-full p-4 flex justify-between items-center text-left text-sm font-bold text-white hover:bg-white/5 transition-colors bg-transparent border-0 outline-none cursor-pointer">
+                    <span class="font-mono tracking-wider">✦ CARACTERÍSTICAS PRINCIPALES</span>
+                    <span class="accordion-icon transition-all duration-300 text-neo-gold font-bold text-lg">+</span>
+                </button>
+                <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                    <ul class="p-4 pt-0 space-y-2 text-gray-300 text-xs font-sans list-disc pl-6" id="drawer-features">
+                        <!-- Dynamic features -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Item 2: Métricas y Resultado -->
+            <div class="accordion-item border border-white/10 rounded-lg overflow-hidden bg-white/5">
+                <button class="accordion-header w-full p-4 flex justify-between items-center text-left text-sm font-bold text-white hover:bg-white/5 transition-colors bg-transparent border-0 outline-none cursor-pointer">
+                    <span class="font-mono tracking-wider">✦ RENDIMIENTO Y RESULTADO</span>
+                    <span class="accordion-icon transition-all duration-300 text-neo-cyan font-bold text-lg">+</span>
+                </button>
+                <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                    <div class="p-4 pt-0 text-gray-300 text-xs font-sans leading-relaxed" id="drawer-result">
+                        <!-- Dynamic result -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="pt-6 space-y-4">
+            <a
+                href="#"
+                target="_blank"
+                id="drawer-link-btn"
+                class="w-full py-4 bg-neo-gold text-black font-black text-center text-sm uppercase tracking-wider block transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(184,153,111,0.3)] rounded-xl"
+            >
+                Ver Aplicación En Vivo 🚀
+            </a>
+            <a
+                href="#"
+                target="_blank"
+                id="drawer-repo-btn"
+                class="w-full py-4 border-2 border-white/20 text-white font-black text-center text-sm uppercase tracking-wider block transition-all duration-300 hover:bg-white/5 hover:border-white rounded-xl"
+            >
+                Ver Código Fuente 📂
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom inner scrollbar for the drawer */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #b8996f;
+    }
+    .accordion-icon {
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+    }
+</style>
+
+<script>
+    const overlay = document.getElementById("project-drawer-overlay");
+    const drawer = document.getElementById("project-drawer");
+    const closeBtn = document.getElementById("close-drawer-btn");
+
+    const drawerTitle = document.getElementById("drawer-title");
+    const drawerCategory = document.getElementById("drawer-category");
+    const drawerDesc = document.getElementById("drawer-desc");
+    const drawerTags = document.getElementById("drawer-tags");
+    const drawerFeatures = document.getElementById("drawer-features");
+    const drawerResult = document.getElementById("drawer-result");
+    const drawerLinkBtn = document.getElementById("drawer-link-btn") as HTMLAnchorElement;
+    const drawerRepoBtn = document.getElementById("drawer-repo-btn") as HTMLAnchorElement;
+
+    // Open Drawer
+    window.addEventListener("open-project-drawer", (e: any) => {
+        const project = e.detail;
+        if (!project) return;
+
+        // Populate elements
+        if (drawerTitle) drawerTitle.textContent = project.title;
+        if (drawerCategory) drawerCategory.textContent = `// ${project.category.toUpperCase().replace(/ /g, "_")}`;
+        if (drawerDesc) drawerDesc.textContent = project.desc;
+        
+        // Tags
+        if (drawerTags) {
+            drawerTags.innerHTML = project.tags.map((t: string) => `
+                <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-[10px] font-bold text-gray-300 rounded-full tracking-wider hover:border-neo-cyan transition-colors">${t}</span>
+            `).join("");
+        }
+
+        // Features
+        if (drawerFeatures) {
+            drawerFeatures.innerHTML = project.features.map((f: string) => `
+                <li>${f}</li>
+            `).join("");
+        }
+
+        // Result
+        if (drawerResult) {
+            drawerResult.textContent = project.result || "Proyecto optimizado con éxito.";
+        }
+
+        // CTAs
+        if (drawerLinkBtn) {
+            if (project.link) {
+                drawerLinkBtn.href = project.link;
+                drawerLinkBtn.style.display = "block";
+            } else {
+                drawerLinkBtn.style.display = "none";
+            }
+        }
+        if (drawerRepoBtn) {
+            if (project.repo) {
+                drawerRepoBtn.href = project.repo;
+                drawerRepoBtn.style.display = "block";
+            } else {
+                drawerRepoBtn.style.display = "none";
+            }
+        }
+
+        // Open UI
+        overlay?.classList.remove("opacity-0", "pointer-events-none");
+        drawer?.classList.remove("translate-x-full");
+        document.body.style.overflow = "hidden"; // Lock scroll
+    });
+
+    // Close function
+    const closeDrawer = () => {
+        overlay?.classList.add("opacity-0", "pointer-events-none");
+        drawer?.classList.add("translate-x-full");
+        
+        // Only unlock body scroll if the loader is not active
+        const loader = document.getElementById("screen-loader");
+        if (!loader || loader.style.display === "none") {
+            document.body.style.overflow = "";
+        }
+
+        // Close all accordions
+        document.querySelectorAll(".accordion-content").forEach((c) => {
+            (c as HTMLElement).style.maxHeight = "";
+        });
+        document.querySelectorAll(".accordion-icon").forEach((i) => {
+            (i as HTMLElement).textContent = "+";
+            (i as HTMLElement).classList.remove("rotate-45");
+        });
+    };
+
+    closeBtn?.addEventListener("click", closeDrawer);
+    overlay?.addEventListener("click", closeDrawer);
+
+    // Accordion interaction
+    document.querySelectorAll(".accordion-header").forEach((header) => {
+        header.addEventListener("click", () => {
+            const content = header.nextElementSibling as HTMLElement;
+            const icon = header.querySelector(".accordion-icon") as HTMLElement;
+            if (content) {
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = "";
+                    if (icon) {
+                        icon.textContent = "+";
+                        icon.classList.remove("rotate-45");
+                    }
+                } else {
+                    content.style.maxHeight = `${content.scrollHeight}px`;
+                    if (icon) {
+                        icon.textContent = "✕";
+                        icon.classList.add("rotate-45");
+                    }
+                }
+            }
+        });
+    });
+</script>

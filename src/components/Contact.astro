@@ -12,12 +12,13 @@
     >
     </div>
 
-    <div class="container mx-auto px-4 max-w-5xl relative z-10">
+    <div
+        class="container mx-auto px-4 max-w-5xl relative z-10 flex flex-col items-center"
+    >
         <!-- Header -->
-        <div
-            class="flex flex-col items-start border-l-8 border-neo-purple pl-8 mb-16 reveal-marked"
-        >
-            <span class="text-neo-purple font-mono text-xl tracking-widest mb-2"
+        <div class="flex flex-col items-center text-center mb-10 reveal-marked">
+            <span
+                class="text-neo-purple font-mono text-xl tracking-widest mb-4 inline-block border-2 border-neo-purple px-4 py-1"
                 >// LETS_TALK</span
             >
             <h2
@@ -29,22 +30,63 @@
                     >SITIO WEB?</span
                 >
             </h2>
+            <p
+                class="text-gray-400 font-mono mt-4 text-lg md:text-xl max-w-2xl"
+            >
+                Diseño, desarrollo y optimización para negocios que necesitan
+                presencia real.
+            </p>
         </div>
 
-        <!-- CTA Buttons -->
+        <!-- CTA & Socials -->
         <div
-            class="flex flex-col md:flex-row gap-6 mb-16 justify-center items-center scroll-reveal"
+            class="flex flex-col items-center gap-4 mb-8 scroll-reveal w-full max-w-sm"
             data-stagger-index="1"
         >
-            <!-- WhatsApp Button - Brutalista -->
+            <!-- Mensaje Personalizado -->
+            <div class="w-full relative group mb-2">
+                <textarea
+                    id="wa-message"
+                    rows="3"
+                    placeholder="Escribe tu nombre, idea o mensaje aquí..."
+                    class="w-full bg-[#111] border border-white/10 text-white placeholder-gray-500 p-4 focus:outline-none focus:border-neo-cyan focus:ring-1 focus:ring-neo-cyan/50 transition-all resize-none font-mono text-sm rounded-sm shadow-inner"
+                ></textarea>
+                <div
+                    class="absolute bottom-4 right-4 text-neo-cyan opacity-40 group-focus-within:opacity-100 transition-opacity"
+                >
+                    <svg
+                        class="w-5 h-5 animate-pulse"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M22 2L11 13"></path>
+                        <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- WhatsApp Button - Refinado -->
             <a
+                id="wa-button"
                 href="https://wa.me/56931342699?text=Hola%20Ariel!%20Estoy%20interesado%20en%20un%20sitio%20web%20profesional."
                 target="_blank"
                 rel="noopener noreferrer"
-                class="group relative px-8 py-5 bg-[#25D366] text-black font-black text-lg uppercase tracking-wider border-4 border-white hover:shadow-[12px_12px_0px_0px_#b8996f] transition-all duration-300 hover:-translate-y-2 hover:-translate-x-1 active:translate-y-0 active:translate-x-0 active:shadow-[4px_4px_0px_0px_#b8996f] flex items-center gap-3"
+                class="group relative w-full flex justify-center items-center gap-3 px-6 py-3 bg-[#25D366] text-black font-black text-base uppercase tracking-wider border border-transparent hover:border-white/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0px_8px_20px_rgba(37,211,102,0.3)] hover:scale-[1.02] active:scale-[0.98] overflow-hidden rounded-sm"
                 aria-label="Contactar por WhatsApp"
             >
-                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                <div
+                    class="absolute inset-0 w-full h-full bg-white/20 blur-md opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity"
+                >
+                </div>
+                <svg
+                    class="w-6 h-6 relative z-10 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                >
                     <path
                         d="M20.52 3.48A11.91 11.91 0 0012.01.03 11.92 11.92 0 003.48 3.48 11.92 11.92 0 00.03 12.01c0 2.11.55 4.16 1.6 5.97L.2 23.09l4.27-1.2A11.9 11.9 0 0012 24c3.19 0 6.18-1.24 8.45-3.51A11.92 11.92 0 0023.97 12.01a11.9 11.9 0 00-3.45-8.53zM12 21.5a9.2 9.2 0 01-4.79-1.33l-.34-.21-2.53.71.68-2.48-.22-.36A9.21 9.21 0 012.5 12.01 9.5 9.5 0 1112 21.5z"
                     ></path>
@@ -52,228 +94,122 @@
                         d="M17.56 14.03c-.29-.15-1.72-.84-1.99-.93-.27-.09-.47-.14-.67.15-.2.29-.77.93-.95 1.12-.17.19-.33.22-.62.07-.29-.15-1.22-.45-2.33-1.44-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.6.13-.13.29-.33.44-.5.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.52.07-.79.37c-.27.3-1.03 1-1.03 2.45s1.05 2.85 1.2 3.05c.15.2 2.07 3.16 5.02 4.43 2.95 1.27 2.95.85 3.48.8.53-.05 1.72-.7 1.97-1.38.25-.68.25-1.26.18-1.38-.07-.12-.27-.2-.56-.35z"
                     ></path>
                 </svg>
-                <span>HABLAR POR WHATSAPP</span>
+                <span class="relative z-10">HABLAR POR WHATSAPP</span>
             </a>
-        </div>
 
-        <!-- Formulario -->
-        <div
-            class="max-w-3xl mx-auto bg-[#111] border-4 border-white/20 p-8 md:p-12 relative scroll-reveal"
-            data-stagger-index="2"
-        >
-            <!-- Esquinas decorativas -->
+            <!-- Redes Sociales Unificadas (Línea Base / Segmented Control) -->
             <div
-                class="absolute -top-1 -left-1 w-6 h-6 bg-neo-black border-t-4 border-l-4 border-neo-gold"
+                class="flex w-full border border-white/10 rounded-sm overflow-hidden bg-[#111] divide-x divide-white/10 shadow-lg"
             >
-            </div>
-            <div
-                class="absolute -top-1 -right-1 w-6 h-6 bg-neo-black border-t-4 border-r-4 border-neo-gold"
-            >
-            </div>
-            <div
-                class="absolute -bottom-1 -left-1 w-6 h-6 bg-neo-black border-b-4 border-l-4 border-neo-gold"
-            >
-            </div>
-            <div
-                class="absolute -bottom-1 -right-1 w-6 h-6 bg-neo-black border-b-4 border-r-4 border-neo-gold"
-            >
-            </div>
-
-            <form
-                action="https://formsubmit.co/ariel.campos.dev@gmail.com"
-                method="POST"
-                class="grid gap-6 font-mono"
-            >
-                <input type="hidden" name="_captcha" value="false" />
-                <input
-                    type="hidden"
-                    name="_subject"
-                    value="🚀 Nuevo mensaje desde tu portafolio"
-                />
-
-                <!-- Nombre -->
-                <div class="group">
-                    <label
-                        class="block text-neo-gold text-sm mb-2 font-bold tracking-wider"
-                        >> INGRESA_TU_NOMBRE</label
-                    >
-                    <input
-                        type="text"
-                        name="name"
-                        required
-                        placeholder="Ej: Juan Pérez"
-                        class="w-full bg-black border-2 border-white/30 text-white p-4 focus:border-neo-gold focus:bg-white/5 outline-none transition-all placeholder:text-gray-600 font-mono"
-                    />
-                </div>
-
-                <!-- Email -->
-                <div class="group">
-                    <label
-                        class="block text-neo-cyan text-sm mb-2 font-bold tracking-wider"
-                        >> INGRESA_TU_EMAIL</label
-                    >
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="nombre@empresa.com"
-                        class="w-full bg-black border-2 border-white/30 text-white p-4 focus:border-neo-cyan focus:bg-white/5 outline-none transition-all placeholder:text-gray-600 font-mono"
-                    />
-                </div>
-
-                <!-- Mensaje -->
-                <div class="group">
-                    <label
-                        class="block text-neo-purple text-sm mb-2 font-bold tracking-wider"
-                        >> EJECUTAR_MENSAJE</label
-                    >
-                    <textarea
-                        name="message"
-                        rows="5"
-                        required
-                        placeholder="Cuéntame tu idea de proyecto..."
-                        class="w-full bg-black border-2 border-white/30 text-white p-4 focus:border-neo-purple focus:bg-white/5 outline-none transition-all placeholder:text-gray-600 font-mono resize-none"
-                    ></textarea>
-                </div>
-
-                <!-- Submit Button -->
-                <button
-                    id="submit-btn"
-                    type="submit"
-                    class="w-full py-5 bg-neo-purple text-white font-black text-xl uppercase tracking-widest border-4 border-neo-purple hover:bg-neo-purple/80 hover:shadow-[0px_0px_30px_rgba(107,79,124,0.6)] active:scale-[0.98] transition-all duration-300 flex justify-center items-center gap-2"
+                <!-- GitHub -->
+                <a
+                    href="https://github.com/ArielCamposs"
+                    target="_blank"
+                    class="group flex-1 flex justify-center items-center gap-2 py-3 text-gray-400 hover:text-black hover:bg-white transition-colors duration-300"
+                    aria-label="GitHub"
                 >
-                    <span>[ ENVIAR MENSAJE ]</span>
                     <svg
-                        id="loading-spinner"
-                        class="w-6 h-6 animate-spin hidden"
+                        class="w-5 h-5 fill-current"
                         viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><line x1="12" y1="2" x2="12" y2="6"></line><line
-                            x1="12"
-                            y1="18"
-                            x2="12"
-                            y2="22"></line><line
-                            x1="4.93"
-                            y1="4.93"
-                            x2="7.76"
-                            y2="7.76"></line><line
-                            x1="16.24"
-                            y1="16.24"
-                            x2="19.07"
-                            y2="19.07"></line><line
-                            x1="2"
-                            y1="12"
-                            x2="6"
-                            y2="12"></line><line x1="18" y1="12" x2="22" y2="12"
-                        ></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"
-                        ></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"
-                        ></line></svg
+                        xmlns="http://www.w3.org/2000/svg"
                     >
-                </button>
-            </form>
+                        <path
+                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+                        ></path>
+                    </svg>
+                </a>
 
-            <!-- Success Message (initially hidden) -->
-            <div
-                id="form-success"
-                class="hidden mt-6 p-4 bg-green-500/20 border-2 border-green-500 text-green-400 font-mono text-center"
-            >
-                ¡MENSAJE ENVIADO CON ÉXITO! 🚀 ME PONDRÉ EN CONTACTO PRONTO.
+                <!-- LinkedIn -->
+                <a
+                    href="https://www.linkedin.com/in/ariel-campos-a1688a324/"
+                    target="_blank"
+                    class="group flex-1 flex justify-center items-center gap-2 py-3 text-gray-400 hover:text-white hover:bg-[#0A66C2] transition-colors duration-300"
+                    aria-label="LinkedIn"
+                >
+                    <svg
+                        class="w-5 h-5 fill-current"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                        ></path>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a
+                    href="https://www.instagram.com/ariellcamposs/"
+                    target="_blank"
+                    class="group flex-1 flex justify-center items-center gap-2 py-3 text-gray-400 hover:text-white hover:bg-gradient-to-br hover:from-[#833AB4] hover:via-[#E1306C] hover:to-[#F77737] transition-colors duration-300 relative overflow-hidden"
+                    aria-label="Instagram"
+                >
+                    <svg
+                        class="w-5 h-5 fill-current relative z-10"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
+                        ></path>
+                    </svg>
+                </a>
             </div>
         </div>
 
-        <script>
-            // Manejo de formulario (simulado para feedback visual)
-            const form = document.querySelector("form");
-            const btn = document.getElementById("submit-btn");
-            const spinner = document.getElementById("loading-spinner");
-            const successMsg = document.getElementById("form-success");
-
-            form?.addEventListener("submit", () => {
-                btn?.setAttribute("disabled", "true");
-                spinner?.classList.remove("hidden");
-                // FormSubmit hará el resto, redirigiendo o enviando.
-            });
-
-            // Función para copiar email (se puede llamar desde un botón futuro o al hacer click en el correo)
-            function copyEmail(email: string) {
-                navigator.clipboard.writeText(email);
-                alert("Email copiado al portapapeles: " + email);
-            }
-        </script>
-
-        <!-- Redes Sociales -->
-        <div class="mt-16 flex flex-wrap justify-center gap-6">
-            <!-- GitHub -->
-            <a
-                href="https://github.com/ArielCamposs"
-                target="_blank"
-                class="group px-6 py-3 bg-[#333] border-2 border-[#333] text-white font-bold uppercase hover:bg-white hover:text-[#333] hover:border-white hover:shadow-[8px_8px_0px_0px_#333] transition-all duration-300 hover:-translate-y-1 flex items-center gap-3 scroll-reveal"
-                data-stagger-index="3"
-            >
-                <svg
-                    class="w-6 h-6 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-                    ></path>
-                </svg>
-                <span>GitHub</span>
-            </a>
-
-            <!-- LinkedIn -->
-            <a
-                href="https://www.linkedin.com/in/ariel-campos-a1688a324/"
-                target="_blank"
-                class="group px-6 py-3 bg-[#0A66C2] border-2 border-[#0A66C2] text-white font-bold uppercase hover:bg-white hover:text-[#0A66C2] hover:border-white hover:shadow-[8px_8px_0px_0px_#0A66C2] transition-all duration-300 hover:-translate-y-1 flex items-center gap-3 scroll-reveal"
-                data-stagger-index="4"
-            >
-                <svg
-                    class="w-6 h-6 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                    ></path>
-                </svg>
-                <span>LinkedIn</span>
-            </a>
-
-            <!-- Instagram -->
-            <a
-                href="https://www.instagram.com/ariellcamposs/"
-                target="_blank"
-                class="group px-6 py-3 bg-gradient-to-br from-[#833AB4] via-[#E1306C] to-[#F77737] border-2 border-[#E1306C] text-white font-bold uppercase hover:bg-white hover:text-[#E1306C] hover:border-white hover:shadow-[8px_8px_0px_0px_#E1306C] transition-all duration-300 hover:-translate-y-1 flex items-center gap-3 relative overflow-hidden scroll-reveal"
-                data-stagger-index="5"
-            >
-                <svg
-                    class="w-6 h-6 fill-current relative z-10"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
-                    ></path>
-                </svg>
-                <span class="relative z-10">Instagram</span>
-                <!-- Hover overlay -->
-                <div
-                    class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                >
-                </div>
-            </a>
-        </div>
-
-        <p
-            class="text-center text-gray-500 text-sm font-mono mt-12 border-t-2 border-white/10 pt-8"
+        <!-- Footer / Availability Text -->
+        <div
+            class="mt-8 flex flex-col items-center gap-4 w-full border-t border-white/5 pt-8"
         >
-            © 2026 ARIEL CAMPOS — DISPONIBLE PARA PROYECTOS FREELANCE
-        </p>
+            <div
+                class="inline-flex items-center gap-3 text-neo-cyan text-sm md:text-base font-mono tracking-wide"
+            >
+                <!-- Ícono de Terminal / Código -->
+                <svg
+                    class="w-5 h-5 animate-pulse drop-shadow-[0_0_8px_rgba(0,255,255,0.5)]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <polyline points="4 17 10 11 4 5"></polyline>
+                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+                <span>DISPONIBLE PARA PROYECTOS FREELANCE</span>
+            </div>
+
+            <p class="text-gray-600 text-xs font-mono">© 2026 ARIEL CAMPOS</p>
+        </div>
     </div>
 </section>
+
+<script>
+    const setupWhatsApp = () => {
+        const waButton = document.getElementById("wa-button");
+        const waMessage = document.getElementById("wa-message");
+        const baseUrl = "https://wa.me/56931342699?text=";
+        const defaultMsg =
+            "Hola Ariel! Estoy interesado en un sitio web profesional.";
+
+        if (waButton && waMessage) {
+            // Remove previous event listeners if setupWhatsApp is called multiple times
+            const newButton = waButton.cloneNode(true);
+            waButton.parentNode.replaceChild(newButton, waButton);
+
+            newButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                const userText = waMessage.value.trim();
+                const textToSend = userText ? userText : defaultMsg;
+                window.open(baseUrl + encodeURIComponent(textToSend), "_blank");
+            });
+        }
+    };
+
+    // Ejecutar en carga inicial
+    setupWhatsApp();
+
+    // Ejecutar en navegaciones de cliente de Astro (View Transitions)
+    document.addEventListener("astro:page-load", setupWhatsApp);
+</script>
