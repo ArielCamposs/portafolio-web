@@ -188,12 +188,12 @@
 <script>
     const setupWhatsApp = () => {
         const waButton = document.getElementById("wa-button");
-        const waMessage = document.getElementById("wa-message");
+        const waMessage = document.getElementById("wa-message") as HTMLTextAreaElement | null;
         const baseUrl = "https://wa.me/56931342699?text=";
         const defaultMsg =
             "Hola Ariel! Estoy interesado en un sitio web profesional.";
 
-        if (waButton && waMessage) {
+        if (waButton && waButton.parentNode && waMessage) {
             // Remove previous event listeners if setupWhatsApp is called multiple times
             const newButton = waButton.cloneNode(true);
             waButton.parentNode.replaceChild(newButton, waButton);
