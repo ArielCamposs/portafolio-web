@@ -1,155 +1,644 @@
-<nav
-    class="fixed w-full z-50 top-4 start-0 transition-all duration-300 px-4"
-    id="main-nav"
->
-    <!-- Usamos md:justify-center para centrar en PC y gap para separar logo de menú -->
-    <div
-        class="max-w-fit mx-auto flex flex-wrap items-center justify-between md:justify-center md:gap-12 p-4 rounded-full transition-all duration-300"
-        id="nav-container"
-    >
-        <!-- Logo -->
-        <a href="#" class="flex items-center rtl:space-x-reverse group">
-            <span
-                class="self-center text-2xl font-black whitespace-nowrap text-white tracking-tighter group-hover:text-neo-gold transition-colors"
-            >
-                Ariel<span class="text-neo-gold">.</span>
-            </span>
+---
+// Redes sociales oficiales del usuario
+const SOCIAL_LINKS = {
+    github: "https://github.com/ArielCamposs",
+    linkedin: "https://www.linkedin.com/in/ariel-campos-a1688a324/",
+    instagram: "https://instagram.com/ariellcamposs",
+};
+---
+
+<header class="site-header">
+    <div class="logo">
+        <a href="#inicio" class="logo-link">
+            <span class="logo-line">ARIEL CAMPOS</span>
+            <span class="logo-line">FULL-STACK DEVELOPER</span>
         </a>
+    </div>
 
-        <!-- Botón menú móvil (Visible solo en celular) -->
-        <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-white rounded-md md:hidden hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-neo-gold"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-        >
-            <span class="sr-only">Abrir menú</span>
-            <svg
-                class="w-6 h-6"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
+    <div class="menu-container">
+        <!-- Botón de apertura -->
+        <button class="menu-btn" id="menuBtn" type="button">MENÚ</button>
+
+        <!-- Tarjeta del menú deslizable -->
+        <div class="menu-card" id="menuCard">
+            <!-- Botón de cierre -->
+            <button
+                class="menu-close-btn bg-transparent border-0 outline-none"
+                id="closeBtn"
+                type="button"
+                aria-label="Cerrar menú"
             >
-                <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M1 1h15M1 7h15M1 13h15"></path>
-            </svg>
-        </button>
+                <svg
+                    width="60"
+                    height="20"
+                    viewBox="0 0 60 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L59 19"
+                        stroke="currentColor"
+                        stroke-width="1.5"></path>
+                    <path
+                        d="M59 1L1 19"
+                        stroke="currentColor"
+                        stroke-width="1.5"></path>
+                </svg>
+            </button>
 
-        <!-- Menú de enlaces (Centrado junto al logo en PC) -->
-        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul
-                class="font-mono text-sm font-bold flex flex-col p-4 md:p-0 mt-4 border border-white/10 rounded-lg md:border-0 bg-neo-black md:bg-transparent md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0"
-            >
-                <li>
-                    <a
-                        href="#inicio"
-                        class="block py-2 px-3 text-white hover:text-neo-gold transition-colors text-center"
-                        >INICIO</a
-                    >
-                </li>
+            <!-- Enlaces del Menú -->
+            <nav class="menu-items">
+                <a href="#inicio" class="menu-link"
+                    ><div class="menu-link-inner">INICIO</div></a
+                >
+                <a href="#proyectos" class="menu-link"
+                    ><div class="menu-link-inner">PROYECTOS</div></a
+                >
+                <a href="#sobre-mi" class="menu-link"
+                    ><div class="menu-link-inner">SOBRE MI</div></a
+                >
+                <a href="#contacto" class="menu-link"
+                    ><div class="menu-link-inner">CONTACTO</div></a
+                >
 
-                <li>
-                    <a
-                        href="#proyectos"
-                        class="block py-2 px-3 text-gray-400 hover:text-neo-cyan transition-colors text-center"
-                        >PROYECTOS</a
-                    >
-                </li>
+                <!-- Interruptor de Tema Móvil (visible solo en celulares) -->
+                <div class="menu-theme-toggle" id="menuThemeToggle">
+                    <div class="theme-toggle-sun">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        >
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <line x1="12" y1="2" x2="12" y2="5"></line>
+                            <line x1="12" y1="19" x2="12" y2="22"></line>
+                            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"
+                            ></line>
+                            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"
+                            ></line>
+                            <line x1="2" y1="12" x2="5" y2="12"></line>
+                            <line x1="19" y1="12" x2="22" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"
+                            ></line>
+                            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"
+                            ></line>
+                        </svg>
+                    </div>
+                    <div class="theme-toggle-moon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        >
+                            <path
+                                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                            ></path>
+                        </svg>
+                    </div>
+                </div>
+            </nav>
 
-                <li>
-                    <a
-                        href="#sobre-mi"
-                        class="block py-2 px-3 text-gray-400 hover:text-neo-purple transition-colors text-center"
-                        >SOBRE MÍ</a
-                    >
-                </li>
+            <div class="menu-separator"></div>
 
-                <!-- Botón de Contacto -->
-                <li>
-                    <a
-                        href="#contacto"
-                        class="block py-2 px-6 text-white border border-white/30 hover:border-neo-gold hover:bg-neo-gold hover:text-black transition-all rounded-full text-center md:ml-4"
-                    >
-                        CONTACTAR
-                    </a>
-                </li>
-            </ul>
+            <!-- Footer del Menú -->
+            <div class="menu-footer">
+                <a
+                    href={SOCIAL_LINKS.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-link">GITHUB ↗</a
+                >
+                <a
+                    href={SOCIAL_LINKS.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-link">LINKEDIN ↗</a
+                >
+                <a
+                    href={SOCIAL_LINKS.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-link">INSTAGRAM ↗</a
+                >
+            </div>
         </div>
     </div>
-</nav>
+</header>
+
+<div class="fixed-services" id="fixedServices">
+    <strong class="fixed-services-heading"
+        >SERVICIOS CON LOS QUE PUEDO AYUDARTE</strong
+    >
+    <p class="fixed-services-body">
+        DESARROLLO WEB. SISTEMAS A MEDIDA.<br />TIENDAS ONLINE. APLICACIONES
+        SAAS.
+    </p>
+</div>
 
 <script>
-    const button = document.querySelector(
-        '[data-collapse-toggle="navbar-default"]',
-    );
-    const menu = document.getElementById("navbar-default");
-    const navContainer = document.getElementById("nav-container");
+    // Inicialización segura de scripts del menú
+    function initMenuLogic() {
+        const menuBtn = document.getElementById("menuBtn");
+        const menuCard = document.getElementById("menuCard");
+        const closeBtn = document.getElementById("closeBtn");
 
-    // Toggle Menú Móvil
-    if (button && menu) {
-        button.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-            // Al abrir en móvil, damos fondo sólido al contenedor para legibilidad
-            if (!menu.classList.contains("hidden")) {
-                navContainer?.classList.add(
-                    "bg-neo-black",
-                    "border",
-                    "border-white/20",
+        if (!menuBtn || !menuCard || !closeBtn) return;
+
+        const menuSeparator = menuCard.querySelector(".menu-separator");
+        const menuFooterLinks = menuCard.querySelectorAll(".social-link");
+        const menuCloseIcon = closeBtn.querySelector("svg");
+        const menuThemeToggle = document.getElementById("menuThemeToggle");
+
+        // Inicializar estado de oculto
+        // @ts-ignore
+        if (typeof gsap !== "undefined") {
+            // @ts-ignore
+            gsap.set(menuCard, {
+                opacity: 0,
+                visibility: "hidden",
+                scale: 0.95,
+                transformOrigin: "top right",
+            });
+        }
+
+        // Animación de Entrada (Open)
+        function openMenu() {
+            // @ts-ignore
+            if (typeof gsap === "undefined") return;
+
+            // @ts-ignore
+            gsap.set(menuCard, {
+                visibility: "visible",
+                opacity: 0,
+                scale: 0.95,
+            });
+
+            // @ts-ignore
+            gsap.set(".menu-link-inner", { y: "150%" });
+            // @ts-ignore
+            gsap.set(menuSeparator, {
+                scaleX: 0,
+                opacity: 1,
+                transformOrigin: "right center",
+            });
+            // @ts-ignore
+            gsap.set(menuFooterLinks, { y: 20, opacity: 0 });
+            // @ts-ignore
+            gsap.set(menuCloseIcon, { rotation: -180, opacity: 0 });
+
+            // @ts-ignore
+            const tl = gsap.timeline();
+            tl.to(menuCard, {
+                duration: 0.5,
+                opacity: 1,
+                scale: 1,
+                ease: "power3.out",
+            })
+                .to(
+                    ".menu-link-inner",
+                    {
+                        duration: 0.8,
+                        y: "0%",
+                        stagger: 0.08,
+                        ease: "power4.out",
+                    },
+                    "-=0.3",
+                )
+                .to(
+                    menuSeparator,
+                    {
+                        duration: 0.6,
+                        scaleX: 1,
+                        ease: "power3.out",
+                    },
+                    "-=0.6",
+                )
+                .to(
+                    menuFooterLinks,
+                    {
+                        duration: 0.6,
+                        y: 0,
+                        opacity: 1,
+                        stagger: 0.05,
+                        ease: "power3.out",
+                    },
+                    "-=0.5",
+                )
+                .to(
+                    menuCloseIcon,
+                    {
+                        duration: 0.6,
+                        rotation: 0,
+                        opacity: 1,
+                        ease: "back.out(1.7)",
+                    },
+                    "-=0.6",
                 );
-            } else {
-                navContainer?.classList.remove(
-                    "bg-neo-black",
-                    "border",
-                    "border-white/20",
+
+            initMenuLetterHover();
+        }
+
+        // Animación de Salida (Close)
+        function closeMenu() {
+            if (!menuCard) return;
+            // @ts-ignore
+            if (typeof gsap === "undefined") return;
+
+            // @ts-ignore
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    // @ts-ignore
+                    gsap.set(menuCard, { visibility: "hidden" });
+                },
+            });
+
+            tl.to(menuCard.querySelectorAll(".menu-link-inner"), {
+                duration: 0.4,
+                y: "150%",
+                stagger: 0.04,
+                ease: "power2.in",
+            })
+                .to(
+                    [menuSeparator, menuFooterLinks, menuCloseIcon],
+                    {
+                        duration: 0.3,
+                        opacity: 0,
+                        ease: "power1.in",
+                    },
+                    "-=0.3",
+                )
+                .to(
+                    menuCard,
+                    {
+                        duration: 0.4,
+                        opacity: 0,
+                        scale: 0.95,
+                        ease: "power2.inOut",
+                    },
+                    "-=0.2",
                 );
+        }
+
+        menuBtn.addEventListener("click", openMenu);
+        closeBtn.addEventListener("click", closeMenu);
+
+        // Desplazamiento suave de los enlaces y autoclose
+        const menuLinks = menuCard.querySelectorAll(".menu-link");
+        menuLinks.forEach((link) => {
+            link.addEventListener("click", (e) => {
+                const href = link.getAttribute("href");
+                if (href && href.startsWith("#")) {
+                    e.preventDefault();
+                    const targetSection = document.getElementById(
+                        href.substring(1),
+                    );
+                    if (targetSection) {
+                        closeMenu();
+                        setTimeout(() => {
+                            // @ts-ignore
+                            if (window.lenis) {
+                                // @ts-ignore
+                                window.lenis.scrollTo(targetSection, {
+                                    duration: 1.5,
+                                    easing: (t: number) => 1 - Math.pow(1 - t, 4),
+                                });
+                            } else {
+                                targetSection.scrollIntoView({
+                                    behavior: "smooth",
+                                });
+                            }
+                        }, 400);
+                    }
+                }
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera o Escape
+        document.addEventListener("click", (e) => {
+            // @ts-ignore
+            const isClickInside = menuCard.contains(e.target);
+            // @ts-ignore
+            const isClickOnBtn = menuBtn.contains(e.target);
+            // @ts-ignore
+            const isVisible = gsap.getProperty(menuCard, "opacity") > 0;
+
+            if (!isClickInside && !isClickOnBtn && isVisible) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                // @ts-ignore
+                const isVisible = gsap.getProperty(menuCard, "opacity") > 0;
+                if (isVisible) closeMenu();
+            }
+        });
+
+        // Configuración de Tema en Móvil
+        if (menuThemeToggle) {
+            menuThemeToggle.addEventListener("click", () => {
+                const current =
+                    document.documentElement.getAttribute("data-theme");
+                const next = current === "dark" ? "light" : "dark";
+                document.documentElement.setAttribute("data-theme", next);
+
+                // Actualizar interruptor móvil
+                const sun = menuThemeToggle.querySelector(
+                    ".theme-toggle-sun",
+                ) as HTMLElement;
+                const moon = menuThemeToggle.querySelector(
+                    ".theme-toggle-moon",
+                ) as HTMLElement;
+
+                // Buscar el botón de tema de escritorio para sincronizarlo
+                const desktopToggle = document.querySelector(
+                    ".theme-toggle",
+                ) as HTMLElement;
+
+                if (next === "dark") {
+                    menuThemeToggle.style.backgroundColor =
+                        "rgba(230, 225, 221, 0.3)";
+                    sun.style.backgroundColor = "transparent";
+                    moon.style.backgroundColor = "rgba(26, 26, 26, 0.8)";
+                    if (desktopToggle) {
+                        desktopToggle.style.backgroundColor =
+                            "rgba(230, 225, 221, 0.3)";
+                        (
+                            desktopToggle.querySelector(
+                                ".theme-toggle-sun",
+                            ) as HTMLElement
+                        ).style.backgroundColor = "transparent";
+                        (
+                            desktopToggle.querySelector(
+                                ".theme-toggle-moon",
+                            ) as HTMLElement
+                        ).style.backgroundColor = "rgba(26, 26, 26, 0.8)";
+                    }
+                } else {
+                    menuThemeToggle.style.backgroundColor =
+                        "rgba(26, 26, 26, 0.3)";
+                    sun.style.backgroundColor = "rgba(230, 225, 221, 0.8)";
+                    moon.style.backgroundColor = "transparent";
+                    if (desktopToggle) {
+                        desktopToggle.style.backgroundColor =
+                            "rgba(26, 26, 26, 0.3)";
+                        (
+                            desktopToggle.querySelector(
+                                ".theme-toggle-sun",
+                            ) as HTMLElement
+                        ).style.backgroundColor = "rgba(230, 225, 221, 0.8)";
+                        (
+                            desktopToggle.querySelector(
+                                ".theme-toggle-moon",
+                            ) as HTMLElement
+                        ).style.backgroundColor = "transparent";
+                    }
+                }
+            });
+        }
+    }
+
+    // Efecto hover letra a letra (Eszter style)
+    function initMenuLetterHover() {
+        const menuLinks = document.querySelectorAll(".menu-link-inner");
+        // @ts-ignore
+        if (typeof gsap === "undefined") return;
+
+        menuLinks.forEach((link) => {
+            // @ts-ignore
+            if (link.dataset.hoverInitialized) return;
+            // @ts-ignore
+            link.dataset.hoverInitialized = "true";
+
+            const text = link.textContent || "";
+            link.textContent = "";
+
+            const originalRow = document.createElement("span");
+            originalRow.className = "menu-text-row menu-text-original";
+
+            const cloneRow = document.createElement("span");
+            cloneRow.className = "menu-text-row menu-text-clone";
+
+            text.split("").forEach((char) => {
+                const origChar = document.createElement("span");
+                origChar.className = "char inline-block";
+                origChar.textContent = char === " " ? "\u00A0" : char;
+                originalRow.appendChild(origChar);
+
+                const cloneChar = document.createElement("span");
+                cloneChar.className = "char inline-block";
+                cloneChar.textContent = char === " " ? "\u00A0" : char;
+                cloneRow.appendChild(cloneChar);
+            });
+
+            link.appendChild(originalRow);
+            link.appendChild(cloneRow);
+
+            // Estilos del contenedor de texto
+            // @ts-ignore
+            link.style.display = "block";
+            // @ts-ignore
+            link.style.position = "relative";
+            // @ts-ignore
+            link.style.clipPath = "inset(-10% 0 -10% 0)";
+
+            originalRow.style.display = "block";
+            cloneRow.style.display = "block";
+            cloneRow.style.position = "absolute";
+            cloneRow.style.top = "0";
+            cloneRow.style.left = "0";
+
+            const origChars = originalRow.querySelectorAll(".char");
+            const cloneChars = cloneRow.querySelectorAll(".char");
+
+            // @ts-ignore
+            gsap.set(cloneChars, { yPercent: 120 });
+
+            const parentLink = link.closest(".menu-link");
+            if (parentLink) {
+                let hoverTl: any = null;
+
+                parentLink.addEventListener("mouseenter", () => {
+                    if (hoverTl) hoverTl.kill();
+                    // @ts-ignore
+                    hoverTl = gsap.timeline();
+
+                    hoverTl.to(
+                        origChars,
+                        {
+                            yPercent: -120,
+                            duration: 0.4,
+                            ease: "power2.out",
+                            stagger: 0.03,
+                        },
+                        0,
+                    );
+
+                    hoverTl.to(
+                        cloneChars,
+                        {
+                            yPercent: 0,
+                            duration: 0.4,
+                            ease: "power2.out",
+                            stagger: 0.03,
+                        },
+                        0,
+                    );
+                });
+
+                parentLink.addEventListener("mouseleave", () => {
+                    if (hoverTl) hoverTl.kill();
+                    // @ts-ignore
+                    hoverTl = gsap.timeline();
+
+                    hoverTl.to(
+                        origChars,
+                        {
+                            yPercent: 0,
+                            duration: 0.4,
+                            ease: "power2.out",
+                            stagger: 0.03,
+                        },
+                        0,
+                    );
+
+                    hoverTl.to(
+                        cloneChars,
+                        {
+                            yPercent: 120,
+                            duration: 0.4,
+                            ease: "power2.out",
+                            stagger: 0.03,
+                        },
+                        0,
+                    );
+                });
             }
         });
     }
 
-    // Efecto "Isla Dinámica" al hacer scroll
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            // Cuando bajas, se crea una "pastilla" negra de fondo detrás de los botones centrados
-            navContainer?.classList.add(
-                "bg-neo-black/80",
-                "backdrop-blur-md",
-                "border",
-                "border-white/10",
-                "shadow-lg",
-            );
-        } else {
-            // Arriba del todo es invisible
-            navContainer?.classList.remove(
-                "bg-neo-black/80",
-                "backdrop-blur-md",
-                "border",
-                "border-white/10",
-                "shadow-lg",
+    // Inicializar al cargar
+    window.addEventListener("loaderComplete", () => {
+        initMenuLogic();
+
+        // Animación de aparición del botón de menú y servicios fijos
+        // @ts-ignore
+        if (typeof gsap !== "undefined") {
+            // @ts-ignore
+            gsap.to("#menuBtn", {
+                duration: 1.0,
+                y: 0,
+                opacity: 1,
+                ease: "power3.out",
+            });
+            // @ts-ignore
+            gsap.fromTo(
+                "#fixedServices",
+                { opacity: 0, y: 12 },
+                {
+                    duration: 1.0,
+                    y: 0,
+                    opacity: 1,
+                    ease: "power3.out",
+                },
             );
         }
     });
-    // Cambiar color del link activo según scroll
-    const sections = document.querySelectorAll("section, div[id]");
-    const links = document.querySelectorAll("nav a[href^='#']");
+</script>
 
-    function updateActiveLink() {
-        let index = sections.length;
-
-        while (
-            --index &&
-            window.scrollY + 100 < (sections[index] as HTMLElement).offsetTop
-        ) {}
-
-        links.forEach((link) => link.classList.remove("text-neo-gold"));
-        links[index]?.classList.add("text-neo-gold");
+<style>
+    /* Estilos locales para corregir clipping y posicionar filas */
+    .menu-text-row {
+        white-space: nowrap;
     }
 
-    updateActiveLink();
-    window.addEventListener("scroll", updateActiveLink);
-</script>
+    .fixed-services {
+        position: fixed;
+        bottom: 1.5em;
+        right: 1.5em;
+        z-index: 50;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        opacity: 0; /* Animado por GSAP al cargar */
+    }
+
+    .fixed-services.hidden {
+        opacity: 0 !important;
+        pointer-events: none;
+    }
+
+    .fixed-services-heading {
+        display: block;
+        font-family: var(--font-geist);
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-primary);
+        margin-bottom: 0.3rem;
+        background: rgba(230, 225, 221, 0.35);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 0.25em 0.5em;
+        width: fit-content;
+        transition:
+            color 0.4s ease,
+            background-color 0.4s ease;
+    }
+
+    [data-theme="dark"] .fixed-services-heading {
+        background: rgba(26, 26, 26, 0.35);
+    }
+
+    .fixed-services-body {
+        font-family: var(--font-geist);
+        font-size: 0.65rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-primary);
+        opacity: 0.65;
+        line-height: 1.6;
+        margin: 0;
+        background: rgba(230, 225, 221, 0.35);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 0.25em 0.5em;
+        width: fit-content;
+        transition:
+            color 0.4s ease,
+            background-color 0.4s ease;
+    }
+
+    [data-theme="dark"] .fixed-services-body {
+        background: rgba(26, 26, 26, 0.35);
+    }
+
+    @media (max-width: 768px) {
+        .fixed-services {
+            bottom: 1em;
+            right: 1em;
+            max-width: 280px;
+        }
+
+        .fixed-services-heading {
+            font-size: 0.55rem;
+            letter-spacing: 0.12em;
+        }
+
+        .fixed-services-body {
+            font-size: 0.55rem;
+            letter-spacing: 0.08em;
+            line-height: 1.5;
+        }
+    }
+</style>

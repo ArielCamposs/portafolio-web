@@ -1,92 +1,82 @@
----
----
-<div
-    id="project-drawer-overlay"
-    class="fixed inset-0 z-[100] bg-black/75 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-500 ease-out"
-></div>
+<div id="project-drawer-overlay" class="drawer-overlay"></div>
 
-<div
-    id="project-drawer"
-    class="fixed top-0 right-0 h-full w-full sm:w-[500px] md:w-[600px] bg-neo-black border-l border-white/10 z-[101] shadow-2xl translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col font-mono"
->
+<div id="project-drawer" class="drawer-panel">
     <!-- Header -->
-    <div class="p-6 border-b border-white/10 flex justify-between items-center bg-[#0a0a0a]">
-        <span class="text-neo-gold text-xs font-bold tracking-widest" id="drawer-category">// DETALLES_PROYECTO</span>
-        <button
-            id="close-drawer-btn"
-            class="group flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-white transition-colors uppercase cursor-pointer bg-transparent border-0 outline-none"
-        >
-            <span>[ Cerrar ]</span>
-            <span class="w-8 h-8 flex items-center justify-center border border-white/20 rounded-full group-hover:border-white transition-colors text-xs">✕</span>
+    <div class="drawer-header">
+        <span class="drawer-category" id="drawer-category">// DETALLES_PROYECTO</span>
+        <button id="close-drawer-btn" class="close-btn">
+            <span>Cerrar</span>
+            <span class="close-icon">✕</span>
         </button>
     </div>
 
     <!-- Scrollable Content -->
-    <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-8 custom-scrollbar">
-        <!-- Title and Main Tagline -->
-        <div class="space-y-4">
-            <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight uppercase" id="drawer-title">
+    <div class="drawer-content custom-scrollbar">
+        <!-- Project Image -->
+        <div class="drawer-image-container">
+            <img id="drawer-image" src="" alt="" />
+        </div>
+
+        <!-- Title and Tags -->
+        <div class="drawer-meta">
+            <h2 class="drawer-title" id="drawer-title">
                 Cargando...
             </h2>
-            <div id="drawer-tags" class="flex flex-wrap gap-2 pt-2">
+            <div id="drawer-tags" class="drawer-tags">
                 <!-- Dynamic tags -->
             </div>
         </div>
 
         <!-- Description -->
-        <div class="space-y-2">
-            <span class="text-neo-cyan text-xs font-bold tracking-widest block">// DESCRIPCIÓN</span>
-            <p class="text-gray-300 text-sm font-sans leading-relaxed" id="drawer-desc">
+        <div class="drawer-desc-container">
+            <span class="section-label">// Descripción</span>
+            <p class="drawer-desc" id="drawer-desc">
                 ...
             </p>
         </div>
 
-        <!-- Accordion Items (Ome Duo Style) -->
-        <div class="space-y-4 pt-2">
+        <!-- Accordions -->
+        <div class="drawer-accordion">
             <!-- Item 1: Características -->
-            <div class="accordion-item border border-white/10 rounded-lg overflow-hidden bg-white/5">
-                <button class="accordion-header w-full p-4 flex justify-between items-center text-left text-sm font-bold text-white hover:bg-white/5 transition-colors bg-transparent border-0 outline-none cursor-pointer">
-                    <span class="font-mono tracking-wider">✦ CARACTERÍSTICAS PRINCIPALES</span>
-                    <span class="accordion-icon transition-all duration-300 text-neo-gold font-bold text-lg">+</span>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>✦ Características Principales</span>
+                    <span class="accordion-icon">+</span>
                 </button>
-                <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                    <ul class="p-4 pt-0 space-y-2 text-gray-300 text-xs font-sans list-disc pl-6" id="drawer-features">
-                        <!-- Dynamic features -->
-                    </ul>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <ul class="features-list" id="drawer-features">
+                            <!-- Dynamic features -->
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <!-- Item 2: Métricas y Resultado -->
-            <div class="accordion-item border border-white/10 rounded-lg overflow-hidden bg-white/5">
-                <button class="accordion-header w-full p-4 flex justify-between items-center text-left text-sm font-bold text-white hover:bg-white/5 transition-colors bg-transparent border-0 outline-none cursor-pointer">
-                    <span class="font-mono tracking-wider">✦ RENDIMIENTO Y RESULTADO</span>
-                    <span class="accordion-icon transition-all duration-300 text-neo-cyan font-bold text-lg">+</span>
+            <!-- Item 2: Rendimiento y Resultado -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>✦ Rendimiento y Resultado</span>
+                    <span class="accordion-icon">+</span>
                 </button>
-                <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                    <div class="p-4 pt-0 text-gray-300 text-xs font-sans leading-relaxed" id="drawer-result">
-                        <!-- Dynamic result -->
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="result-metric" id="drawer-result">
+                            <!-- Dynamic result -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- CTA Buttons -->
-        <div class="pt-6 space-y-4">
+        <div class="drawer-ctas">
             <a
                 href="#"
                 target="_blank"
                 id="drawer-link-btn"
-                class="w-full py-4 bg-neo-gold text-black font-black text-center text-sm uppercase tracking-wider block transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(184,153,111,0.3)] rounded-xl"
+                class="btn-primary"
             >
-                Ver Aplicación En Vivo 🚀
-            </a>
-            <a
-                href="#"
-                target="_blank"
-                id="drawer-repo-btn"
-                class="w-full py-4 border-2 border-white/20 text-white font-black text-center text-sm uppercase tracking-wider block transition-all duration-300 hover:bg-white/5 hover:border-white rounded-xl"
-            >
-                Ver Código Fuente 📂
+                Ver Aplicación ↗
             </a>
         </div>
     </div>
@@ -101,16 +91,346 @@
         background: transparent;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--border);
         border-radius: 4px;
+        transition: background-color 0.3s ease;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #b8996f;
+        background: var(--text-primary);
+    }
+
+    /* Custom Overlay */
+    .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Panel */
+    .drawer-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 101;
+        background-color: var(--bg-secondary);
+        border-left: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+        transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+    [data-theme="dark"] .drawer-panel {
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    }
+    @media (min-width: 640px) {
+        .drawer-panel {
+            width: 500px;
+        }
+    }
+    @media (min-width: 768px) {
+        .drawer-panel {
+            width: 600px;
+        }
+    }
+    @media (min-width: 1024px) {
+        .drawer-panel {
+            width: 650px;
+        }
+    }
+
+    /* Header */
+    .drawer-header {
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--bg-secondary);
+        transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .drawer-category {
+        font-family: var(--font-geist);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        transition: color 0.4s ease;
+    }
+
+    .close-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        font-family: var(--font-geist);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: color 0.4s ease;
+        outline: none;
+    }
+    .close-icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        font-size: 0.8rem;
+        font-weight: normal;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+    }
+    .close-btn:hover .close-icon {
+        border-color: var(--text-primary);
+        transform: rotate(90deg);
+    }
+
+    /* Content Area */
+    .drawer-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    @media (min-width: 768px) {
+        .drawer-content {
+            padding: 3rem 2.5rem;
+            gap: 2.5rem;
+        }
+    }
+
+    /* Cover Image */
+    .drawer-image-container {
+        width: 100%;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--accent);
+        transition: border-color 0.4s ease, background-color 0.4s ease;
+    }
+    .drawer-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .drawer-panel:hover .drawer-image-container img {
+        transform: scale(1.02);
+    }
+
+    /* Title and Tags */
+    .drawer-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .drawer-title {
+        font-family: var(--font-display);
+        font-size: clamp(3.2rem, 8vw, 5.5rem);
+        font-weight: 900;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: -0.015em;
+        line-height: 0.85;
+        margin: 0;
+        transition: color 0.4s ease;
+    }
+    .drawer-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    :global(.drawer-tag) {
+        font-family: var(--font-geist);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        padding: 0.4rem 0.85rem;
+        border: 1px solid var(--border);
+        border-radius: 9999px;
+        background: transparent;
+        transition: all 0.3s ease, color 0.4s ease, border-color 0.4s ease;
+    }
+    :global(.drawer-tag:hover) {
+        border-color: var(--text-primary);
+        background-color: var(--text-primary);
+        color: var(--bg-primary);
+    }
+
+    /* Description */
+    .drawer-desc-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .section-label {
+        font-family: var(--font-geist);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        transition: color 0.4s ease;
+    }
+    .drawer-desc {
+        font-family: var(--font-playfair);
+        font-style: italic;
+        font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+        line-height: 1.35;
+        color: var(--text-primary);
+        opacity: 0.85;
+        margin: 0;
+        transition: color 0.4s ease;
+    }
+
+    /* Accordion */
+    .drawer-accordion {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid var(--border);
+        transition: border-color 0.4s ease;
+    }
+    .accordion-item {
+        border-bottom: 1px solid var(--border);
+        background: transparent;
+        transition: border-color 0.4s ease;
+    }
+    .accordion-header {
+        width: 100%;
+        padding: 1.25rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        font-family: var(--font-geist);
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: none;
+        outline: none;
+        transition: color 0.4s ease;
     }
     .accordion-icon {
+        font-size: 1.2rem;
+        font-weight: normal;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
         display: inline-block;
-        width: 20px;
+        color: var(--text-primary);
+    }
+    .accordion-header.active .accordion-icon {
+        transform: rotate(45deg);
+    }
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        opacity: 0;
+    }
+    .accordion-content.active {
+        opacity: 1;
+    }
+    .accordion-content-inner {
+        padding-bottom: 1.5rem;
+    }
+    .features-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+    :global(.features-list li) {
+        font-family: var(--font-geist);
+        font-size: 0.85rem;
+        color: var(--text-primary);
+        opacity: 0.8;
+        line-height: 1.5;
+        position: relative;
+        padding-left: 1.25rem;
+        transition: color 0.4s ease;
+    }
+    :global(.features-list li::before) {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        color: var(--text-primary);
+        opacity: 0.5;
+        transition: color 0.4s ease;
+    }
+    .result-metric {
+        font-family: var(--font-playfair);
+        font-style: italic;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        padding: 0.75rem 1rem;
+        border-left: 2px solid var(--text-primary);
+        background: rgba(161, 153, 255, 0.05); /* Violet background hint */
+        margin-top: 0.25rem;
+        line-height: 1.4;
+        transition: color 0.4s ease, border-color 0.4s ease;
+    }
+    [data-theme="dark"] .result-metric {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* CTAs */
+    .drawer-ctas {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding-top: 1rem;
+    }
+
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1.1rem 1.5rem;
+        font-family: var(--font-geist);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease, color 0.4s ease;
         text-align: center;
+        outline: none;
+    }
+    .btn-primary {
+        background-color: var(--text-primary);
+        color: var(--bg-primary);
+        border: 1px solid var(--text-primary);
+    }
+    .btn-primary:hover {
+        background-color: transparent;
+        color: var(--text-primary);
     }
 </style>
 
@@ -125,8 +445,8 @@
     const drawerTags = document.getElementById("drawer-tags");
     const drawerFeatures = document.getElementById("drawer-features");
     const drawerResult = document.getElementById("drawer-result");
+    const drawerImage = document.getElementById("drawer-image") as HTMLImageElement;
     const drawerLinkBtn = document.getElementById("drawer-link-btn") as HTMLAnchorElement;
-    const drawerRepoBtn = document.getElementById("drawer-repo-btn") as HTMLAnchorElement;
 
     // Open Drawer
     window.addEventListener("open-project-drawer", (e: any) => {
@@ -138,10 +458,21 @@
         if (drawerCategory) drawerCategory.textContent = `// ${project.category.toUpperCase().replace(/ /g, "_")}`;
         if (drawerDesc) drawerDesc.textContent = project.desc;
         
+        // Image
+        if (drawerImage) {
+            if (project.img) {
+                drawerImage.src = project.img;
+                drawerImage.alt = project.title;
+                drawerImage.parentElement!.style.display = "block";
+            } else {
+                drawerImage.parentElement!.style.display = "none";
+            }
+        }
+
         // Tags
         if (drawerTags) {
             drawerTags.innerHTML = project.tags.map((t: string) => `
-                <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-[10px] font-bold text-gray-300 rounded-full tracking-wider hover:border-neo-cyan transition-colors">${t}</span>
+                <span class="drawer-tag">${t}</span>
             `).join("");
         }
 
@@ -161,44 +492,114 @@
         if (drawerLinkBtn) {
             if (project.link) {
                 drawerLinkBtn.href = project.link;
-                drawerLinkBtn.style.display = "block";
+                drawerLinkBtn.style.display = "inline-flex";
             } else {
                 drawerLinkBtn.style.display = "none";
             }
         }
-        if (drawerRepoBtn) {
-            if (project.repo) {
-                drawerRepoBtn.href = project.repo;
-                drawerRepoBtn.style.display = "block";
-            } else {
-                drawerRepoBtn.style.display = "none";
-            }
+
+
+        // Lock scroll (Lenis + native)
+        document.body.style.overflow = "hidden";
+        // @ts-ignore
+        if (window.lenis) {
+            // @ts-ignore
+            window.lenis.stop();
         }
 
-        // Open UI
-        overlay?.classList.remove("opacity-0", "pointer-events-none");
-        drawer?.classList.remove("translate-x-full");
-        document.body.style.overflow = "hidden"; // Lock scroll
+        // Open animation via GSAP if available
+        // @ts-ignore
+        if (typeof gsap !== "undefined") {
+            // @ts-ignore
+            gsap.killTweensOf([overlay, drawer, ".drawer-image-container", drawerTitle, "#drawer-tags", ".drawer-desc-container", ".drawer-accordion", ".drawer-ctas"]);
+            
+            // @ts-ignore
+            const tl = gsap.timeline();
+            overlay?.classList.remove("pointer-events-none");
+            
+            // @ts-ignore
+            tl.fromTo(overlay, 
+                { opacity: 0 }, 
+                { opacity: 1, duration: 0.4, ease: "power2.out" }
+            )
+            // @ts-ignore
+            .fromTo(drawer, 
+                { x: "100%" }, 
+                { x: "0%", duration: 0.6, ease: "power3.out" }, 
+                "-=0.3"
+            )
+            // @ts-ignore
+            .fromTo([
+                ".drawer-image-container",
+                drawerTitle,
+                "#drawer-tags",
+                ".drawer-desc-container",
+                ".drawer-accordion",
+                ".drawer-ctas"
+            ], 
+                { y: 25, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power2.out" }, 
+                "-=0.2"
+            );
+        } else {
+            // Fallback without GSAP
+            overlay?.classList.add("active");
+            overlay?.classList.remove("pointer-events-none");
+            drawer?.classList.add("active");
+        }
     });
 
     // Close function
     const closeDrawer = () => {
-        overlay?.classList.add("opacity-0", "pointer-events-none");
-        drawer?.classList.add("translate-x-full");
-        
-        // Only unlock body scroll if the loader is not active
+        // Unlock scroll (Lenis + native)
         const loader = document.getElementById("screen-loader");
         if (!loader || loader.style.display === "none") {
             document.body.style.overflow = "";
+            // @ts-ignore
+            if (window.lenis) {
+                // @ts-ignore
+                window.lenis.start();
+            }
+        }
+
+        // Close animation via GSAP if available
+        // @ts-ignore
+        if (typeof gsap !== "undefined") {
+            // @ts-ignore
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    overlay?.classList.add("pointer-events-none");
+                    // Reset positions for next opening
+                    // @ts-ignore
+                    gsap.set([
+                        ".drawer-image-container",
+                        drawerTitle,
+                        "#drawer-tags",
+                        ".drawer-desc-container",
+                        ".drawer-accordion",
+                        ".drawer-ctas"
+                    ], { clearProps: "all" });
+                }
+            });
+            
+            // @ts-ignore
+            tl.to(drawer, { x: "100%", duration: 0.5, ease: "power3.inOut" })
+              // @ts-ignore
+              .to(overlay, { opacity: 0, duration: 0.4, ease: "power2.inOut" }, "-=0.3");
+        } else {
+            // Fallback without GSAP
+            overlay?.classList.remove("active");
+            overlay?.classList.add("pointer-events-none");
+            drawer?.classList.remove("active");
         }
 
         // Close all accordions
+        document.querySelectorAll(".accordion-header").forEach((h) => {
+            h.classList.remove("active");
+        });
         document.querySelectorAll(".accordion-content").forEach((c) => {
             (c as HTMLElement).style.maxHeight = "";
-        });
-        document.querySelectorAll(".accordion-icon").forEach((i) => {
-            (i as HTMLElement).textContent = "+";
-            (i as HTMLElement).classList.remove("rotate-45");
+            c.classList.remove("active");
         });
     };
 
@@ -209,21 +610,16 @@
     document.querySelectorAll(".accordion-header").forEach((header) => {
         header.addEventListener("click", () => {
             const content = header.nextElementSibling as HTMLElement;
-            const icon = header.querySelector(".accordion-icon") as HTMLElement;
-            if (content) {
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = "";
-                    if (icon) {
-                        icon.textContent = "+";
-                        icon.classList.remove("rotate-45");
-                    }
-                } else {
-                    content.style.maxHeight = `${content.scrollHeight}px`;
-                    if (icon) {
-                        icon.textContent = "✕";
-                        icon.classList.add("rotate-45");
-                    }
-                }
+            const isClosed = !header.classList.contains("active");
+
+            if (isClosed) {
+                header.classList.add("active");
+                content.classList.add("active");
+                content.style.maxHeight = `${content.scrollHeight}px`;
+            } else {
+                header.classList.remove("active");
+                content.classList.remove("active");
+                content.style.maxHeight = "";
             }
         });
     });

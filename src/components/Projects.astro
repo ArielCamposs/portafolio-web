@@ -1,14 +1,12 @@
 ---
 const projects = [
   {
-    title: "NITIV APP 📊",
+    title: "NITIV APP",
     category: "Plataforma SaaS",
-    desc: "Sistema integral de gestión escolar para equipos de convivencia, orientadores y docentes. Centraliza el seguimiento de casos, protocolos Mineduc y medición del clima escolar.",
-    img: "nitiv-saas.webp",
-    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Vercel"],
+    desc: "Sistema integral de gestión escolar para convivencia, orientadores y docentes.",
+    img: "/images/nitiv-saas.webp",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind"],
     link: "https://nitiv-app-three.vercel.app/login",
-    featured: true,
-    objectFit: "contain",
     features: [
       "Gestión y trazabilidad de casos (PAEC/DEC)",
       "Radar de competencia socioemocional CASEL",
@@ -16,693 +14,642 @@ const projects = [
       "Asistente con Inteligencia Artificial",
     ],
     result: "92% de adopción docente 🚀",
-    ctaText: "Ver App"
   },
   {
     title: "NITIV.CL",
-    category: "Landing Page",
-    desc: "Landing page de la plataforma Nitiv, diseñada para colegios chilenos. Presenta el SaaS, sus pilares, beneficios y permite cotizaciones a medida.",
-    img: "nitiv-landing.webp",
-    tags: ["Astro", "React", "Styled Components", "SEO", "Responsive"],
+    category: "Landing Corporativa",
+    desc: "Landing page de la plataforma Nitiv, diseñada para colegios chilenos.",
+    img: "/images/nitiv-landing.png",
+    tags: ["Astro", "React", "SEO", "Responsive"],
     link: "https://nitiv.cl",
-    objectFit: "contain",
     features: [
       "Presentación interactiva de pilares",
       "Sección de cotizaciones dinámicas",
       "Optimización SEO y carga rápida",
       "Formularios de contacto integrados",
     ],
-    result: "Conversión de leads escolares 📈",
-    ctaText: "Ver Página"
+    result: "Alta tasa de captación escolar 📈",
   },
   {
-    title: "BITECRAFT 🍔",
-    category: "E-Commerce & Delivery",
-    desc: "Aplicación web moderna y auto-administrable de delivery de comida rápida. Cuenta con carrito dinámico, checkout con formulario validado, panel de administración interactivo y animaciones fluidas.",
-    img: "bitecraft.png",
-    tags: ["Next.js", "React", "Tailwind CSS", "Zustand", "GSAP", "Framer Motion"],
+    title: "BITECRAFT",
+    category: "E-Commerce Delivery",
+    desc: "App web de delivery auto-administrable con carrito persistente y panel administrador.",
+    img: "/images/bitecraft.png",
+    tags: ["Next.js", "React", "Zustand", "GSAP"],
     link: "https://tienda-comida-six.vercel.app/",
-    repo: "https://github.com/ArielCamposs/tienda-comida-admin",
-    featured: true,
-    objectFit: "contain",
     features: [
-      "Carrito de compras interactivo y persistente",
-      "Panel de administración demo para gestión de pedidos",
-      "Efectos visuales fluidos con GSAP y Framer Motion",
-      "Formularios validados con Zod y React Hook Form",
+      "Carrito interactivo y persistente",
+      "Panel de administración de pedidos",
+      "Efectos visuales con GSAP y Framer Motion",
+      "Formularios validados con Zod",
     ],
-    result: "Experiencia de compra fluida 🚀",
-    ctaText: "Ver Tienda"
+    result: "Experiencia de compra fluida 🍔",
   },
   {
-    title: "TIENDA TEXTIL ADMINISTRABLE 🧶",
-    category: "E-Commerce & Admin",
-    desc: "Tienda online de alta textilería artesanal de La Ligua, con carrito dinámico, checkout por transferencia bancaria y panel de administración para gestionar productos en tiempo real.",
-    img: "pura-lana.webp",
-    tags: ["HTML5", "CSS3", "JavaScript", "Supabase", "Vercel"],
+    title: "TIENDA TEXTIL",
+    category: "E-Commerce Textil",
+    desc: "Tienda online de textilería artesanal con carrito dinámico y panel de administración.",
+    img: "/images/pura-lana.webp",
+    tags: ["HTML5", "CSS3", "JavaScript", "Supabase"],
     link: "https://landingpage-puralana.vercel.app/",
-    featured: true,
-    objectFit: "contain",
     features: [
       "Carrito de compras dinámico",
       "Panel de administración de productos",
-      "Base de datos en tiempo real (Supabase)",
-      "Checkout integrado por transferencia",
+      "Base de datos Supabase integrada",
+      "Envío de detalles de compra",
     ],
-    result: "Gestión de stock autónoma 📈",
-    ctaText: "Ver Tienda"
+    result: "Autoadministración de stock 🧶",
   },
   {
-    title: "TIENDA SUSHI 🍣",
-    category: "E-Commerce Real",
+    title: "TIENDA SUSHI",
+    category: "Restaurante Delivery",
     desc: "E-commerce desarrollado para restaurante real, con carrito dinámico, gestión de favoritos y envío de pedido directo a WhatsApp.",
-    img: "tienda-sushi.png",
-    tags: ["React", "Tailwind CSS", "Vercel", "Vite"],
-    repo: "https://github.com/ArielCamposs/tienda-sushi",
+    img: "/tienda-sushi.webp",
+    tags: ["React", "Tailwind", "Vite", "Responsive"],
     link: "https://tienda-sushi.vercel.app/",
-    objectFit: "sushi",
+    repo: "https://github.com/ArielCamposs/tienda-sushi",
     features: [
       "Carrito de compras funcional",
       "Control visual de stock",
-      "Favoritos en localStorage",
-      "Integración WhatsApp API",
+      "Favoritos guardados en localStorage",
+      "Integración con WhatsApp API",
+      "Diseño Mobile First",
     ],
-    result: "Pedidos directos a WhatsApp 📲",
-    ctaText: "Ver Tienda"
-  },
-  {
-    title: "PELUQUERIA DELTA ✂️",
-    category: "Landing Page",
-    desc: "Landing page creada para captar clientes mediante SEO Local y CTA directo a WhatsApp.",
-    img: "landing-page.webp",
-    tags: ["Astro", "Tailwind CSS", "Responsive"],
-    link: "https://landing-page-peluqueria-delta.vercel.app/",
-    repo: "https://github.com/ArielCamposs/landing-page-informativa",
-    objectFit: "contain",
-    features: [
-      "SEO Local optimizado",
-      "WhatsApp directo",
-      "Carga ultra rapida",
-    ],
-    result: "Mejora notable de captacion ✨",
-    ctaText: "Ver Página"
+    result: "Envío de pedidos directo a WhatsApp 🍣",
   },
 ];
 ---
 
-<section id="proyectos" class="projects-section">
-  <!-- Background Effects -->
-  <div class="bg-orb bg-orb-1"></div>
-  <div class="bg-orb bg-orb-2"></div>
-  <div class="bg-orb bg-orb-3"></div>
-  <div class="deco-line deco-line-1"></div>
-  <div class="deco-line deco-line-2"></div>
-
-  <div class="container">
-    <!-- Header -->
-    <header class="section-header">
-      <span class="code-tag">// SELECTED_WORKS</span>
-      <h2 class="section-title">
-        MIS <br/>
-        <span class="gradient-text">PROYECTOS</span>
+<section class="projects-section" id="proyectos">
+  <!-- Contenedor sticky que se fija en pantalla mientras el usuario scrollea -->
+  <div class="projects-sticky">
+    <!-- Encabezado de Proyectos -->
+    <div class="projects-header">
+      <h2 class="projects-title">
+        <span class="projects-italic">Mis</span>
+        <span class="projects-main">PROYECTOS</span>
       </h2>
-      <p class="section-subtitle">Proyectos reales que demuestran mis habilidades</p>
-    </header>
+      <!-- Badge circular giratoria -->
+      <div class="view-all-circle" id="viewAllBadge">
+        <div class="view-all-inner">
+          <svg class="view-all-svg" viewBox="0 0 100 100">
+            <defs>
+              <path
+                id="viewAllCirclePath"
+                d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"></path>
+            </defs>
+            <text class="view-all-text">
+              <textPath href="#viewAllCirclePath"
+                >VER PROYECTOS • VER PROYECTOS •</textPath
+              >
+            </text>
+          </svg>
+          <div class="view-all-icon">↗</div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Projects List -->
-    <div class="projects-list">
-      {projects.map((project, index) => {
-        // Alternating layouts: horizontal (0), vertical (1), editorial (2)
-        const layoutType = index % 3;
-        let layoutClass = "layout-horizontal";
-        let glowColor = "rgba(184, 153, 111, 0.25)"; // Gold default
-        let accentColor = "#b8996f";
-        
-        if (layoutType === 1) {
-          layoutClass = "layout-vertical";
-          glowColor = "rgba(90, 138, 154, 0.25)"; // Cyan
-          accentColor = "#5a8a9a";
-        } else if (layoutType === 2) {
-          layoutClass = "layout-editorial";
-          glowColor = "rgba(107, 79, 124, 0.25)"; // Purple
-          accentColor = "#6b4f7c";
-        }
-
-        return (
-          <article 
-            class={`project-card scroll-reveal ${layoutClass}`} 
-            data-stagger-index={layoutType}
-            data-project-index={index}
-            style={`--glow-color: ${glowColor}; --accent-color: ${accentColor};`}
-          >
-            <!-- Screenshot Dominante -->
-            <div class="project-image-wrap open-drawer-trigger" data-parallax-speed="-0.04">
-              <div class="project-img-inner">
-                <img
-                  src={project.img}
-                  alt={project.title}
-                  loading="lazy"
-                  class={project.objectFit === 'contain' ? 'img-contain' : project.objectFit === 'sushi' ? 'img-sushi' : 'img-cover'}
-                />
-              </div>
-              <span class="project-badge">{project.category}</span>
-            </div>
-
-            <!-- Content (Case Study Style) -->
-            <div class="project-content" data-parallax-speed="0.04">
-              <div class="project-meta">
-                <span class="project-num">0{index + 1}</span>
-                <span class="project-category-name">{project.category}</span>
-              </div>
-
-              <!-- Título Corto -->
-              <h3 class="project-title open-drawer-trigger">{project.title}</h3>
-              
-              <!-- Frase de Impacto -->
-              <p class="project-impact-desc">{project.desc}</p>
-
-              <!-- Una sola métrica visible -->
-              {project.result ? (
-                <div class="project-metric">
-                  <span class="metric-icon">✦</span>
-                  <span class="metric-val">{project.result}</span>
+    <!-- Carrusel de tarjetas de proyectos -->
+    <div class="projects-carousel-wrapper">
+      <div class="projects-carousel" id="projectsCarousel">
+        {
+          projects.map((project, index) => (
+            <div
+              class="project-card open-drawer-trigger"
+              data-project-index={index}
+            >
+              <div class="project-card-image">
+                <img src={project.img} alt={project.title} loading="lazy" />
+                <div class="project-card-overlay">
+                  <span class="project-card-view">VER DETALLES</span>
                 </div>
-              ) : (
-                <div class="project-metric">
-                  <span class="metric-icon">✦</span>
-                  <span class="metric-val">Diseño 100% Adaptable ✨</span>
-                </div>
-              )}
-
-              <!-- Link de acceso directo y Botón de Drawer -->
-              <div class="project-cta-links">
-                <button class="project-btn-small btn-solid open-drawer-trigger cursor-pointer border-0 outline-none">
-                  <span>Detalles ✦</span>
-                </button>
+              </div>
+              <div class="project-card-info">
+                <h3 class="project-card-title">{project.title}</h3>
+                <p class="project-card-desc">{project.category}</p>
+                
+                <!-- Badge circular interactivo -->
                 {project.link && (
-                  <a href={project.link} target="_blank" class="project-btn-small btn-border">
-                    <span>Ver App</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-card-badge-link"
+                    onclick="event.stopPropagation()"
+                  >
+                    <div class="project-card-badge">
+                      <svg class="project-card-badge-svg" viewBox="0 0 100 100">
+                        <path
+                          id={`badgePath-${index}`}
+                          d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
+                          fill="none"
+                        ></path>
+                        <text class="project-card-badge-text">
+                          <textPath href={`#badgePath-${index}`}>
+                            VER SITIO WEB • VER SITIO WEB •
+                          </textPath>
+                        </text>
+                      </svg>
+                      <div class="project-card-badge-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="2" y1="12" x2="22" y2="12"></line>
+                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                      </div>
+                    </div>
                   </a>
                 )}
               </div>
             </div>
-
-          </article>
-        );
-      })}
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Infinite Scroll Marquee -->
-<div class="marquee-container">
-  <div class="marquee">
-    <div class="track">
-      <p>Desarrollador Web Full Stack Junior Disponible 🚀</p>
-      <p>Contrataciones &amp; Proyectos Freelance 📩</p>
-      <p>React &bull; Astro &bull; Tailwind &bull; APIs &bull; UX/UI 🎨</p>
-      <p>Chile | Remoto LATAM 🌍</p>
-      <p>Desarrollador Web Full Stack Junior Disponible 🚀</p>
-      <p>Contrataciones &amp; Proyectos Freelance 📩</p>
-      <p>React &bull; Astro &bull; Tailwind &bull; APIs &bull; UX/UI 🎨</p>
-      <p>Chile | Remoto LATAM 🌍</p>
-    </div>
-  </div>
-</div>
+<script define:vars={{ projects }}>
+  window.addEventListener("loaderComplete", () => {
+    // Abrir drawer al hacer clic en tarjeta
+    const cards = document.querySelectorAll(".project-card");
+    cards.forEach((card) => {
+      const index = parseInt(card.getAttribute("data-project-index") || "0");
+      const data = projects[index];
+
+      card.addEventListener("click", (e) => {
+        if (e.target.closest(".project-card-badge-link")) return;
+        e.preventDefault();
+        window.dispatchEvent(
+          new CustomEvent("open-project-drawer", { detail: data }),
+        );
+      });
+    });
+
+    // Zoom inverso con GSAP
+    const imgs = document.querySelectorAll(".project-card-image img");
+    imgs.forEach((img) => {
+      // @ts-ignore
+      gsap.set(img, { scale: 1.1 });
+      const card = img.closest(".project-card");
+      if (!card) return;
+      card.addEventListener("mouseenter", () => {
+        // @ts-ignore
+        gsap.to(img, { scale: 1, duration: 0.7, ease: "power3.out" });
+      });
+      card.addEventListener("mouseleave", () => {
+        // @ts-ignore
+        gsap.to(img, { scale: 1.1, duration: 0.5, ease: "power2.inOut" });
+      });
+    });
+
+    // Rotar badge principal del header
+    const badge = document.getElementById("viewAllBadge");
+    if (badge) {
+      let rot = 0;
+      function rotateBadge() {
+        rot += 0.4;
+        const svg = badge.querySelector(".view-all-svg");
+        if (svg) svg.style.transform = `rotate(${rot}deg)`;
+        requestAnimationFrame(rotateBadge);
+      }
+      rotateBadge();
+    }
+
+    // ---- Scroll horizontal con GSAP ScrollTrigger (conectado a Lenis en Layout.astro) ----
+    function setupHorizontalScroll() {
+      if (window.innerWidth <= 768) return;
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+
+      var section = document.getElementById("proyectos");
+      var sticky = section && section.querySelector(".projects-sticky");
+      var carousel = document.getElementById("projectsCarousel");
+      if (!section || !sticky || !carousel) return;
+
+      // Registrar plugin (es seguro llamarlo varias veces)
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Calcular cuánto debe moverse el carrusel
+      var totalMove = carousel.scrollWidth - window.innerWidth;
+      if (totalMove <= 0) return;
+
+      // Animar el translateX del carrusel vinculado al scroll de la página
+      gsap.to(carousel, {
+        x: -totalMove,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=" + totalMove,
+          pin: sticky,
+          pinSpacing: true,
+          scrub: 1.5,           // Número = segundos de lag suave (efecto lerp/rubber band)
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onRefresh: function() {
+            totalMove = carousel.scrollWidth - window.innerWidth;
+          }
+        }
+      });
+
+      // Refrescar después de que ScrollTrigger calcule posiciones
+      ScrollTrigger.refresh();
+    }
+
+    // Esperar a que Lenis y el DOM estén completamente listos
+    setTimeout(setupHorizontalScroll, 400);
+
+    // Rotación de los badges en cada tarjeta
+    const cardBadges = document.querySelectorAll(".project-card-badge");
+    if (cardBadges.length > 0) {
+      const badgeRotations = Array.from(cardBadges).map(() => 0);
+      const badgeHoverStates = Array.from(cardBadges).map(() => false);
+
+      cardBadges.forEach((b, i) => {
+        const card = b.closest(".project-card");
+        if (card) {
+          card.addEventListener("mouseenter", () => {
+            badgeHoverStates[i] = true;
+          });
+          card.addEventListener("mouseleave", () => {
+            badgeHoverStates[i] = false;
+          });
+        }
+      });
+
+      function animateCardBadges() {
+        cardBadges.forEach((b, i) => {
+          const svg = b.querySelector(".project-card-badge-svg");
+          if (svg) {
+            const speed = badgeHoverStates[i] ? 1.5 : 0.4;
+            badgeRotations[i] = (badgeRotations[i] + speed) % 360;
+            // @ts-ignore
+            svg.style.transform = `rotate(${badgeRotations[i]}deg)`;
+          }
+        });
+        requestAnimationFrame(animateCardBadges);
+      }
+      animateCardBadges();
+    }
+  });
+</script>
 
 <style>
-  /* ===== SECTION ===== */
   .projects-section {
+    background: var(--bg-primary);
+    transition: background-color 0.4s ease;
+    width: 100%;
+    padding: 3.5rem 0 2.5rem; /* Solo en mobile; desktop lo sobreescribe */
+  }
+
+  /* ScrollTrigger pina este elemento automáticamente */
+  .projects-sticky {
+    background: var(--bg-primary);
+    transition: background-color 0.4s ease;
+    width: 100%;
+    padding: 0; /* El padding lo lleva projects-section en mobile */
+  }
+
+  @media (min-width: 769px) {
+    .projects-section {
+      padding: 0;
+    }
+    .projects-sticky {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 0 3rem;
+    }
+  }
+
+  .projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto 1.5rem auto;
+    max-width: 100%;
+    padding: 0 max(2rem, calc((100vw - 1400px) / 2 + 2rem));
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .projects-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0em;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .projects-italic {
+    font-family: var(--font-playfair);
+    font-style: italic;
+    font-size: clamp(3.5rem, 10vw, 7.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    opacity: 0.7;
+    display: block;
+    line-height: 1;
+  }
+
+  .projects-main {
+    font-family: var(--font-display);
+    font-size: clamp(5.5rem, 21vw, 15.5rem);
+    font-weight: 900;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.82;
+    display: block;
+    transition: color 0.4s ease;
+  }
+
+  @media (max-width: 768px) {
+    .projects-header {
+      /* En mobile: título a la izquierda, badge a la derecha en la misma fila */
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-right: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .view-all-circle {
+      width: 64px;      /* Más pequeño en mobile */
+      height: 64px;
+      flex-shrink: 0;
+    }
+
+    .view-all-icon {
+      font-size: 1.1rem;
+    }
+
+    .projects-italic {
+      font-size: clamp(2.2rem, 8vw, 3.5rem);
+    }
+
+    .projects-main {
+      font-size: clamp(4rem, 17vw, 6rem);
+    }
+  }
+
+  /* Badge circular del header */
+  .view-all-circle {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
     position: relative;
-    padding: 8rem 0 6rem;
-    background: #0a0a0a;
+    cursor: none;
+  }
+
+  .view-all-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .view-all-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .view-all-text {
+    font-family: var(--font-geist);
+    font-size: 10px;
+    font-weight: 500;
+    fill: var(--text-primary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .view-all-icon {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    font-weight: 900;
+    z-index: 1;
+    transition: color 0.4s ease;
+  }
+
+  /* Carrusel horizontal */
+  .projects-carousel-wrapper {
+    width: 100%;
     overflow: hidden;
   }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
+  .projects-carousel {
+    display: flex;
+    gap: 3.5rem;
+    padding: 1rem 0;
+    width: max-content;   /* ancho natural de todas las tarjetas */
+    padding-left: max(2rem, calc((100vw - 1400px) / 2 + 2rem));
+    padding-right: max(2rem, calc((100vw - 1400px) / 2 + 2rem));
+    user-select: none;
+    will-change: transform;
+  }
+
+  @media (max-width: 768px) {
+    .projects-carousel-wrapper {
+      overflow-x: auto;
+      overflow-y: visible;
+      scrollbar-width: none;
+    }
+    .projects-carousel-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+    .projects-carousel {
+      width: max-content;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      cursor: grab;
+      will-change: auto;
+      gap: 1.5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+    }
+    .project-card {
+      flex: 0 0 clamp(260px, 78vw, 400px); /* Más compactas en mobile */
+    }
+  }
+
+  .projects-carousel::-webkit-scrollbar {
+    display: none; /* Oculta scrollbar Chrome/Safari */
+  }
+
+  .projects-carousel.active {
+    cursor: grabbing;
+  }
+
+  /* Tarjetas del proyecto */
+  .project-card {
+    flex: 0 0 clamp(290px, 85vw, 620px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    cursor: none;
     position: relative;
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  }
+
+  [data-theme="dark"] .project-card {
+    background: var(--bg-secondary);
+    border-color: var(--border);
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .project-card-image {
+    width: 100%;
+    aspect-ratio: 16/9.5;
+    overflow: hidden;
+    position: relative;
+    background: var(--accent);
+  }
+
+  .project-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .project-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover .project-card-overlay {
+    opacity: 1;
+  }
+
+  .project-card-view {
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+  }
+
+  .project-card-info {
+    padding: 2.2rem;
+    background: var(--bg-secondary);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: background-color 0.4s ease;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-card-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 4.8rem);
+    font-weight: 900;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 0.85;
+    transition: color 0.4s ease;
+  }
+
+  .project-card-desc {
+    font-family: var(--font-playfair);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-primary);
+    opacity: 0.7;
+    margin: 0;
+    transition: color 0.4s ease;
+  }
+
+  /* Badge circular interactivo en tarjeta */
+  .project-card-badge-link {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
     z-index: 10;
   }
 
-  /* ===== BACKGROUND ORBS ===== */
-  .bg-orb {
-    position: absolute;
+  .project-card-badge {
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-    opacity: 0.35;
-  }
-  .bg-orb-1 {
-    top: -80px; right: -80px;
-    width: 480px; height: 480px;
-    background: linear-gradient(135deg, #5a8a9a, #6b4f7c);
-    animation: float-orb 8s ease-in-out infinite;
-  }
-  .bg-orb-2 {
-    bottom: 15%; left: -120px;
-    width: 380px; height: 380px;
-    background: linear-gradient(135deg, #c25d85, #b8996f);
-    animation: float-orb 11s ease-in-out infinite reverse;
-  }
-  .bg-orb-3 {
-    top: 50%; right: 8%;
-    width: 280px; height: 280px;
-    background: #b8996f;
-    opacity: 0.12;
-    animation: float-orb 6s ease-in-out infinite;
-  }
-  @keyframes float-orb {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50%       { transform: translate(25px, -25px) scale(1.08); }
-  }
-
-  .deco-line {
-    position: absolute;
-    background: linear-gradient(90deg, transparent, #b8996f, transparent);
-    height: 1px;
-    pointer-events: none;
-    left: 0; width: 100%;
-  }
-  .deco-line-1 { top: 12%; opacity: 0.18; }
-  .deco-line-2 { bottom: 22%; opacity: 0.12; }
-
-  /* ===== HEADER ===== */
-  .section-header {
-    margin-bottom: 5rem;
-    text-align: center;
-  }
-  .code-tag {
-    display: inline-block;
-    font-family: monospace;
-    font-size: 0.95rem;
-    color: #b8996f;
-    letter-spacing: 0.2em;
-    margin-bottom: 1rem;
-    text-shadow: 0 0 20px rgba(184,153,111,0.3);
-  }
-  .section-title {
-    font-size: clamp(3rem, 10vw, 6rem);
-    font-weight: 900;
-    color: white;
-    text-transform: uppercase;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-  }
-  .gradient-text {
-    background: linear-gradient(135deg, #c25d85 0%, #6b4f7c 50%, #5a8a9a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .section-subtitle {
-    margin-top: 1.5rem;
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.55);
-    font-weight: 300;
-  }
-
-  /* ===== PROJECTS LIST ===== */
-  .projects-list {
+    background: var(--text-primary);
     display: flex;
-    flex-direction: column;
-    gap: 8rem; /* Gran separación para bloques independientes */
-  }
-
-  /* ===== SCROLL REVEAL WITH BLUR ===== */
-  .project-card {
-    opacity: 0;
-    transform: translateY(40px);
-    filter: blur(8px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity, filter;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
     align-items: center;
-  }
-  .project-card.is-visible {
-    opacity: 1;
-    transform: none;
-    filter: blur(0);
-  }
-
-  /* ===== SCREENSHOT DOMINANTE ===== */
-  .project-image-wrap {
+    justify-content: center;
     position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    background: linear-gradient(145deg, rgba(22,22,22,0.9), rgba(10,10,10,0.95));
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    width: 100%;
-    aspect-ratio: 16 / 9;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 
-  .project-img-inner {
+  .project-card-badge-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    transform-origin: center;
   }
 
-  .project-img-inner img {
+  .project-card-badge-text {
+    font-family: var(--font-geist);
+    font-size: 7.5px;
+    font-weight: 700;
+    fill: var(--bg-primary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: fill 0.4s ease;
+  }
+
+  .project-card-badge-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: color 0.4s ease, transform 0.3s ease;
+  }
+
+  .project-card-badge-icon svg {
     width: 100%;
     height: 100%;
-    display: block;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .img-cover  { object-fit: cover; }
-  .img-contain {
-    object-fit: contain;
-    background: rgba(255, 255, 255, 0.02);
-    padding: 2rem;
-  }
-  .img-sushi {
-    object-fit: cover;
-    object-position: center;
-  }
-  @media (max-width: 899px) {
-    .img-sushi {
-      object-fit: contain;
-      background: #050505;
-      padding: 0;
-    }
+  /* Hover del badge */
+  .project-card:hover .project-card-badge {
+    transform: scale(1.1);
   }
 
-  /* Image Hover Zoom & Glow */
-  .project-card:hover .project-image-wrap {
-    border-color: var(--accent-color, rgba(184, 153, 111, 0.4));
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px var(--glow-color);
-    transform: translateY(-4px);
-  }
-
-  .project-card:hover .project-img-inner img {
-    transform: scale(1.03);
-  }
-
-  .project-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 0.4rem 0.9rem;
-    background: rgba(10, 10, 10, 0.85);
-    color: white;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 5;
-    backdrop-filter: blur(8px);
-  }
-
-  /* ===== CONTENT ===== */
-  .project-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    width: 100%;
-  }
-
-  .project-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .project-num {
-    font-family: monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #b8996f;
-    letter-spacing: 0.08em;
-  }
-  .project-card:hover .project-num {
-    color: var(--accent-color, #b8996f);
-  }
-  .project-category-name {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.35);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-
-  /* Título corto */
-  .project-title {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 800;
-    color: white;
-    line-height: 1.1;
-    margin: 0;
-    transition: color 0.3s ease;
-  }
-  .project-card:hover .project-title {
-    color: var(--accent-color, #b8996f);
-  }
-
-  /* Frase de impacto */
-  .project-impact-desc {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* Una sola métrica visible */
-  .project-metric {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #e8e8e8;
-    width: fit-content;
-    transition: border-color 0.4s ease, background-color 0.4s ease;
-  }
-  .project-card:hover .project-metric {
-    border-color: var(--accent-color, rgba(184, 153, 111, 0.3));
-    background: rgba(255, 255, 255, 0.05);
-  }
-  .metric-icon {
-    color: #b8996f;
-    font-size: 0.7rem;
-    transition: color 0.4s ease;
-  }
-  .project-card:hover .metric-icon {
-    color: var(--accent-color, #b8996f);
-  }
-
-  /* Dos links pequeños */
-  .project-cta-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding-top: 0.5rem;
-  }
-
-  .project-btn-small {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.8rem;
-    font-weight: 700;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.3s ease,
-                background-color 0.3s ease,
-                color 0.3s ease;
-  }
-
-  .btn-solid {
-    background: #b8996f;
-    color: #0a0a0a;
-    box-shadow: 0 4px 12px rgba(184,153,111,0.15);
-  }
-  .project-card:hover .btn-solid {
-    background: var(--accent-color, #b8996f);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-color, rgba(184, 153, 111, 0.2));
-  }
-  .btn-solid:hover {
-    transform: translateY(-2px);
-  }
-
-  .btn-border {
-    background: transparent;
-    color: rgba(255,255,255,0.7);
-    border: 1px solid rgba(255,255,255,0.18);
-  }
-  .btn-border:hover {
-    border-color: var(--accent-color, #5a8a9a);
-    background: rgba(255, 255, 255, 0.04);
-    color: white;
-    transform: translateY(-2px);
-  }
-
-  .project-btn-small svg {
-    transition: transform 0.25s ease;
-  }
-  .project-btn-small:hover svg {
-    transform: translate(2px, -2px);
-  }
-
-  /* ===== LAYOUT ALTERNATIVITY (DESKTOP) ===== */
-  @media (min-width: 900px) {
-    /* 1. Layout Horizontal: Imagen izquierda, contenido derecha */
-    .layout-horizontal {
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 4rem;
-    }
-
-    /* 2. Layout Vertical: Imagen arriba, contenido abajo */
-    .layout-vertical {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .layout-vertical .project-image-wrap {
-      aspect-ratio: 21 / 9; /* Formato ultra ancho espectacular */
-    }
-    .layout-vertical .project-content {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 3rem;
-      align-items: start;
-    }
-    .layout-vertical .project-cta-links {
-      justify-self: end;
-      align-self: center;
-    }
-
-    /* 3. Layout Editorial: Contenido izquierda, imagen derecha */
-    .layout-editorial {
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 4rem;
-    }
-    .layout-editorial .project-image-wrap {
-      order: 2; /* Empuja la imagen a la derecha */
-    }
-    .layout-editorial .project-content {
-      order: 1; /* Pone el texto a la izquierda */
-    }
-  }
-
-  /* ===== RESPONSIVE MOBILE ===== */
-  @media (max-width: 899px) {
-    .project-image-wrap {
-      aspect-ratio: 16 / 10;
-    }
-    .project-card {
-      gap: 2rem;
-    }
-  }
-
-  /* ===== MARQUEE ===== */
-  .marquee-container {
-    width: 100%;
-    overflow: hidden;
-    border-top: 2px solid #b8996f;
-    border-bottom: 2px solid #b8996f;
-    background: #0a0a0a;
-    margin-top: 5rem;
-  }
-  .marquee {
-    position: relative;
-    width: 100%;
-    height: 48px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .track {
-    display: inline-flex;
-    gap: 3rem;
-    padding: 0.75rem 0;
-    animation: marquee-move 20s linear infinite;
-  }
-  .track p {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #b8996f;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(184,153,111,0.3);
-  }
-  @keyframes marquee-move {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .marquee-container:hover .track {
-    animation-play-state: paused;
+  .project-card-badge:hover .project-card-badge-icon {
+    transform: scale(1.15) rotate(15deg);
   }
 </style>
-
-<script define:vars={{ projects }}>
-  document.querySelectorAll(".project-card").forEach((card) => {
-    const index = parseInt(card.getAttribute("data-project-index") || "0");
-    const projectData = projects[index];
-
-    // Triggers that open the drawer
-    const triggers = card.querySelectorAll(".open-drawer-trigger");
-    triggers.forEach((trigger) => {
-      trigger.style.cursor = "pointer";
-      trigger.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        // Dispatch open-project-drawer custom event
-        const event = new CustomEvent("open-project-drawer", {
-          detail: projectData
-        });
-        window.dispatchEvent(event);
-      });
-    });
-  });
-
-  // Vertical Parallax Scroll Effect for images and text in Project Cards (Desktop only)
-  const parallaxEls = document.querySelectorAll("[data-parallax-speed]");
-  
-  const handleParallax = () => {
-    if (window.innerWidth < 900) {
-      parallaxEls.forEach((el) => {
-        el.style.transform = "";
-      });
-      return;
-    }
-    
-    const scrolled = window.scrollY;
-    const viewportCenter = scrolled + window.innerHeight / 2;
-
-    parallaxEls.forEach((el) => {
-      const speed = parseFloat(el.getAttribute("data-parallax-speed") || "0");
-      const rect = el.getBoundingClientRect();
-      const elementTop = rect.top + scrolled;
-      const elementHeight = rect.height;
-      const elementCenter = elementTop + elementHeight / 2;
-      
-      const distance = viewportCenter - elementCenter;
-      const translation = distance * speed;
-      
-      // Apply translation
-      el.style.transform = `translateY(${translation}px)`;
-    });
-  };
-
-  window.addEventListener("scroll", handleParallax);
-  window.addEventListener("resize", handleParallax);
-  // Run once initially to position correctly
-  setTimeout(handleParallax, 500);
-</script>

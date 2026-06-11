@@ -1,645 +1,691 @@
 ---
-import "@fontsource-variable/onest"; // Asegúrate de tener la fuente
-import CodeBackground from "../components/CodeBackground.astro";
-import ProjectDrawer from "../components/ProjectDrawer.astro";
 interface Props {
     title: string;
     description?: string;
 }
 const {
     title,
-    description = "Ariel Campos - Analista Programador Web especializado en React, Astro, Next.js y Tailwind CSS. Creando interfaces modernas y eficientes.",
+    description = "Ariel Campos - Analista Programador Computacional. Creando interfaces modernas, eficientes e interactivas.",
 } = Astro.props;
+
+import ProjectDrawer from "../components/ProjectDrawer.astro";
+import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" data-theme="light">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
 
-        <!-- Fonts -->
+        <script is:inline>
+            // Configurar tema inicial por defecto (light)
+            (function() {
+                var pageTheme = 'light';
+                document.documentElement.setAttribute('data-theme', pageTheme);
+            })();
+        </script>
+
+        <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
-            rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Geist:wght@100..900&family=Bebas+Neue&display=swap" rel="stylesheet" />
 
         <!-- SEO Primario -->
         <title>{title}</title>
         <meta name="title" content={title} />
         <meta name="description" content={description} />
         <meta name="author" content="Ariel Campos" />
-        <meta
-            name="keywords"
-            content="Ariel Campos, Portafolio, Programador Web, Analista Programador, React, Astro, Tailwind CSS, Chile, Desarrollo Web"
-        />
+        <meta name="keywords" content="Ariel Campos, Portafolio, Programador Web, Analista Programador, React, Astro, Tailwind CSS, Chile, Desarrollo Web" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://arielcampos.dev/" />
-        <!-- Actualizar con tu URL real -->
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content="/og-image.jpg" />
+        <meta property="og:image" content="/images/og-image.jpg" />
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://arielcampos.dev/" />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content="/og-image.jpg" />
+        <meta property="twitter:image" content="/images/og-image.jpg" />
     </head>
-    <body
-        class="bg-neo-black text-neo-white font-outfit overflow-x-hidden selection:bg-neo-lime selection:text-black scroll-smooth"
-    >
-        <!-- Pantalla de Carga (Loader) -->
-        <div
-            id="screen-loader"
-            class="fixed inset-0 z-[9999] bg-[#0a0a0a] flex flex-col items-center justify-center select-none overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)]"
-        >
-            <!-- Efectos de Luces Neo de Fondo -->
-            <div
-                class="absolute top-[30%] left-[20%] w-[300px] h-[300px] bg-neo-purple/10 rounded-full blur-[80px] -z-10 animate-pulse"
-            >
-            </div>
-            <div
-                class="absolute bottom-[30%] right-[20%] w-[400px] h-[400px] bg-neo-cyan/10 rounded-full blur-[100px] -z-10"
-            >
-            </div>
-
-            <div class="flex flex-col items-center gap-6">
-                <!-- Branding/Nombre -->
-                <div
-                    class="text-4xl sm:text-5xl md:text-7xl font-black tracking-wider flex select-none font-outfit"
-                >
-                    <!-- Ariel -->
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
-                        style="transition-delay: 0.1s">A</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
-                        style="transition-delay: 0.15s">r</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
-                        style="transition-delay: 0.2s">i</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
-                        style="transition-delay: 0.25s">e</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-white"
-                        style="transition-delay: 0.3s">l</span
-                    >
-
-                    <!-- Espacio -->
-                    <span class="w-3 sm:w-4 md:w-6"></span>
-
-                    <!-- Campos -->
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
-                        style="transition-delay: 0.4s">C</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
-                        style="transition-delay: 0.45s">a</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
-                        style="transition-delay: 0.5s">m</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
-                        style="transition-delay: 0.55s">p</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
-                        style="transition-delay: 0.6s">o</span
-                    >
-                    <span
-                        class="loader-char inline-block translate-y-8 opacity-0 filter blur-[2px] transition-all duration-500 ease-out text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
-                        style="transition-delay: 0.65s">s</span
-                    >
-                </div>
-
-                <!-- Subtítulo -->
-                <div class="overflow-hidden">
-                    <span
-                        class="loader-subtitle inline-block text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-neo-gold/80 opacity-0 translate-y-4 transition-all duration-700 ease-out"
-                        style="transition-delay: 0.75s;"
-                    >
-                        Analista Programador Computacional
-                    </span>
-                </div>
-
-                <!-- Barra de Carga -->
-                <div
-                    class="w-48 sm:w-64 h-[3px] bg-white/10 rounded-full overflow-hidden relative border border-white/5 shadow-inner"
-                >
-                    <div
-                        id="loader-bar"
-                        class="absolute top-0 left-0 h-full w-0 bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan transition-all duration-1200 ease-out shadow-[0_0_10px_rgba(184,153,111,0.5)]"
-                    >
-                    </div>
-                </div>
+    <body class="index-page">
+        <!-- Pantalla de Carga (Loader con columnas) -->
+        <div class="loader">
+            <div class="loader-col"></div>
+            <div class="loader-col"></div>
+            <div class="loader-col"></div>
+            <div class="loader-col"></div>
+            <div class="loader-col"></div>
+            <div class="loader-col"></div>
+            <div class="loader-col"></div>
+            <div class="loader-col"></div>
+            <div class="loader-content">
+                <div class="loader-counter">0%</div>
             </div>
         </div>
 
-        <!-- Background System -->
-        <CodeBackground />
-
-        <!-- Scroll Progress Bar -->
-        <div
-            id="scroll-progress"
-            class="fixed top-0 left-0 h-1 bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan z-[100] w-0 transition-all duration-100"
-        >
+        <!-- Cuadrícula de Fondo (Grid lines) -->
+        <div class="grid-background">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
         </div>
 
-        <!-- Custom Glow Cursor -->
-        <div
-            id="glow-cursor"
-            class="fixed w-[400px] h-[400px] bg-neo-purple/20 rounded-full blur-[100px] pointer-events-none z-40 opacity-0 transition-all duration-500 ease-out mix-blend-screen"
-        >
-        </div>
-
-        <!-- Fondo con Ruido (Noise Texture) -->
-        <div
-            class="fixed inset-0 opacity-[0.03] pointer-events-none z-50"
-            style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"
-        >
-        </div>
-
-        <!-- Malla de fondo (Grid) -->
-        <div
-            class="fixed inset-0 bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10 transform perspective-1000 rotate-x-12 scale-125 opacity-20"
-        >
-        </div>
-
-        <!-- Círculos de color difuso -->
-        <div
-            class="fixed top-20 left-[-100px] w-[500px] h-[500px] bg-neo-purple/15 rounded-full blur-[120px] -z-10 animate-pulse"
-        >
-        </div>
-        <div
-            class="fixed bottom-0 right-[-100px] w-[600px] h-[600px] bg-neo-cyan/10 rounded-full blur-[140px] -z-10"
-        >
-        </div>
-
+        <!-- Contenedor de Contenido Principal -->
         <slot />
+
+        <!-- Detalles del Proyecto (Drawer de información) -->
         <ProjectDrawer />
 
-        <style is:global>
-            :root {
-                --neo-gold: #b8996f;
-                --neo-purple: #6b4f7c;
-                --neo-cyan: #5a8a9a;
-            }
-            .font-outfit {
-                font-family: "Outfit", sans-serif;
-            }
+        <!-- CDN Scripts (GSAP, ScrollTrigger, Lenis) -->
+        <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        <script is:inline src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
-            /* Custom Scrollbar Premium */
-            ::-webkit-scrollbar {
-                width: 8px;
-            }
-            ::-webkit-scrollbar-track {
-                background: #0a0a0a;
-            }
-            ::-webkit-scrollbar-thumb {
-                background: #1a1a1a;
-                border-radius: 10px;
-                border: 2px solid #0a0a0a;
-            }
-            ::-webkit-scrollbar-thumb:hover {
-                background: #b8996f;
-            }
+        <!-- Lógica de Preloader (loader.js) -->
+        <script is:inline>
+            (function() {
+                'use strict';
+                const loader = document.querySelector('.loader');
+                const loaderCounter = document.querySelector('.loader-counter');
+                const loaderCols = document.querySelectorAll('.loader-col');
 
-            html.lenis {
-                height: auto;
-            }
-            .lenis.lenis-smooth {
-                scroll-behavior: auto;
-            }
-            .lenis.lenis-smooth [data-lenis-prevent] {
-                overscroll-behavior: contain;
-            }
-            .lenis.lenis-stopped {
-                overflow: hidden;
-            }
+                if (!loader || !loaderCounter) return;
 
-            /* Estilos mejorados para el cursor hover */
-            #glow-cursor {
-                transition:
-                    width 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-                    height 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-                    background-color 0.5s ease,
-                    opacity 0.5s ease,
-                    filter 0.5s ease;
-            }
+                const images = Array.from(document.querySelectorAll('img'));
+                const bgElements = Array.from(document.querySelectorAll('[style*="background-image"]'));
 
-            #glow-cursor.cursor-active {
-                width: 650px;
-                height: 650px;
-                background-color: rgba(184, 153, 111, 0.4);
-                filter: blur(80px); /* Menos blur = más definido y brillante */
-                opacity: 0.8 !important;
-            }
+                // Forzar imágenes a cargar inmediatamente
+                images.forEach(img => {
+                    if (img.loading === 'lazy') {
+                        img.loading = 'eager';
+                    }
+                });
 
-            /* --- Global Premium Animations --- */
-            .reveal-fade-up,
-            .scroll-reveal {
-                opacity: 0;
-                transform: translateY(35px);
-                filter: blur(8px);
-                transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-                will-change: transform, opacity, filter;
-            }
+                const totalAssets = images.length + bgElements.length;
+                let loadedAssets = 0;
+                let displayedPercent = 0;
 
-            .reveal-fade-in {
-                opacity: 0;
-                filter: blur(12px);
-                transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-                            filter 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-                will-change: opacity, filter;
-            }
-
-            .reveal-slide-left {
-                opacity: 0;
-                transform: translateX(-45px);
-                filter: blur(8px);
-                transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-                will-change: transform, opacity, filter;
-            }
-
-            .reveal-slide-right {
-                opacity: 0;
-                transform: translateX(45px);
-                filter: blur(8px);
-                transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-                will-change: transform, opacity, filter;
-            }
-
-            .reveal-scale-up,
-            .reveal-marked {
-                opacity: 0;
-                transform: scale(0.93) translateY(20px);
-                filter: blur(12px);
-                transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-                            transform 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-                            filter 1.3s cubic-bezier(0.16, 1, 0.3, 1);
-                will-change: transform, opacity, filter;
-            }
-
-            .reveal-fade-up.is-visible,
-            .scroll-reveal.is-visible,
-            .reveal-fade-in.is-visible,
-            .reveal-slide-left.is-visible,
-            .reveal-slide-right.is-visible,
-            .reveal-scale-up.is-visible,
-            .reveal-marked.is-visible {
-                opacity: 1 !important;
-                transform: translate(0, 0) scale(1) !important;
-                filter: blur(0) !important;
-            }
-
-            /* Estilo para los dots activos de navegación lateral */
-            .side-dot-link span:last-child.active-dot {
-                background-color: currentColor;
-                transform: scale(1.35);
-                border-color: currentColor;
-                box-shadow: 0 0 12px currentColor;
-            }
-
-            /* Estilos para textos divididos (Split Text) */
-            .split-word {
-                display: inline-block;
-                transform: translateY(105%);
-                opacity: 0;
-                filter: blur(2px);
-                transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-                will-change: transform, opacity, filter;
-            }
-
-            .is-visible .split-word {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-                filter: blur(0) !important;
-            }
-        </style>
-
-        <!-- Lenis Smooth Scroll -->
-        <script
-            src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"
-        ></script>
-        <script>
-            // Pantalla de Carga (Loader) Logic
-            const loader = document.getElementById("screen-loader");
-            const loaderBar = document.getElementById("loader-bar");
-            const loaderChars = document.querySelectorAll(".loader-char");
-            const loaderSubtitle = document.querySelector(".loader-subtitle");
-
-            // Bloquear scroll inmediatamente
-            document.body.style.overflow = "hidden";
-
-            // Verificar si ya se visitó en esta sesión de forma segura
-            let hasVisited = false;
-            try {
-                hasVisited =
-                    sessionStorage.getItem("has-visited-portfolio") === "true";
-            } catch (e) {
-                console.warn("sessionStorage no accesible:", e);
-            }
-
-            // Variable global para Lenis
-            let lenis: any = null;
-
-            // Función para desbloquear el sitio
-            const unlockSite = () => {
-                if (loader) {
-                    loader.style.display = "none";
+                if (totalAssets === 0) {
+                    animateToPercent(100, completeLoader);
+                    return;
                 }
-                document.body.style.overflow = "";
-                if (lenis && typeof lenis.start === "function") {
-                    lenis.start();
+
+                function updateProgress() {
+                    loadedAssets++;
+                    const actualPercent = Math.min(100, Math.round((loadedAssets / totalAssets) * 100));
+                    animateToPercent(actualPercent, loadedAssets >= totalAssets ? completeLoader : null);
                 }
-            };
 
-            if (hasVisited && loader) {
-                loader.style.transition = "none";
-                unlockSite();
-            } else {
-                setTimeout(() => {
-                    loaderChars.forEach((char) => {
-                        char.classList.remove(
-                            "translate-y-8",
-                            "opacity-0",
-                            "blur-[2px]",
-                        );
-                        char.classList.add(
-                            "translate-y-0",
-                            "opacity-100",
-                            "blur-0",
-                        );
-                    });
-                    if (loaderSubtitle) {
-                        loaderSubtitle.classList.remove(
-                            "translate-y-4",
-                            "opacity-0",
-                        );
-                        loaderSubtitle.classList.add(
-                            "translate-y-0",
-                            "opacity-100",
-                        );
-                    }
-                    if (loaderBar) {
-                        loaderBar.style.width = "100%";
-                    }
-                }, 100);
-
-                setTimeout(() => {
-                    if (loader) {
-                        loader.style.transform = "translateY(-100%)";
-                    }
-                    try {
-                        sessionStorage.setItem("has-visited-portfolio", "true");
-                    } catch (e) {
-                        // ignorar
-                    }
-                }, 1800);
-
-                setTimeout(() => {
-                    unlockSite();
-                }, 2500);
-            }
-
-            // Initialize Lenis de forma segura
-            try {
-                // @ts-ignore
-                if (typeof Lenis !== "undefined") {
-                    // @ts-ignore
-                    lenis = new Lenis({
-                        duration: 1.2,
-                        easing: (t: number) =>
-                            Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                        direction: "vertical",
-                        gestureDirection: "vertical",
-                        smooth: true,
-                        mouseMultiplier: 1,
-                        smoothTouch: false,
-                        touchMultiplier: 2,
-                        infinite: false,
-                    });
-
-                    // Detener scroll si el loader aún está activo
-                    if (!hasVisited && lenis) {
-                        lenis.stop();
-                    }
-
-                    const progressBar =
-                        document.getElementById("scroll-progress");
-                    const raf = (time: any) => {
-                        if (lenis) {
-                            lenis.raf(time);
-                            // Update progress bar inside raf for maximum performance
-                            if (progressBar) {
-                                const totalHeight =
-                                    document.documentElement.scrollHeight -
-                                    window.innerHeight;
-                                const progress =
-                                    totalHeight > 0
-                                        ? (lenis.scroll / totalHeight) * 100
-                                        : 0;
-                                progressBar.style.width = `${progress}%`;
-                            }
+                function animateToPercent(targetPercent, onComplete) {
+                    const animate = () => {
+                        if (displayedPercent < targetPercent) {
+                            displayedPercent += Math.ceil((targetPercent - displayedPercent) / 10) || 1;
+                            if (displayedPercent > targetPercent) displayedPercent = targetPercent;
+                            loaderCounter.textContent = displayedPercent + '%';
+                            requestAnimationFrame(animate);
+                        } else if (onComplete) {
+                            onComplete();
                         }
-                        requestAnimationFrame(raf);
                     };
-                    requestAnimationFrame(raf);
-                } else {
-                    console.warn(
-                        "Lenis is not defined. Smooth scroll disabled.",
-                    );
+                    animate();
                 }
-            } catch (error) {
-                console.error("Error al inicializar Lenis:", error);
+
+                function completeLoader() {
+                    if (typeof gsap === 'undefined') {
+                        setTimeout(completeLoader, 50);
+                        return;
+                    }
+                    const decodePromises = images.map(img => {
+                        if (img.decode) {
+                            return img.decode().catch(() => {});
+                        }
+                        return Promise.resolve();
+                    });
+                    Promise.all(decodePromises).then(finishLoader);
+                }
+
+                function finishLoader() {
+                    const tl = gsap.timeline({
+                        onComplete: () => {
+                            gsap.set(loader, { display: 'none' });
+                        }
+                    });
+
+                    tl.to(loaderCounter, {
+                        duration: 0.5,
+                        opacity: 0,
+                        y: -50,
+                        ease: "power2.in"
+                    })
+                    .to(loaderCols, {
+                        duration: 1.2,
+                        scaleY: 0,
+                        stagger: 0.1,
+                        ease: "power4.inOut",
+                        onStart: () => {
+                            // Animación de aparición de líneas de fondo
+                            gsap.to(".grid-background .line", {
+                                duration: 1.5,
+                                scaleY: 1,
+                                stagger: 0.08,
+                                ease: "power3.inOut",
+                                delay: 0.6
+                            });
+                            // Despachar evento global de cargador listo
+                            setTimeout(() => {
+                                window.dispatchEvent(new CustomEvent('loaderComplete'));
+                            }, 500);
+                        }
+                    }, "-=0.2");
+                }
+
+                images.forEach(img => {
+                    if (img.complete) {
+                        updateProgress();
+                    } else {
+                        img.addEventListener('load', updateProgress);
+                        img.addEventListener('error', updateProgress);
+                    }
+                });
+
+                bgElements.forEach(el => {
+                    const style = el.getAttribute('style');
+                    const match = style.match(/url\(['"]?([^'")\s]+)['"]?\)/);
+                    if (match && match[1]) {
+                        const bgImg = new Image();
+                        bgImg.onload = updateProgress;
+                        bgImg.onerror = updateProgress;
+                        bgImg.src = match[1];
+                    } else {
+                        updateProgress();
+                    }
+                });
+
+                setTimeout(() => {
+                    if (displayedPercent < 100) {
+                        animateToPercent(100, completeLoader);
+                    }
+                }, 5000);
+            })();
+        </script>
+
+        <!-- Lógica de Scroll Suave, Cursores y Temas (script.js) -->
+        <script is:inline>
+            // Registrar actualizador de ScrollTrigger con Lenis
+            let lenisInstance = null;
+
+            window.addEventListener('load', () => {
+                if (typeof Lenis !== 'undefined') {
+                    lenisInstance = new Lenis({
+                        duration: 1.2,
+                        easing: (t) => 1 - Math.pow(1 - t, 4),
+                        orientation: 'vertical',
+                        gestureOrientation: 'vertical',
+                        smoothWheel: true,
+                        wheelMultiplier: 1,
+                        touchMultiplier: 2,
+                    });
+
+                    lenisInstance.on('scroll', ScrollTrigger.update);
+                    
+                    gsap.ticker.add((time) => {
+                        lenisInstance.raf(time * 1000);
+                    });
+                    
+                    gsap.ticker.lagSmoothing(0);
+                    window.lenis = lenisInstance; // Exportar globalmente
+                }
+
+                // --- CURSORES PERSONALIZADOS ---
+                initCustomCursor();
+
+                // --- BOTÓN DE TEMA GLOBLAL ---
+                initThemeToggle();
+
+                // --- CAMBIO DE TEMA SEGÚN DESPLAZAMIENTO ---
+                initScrollThemeSwitch();
+
+                // --- PUERTAS DE ESCAPE Y CONTADOR ---
+                initDoorNavigation();
+                initCountdownTimer();
+
+                // --- INTERCAMBIO DE CARACTERES ---
+                initCharSwapAnimation();
+
+                // Parallax en las líneas del Grid
+                const grid = document.querySelector(".grid-background");
+                window.addEventListener("mousemove", (e) => {
+                    const moveX = e.clientX - window.innerWidth / 2;
+                    const moveY = e.clientY - window.innerHeight / 2;
+                    if (grid) {
+                        gsap.to(grid, {
+                            x: moveX * 0.02,
+                            y: moveY * 0.02,
+                            duration: 0.6,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+            });
+
+            // Función para Cursores Interactivos
+            function initCustomCursor() {
+                const cursor = document.createElement('div');
+                cursor.className = 'custom-cursor';
+                cursor.innerHTML = `
+                    <div class="cursor-dot"></div>
+                    <div class="cursor-ring"></div>
+                    <div class="cursor-text">&gt;_</div>
+                `;
+                document.body.appendChild(cursor);
+
+                const viewWorkCursor = document.createElement('div');
+                viewWorkCursor.className = 'view-work-cursor';
+                viewWorkCursor.textContent = 'VER';
+                document.body.appendChild(viewWorkCursor);
+
+                const contactTitleCursor = document.createElement('div');
+                contactTitleCursor.className = 'contact-title-cursor';
+                contactTitleCursor.innerHTML = `<img src="/images/custom-cursor-hover.svg" style="width:100%; height:100%; filter: var(--theme-filter);" alt="">`;
+                document.body.appendChild(contactTitleCursor);
+
+                let mouseX = 0, mouseY = 0;
+                let cursorX = 0, cursorY = 0;
+                let viewX = 0, viewY = 0;
+                let contactX = 0, contactY = 0;
+                let skewX = 0, skewY = 0;
+                let isOverContact = false;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                // Detectores para animar click y spawnear efectos visuales (código / PC)
+                document.addEventListener('mousedown', (e) => {
+                    cursor.classList.add('clicking');
+
+                    // 1. Crear ripple circular expansivo
+                    const ripple = document.createElement('div');
+                    ripple.className = 'cursor-click-ripple';
+                    ripple.style.left = e.clientX + 'px';
+                    ripple.style.top = e.clientY + 'px';
+                    document.body.appendChild(ripple);
+                    
+                    // Animar ripple
+                    // @ts-ignore
+                    gsap.fromTo(ripple, 
+                        { scale: 0.2, opacity: 0.8 },
+                        { 
+                            scale: 2.2, 
+                            opacity: 0, 
+                            duration: 0.6, 
+                            ease: "power2.out",
+                            onComplete: () => ripple.remove() 
+                        }
+                    );
+
+                    // 2. Crear partículas flotantes de código / PC
+                    const symbols = ['💻', '</>', '{}', '=>', 'const', '[]', '()', 'JS'];
+                    const numParticles = 4;
+                    
+                    for (let i = 0; i < numParticles; i++) {
+                        const particle = document.createElement('span');
+                        particle.className = 'cursor-click-particle';
+                        particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                        particle.style.left = e.clientX + 'px';
+                        particle.style.top = e.clientY + 'px';
+                        document.body.appendChild(particle);
+                        
+                        const angle = Math.random() * Math.PI * 2;
+                        const velocity = 35 + Math.random() * 55; // distancia
+                        const targetX = Math.cos(angle) * velocity;
+                        const targetY = Math.sin(angle) * velocity;
+                        const rotation = (Math.random() - 0.5) * 180;
+                        
+                        // @ts-ignore
+                        gsap.fromTo(particle,
+                            { x: 0, y: 0, scale: 0.6, opacity: 1 },
+                            {
+                                x: targetX,
+                                y: targetY,
+                                scale: 1.1,
+                                opacity: 0,
+                                rotation: rotation,
+                                duration: 0.8,
+                                ease: "power3.out",
+                                onComplete: () => particle.remove()
+                            }
+                        );
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    cursor.classList.remove('clicking');
+                });
+
+                // Función de animación del cursor (Lerp elástico)
+                function updateCursors() {
+                    const cx = mouseX - cursorX;
+                    const cy = mouseY - cursorY;
+                    cursorX += cx * 0.16; // Interpolación para suavizado
+                    cursorY += cy * 0.16;
+
+                    cursor.style.left = cursorX + 'px';
+                    cursor.style.top = cursorY + 'px';
+
+                    // Lerp para el cursor de ver proyecto
+                    const vx = mouseX - viewX;
+                    const vy = mouseY - viewY;
+                    viewX += vx * 0.10;
+                    viewY += vy * 0.10;
+
+                    viewWorkCursor.style.left = viewX + 'px';
+                    viewWorkCursor.style.top = viewY + 'px';
+
+                    // Lerp para cursor del contacto
+                    if (isOverContact) {
+                        const cox = mouseX - contactX;
+                        const coy = mouseY - contactY;
+
+                        contactX += cox * 0.12;
+                        contactY += coy * 0.12;
+
+                        const targetSkewX = Math.max(-15, Math.min(15, cox * 0.3));
+                        const targetSkewY = Math.max(-15, Math.min(15, coy * 0.3));
+
+                        skewX += (targetSkewX - skewX) * 0.15;
+                        skewY += (targetSkewY - skewY) * 0.15;
+
+                        contactTitleCursor.style.left = contactX + 'px';
+                        contactTitleCursor.style.top = contactY + 'px';
+                        contactTitleCursor.style.transform = `translate(-50%, -50%) scale(1) skew(${skewX}deg, ${skewY}deg)`;
+                    }
+                    requestAnimationFrame(updateCursors);
+                }
+                updateCursors();
+
+                // Hover en botones / enlaces ordinarios
+                const hoverables = document.querySelectorAll('a:not(.project-card), button, .menu-btn, .menu-link, .social-link, .contact-social-link');
+                hoverables.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.classList.add('hovering');
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.classList.remove('hovering');
+                    });
+                });
+
+                // Hover en proyectos
+                document.addEventListener('mouseover', (e) => {
+                    const card = e.target.closest('.project-card');
+                    if (card) {
+                        cursor.classList.add('on-project');
+                        viewWorkCursor.classList.add('visible');
+                    } else {
+                        cursor.classList.remove('on-project');
+                        viewWorkCursor.classList.remove('visible');
+                    }
+                });
             }
 
-            // Glow Cursor Logic (Rediseñado)
-            const cursor = document.getElementById("glow-cursor");
+            // Inicialización de Switcher de Tema
+            function initThemeToggle() {
+                const controls = document.createElement('div');
+                controls.className = 'controls-container';
 
-            window.addEventListener("mousemove", (e) => {
-                if (cursor) {
-                    cursor.style.opacity = "1";
-                    // Centrado perfecto usando transform
-                    cursor.style.left = "0px";
-                    cursor.style.top = "0px";
-                    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-                }
-            });
+                const toggle = document.createElement('button');
+                toggle.className = 'theme-toggle';
+                toggle.setAttribute('aria-label', 'Alternar modo oscuro');
+                toggle.type = 'button';
+                toggle.innerHTML = `
+                    <div class="theme-toggle-sun">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="4"/>
+                            <line x1="12" y1="2" x2="12" y2="5"/>
+                            <line x1="12" y1="19" x2="12" y2="22"/>
+                            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+                            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+                            <line x1="2" y1="12" x2="5" y2="12"/>
+                            <line x1="19" y1="12" x2="22" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+                            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+                        </svg>
+                    </div>
+                    <div class="theme-toggle-moon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </div>
+                `;
+                controls.appendChild(toggle);
+                document.body.appendChild(controls);
 
-            // Delegación de eventos para detectar hover en cualquier link o botón incluso si son dinámicos
-            document.addEventListener("mouseover", (e) => {
-                const target = e.target as HTMLElement;
-                if (
-                    target.closest(
-                        "a, button, [role='button'], .project-card, .tech-tag",
-                    )
-                ) {
-                    cursor?.classList.add("cursor-active");
-                } else {
-                    cursor?.classList.remove("cursor-active");
-                }
-            });
-
-            // Split Text initialization (Splits words inside elements with data-split-text)
-            document.querySelectorAll("[data-split-text]").forEach((el) => {
-                const text = el.textContent || "";
-                el.innerHTML = text.split(" ").map((word, wordIdx) => `
-                    <span class="inline-block overflow-hidden py-1">
-                        <span class="split-word inline-block" style="transition-delay: ${wordIdx * 55}ms;">
-                            ${word === "" ? "&nbsp;" : word}
-                        </span>
-                    </span>
-                `).join(" ");
-            });
-
-            // Global Intersection Observer for Premium Scroll Reveal (Unificado)
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target as HTMLElement;
-                        const staggerIndex = el.getAttribute('data-stagger-index');
-                        if (staggerIndex) {
-                            el.style.transitionDelay = `${parseInt(staggerIndex) * 100}ms`;
-                        }
-                        el.classList.add('is-visible');
-
-                        // Disparar barras de progreso hijas si existen
-                        el.querySelectorAll('.progress-bar').forEach((bar) => {
-                            const level = bar.getAttribute('data-level');
-                            if (level) {
-                                (bar as HTMLElement).style.width = `${level}%`;
-                            }
-                        });
-
-                        // Disparar contadores numéricos hijos si existen
-                        el.querySelectorAll('.counter').forEach((counter) => {
-                            const target = parseInt(counter.getAttribute('data-target') || '0');
-                            let count = 0;
-                            const duration = 1500; // 1.5s
-                            const stepTime = Math.max(Math.floor(duration / target), 16);
-                            
-                            const timer = setInterval(() => {
-                                count += Math.ceil(target / (duration / stepTime));
-                                if (count >= target) {
-                                    counter.textContent = target.toString();
-                                    clearInterval(timer);
-                                } else {
-                                    counter.textContent = count.toString();
-                                }
-                            }, stepTime);
-                        });
-
-                        revealObserver.unobserve(el);
-                    }
-                });
-            }, {
-                threshold: 0.05,
-                rootMargin: '0px 0px -50px 0px'
-            });
-
-            // Función para iniciar la observación de todas las clases de revelación
-            const initRevealObserver = () => {
-                document.querySelectorAll(
-                    '.reveal-fade-up, .reveal-fade-in, .reveal-slide-left, .reveal-slide-right, .reveal-scale-up, .scroll-reveal, .reveal-marked'
-                ).forEach((el) => {
-                    revealObserver.observe(el);
-                });
-            };
-
-            // Iniciar observador global
-            initRevealObserver();
-
-            // Parallax Grid & Background Blobs effect
-            const grid = document.querySelector(
-                ".fixed.inset-0.bg-\\[linear-gradient",
-            );
-            const bgBlobs = document.querySelectorAll(
-                "div.fixed.rounded-full.-z-10",
-            );
-
-            window.addEventListener("mousemove", (e) => {
-                const moveX = e.clientX - window.innerWidth / 2;
-                const moveY = e.clientY - window.innerHeight / 2;
-
-                if (grid) {
-                    (grid as HTMLElement).style.transform =
-                        `perspective(1000px) rotateX(12deg) scale(1.25) translate(${moveX * 0.01}px, ${moveY * 0.01}px)`;
-                }
-
-                bgBlobs.forEach((blob, idx) => {
-                    const factor = (idx + 1) * 0.008;
-                    (blob as HTMLElement).style.transform =
-                        `translate(${moveX * factor}px, ${moveY * factor}px)`;
-                });
-            });
-
-            // Active dot navigation tracking
-            const sideDotLinks = document.querySelectorAll(".side-dot-link");
-            const sideNavSections = [
-                document.getElementById("inicio"),
-                document.getElementById("servicios"),
-                document.getElementById("proyectos"),
-                document.getElementById("sobre-mi"),
-                document.getElementById("contacto")
-            ].filter(Boolean) as HTMLElement[];
-
-            const updateActiveDot = () => {
-                let currentSectionId = "";
-                const scrollPosition = window.scrollY + window.innerHeight / 3;
-
-                sideNavSections.forEach((section) => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        currentSectionId = section.getAttribute("id") || "";
+                // Ocultar al entrar a la sección de contacto
+                const fixedServices = document.getElementById('fixedServices');
+                ScrollTrigger.create({
+                    trigger: '.contact-section',
+                    start: 'top bottom',
+                    onEnter: () => {
+                        controls.classList.add('hidden');
+                        fixedServices?.classList.add('hidden');
+                    },
+                    onLeaveBack: () => {
+                        controls.classList.remove('hidden');
+                        fixedServices?.classList.remove('hidden');
                     }
                 });
 
-                // Fallback for top of page
-                if (window.scrollY < 200) {
-                    currentSectionId = "inicio";
-                }
+                toggle.addEventListener('click', () => {
+                    const current = document.documentElement.getAttribute('data-theme');
+                    const next = current === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    updateThemeVisuals(next === 'dark');
+                });
+            }
 
-                sideDotLinks.forEach((link) => {
-                    const dotSpan = link.querySelector("span:last-child");
-                    const sectionId = link.getAttribute("data-section");
-                    if (sectionId === currentSectionId) {
-                        dotSpan?.classList.add("active-dot");
+            function updateThemeVisuals(isDark) {
+                const toggles = document.querySelectorAll('.theme-toggle, .menu-theme-toggle');
+                toggles.forEach(t => {
+                    const sun = t.querySelector('.theme-toggle-sun');
+                    const moon = t.querySelector('.theme-toggle-moon');
+                    if (isDark) {
+                        t.style.backgroundColor = 'rgba(230, 225, 221, 0.3)';
+                        if (sun) sun.style.backgroundColor = 'transparent';
+                        if (moon) moon.style.backgroundColor = 'rgba(26, 26, 26, 0.8)';
                     } else {
-                        dotSpan?.classList.remove("active-dot");
+                        t.style.backgroundColor = 'rgba(26, 26, 26, 0.3)';
+                        if (sun) sun.style.backgroundColor = 'rgba(230, 225, 221, 0.8)';
+                        if (moon) moon.style.backgroundColor = 'transparent';
                     }
                 });
-            };
+            }
 
-            window.addEventListener("scroll", updateActiveDot);
-            window.addEventListener("resize", updateActiveDot);
-            // Run on load after a small delay to ensure sections are rendered and offsets calculated
-            setTimeout(updateActiveDot, 200);
+            // Cambiar tema automáticamente según scroll
+            function initScrollThemeSwitch() {
+                const aboutSection = document.querySelector('#sobre-mi');
+                if (aboutSection) {
+                    ScrollTrigger.create({
+                        trigger: aboutSection,
+                        start: 'top 70%',
+                        onEnter: () => {
+                            document.documentElement.setAttribute('data-theme', 'dark');
+                            updateThemeVisuals(true);
+                        },
+                        onLeaveBack: () => {
+                            document.documentElement.setAttribute('data-theme', 'light');
+                            updateThemeVisuals(false);
+                        }
+                    });
+                    // Refrescar ScrollTrigger para asegurar coordenadas correctas
+                    ScrollTrigger.refresh();
+                }
+            }
+
+            // Temporizador de cuenta regresiva hacia las 16:20 (4:20 PM)
+            function initCountdownTimer() {
+                const timers = document.querySelectorAll('.countdown-timer');
+                if (timers.length === 0) return;
+
+                function update() {
+                    const now = new Date();
+                    const target = new Date();
+                    target.setHours(16, 20, 0, 0);
+
+                    if (now >= target) {
+                        target.setDate(target.getDate() + 1);
+                    }
+
+                    const diff = target.getTime() - now.getTime();
+                    const hours = Math.floor(diff / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    const formatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    timers.forEach(t => t.textContent = formatted);
+                }
+
+                update();
+                setInterval(update, 1000);
+            }
+
+            // Navegación de Puerta
+            function initDoorNavigation() {
+                const doors = document.querySelectorAll('.contact-door-open, .hero-door-open');
+                if (doors.length === 0) return;
+
+                function is420() {
+                    const now = new Date();
+                    return now.getHours() === 16 && now.getMinutes() === 20;
+                }
+
+                // Auto-redirección a las 16:20
+                setInterval(() => {
+                    if (is420()) {
+                        window.location.href = '/dramatic-exit?from=' + encodeURIComponent(window.location.pathname);
+                    }
+                }, 1000);
+
+                doors.forEach(door => {
+                    door.style.cursor = 'pointer';
+                    door.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const isFromHero = door.closest('.hero-exit') !== null;
+                        const returnPath = window.location.pathname + (isFromHero ? '#inicio' : '#contacto');
+                        const fromParam = '?from=' + encodeURIComponent(returnPath);
+
+                        if (is420()) {
+                            window.location.href = '/dramatic-exit' + fromParam;
+                        } else {
+                            window.location.href = '/break' + fromParam;
+                        }
+                    });
+                });
+            }
+
+            // Animación de Intercambio de Caracteres (Bebas Neue Text)
+            function initCharSwapAnimation() {
+                const elements = document.querySelectorAll('[data-char-swap]');
+                elements.forEach(el => {
+                    const text = el.textContent || '';
+                    el.textContent = '';
+
+                    const chars = text.split('');
+                    const containers = [];
+
+                    chars.forEach(char => {
+                        const container = document.createElement('span');
+                        container.className = 'char-swap-container';
+
+                        const original = document.createElement('span');
+                        original.className = 'char-swap-original';
+                        original.textContent = char === ' ' ? '\u00A0' : char;
+
+                        const clone = document.createElement('span');
+                        clone.className = 'char-swap-clone';
+                        clone.textContent = char === ' ' ? '\u00A0' : char;
+
+                        container.appendChild(original);
+                        container.appendChild(clone);
+                        el.appendChild(container);
+
+                        containers.push({ container, original, clone });
+                    });
+
+                    // Inicializar posiciones de los clones fuera de vista
+                    containers.forEach(data => {
+                        const { original, clone } = data;
+                        const charWidth = original.offsetWidth;
+                        const gap = 4;
+                        gsap.set(clone, { x: -(charWidth + gap) });
+                    });
+
+                    // Iniciar bucle de animación aleatoria
+                    setTimeout(() => {
+                        startSwapLoop(containers);
+                    }, 2000);
+                });
+            }
+
+            function startSwapLoop(containers) {
+                function shuffle(arr) {
+                    const s = [...arr];
+                    for (let i = s.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [s[i], s[j]] = [s[j], s[i]];
+                    }
+                    return s;
+                }
+
+                function animate() {
+                    const filtered = containers.filter(c => c.original.textContent.trim() !== '');
+                    if (filtered.length === 0) {
+                        setTimeout(animate, 3000 + Math.random() * 2000);
+                        return;
+                    }
+                    const shuffled = shuffle(filtered);
+                    const data = shuffled[0];
+                    const { original, clone } = data;
+                    const charWidth = original.offsetWidth;
+                    const gap = 4;
+
+                    gsap.set(clone, { x: -(charWidth + gap) });
+                    gsap.set(original, { x: 0 });
+
+                    gsap.to(original, {
+                        x: charWidth + gap,
+                        duration: 0.5,
+                        ease: "power2.inOut"
+                    });
+
+                    gsap.to(clone, {
+                        x: 0,
+                        duration: 0.5,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            gsap.set(original, { x: -(charWidth + gap) });
+                            gsap.set(clone, { x: 0 });
+                        }
+                    });
+
+                    setTimeout(animate, 3000 + Math.random() * 2000);
+                }
+
+                animate();
+            }
         </script>
     </body>
 </html>

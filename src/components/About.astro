@@ -1,240 +1,386 @@
 ---
-// Datos simulados de "Niveles" para las barras de progreso
 const stats = [
-    { label: "Frontend (React/Astro)", level: 95 },
-    { label: "Backend (Node/PHP)", level: 80 },
-    { label: "UI/UX Design", level: 85 },
-    { label: "Database SQL", level: 75 }
+  { label: "Proyectos", value: "3+" },
+  { label: "Rendimiento", value: "98%" },
+  { label: "Tecnologías", value: "10+" },
+  { label: "Clean Code", value: "100%" },
 ];
 ---
 
-<section id="sobre-mi" class="py-32 bg-neo-black relative overflow-hidden">
-    
-    <!-- Fondo Grid Táctico -->
-    <div class="absolute inset-0 opacity-10 pointer-events-none" 
-         style="background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), 
-         linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px); 
-         background-size: 50px 50px;">
+<section id="sobre-mi" class="about-section">
+  <!-- Header -->
+  <div class="about-header">
+    <span class="about-tag">// CONÓCEME</span>
+    <h2 class="about-title">
+      <span class="about-title-line font-display" data-char-swap>SOBRE</span>
+      <span class="about-title-line about-title-accent font-display" data-char-swap>MÍ</span>
+    </h2>
+  </div>
+
+  <!-- Texto biográfico gigante -->
+  <h2 class="about-bio">
+    HOLA. SOY ARIEL. UN ANALISTA PROGRAMADOR COMPUTACIONAL Y DESARROLLADOR WEB
+    FULL-STACK EN LA LIGUA, CHILE. VIVO LA INTERESANTE VIDA DEL CÓDIGO Y DE LA
+    CREACIÓN WEB.
+  </h2>
+
+  <!-- Grid de detalles -->
+  <div class="about-grid">
+    <!-- Foto -->
+    <div class="about-photo">
+      <div class="about-photo-inner">
+        <img
+          src="/generated-image.webp"
+          alt="Ariel Campos - Desarrollador"
+          class="about-img"
+        />
+      </div>
     </div>
 
-    <div class="container mx-auto px-4 relative z-10">
-        
-        <!-- Contenedor Principal tipo "ID Card" Gigante -->
-        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 border-2 border-white/10 bg-[#111] p-6 md:p-12 relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-            
-            <!-- Decoración Esquinas Tech -->
-            <div class="absolute -top-2 -left-2 w-8 h-8 border-t-4 border-l-4 border-neo-gold"></div>
-            <div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-4 border-r-4 border-neo-gold"></div>
-            <div class="absolute top-1/2 -left-3 w-1 h-20 bg-neo-purple"></div>
-            <div class="absolute top-1/2 -right-3 w-1 h-20 bg-neo-cyan"></div>
+    <!-- Info -->
+    <div class="about-info">
+      <!-- Descripción -->
+      <div class="about-description">
+        <p>
+          Actualmente trabajo en el <strong
+            >Departamento de Salud de La Ligua (DESAM) como informático</strong
+          > y soy cofundador de <a
+            href="https://nitiv.cl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="about-link">Nitiv SpA.</a
+          >, donde lidero el diseño y desarrollo de nuestra infraestructura web
+          y aplicaciones SaaS.
+        </p>
+        <p>
+          Me especializo en crear interfaces modernas, rápidas y orientadas a
+          resultados, aplicando metodologías ágiles como <strong>SCRUM</strong> y
+          principios de <strong>Clean Code</strong>.
+        </p>
+      </div>
 
-            <!-- COLUMNA 1: IMAGEN & DATOS RÁPIDOS (4 columnas) -->
-            <div class="md:col-span-4 flex flex-col gap-6 scroll-reveal" data-stagger-index="1">
-                <!-- Marco de Foto con efecto Glitch estático -->
-                <div class="relative group">
-                    <div class="absolute inset-0 bg-neo-gold/30 translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
-                    <div class="relative border-2 border-white bg-neo-black overflow-hidden aspect-square magnetic-avatar">
-                        <!-- Glitch Layers -->
-                        <div class="glitch-layer glitch-1 absolute inset-0 opacity-0 bg-neo-gold mix-blend-color-dodge"></div>
-                        <div class="glitch-layer glitch-2 absolute inset-0 opacity-0 bg-neo-purple mix-blend-color-dodge"></div>
-                        
-                        <img 
-                            src="/generated-image.webp" 
-                            alt="Avatar Developer" 
-                            class="relative z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 avatar-img"
-                        />
-                        <!-- Overlay de escaneo -->
-                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neo-gold/20 to-transparent h-full w-full animate-scan opacity-50 pointer-events-none z-20"></div>
-                    </div>
-                </div>
-
-                <!-- Datos Rápidos -->
-                <div class="bg-white/5 p-4 border border-white/10 font-mono text-xs">
-                    <div class="flex justify-between border-b border-white/10 pb-2 mb-2">
-                        <span class="text-gray-400">UBICACIÓN:</span>
-                        <span class="text-neo-gold">LA LIGUA, REGIÓN DE VALPARAÍSO, CHILE</span>
-                    </div>
-                    <div class="flex justify-between border-b border-white/10 pb-2 mb-2">
-                        <span class="text-gray-400">ESTADO:</span>
-                        <span class="text-neo-cyan animate-pulse">DISPONIBLE PARA PROYECTOS REMOTOS</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-400">EXP:</span>
-                        <span class="text-white">TRABAJANDO EN DESAM LA LIGUA</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- COLUMNA 2: BIO & STATS (8 columnas) -->
-            <div class="md:col-span-8 flex flex-col justify-center">
-                
-                <!-- Encabezado -->
-                <div class="mb-8 scroll-reveal" data-stagger-index="2">
-                    <p class="text-gray-300 text-lg leading-relaxed border-l-4 border-neo-purple pl-6">
-    Soy <strong class="text-white">Analista Programador Computacional</strong> con enfoque en desarrollo
-    frontend y experiencia en <strong class="text-neo-gold">React, Astro y Tailwind CSS</strong>.
-    <br/><br/>
-    Actualmente trabajo en el <strong class="text-white">Departamento de Salud de La Ligua (DESAM)</strong> y soy parte de una nueva empresa llamada <a href="https://nitiv.cl" target="_blank" rel="noopener noreferrer" class="text-neo-cyan font-bold hover:underline hover:text-white transition-colors">Nitiv SpA.</a>, donde soy el encargado de la creación del sitio web y el desarrollo de nuestro <a href="https://nitiv-app-three.vercel.app/login" target="_blank" rel="noopener noreferrer" class="text-neo-cyan font-bold hover:underline hover:text-white transition-colors">SaaS</a>.
-    <br/><br/>
-    Me especializo en crear interfaces modernas, rápidas y enfocadas en la experiencia de usuario,
-    aplicando metodologías como <strong>Ágil – SCRUM</strong> y buenas prácticas de <strong>Clean Code</strong>.
-</p>
-                </div>
-
-                <!-- Barras de Habilidad (Stats) -->
-                <div class="space-y-6">
-                    <h3 class="text-neo-gold font-mono text-sm tracking-widest border-b border-white/20 pb-2 mb-4 scroll-reveal" data-stagger-index="3">
-                        // SISTEMAS_OPERATIVOS
-                    </h3>
-                    
-                    {stats.map((stat, index) => (
-                        <div class="group scroll-reveal" data-stagger-index={4 + index}>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm font-bold text-white group-hover:text-neo-cyan transition-colors">{stat.label}</span>
-                                <span class="text-xs font-mono text-neo-gold">{stat.level}%</span>
-                            </div>
-                            <div class="h-2 w-full bg-white/10 relative overflow-hidden">
-                                <!-- Barra de progreso animada -->
-                                <div class="progress-bar h-full bg-gradient-to-r from-neo-cyan to-neo-purple absolute top-0 left-0 transition-all duration-1000 group-hover:brightness-150" 
-                                     data-level={stat.level}
-                                     style="width: 0%"></div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                <!-- Métricas Animadas (Logros) -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
-                    <div class="bg-white/5 p-4 border border-white/10 text-center font-mono scroll-reveal" data-stagger-index="8">
-                        <div class="text-2xl md:text-3xl font-black text-neo-gold mb-1">
-                            +<span class="counter" data-target="3">0</span>
-                        </div>
-                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Proyectos</div>
-                    </div>
-                    <div class="bg-white/5 p-4 border border-white/10 text-center font-mono scroll-reveal" data-stagger-index="9">
-                        <div class="text-2xl md:text-3xl font-black text-neo-cyan mb-1">
-                            <span class="counter" data-target="98">0</span>%
-                        </div>
-                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Rendimiento</div>
-                    </div>
-                    <div class="bg-white/5 p-4 border border-white/10 text-center font-mono scroll-reveal" data-stagger-index="10">
-                        <div class="text-2xl md:text-3xl font-black text-neo-purple mb-1">
-                            +<span class="counter" data-target="10">0</span>
-                        </div>
-                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Tecnologías</div>
-                    </div>
-                    <div class="bg-white/5 p-4 border border-white/10 text-center font-mono scroll-reveal" data-stagger-index="11">
-                        <div class="text-2xl md:text-3xl font-black text-white mb-1">
-                            <span class="counter" data-target="100">0</span>%
-                        </div>
-                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Clean Code</div>
-                    </div>
-                </div>
-
-                <!-- Botón CV Ultra Animado -->
-                <div class="mt-12 scroll-reveal" data-stagger-index="12">
-                    <a 
-                        href="/curriculum.pdf" 
-                        download="Curriculum_Vitae_2025.pdf" 
-                        target="_blank"
-                        class="group relative inline-flex items-center gap-3 px-8 py-4 bg-neo-black border border-white/20 text-white font-black tracking-widest uppercase overflow-hidden hover:text-black transition-colors duration-300"
-                    >
-                        <!-- Fondo deslizante al Hover (Color Lima) -->
-                        <div class="absolute inset-0 bg-neo-gold translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
-                        
-                        <!-- Borde Glitch Animado (Esquinas) -->
-                        <span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-neo-gold group-hover:border-black transition-colors"></span>
-                        <span class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-neo-gold group-hover:border-black transition-colors"></span>
-                        <span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-neo-gold opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                        <span class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-neo-gold opacity-0 group-hover:opacity-100 transition-opacity"></span>
-
-                        <!-- Icono y Texto (Relative para estar sobre el fondo deslizante) -->
-                        <svg class="w-5 h-5 relative z-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                        </svg>
-                        
-                        <span class="relative z-10">DESCARGAR CV_V2.0</span>
-                    </a>
-            </div>
+      <!-- Datos rápidos -->
+      <div class="about-data-card">
+        <div class="about-data-row">
+          <span class="about-data-label">UBICACIÓN:</span>
+          <span class="about-data-value">LA LIGUA, CHILE</span>
         </div>
+        <div class="about-data-row">
+          <span class="about-data-label">ESTADO:</span>
+          <span class="about-data-value about-available"
+            >DISPONIBLE PARA PROYECTOS</span
+          >
+        </div>
+        <div class="about-data-row">
+          <span class="about-data-label">EMPRESA:</span>
+          <span class="about-data-value">DESAM / NITIV SPA</span>
+        </div>
+      </div>
 
+      <!-- Métricas -->
+      <div class="about-stats">
+        {
+          stats.map((stat) => (
+            <div class="about-stat">
+              <span class="about-stat-label">{stat.label}</span>
+              <span class="about-stat-value">{stat.value}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Botón CV -->
+      <div class="about-cv-wrapper">
+        <a
+          href="/curriculum.pdf"
+          download="Curriculum_Vitae_Ariel_Campos.pdf"
+          target="_blank"
+          class="about-cv-btn"
+        >
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+            ></path>
+          </svg>
+          DESCARGAR CV
+        </a>
+      </div>
     </div>
+  </div>
 </section>
 
 <style>
-    @keyframes scan {
-        0% { transform: translateY(-100%); }
-        100% { transform: translateY(100%); }
-    }
-    .animate-scan {
-        animation: scan 3s linear infinite;
-    }
+  .about-section {
+    padding: 6rem 2rem 5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    transition: background-color 0.4s ease;
+    width: 100%;
+  }
 
-    /* Glitch Animation */
-    @keyframes glitch-anim-1 {
-        0% { clip-path: inset(80% 0 0 0); transform: translate(-5px, -5px); }
-        20% { clip-path: inset(20% 0 50% 0); transform: translate(5px, 5px); }
-        40% { clip-path: inset(50% 0 30% 0); transform: translate(-5px, 5px); }
-        60% { clip-path: inset(10% 0 70% 0); transform: translate(5px, -5px); }
-        80% { clip-path: inset(40% 0 40% 0); transform: translate(5px, 5px); }
-        100% { clip-path: inset(80% 0 0 0); transform: translate(-5px, -5px); }
-    }
+  .about-header {
+    margin-bottom: 4rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    @keyframes glitch-anim-2 {
-        0% { clip-path: inset(10% 0 80% 0); transform: translate(5px, 5px); }
-        20% { clip-path: inset(70% 0 10% 0); transform: translate(-5px, -5px); }
-        40% { clip-path: inset(30% 0 50% 0); transform: translate(5px, -5px); }
-        60% { clip-path: inset(50% 0 20% 0); transform: translate(-5px, 5px); }
-        80% { clip-path: inset(20% 0 70% 0); transform: translate(5px, -5px); }
-        100% { clip-path: inset(10% 0 80% 0); transform: translate(5px, 5px); }
-    }
+  .about-tag {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    opacity: 0.5;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
 
-    .group:hover .glitch-1 {
-        opacity: 0.5;
-        animation: glitch-anim-1 0.2s infinite linear alternate-reverse;
+  .about-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .about-title-line {
+    font-family: var(--font-display);
+    font-size: clamp(5.5rem, 21vw, 15.5rem);
+    font-weight: 900;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease;
+    width: 100%;
+    transform-origin: bottom left;
+    cursor: pointer;
+  }
+
+  .about-title-line:hover {
+    transform: translateY(-15px) rotate(-1deg);
+    color: var(--beige);
+  }
+
+  .about-title-accent {
+    color: var(--beige);
+  }
+
+  .about-bio {
+    font-family: var(--font-geist);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    margin-bottom: 4rem;
+    opacity: 0.85;
+    transition: color 0.4s ease;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
     }
-    .group:hover .glitch-2 {
-        opacity: 0.5;
-        animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
-    }
-    .group:hover .avatar-img {
-        filter: contrast(1.2) brightness(1.1);
-        transform: scale(1.05);
-    }
+  }
+
+  .about-photo {
+    width: 100%;
+  }
+
+  .about-photo-inner {
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: var(--accent);
+    transition: border-color 0.4s ease;
+  }
+
+  .about-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(100%);
+    transition:
+      filter 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  .about-photo-inner:hover .about-img {
+    filter: grayscale(0%);
+    transform: scale(1.04);
+  }
+
+  .about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .about-description {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .about-description p {
+    font-family: var(--font-geist);
+    font-size: 1rem;
+    color: var(--text-primary);
+    opacity: 0.7;
+    line-height: 1.7;
+    margin: 0;
+    transition: color 0.4s ease;
+  }
+
+  .about-description strong {
+    color: var(--text-primary);
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  .about-link {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+  }
+
+  .about-link:hover {
+    opacity: 0.6;
+  }
+
+  .about-data-card {
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    transition: border-color 0.4s ease;
+  }
+
+  .about-data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    font-family: monospace;
+    font-size: 0.8rem;
+    transition: border-color 0.4s ease;
+  }
+
+  .about-data-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .about-data-label {
+    color: var(--text-primary);
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+  }
+
+  .about-data-value {
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: color 0.4s ease;
+  }
+
+  .about-available {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .about-stat {
+    border: 1px solid var(--border);
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.4s ease;
+  }
+
+  .about-stat-label {
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: var(--text-primary);
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .about-stat-value {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1;
+    transition: color 0.4s ease;
+  }
+
+  .about-cv-wrapper {
+    margin-top: 0.5rem;
+  }
+
+  .about-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-family: var(--font-geist);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: transparent;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      border-color 0.4s ease;
+    cursor: none;
+  }
+
+  .about-cv-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+  }
+
+  .about-cv-btn svg {
+    transition: inherit;
+  }
 </style>
-
-<script>
-    // Observador para animar barras de progreso al hacer scroll
-    const observerOptions = {
-        threshold: 0.5
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const bar = entry.target as HTMLElement;
-                const width = bar.getAttribute('data-level');
-                bar.style.width = `${width}%`;
-                observer.unobserve(bar);
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.progress-bar').forEach(bar => {
-        observer.observe(bar);
-    });
-
-    // Magnetic Avatar Effect
-    const avatar = document.querySelector('.magnetic-avatar');
-    if (avatar) {
-        avatar.addEventListener('mousemove', (e: any) => {
-            const rect = (avatar as HTMLElement).getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            (avatar as HTMLElement).style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-        });
-        avatar.addEventListener('mouseleave', () => {
-            (avatar as HTMLElement).style.transform = `translate(0px, 0px)`;
-        });
-    }
-</script>

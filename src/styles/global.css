@@ -1,27 +1,682 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+@font-face {
+    font-family: 'MangoGrotesque';
+    src: url('/fonts/Mango-Grotesque-VF.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+@font-face {
+    font-family: 'BiggerDisplay';
+    src: url('/fonts/biggerdisplay.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* Colores base */
+    --soft-beige: #E6E1DD;
+    --muted-beige: #ADA8A4;
+    --beige: #C6BBB2;
+    --dark-beige: #5C5652;
+    --darker-beige: #3F3A37;
+    --black: #1A1A1A;
+    --white: #FFFFFF;
+    --warm-white: #FCF8F5;
+    --violet: #A199FF;
+
+    /* Colores semánticos (por defecto tema claro) */
+    --bg-primary: var(--soft-beige);
+    --bg-secondary: var(--white);
+    --text-primary: var(--black);
+    --text-secondary: var(--beige);
+    --accent: var(--beige);
+    --accent-inverse: var(--soft-beige);
+    --border: var(--beige);
+
+    --font-display: 'MangoGrotesque', sans-serif;
+    --font-geist: 'Geist', sans-serif;
+    --font-playfair: 'Playfair Display', serif;
+}
+
+/* Tema Oscuro */
+[data-theme="dark"] {
+    --bg-primary: #1A1A1A;
+    --bg-secondary: #252525;
+    --text-primary: #E6E1DD;
+    --text-secondary: #9A918A;
+    --accent: #3D3D3D;
+    --accent-inverse: #1A1A1A;
+    --border: #3D3D3D;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg-primary: #1A1A1A;
+        --bg-secondary: #252525;
+        --text-primary: #E6E1DD;
+        --text-secondary: #9A918A;
+        --accent: #3D3D3D;
+        --accent-inverse: #1A1A1A;
+        --border: #3D3D3D;
     }
 }
 
-.animate-fadeIn {
-    animation: fadeIn 1s ease-out forwards;
+/* Reset y Ocultamiento de Cursor */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important;
 }
 
-@keyframes marquee {
-    0% {
-        transform: translateX(0);
+html, body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-geist);
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    height: auto;
+}
+
+/* Desplazamiento Suave con Lenis */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+/* Líneas de Fondo (Grid Background) */
+.grid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: -10;
+    padding: 0;
+}
+
+.line {
+    width: 1px;
+    height: 100%;
+    background-color: var(--border);
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: background-color 0.4s ease;
+}
+
+/* Encabezado del Sitio */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+}
+
+.logo {
+    font-family: var(--font-geist);
+    font-weight: normal;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    transition: color 0.4s ease;
+}
+
+.logo-line {
+    display: block;
+    background: rgba(230, 225, 221, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.2em 0.5em;
+    width: fit-content;
+}
+
+[data-theme="dark"] .logo-line {
+    background: rgba(26, 26, 26, 0.35);
+}
+
+.logo.logo-light {
+    color: var(--soft-beige);
+}
+
+.logo.logo-dark {
+    color: var(--black);
+}
+
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Botón del Menú */
+.menu-btn {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.4rem 0.6rem 0.1rem 0.6rem;
+    cursor: none;
+    height: fit-content;
+    line-height: 0.85;
+    border-radius: 8px;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+/* Tarjeta de Menú Desplegable */
+.menu-container {
+    position: relative;
+    z-index: 60;
+}
+
+.menu-card {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5em;
+    width: 360px;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 61;
+    transform-origin: top right;
+    transition: background-color 0.4s ease;
+}
+
+.menu-close-btn {
+    cursor: none;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.menu-link {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 4rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    line-height: 0.75;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    overflow: hidden;
+    display: block;
+    padding-top: 0.25em;
+    padding-bottom: 0.05em;
+}
+
+.menu-link-inner {
+    display: block;
+    transform: translateY(150%);
+}
+
+.menu-separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-primary);
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    transform-origin: right center;
+    transition: background-color 0.4s ease;
+}
+
+.menu-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+    width: 100%;
+    font-family: var(--font-geist);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.social-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Pantalla de Carga (Loader) */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+}
+
+.loader-col {
+    flex: 1;
+    height: 100%;
+    background-color: var(--black);
+    transform-origin: top;
+    transform: scaleY(1);
+    margin-left: -1px;
+}
+
+.loader-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 2.5rem;
+    z-index: 10001;
+}
+
+.loader-counter {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 10vw;
+    color: var(--white);
+    line-height: 0.8;
+}
+
+/* Animaciones de Revelación */
+.reveal-wrapper {
+    overflow: hidden;
+    display: block;
+    line-height: 1.2;
+}
+
+.reveal-inner {
+    display: block;
+    transform: translateY(120%);
+}
+
+.reveal-wrapper-hero {
+    overflow: hidden;
+    display: block;
+    padding-top: 0.5em;
+    margin-top: -0.5em;
+    padding-bottom: 0.1em;
+}
+
+.reveal-inner-hero {
+    display: block;
+    transform: translateY(220%);
+}
+
+/* Intercambio de Caracteres */
+.char-swap-text {
+    display: inline-block;
+}
+
+.char-swap-container {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    padding-top: 0.15em;
+    margin-top: -0.15em;
+    flex-shrink: 0;
+}
+
+.char-swap-original,
+.char-swap-clone {
+    display: inline-block;
+}
+
+.char-swap-clone {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 0.15em;
+}
+
+/* Cursores Personalizados */
+.custom-cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.25s ease;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #A199FF; /* Violeta pastel de la referencia */
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+}
+
+.cursor-ring {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid #A199FF;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.cursor-text {
+    font-family: var(--font-geist);
+    font-size: 8px;
+    font-weight: 700;
+    color: #A199FF;
+    position: absolute;
+    bottom: -14px;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.custom-cursor.hidden {
+    opacity: 0;
+}
+
+/* Efecto al pasar sobre links interactivos (Hover) */
+.custom-cursor.hovering .cursor-ring {
+    transform: scale(1.4);
+    background-color: rgba(161, 153, 255, 0.08);
+    border-color: #A199FF;
+}
+
+.custom-cursor.hovering .cursor-dot {
+    transform: scale(0.5);
+}
+
+.custom-cursor.hovering .cursor-text {
+    opacity: 0.9;
+    transform: translateY(2px);
+}
+
+/* Efecto al hacer Click (Comprimirse y cambiar de color) */
+.custom-cursor.clicking .cursor-ring {
+    transform: scale(0.75);
+    border-color: var(--text-primary);
+    background-color: rgba(230, 225, 221, 0.1);
+}
+
+.custom-cursor.clicking .cursor-dot {
+    transform: scale(2.2);
+    background-color: var(--text-primary);
+}
+
+.custom-cursor.clicking .cursor-text {
+    opacity: 0;
+    transform: translateY(4px) scale(0.8);
+}
+
+/* Ripple y partículas al hacer Click */
+.cursor-click-ripple {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--violet); /* Violeta de la paleta */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.cursor-click-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    font-family: var(--font-geist);
+    font-size: clamp(0.55rem, 1.2vw, 0.75rem);
+    font-weight: 700;
+    color: var(--violet); /* Violeta pastel */
+    transform: translate(-50%, -50%);
+    user-select: none;
+    white-space: nowrap;
+    text-shadow: 0 0 4px rgba(161, 153, 255, 0.4);
+}
+
+.custom-cursor.on-project,
+.custom-cursor.on-flower-hug,
+.custom-cursor.on-contact-title {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.view-work-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.5rem 0.6rem 0.1rem 0.6rem;
+    line-height: 0.85;
+    border-radius: 8px;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.view-work-cursor.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Cursor de Flor Magnético */
+.flower-hug-cursor {
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    pointer-events: none;
+    z-index: 9997;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.flower-hug-cursor.visible {
+    opacity: 1;
+}
+
+.purple-flower-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Seguidor de Título de Contacto */
+.contact-title-cursor {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    pointer-events: none;
+    z-index: 9997;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contact-title-cursor.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Contenedor de Botón de Tema (Fijo abajo a la izquierda) */
+.controls-container {
+    position: fixed;
+    left: 1.5em;
+    bottom: 1.5em;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.3s ease;
+}
+
+.controls-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.theme-toggle {
+    display: flex;
+    gap: 4px;
+    padding: 3px;
+    background-color: rgba(26, 26, 26, 0.3);
+    border: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 9999px;
+    cursor: none;
+    transition: background-color 0.4s ease;
+}
+
+.theme-toggle-sun,
+.theme-toggle-moon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle-sun {
+    background-color: rgba(230, 225, 221, 0.8);
+    color: var(--black);
+}
+
+.theme-toggle-moon {
+    background-color: transparent;
+    color: var(--soft-beige);
+}
+
+.theme-toggle svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* Modificaciones de temas oscuros para elementos */
+[data-theme="dark"] .theme-toggle-sun {
+    background-color: transparent;
+    color: var(--soft-beige);
+}
+
+[data-theme="dark"] .theme-toggle-moon {
+    background-color: rgba(26, 26, 26, 0.8);
+    color: var(--white);
+}
+
+[data-theme="dark"] .view-work-cursor {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+/* Ajustes Responsivos Móviles */
+@media (max-width: 768px) {
+    * {
+        cursor: auto !important; /* Restore default cursor on mobile */
     }
 
-    100% {
-        transform: translateX(-50%);
+    .custom-cursor,
+    .view-work-cursor,
+    .flower-hug-cursor,
+    .contact-title-cursor {
+        display: none !important;
+    }
+
+    .controls-container {
+        display: none !important;
+    }
+
+    .loader-col:nth-child(n+5) {
+        display: none;
+    }
+
+    .loader-counter {
+        font-size: 20vw;
+    }
+
+    .menu-card {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu-items {
+        align-items: center;
+    }
+
+    .menu-link {
+        font-size: 22vw;
+    }
+
+    .menu-separator {
+        display: none;
+    }
+
+    .menu-footer {
+        position: absolute;
+        bottom: 1.5em;
+        left: 1.5em;
+        right: 1.5em;
+        justify-content: center;
     }
 }

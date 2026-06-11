@@ -1,171 +1,598 @@
-<section
-    id="inicio"
-    class="min-h-screen flex flex-col justify-center items-center relative px-4 overflow-hidden pt-24 animate-fadeIn"
->
-    <!-- Decorativos -->
-    <div
-        class="absolute top-32 right-[10%] w-24 h-24 border-4 border-neo-gold/50 rotate-12 animate-float hidden md:block"
-    >
+---
+import TerminalGraphic from "./TerminalGraphic.astro";
+
+const techs = [
+  {
+    name: "HTML5",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+  },
+  {
+    name: "Tailwind",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+  },
+  {
+    name: "JavaScript",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+  },
+  {
+    name: "Astro",
+    icon: "https://astro.build/assets/press/astro-icon-light-gradient.svg",
+  },
+  {
+    name: "PHP",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
+  },
+  { name: "GitHub", icon: "https://www.svgrepo.com/show/349375/github.svg" },
+  {
+    name: "Vercel",
+    icon: "https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png",
+    invert: true,
+  },
+  {
+    name: "IA",
+    icon: "https://img.icons8.com/fluency/96/artificial-intelligence.png",
+  },
+  {
+    name: "Firebase",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+  },
+  {
+    name: "Supabase",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
+  },
+];
+---
+
+<section id="inicio" class="hero-section">
+  <!-- FONDO: Terminal interactiva con física elástica y código reactivo al pasar el mouse -->
+  <div class="hero-bg-icon" aria-hidden="true">
+    <div class="hero-bg-icon-inner">
+      <TerminalGraphic />
     </div>
-    <div
-        class="absolute bottom-32 left-[10%] w-16 h-16 bg-neo-purple/50 rotate-45 animate-float hidden md:block"
-        style="animation-delay: 1s;"
-    >
-    </div>
+  </div>
 
-    <div class="relative z-10 text-center max-w-5xl">
-        <!-- Título mini -->
-        <span
-            class="inline-block py-2 px-6 bg-neo-gold/20 text-neo-white font-black text-lg tracking-wider border-2 border-neo-gold shadow-neo-sm mb-6 rotate-[-2deg] hover:rotate-0 transition-transform backdrop-blur-sm hero-reveal-fade"
-            style="animation-delay: 0.1s;"
-        >
-            ANALISTA PROGRAMADOR COMPUTACIONAL
-        </span>
-
-        <!-- Título principal -->
-        <h1
-            class="text-4xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter"
-        >
-            <div class="overflow-hidden">
-                <span class="inline-block animate-reveal"
-                    >Diseños Modernos.</span
-                >
-            </div>
-            <div class="overflow-hidden">
-                <span
-                    class="inline-block animate-reveal"
-                    style="animation-delay: 0.3s;">Webs Rápidas.</span
-                >
-            </div>
-            <div class="overflow-hidden">
-                <span
-                    class="inline-block animate-reveal text-transparent bg-clip-text bg-gradient-to-r from-neo-gold via-neo-purple to-neo-cyan"
-                    style="animation-delay: 0.5s;">Resultados Reales.</span
-                >
-            </div>
-        </h1>
-
-        <p
-            class="mt-6 text-base md:text-xl lg:text-2xl text-gray-200 font-mono border-l-4 border-neo-pink pl-4 max-w-3xl mx-auto hero-reveal-fade"
-            style="animation-delay: 0.9s;"
-        >
-            Hola! Soy <span class="text-neo-white font-extrabold"
-                >Ariel Campos</span
-            > 👋<br />
-            Construyo <span class="text-neo-cyan font-bold"
-                >sitios web de alto rendimiento</span
-            >
-            y <span class="text-neo-gold font-bold"
-                >tiendas online que venden</span
-            >
-            utilizando tecnologías modernas como React ⚛️
-        </p>
-
-        <!-- Botones CTA -->
-        <div
-            class="mt-10 flex flex-col md:flex-row gap-6 justify-center items-center hero-reveal-fade"
-            style="animation-delay: 1.1s;"
-        >
-            <a
-                href="https://wa.me/56931342699?text=Hola!%20Quiero%20un%20sitio%20web"
-                target="_blank"
-                class="magnetic-btn group relative px-8 py-5 bg-neo-gold text-neo-black font-black text-xl uppercase
-                transition-all duration-300 rounded-xl overflow-hidden shadow-[0_4px_14px_rgba(184,153,111,0.2)] hover:shadow-[0_12px_30px_rgba(184,153,111,0.5),0_0_0_6px_rgba(184,153,111,0.15)] hover:scale-[1.02]"
-            >
-                <span class="relative z-10">🚀 Empezar un Proyecto</span>
-                <div
-                    class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                >
-                </div>
-            </a>
-
-            <a
-                href="#proyectos"
-                class="magnetic-btn px-8 py-5 border-2 border-white/20 text-white font-bold text-xl hover:border-neo-cyan hover:bg-neo-cyan/10 hover:text-white transition-all duration-300 flex items-center gap-3 rounded-xl backdrop-blur-sm hover:scale-[1.02]"
-            >
-                Ver Proyectos
-                <svg
-                    class="h-6 w-6 animate-bounce"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                </svg>
-            </a>
+  <!-- Tecnologías flotantes interactivas en el background -->
+  <div class="hero-tech-background" aria-hidden="true">
+    {
+      techs.map((t) => (
+        <div class="hero-tech-item">
+          <img
+            src={t.icon}
+            alt={t.name}
+            class={
+              t.invert ? "hero-tech-icon tech-icon-invert" : "hero-tech-icon"
+            }
+          />
+          <span class="hero-tech-name">{t.name}</span>
         </div>
-    </div>
+      ))
+    }
+  </div>
 
-    <style>
-        .animate-reveal {
-            animation: reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-            transform: translateY(100%);
-        }
-
-        @keyframes reveal {
-            0% {
-                transform: translateY(100%);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes heroFadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-reveal-fade {
-            opacity: 0;
-            animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .magnetic-btn {
-            display: inline-block;
-            transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);
-        }
-    </style>
-
-    <script>
-        // Magnetic Button Effect
-        const magneticBtns = document.querySelectorAll(".magnetic-btn");
-
-        magneticBtns.forEach((btn) => {
-            btn.addEventListener("mousemove", (e: any) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-
-                (btn as HTMLElement).style.transform =
-                    `translate(${x * 0.3}px, ${y * 0.3}px)`;
-            });
-
-            btn.addEventListener("mouseleave", () => {
-                (btn as HTMLElement).style.transform = `translate(0px, 0px)`;
-            });
-        });
-
-        // Parallax decorative elements
-        window.addEventListener("scroll", () => {
-            const scrolled = window.scrollY;
-            const floaters = document.querySelectorAll(".animate-float");
-            floaters.forEach((floater, index) => {
-                const speed = (index + 1) * 0.2;
-                (floater as HTMLElement).style.transform =
-                    `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
-            });
-        });
-    </script>
+  <!-- TÍTULO PRINCIPAL: Letras dinámicas con efecto looping por GSAP -->
+  <div class="hero-title-container">
+    <h1 class="hero-title" id="heroTitle">
+      <div class="hero-title-row title-row-first">
+        <span class="hero-word word-desarrollador" data-char-swap
+          >DESARROLLADOR</span
+        >
+        <span class="hero-italic" data-char-swap>web</span>
+      </div>
+      <div class="hero-title-row title-row-second">
+        <span class="hero-word word-fullstack" data-char-swap>FULL-STACK</span>
+      </div>
+    </h1>
+  </div>
 </section>
+
+<script>
+  (function () {
+    // Física interactiva de tecnologías flotantes
+    let physicsRegistered = false;
+    interface TechPosition {
+      el: Element;
+      baseX: number;
+      baseY: number;
+      currentX: number;
+      currentY: number;
+      vx: number;
+      vy: number;
+    }
+    let positions: TechPosition[] = [];
+    let mouseX = -1000;
+    let mouseY = -1000;
+
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    // En pantallas táctiles, actualizar la posición también con touchmove
+    window.addEventListener("touchmove", (e) => {
+      if (e.touches.length > 0) {
+        mouseX = e.touches[0].clientX;
+        mouseY = e.touches[0].clientY;
+      }
+    });
+
+    function initTechPhysics() {
+      const items = document.querySelectorAll(".hero-tech-item");
+      if (items.length === 0) return;
+
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const isMobile = screenWidth <= 768;
+      const baseOpacity = isMobile ? 0.06 : 0.18;
+
+      positions = [];
+
+      items.forEach((item, i) => {
+        // Distribuir a la izquierda y a la derecha del centro del Hero
+        // para no encimar el bloque del título principal
+        const isLeft = i % 2 === 0;
+        let minX, maxX;
+        if (isLeft) {
+          minX = 60;
+          maxX = screenWidth * 0.35;
+        } else {
+          minX = screenWidth * 0.65;
+          maxX = screenWidth - 60;
+        }
+
+        const x = Math.random() * (maxX - minX) + minX;
+        const y = Math.random() * (screenHeight - 160) + 80;
+
+        // @ts-ignore
+        gsap.set(item, {
+          x,
+          y,
+          xPercent: -50,
+          yPercent: -50,
+          opacity: baseOpacity,
+          scale: 1,
+        });
+
+        positions.push({
+          el: item,
+          baseX: x,
+          baseY: y,
+          currentX: x,
+          currentY: y,
+          vx: (Math.random() - 0.5) * 0.32,
+          vy: (Math.random() - 0.5) * 0.32,
+        });
+      });
+
+      // Registrar el ticker de GSAP una sola vez
+      // @ts-ignore
+      if (typeof gsap !== "undefined" && !physicsRegistered) {
+        // @ts-ignore
+        gsap.ticker.add(updatePhysics);
+        physicsRegistered = true;
+      }
+    }
+
+    function updatePhysics() {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const radius = 220; // Radio de repulsión interactivo
+      const isMobile = screenWidth <= 768;
+      const baseOpacity = isMobile ? 0.06 : 0.18;
+
+      positions.forEach((item) => {
+        // 1. Flotación pasiva
+        item.baseX += item.vx;
+        item.baseY += item.vy;
+
+        // Limitar la flotación a sus zonas (izquierda / derecha del título)
+        // para evitar que migren todas juntas hacia un lado
+        const isLeft = positions.indexOf(item) % 2 === 0;
+        let minBoundX = 40;
+        let maxBoundX = screenWidth * 0.42;
+
+        if (!isLeft) {
+          minBoundX = screenWidth * 0.58;
+          maxBoundX = screenWidth - 40;
+        }
+
+        if (item.baseX < minBoundX || item.baseX > maxBoundX) {
+          item.vx *= -1;
+          item.baseX = Math.max(minBoundX, Math.min(maxBoundX, item.baseX));
+        }
+        if (item.baseY < 60 || item.baseY > screenHeight - 60) {
+          item.vy *= -1;
+          item.baseY = Math.max(60, Math.min(screenHeight - 60, item.baseY));
+        }
+
+        // 2. Repulsión al pasar el mouse cerca
+        const dx = item.currentX - mouseX;
+        const dy = item.currentY - mouseY;
+        const dist = Math.hypot(dx, dy);
+
+        let targetX = item.baseX;
+        let targetY = item.baseY;
+        let targetOpacity = baseOpacity;
+        let targetScale = 1;
+
+        if (dist < radius) {
+          const force = (radius - dist) / radius;
+          const angle = Math.atan2(dy, dx);
+          const repelDist = force * 90; // Empujar hasta 90px
+
+          targetX = item.baseX + Math.cos(angle) * repelDist;
+          targetY = item.baseY + Math.sin(angle) * repelDist;
+          targetOpacity = baseOpacity + force * 0.48; // Más visible según cercanía
+          targetScale = 1 + force * 0.15; // Ligeramente más grande
+        }
+
+        // 3. Interpolación suave (Lerp) para inercia elástica
+        item.currentX += (targetX - item.currentX) * 0.08;
+        item.currentY += (targetY - item.currentY) * 0.08;
+
+        // Aplicar estilos
+        // @ts-ignore
+        gsap.set(item.el, {
+          x: item.currentX,
+          y: item.currentY,
+          opacity: targetOpacity,
+          scale: targetScale,
+        });
+      });
+    }
+
+    // Adaptabilidad ante redimensionado de pantalla
+    let resizeTimer: number | undefined;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        initTechPhysics();
+      }, 250);
+    });
+
+    // Función unificada para arrancar animaciones al cargarse el Hero
+    function startHeroAnimations() {
+      // @ts-ignore
+      if (typeof gsap === "undefined") return;
+
+      // 1. Inicializar animación de tecnologías
+      initTechPhysics();
+
+      // 2. Entrada fluida del título letra por letra
+      // @ts-ignore
+      gsap.fromTo(
+        "#heroTitle .char-swap-container",
+        { y: 35, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.025,
+          ease: "power2.out",
+          delay: 0.2,
+        },
+      );
+      // @ts-ignore
+      gsap.fromTo(
+        ".hero-bg-icon",
+        { opacity: 0 },
+        { opacity: 1, duration: 1.4, delay: 0.05, ease: "power3.out" },
+      );
+      // @ts-ignore
+      gsap.fromTo(
+        ".hero-bg-icon-inner",
+        { scale: 0.9 },
+        { scale: 1, duration: 1.4, delay: 0.05, ease: "power3.out" },
+      );
+    }
+
+    // Comprobar si el loader global ya terminó de cargarse en el DOM
+    const loader = document.querySelector(".loader");
+    const isLoaderDone =
+      !loader || window.getComputedStyle(loader).display === "none";
+
+    if (isLoaderDone) {
+      startHeroAnimations();
+    } else {
+      window.addEventListener("loaderComplete", startHeroAnimations);
+    }
+  })();
+</script>
+
+<style>
+  /* ===== SECCIÓN ===== */
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    min-height: 580px;
+    background: var(--bg-primary);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    transition: background-color 0.4s ease;
+  }
+
+  /* ===== ÍCONO DE CÓDIGO EN BACKGROUND ===== */
+  /* Posicionado de fondo, un poco más pequeño, más transparente y desplazado a la derecha */
+  .hero-bg-icon {
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(300px, 70vh, 720px);
+    height: clamp(300px, 70vh, 720px);
+    pointer-events: none;
+    z-index: 1;
+    color: var(--text-primary);
+    transition:
+      opacity 0.4s ease,
+      color 0.4s ease;
+  }
+
+  .hero-bg-icon-inner {
+    width: 100%;
+    height: 100%;
+    opacity: 0.035; /* Un poco más visible pero de fondo */
+    transition: opacity 0.4s ease;
+  }
+
+  .hero-code-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Ocultar letras inicialmente para la animación de entrada */
+  #heroTitle .char-swap-container {
+    opacity: 0;
+  }
+
+  /* ===== TÍTULO PRINCIPAL ===== */
+  .hero-title-container {
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+  }
+
+  /* Texto gigante que llena el ancho, posicionado abajo con separación segura */
+  .hero-title {
+    position: relative;
+    margin: 0;
+    padding: 0 5.2rem 3.9rem; /* Separación de seguridad con la esquina superior */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar las filas horizontalmente */
+    text-align: center; /* Centrar el texto */
+    gap: 0;
+    line-height: 1;
+    overflow: visible;
+  }
+
+  .hero-title-row {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline; /* Alinear tipografías por su línea base de lectura */
+    justify-content: center; /* Centrar los elementos horizontalmente */
+    white-space: nowrap; /* Evita saltos de línea extraños */
+    overflow: visible; /* Permitir que las letras individuales viajen libremente por toda la pantalla */
+    line-height: 0.88;
+    perspective: 1000px; /* Perspectiva 3D para giros realistas */
+  }
+
+  /* Texto GIGANTE — lleno de impacto. */
+  .hero-word {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 18vw, 15.5rem); /* Más grande e imponente */
+    font-weight: 900;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: -0.01em; /* Condensado premium, fiel a la referencia */
+    line-height: 0.85;
+    display: inline-flex;
+    gap: 0.04em;
+    align-items: baseline;
+    transition: color 0.4s ease;
+  }
+
+  /* Letras individuales de intercambio de caracteres */
+  #heroTitle .char-swap-original,
+  #heroTitle .char-swap-clone {
+    display: inline-block;
+    /* Angostamos un poco las letras (escala horizontal) */
+    transform: scaleX(0.92);
+    transform-origin: center;
+    transition: color 0.4s ease;
+    will-change: transform;
+  }
+
+  /* Itálica acompañante — más pequeña */
+  .hero-italic {
+    font-family: var(--font-playfair);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2rem, 7.2vw, 6.2rem); /* Proporcional a la referencia */
+    color: var(--text-primary);
+    opacity: 0.75;
+    line-height: 1;
+    display: inline-flex;
+    gap: 0.04em;
+    align-items: baseline;
+    transition: color 0.4s ease;
+    margin-left: 0.22em; /* Separar la itálica del texto anterior */
+  }
+
+  /* ===== LENGUAJES FLOTANTES EN BACKGROUND ===== */
+  .hero-tech-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* No bloquear clicks en primer plano */
+    z-index: 2; /* Encima de la terminal pero detrás del título */
+    overflow: hidden;
+  }
+
+  .hero-tech-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    pointer-events: auto; /* Permitir interacción con el mouse */
+    opacity: 0.1;
+    user-select: none;
+    transition:
+      opacity 0.1ease,
+      transform 0.1s ease;
+  }
+
+  .hero-tech-icon {
+    width: 66px;
+    height: 66px;
+    object-fit: contain;
+    filter: grayscale(90%) contrast(1.2);
+    transition: filter 0.3s ease;
+  }
+
+  /* Reactivar color completo al acercarse */
+  .hero-tech-item:hover .hero-tech-icon {
+    filter: grayscale(0%) contrast(1);
+  }
+
+  .tech-icon-invert {
+    filter: invert(1) grayscale(80%) contrast(0.9);
+  }
+  .hero-tech-item:hover .tech-icon-invert {
+    filter: invert(1) grayscale(0%) contrast(1);
+  }
+
+  .hero-tech-name {
+    font-family: var(--font-geist);
+    font-size: 0.52rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+    opacity: 0.2;
+    white-space: nowrap;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero-section {
+      align-items: center; /* Centrado vertical en móviles */
+      justify-content: center;
+    }
+
+    .hero-bg-icon {
+      left: 58%;
+      width: 78vw;
+      height: 78vw;
+    }
+
+    .hero-bg-icon-inner {
+      opacity: 0.024; /* Un poco más visible */
+    }
+
+    /* Título apilado en 3 líneas centradas con diseño en bloque y acoplamiento estrecho */
+    .hero-title {
+      align-items: center;
+      text-align: center;
+      padding: 0 0.8rem;
+      justify-content: center;
+      gap: 0;
+      line-height: 0.82;
+    }
+
+    .title-row-first {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      overflow: visible;
+    }
+
+    .title-row-second {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: center;
+      width: 100%;
+      overflow: visible;
+    }
+
+    #heroTitle .char-swap-original,
+    #heroTitle .char-swap-clone {
+      transform: scaleX(1) !important; /* Letras más anchas/gruesas en móvil */
+    }
+
+    .word-desarrollador {
+      display: inline-flex !important;
+      justify-content: center;
+      margin: 0 auto;
+      font-size: clamp(3.8rem, 17.5vw, 9.5rem); /* Aumentado */
+      line-height: 0.82;
+      letter-spacing: -0.015em;
+      gap: 0.04em;
+      align-items: baseline;
+      flex-shrink: 0;
+    }
+
+    .hero-italic {
+      display: inline-flex !important;
+      justify-content: center;
+      margin: -0.04em auto !important; /* Anidamiento más natural y visible */
+      font-size: clamp(2.2rem, 10vw, 4.2rem); /* Aumentado */
+      opacity: 1 !important;
+      line-height: 0.82;
+      gap: 0.04em;
+      align-items: baseline;
+      flex-shrink: 0;
+    }
+
+    .word-fullstack {
+      display: inline-flex !important;
+      justify-content: center;
+      margin: 0 auto;
+      font-size: clamp(
+        4.2rem,
+        22vw,
+        12.5rem
+      ); /* Aumentado significativamente para igualar ancho */
+      line-height: 0.82;
+      letter-spacing: -0.015em;
+      gap: 0.04em;
+      align-items: baseline;
+      flex-shrink: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-bg-icon {
+      left: 55%;
+      width: 82vw;
+      height: 82vw;
+    }
+
+    .hero-bg-icon-inner {
+      opacity: 0.018;
+    }
+
+    .word-desarrollador {
+      font-size: clamp(3.5rem, 16.5vw, 8.5rem);
+    }
+
+    .hero-italic {
+      font-size: clamp(2rem, 9.5vw, 3.5rem);
+      margin: -0.04em auto !important;
+    }
+
+    .word-fullstack {
+      font-size: clamp(3.8rem, 21vw, 11rem);
+    }
+  }
+</style>

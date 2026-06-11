@@ -1,0 +1,333 @@
+<!-- Gráfico de Terminal de Código en SVG con soporte para animación líquida y magnetismo -->
+<svg
+  id="TerminalSvg"
+  xmlns="http://www.w3.org/2000/svg"
+  width="100%"
+  height="100%"
+  viewBox="0 0 800 800"
+  class="select-none pointer-events-none overflow-visible"
+>
+  <g
+    class="terminal-graphics"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  >
+    <!-- Marco exterior de la terminal (redondeado, elástico y reactivo) -->
+    <path
+      id="terminalFrame"
+      class="terminal-frame"
+      d="M 160,160 C 320,135 480,140 640,160 C 670,320 665,480 640,640 C 480,665 320,660 160,640 C 130,480 135,320 160,160 Z"
+      stroke-width="24"></path>
+
+    <!-- Botones de la barra de título (Cerrar, Minimizar, Maximizar) -->
+    <circle id="dot1" cx="215" cy="220" r="12" fill="currentColor" stroke="none"
+    ></circle>
+    <circle id="dot2" cx="260" cy="220" r="12" fill="currentColor" stroke="none"
+    ></circle>
+    <circle id="dot3" cx="305" cy="220" r="12" fill="currentColor" stroke="none"
+    ></circle>
+
+    <!-- Barra decorativa interna para dividir la barra de título (línea de consola) -->
+    <path
+      id="terminalDivider"
+      class="terminal-divider"
+      d="M 160,265 C 320,265 480,265 640,265"
+      stroke-width="8"
+      stroke-dasharray="10 15"></path>
+
+    <!-- Líneas de código reales de desarrollador -->
+    <g
+      class="terminal-code-text"
+      fill="currentColor"
+      stroke="none"
+      font-family="GeistMono, monospace"
+    >
+      <!-- Línea de arranque -->
+      <text id="line1" x="200" y="325" font-size="24" font-weight="bold"
+        >> npm run dev</text
+      >
+
+      <!-- Línea de estado -->
+      <text id="line2" x="200" y="365" font-size="18" opacity="0.5"
+        >arielcampos: ready in 14ms</text
+      >
+
+      <!-- Bloque de código interactivo -->
+      <text
+        id="line3"
+        x="200"
+        y="415"
+        font-size="22"
+        font-weight="600"
+        fill="var(--violet)">const developer = &#123;</text
+      >
+      <text id="line4" x="235" y="455" font-size="22"
+        >name: "Ariel Campos",</text
+      >
+      <text id="line5" x="235" y="495" font-size="22"
+        >role: "Full-Stack Dev",</text
+      >
+      <text id="line6" x="235" y="535" font-size="22"
+        >passion: "Crear Webs"</text
+      >
+      <text
+        id="line7"
+        x="200"
+        y="575"
+        font-size="22"
+        font-weight="600"
+        fill="var(--violet)">&#125;;</text
+      >
+
+      <!-- Línea de comando actual con cursor parpadeante -->
+      <text id="line8" x="200" y="620" font-size="24" font-weight="bold"
+        >> <tspan id="typingCursor" font-weight="bold">_</tspan></text
+      >
+    </g>
+  </g>
+</svg>
+
+<script is:inline>
+  // Ejecutar lógica de animación elástica interactiva al cargar la página
+  (function () {
+    function initTerminalPhysics() {
+      const svg = document.getElementById("TerminalSvg");
+      const path = document.getElementById("terminalFrame");
+      if (!svg || !path) return;
+
+      // Coordenadas base originales del path SVG de la terminal
+      const basePoints = [
+        { x: 160, y: 160 }, // p1
+        { x: 320, y: 135 }, // c1a
+        { x: 480, y: 140 }, // c1b
+        { x: 640, y: 160 }, // p2
+        { x: 670, y: 320 }, // c2a
+        { x: 665, y: 480 }, // c2b
+        { x: 640, y: 640 }, // p3
+        { x: 480, y: 665 }, // c3a
+        { x: 320, y: 660 }, // c3b
+        { x: 160, y: 640 }, // p4
+        { x: 130, y: 480 }, // c4a
+        { x: 135, y: 320 }, // c4b
+      ];
+
+      // Inicializar posiciones dinámicas y velocidades
+      const points = basePoints.map((p) => ({
+        x: p.x,
+        y: p.y,
+        rx: p.x,
+        ry: p.y,
+        vx: 0,
+        vy: 0,
+      }));
+
+      let mouseX = -9999;
+      let mouseY = -9999;
+
+      // Escuchar el movimiento del ratón — funciona aunque el mouse no esté sobre el SVG
+      window.addEventListener("mousemove", (e) => {
+        const rect = svg.getBoundingClientRect();
+        if (rect.width === 0) return;
+        const scaleX = 800 / rect.width;
+        const scaleY = 800 / rect.height;
+        // Usar coordenadas globales de la ventana relativas al elemento
+        mouseX = (e.clientX - rect.left) * scaleX;
+        mouseY = (e.clientY - rect.top) * scaleY;
+      });
+
+      // Escuchar eventos táctiles en móviles
+      window.addEventListener(
+        "touchmove",
+        (e) => {
+          if (e.touches.length > 0) {
+            const rect = svg.getBoundingClientRect();
+            if (rect.width === 0) return;
+            const scaleX = 800 / rect.width;
+            const scaleY = 800 / rect.height;
+            mouseX = (e.touches[0].clientX - rect.left) * scaleX;
+            mouseY = (e.touches[0].clientY - rect.top) * scaleY;
+          }
+        },
+        { passive: true },
+      );
+
+      // Encontrar referencias de elementos internos a desplazar (efecto parallax/profundidad)
+      const elements = [
+        {
+          el: document.getElementById("dot1"),
+          base: { x: 215, y: 220 },
+          type: "circle",
+        },
+        {
+          el: document.getElementById("dot2"),
+          base: { x: 260, y: 220 },
+          type: "circle",
+        },
+        {
+          el: document.getElementById("dot3"),
+          base: { x: 305, y: 220 },
+          type: "circle",
+        },
+        {
+          el: document.getElementById("terminalDivider"),
+          base: { x1: 160, y1: 265, x2: 640, y2: 265 },
+          type: "divider",
+        },
+        {
+          el: document.getElementById("line1"),
+          base: { x: 200, y: 325 },
+          type: "text",
+        },
+        {
+          el: document.getElementById("line2"),
+          base: { x: 200, y: 365 },
+          type: "text",
+        },
+        {
+          el: document.getElementById("line3"),
+          base: { x: 200, y: 415 },
+          type: "text",
+        },
+        {
+          el: document.getElementById("line4"),
+          base: { x: 235, y: 455 },
+          type: "text",
+        },
+        {
+          el: document.getElementById("line5"),
+          base: { x: 235, y: 495 },
+          type: "text",
+        },
+        {
+          el: document.getElementById("line6"),
+          base: { x: 235, y: 535 },
+          type: "text",
+        },
+        {
+          el: document.getElementById("line7"),
+          base: { x: 200, y: 575 },
+          type: "text",
+        },
+        {
+          el: document.getElementById("line8"),
+          base: { x: 200, y: 620 },
+          type: "text",
+        },
+      ];
+
+      const spring = 0.08;
+      const friction = 0.82;
+      const radius = 220; // Radio de influencia
+      const maxWarp = 60; // Máxima deformación de resorte
+
+      // Posiciones de parallax elástico
+      let currentShiftX = 0;
+      let currentShiftY = 0;
+
+      function render() {
+        // 1. Deformar los puntos del borde
+        points.forEach((p) => {
+          const dx = mouseX - p.rx;
+          const dy = mouseY - p.ry;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          let targetX = p.x;
+          let targetY = p.y;
+
+          if (dist < radius) {
+            // Fuerza repulsiva elástica tipo fluido de gel
+            const force = (1 - dist / radius) * maxWarp;
+            const angle = Math.atan2(dy, dx);
+            targetX = p.x - Math.cos(angle) * force;
+            targetY = p.y - Math.sin(angle) * force;
+          }
+
+          // Aceleración de resorte
+          const ax = (targetX - p.rx) * spring;
+          const ay = (targetY - p.ry) * spring;
+
+          p.vx = (p.vx + ax) * friction;
+          p.vy = (p.vy + ay) * friction;
+
+          p.rx += p.vx;
+          p.ry += p.vy;
+        });
+
+        // Construir comando SVG d
+        const dStr =
+          `M ${points[0].rx.toFixed(1)},${points[0].ry.toFixed(1)} ` +
+          `C ${points[1].rx.toFixed(1)},${points[1].ry.toFixed(1)} ${points[2].rx.toFixed(1)},${points[2].ry.toFixed(1)} ${points[3].rx.toFixed(1)},${points[3].ry.toFixed(1)} ` +
+          `C ${points[4].rx.toFixed(1)},${points[4].ry.toFixed(1)} ${points[5].rx.toFixed(1)},${points[5].ry.toFixed(1)} ${points[6].rx.toFixed(1)},${points[6].ry.toFixed(1)} ` +
+          `C ${points[7].rx.toFixed(1)},${points[7].ry.toFixed(1)} ${points[8].rx.toFixed(1)},${points[8].ry.toFixed(1)} ${points[9].rx.toFixed(1)},${points[9].ry.toFixed(1)} ` +
+          `C ${points[10].rx.toFixed(1)},${points[10].ry.toFixed(1)} ${points[11].rx.toFixed(1)},${points[11].ry.toFixed(1)} ${points[0].rx.toFixed(1)},${points[0].ry.toFixed(1)} Z`;
+
+        path.setAttribute("d", dStr);
+
+        // 2. Parallax de magnetismo para elementos internos (código, círculos de ventana)
+        const centerDx = mouseX - 400;
+        const centerDy = mouseY - 400;
+        const centerDist = Math.sqrt(centerDx * centerDx + centerDy * centerDy);
+
+        let targetShiftX = 0;
+        let targetShiftY = 0;
+
+        if (centerDist < 400) {
+          // Desplazar ligeramente en la dirección del cursor para dar profundidad
+          const factor = (1 - centerDist / 400) * 20;
+          const angle = Math.atan2(centerDy, centerDx);
+          targetShiftX = Math.cos(angle) * factor;
+          targetShiftY = Math.sin(angle) * factor;
+        }
+
+        currentShiftX += (targetShiftX - currentShiftX) * 0.1;
+        currentShiftY += (targetShiftY - currentShiftY) * 0.1;
+
+        elements.forEach((item) => {
+          if (!item.el) return;
+          if (item.type === "circle") {
+            item.el.setAttribute(
+              "cx",
+              (item.base.x + currentShiftX).toFixed(1),
+            );
+            item.el.setAttribute(
+              "cy",
+              (item.base.y + currentShiftY).toFixed(1),
+            );
+          } else if (item.type === "text") {
+            item.el.setAttribute("x", (item.base.x + currentShiftX).toFixed(1));
+            item.el.setAttribute("y", (item.base.y + currentShiftY).toFixed(1));
+          } else if (item.type === "divider") {
+            const yOffset1 = item.base.y1 + currentShiftY;
+            const yOffset2 = item.base.y2 + currentShiftY;
+            item.el.setAttribute(
+              "d",
+              `M ${(item.base.x1 + currentShiftX).toFixed(1)},${yOffset1.toFixed(1)} C 320,${yOffset1.toFixed(1)} 480,${yOffset2.toFixed(1)} ${(item.base.x2 + currentShiftX).toFixed(1)},${yOffset2.toFixed(1)}`,
+            );
+          }
+        });
+
+        requestAnimationFrame(render);
+      }
+
+      // Iniciar bucle
+      requestAnimationFrame(render);
+    }
+
+    // Parpadeo del cursor
+    const cursor = document.getElementById("typingCursor");
+    if (cursor) {
+      setInterval(() => {
+        cursor.style.opacity = cursor.style.opacity === "0" ? "1" : "0";
+      }, 550);
+    }
+
+    // Inicializar al terminar de cargar de forma robusta
+    if (document.readyState === "complete") {
+      initTerminalPhysics();
+    } else {
+      window.addEventListener("load", initTerminalPhysics);
+    }
+  })();
+</script>
