@@ -170,7 +170,7 @@ const contactInfo = {
     </div>
   </div>
 
-  <!-- Footer con links y puerta de salida -->
+  <!-- Footer con links -->
   <footer class="contact-footer">
     <div class="contact-social-links">
       <a href={`mailto:${contactInfo.email}`} class="contact-social-link"
@@ -194,60 +194,6 @@ const contactInfo = {
         rel="noopener noreferrer"
         class="contact-social-link">INSTAGRAM ↗</a
       >
-    </div>
-
-    <!-- Puerta de escape -->
-    <div class="contact-exit">
-      <div class="contact-exit-text">
-        <span class="contact-exit-line"
-          ><span class="contact-exit-word">DRAMÁTICA</span></span
-        >
-        <span class="contact-exit-line"
-          ><span class="contact-exit-word">SALIDA EN</span></span
-        >
-        <span class="contact-exit-line"
-          ><span class="contact-exit-word countdown-timer">00:00:00</span></span
-        >
-      </div>
-      <div class="contact-door-container" id="contactDoor">
-        <img
-          src="/images/closed-door-black.svg"
-          alt=""
-          class="contact-door-icon contact-door-closed contact-door-closed-light"
-        />
-        <img
-          src="/images/closed-door-beige.svg"
-          alt=""
-          class="contact-door-icon contact-door-closed contact-door-closed-dark"
-        />
-        <div class="contact-door-open">
-          <canvas id="psychedelicCanvas" width="178" height="264"></canvas>
-          <svg
-            class="contact-door-frame"
-            viewBox="0 0 89.3 131.9"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <mask id="doorMask">
-                <rect width="100%" height="100%" fill="white"></rect>
-                <path
-                  d="M44.6,9.1c-19.6,0-35.5,15.9-35.5,35.5v78.2h71V44.6C80.1,25,64.2,9.1,44.6,9.1Z"
-                  fill="black"></path>
-              </mask>
-            </defs>
-            <rect
-              class="door-frame-bg"
-              width="100%"
-              height="100%"
-              fill="var(--bg-primary)"
-              mask="url(#doorMask)"></rect>
-            <path
-              class="door-frame-border"
-              d="M44.6,0C20,0,0,20,0,44.6v87.3h89.3V44.6C89.3,20,69.3,0,44.6,0ZM9.1,122.8V44.6c0-19.6,15.9-35.5,35.5-35.5s35.5,15.9,35.5,35.5v78.2H9.1Z"
-              fill="var(--text-primary)"></path>
-          </svg>
-        </div>
-      </div>
     </div>
   </footer>
 </section>
@@ -407,62 +353,9 @@ const contactInfo = {
     }).observe(canvas);
   }
 
-  // Canvas psicodélico de puertas
-  function initPsychedelicCanvas() {
-    [
-      document.getElementById("psychedelicCanvas"),
-      document.getElementById("heroPsychedelicCanvas"),
-    ].forEach((el) => {
-      const canvas = el as HTMLCanvasElement;
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-      if (!ctx) return;
-      const w = canvas.width,
-        h = canvas.height;
-      const cx = w / 2,
-        cy = h / 2;
-      let rot = 0,
-        visible = false,
-        animId: number | null = null;
-
-      function draw() {
-        if (!visible) {
-          animId = null;
-          return;
-        }
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = "#1A1A1A";
-        ctx.fillRect(0, 0, w, h);
-        ctx.save();
-        ctx.translate(cx, cy);
-        rot += 0.5;
-        ctx.rotate((rot * Math.PI) / 180);
-        ctx.fillStyle = "rgba(161, 153, 255, 0.55)";
-        const sc = (Math.max(w, h) / 1477.3) * 1.2;
-        for (let i = 0; i < 36; i++) {
-          ctx.save();
-          ctx.rotate((i * 10 * Math.PI) / 180);
-          ctx.scale(sc, sc);
-          ctx.fillRect(-738, -128, 1477, 256);
-          ctx.restore();
-        }
-        ctx.restore();
-        animId = requestAnimationFrame(draw);
-      }
-
-      new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          visible = e.isIntersecting;
-          if (visible && !animId) draw();
-        });
-      }).observe(canvas);
-    });
-  }
-
   window.addEventListener("loaderComplete", () => {
     setupWhatsApp();
     initContactWaves();
-    initPsychedelicCanvas();
   });
 </script>
 
@@ -711,7 +604,7 @@ const contactInfo = {
     margin: 4rem auto 0;
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 2rem;
     padding-top: 2rem;
@@ -739,97 +632,5 @@ const contactInfo = {
 
   .contact-social-link:hover {
     opacity: 1;
-  }
-
-  /* === Puerta de salida === */
-  .contact-exit {
-    display: flex;
-    align-items: flex-end;
-    gap: 1rem;
-  }
-
-  .contact-exit-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    font-family: var(--font-geist);
-    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-primary);
-    opacity: 0.5;
-    line-height: 1.8;
-    transition: color 0.4s ease;
-  }
-
-  .contact-exit-line {
-    display: block;
-    overflow: hidden;
-  }
-
-  .contact-exit-word {
-    display: block;
-  }
-
-  .contact-door-container {
-    cursor: none;
-    position: relative;
-    width: 55px;
-  }
-
-  .contact-door-icon {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: opacity 0.3s ease;
-  }
-
-  .contact-door-closed-light {
-    display: block;
-  }
-  .contact-door-closed-dark {
-    display: none;
-  }
-
-  [data-theme="dark"] .contact-door-closed-light {
-    display: none;
-  }
-  [data-theme="dark"] .contact-door-closed-dark {
-    display: block;
-  }
-
-  .contact-door-open {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  .contact-door-container:hover .contact-door-closed {
-    opacity: 0;
-  }
-
-  .contact-door-container:hover .contact-door-open {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  #psychedelicCanvas {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .contact-door-frame {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
   }
 </style>

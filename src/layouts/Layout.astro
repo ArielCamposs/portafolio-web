@@ -258,10 +258,6 @@ import "../styles/global.css";
                 // --- CAMBIO DE TEMA SEGÚN DESPLAZAMIENTO ---
                 initScrollThemeSwitch();
 
-                // --- PUERTAS DE ESCAPE Y CONTADOR ---
-                initDoorNavigation();
-                initCountdownTimer();
-
                 // --- INTERCAMBIO DE CARACTERES ---
                 initCharSwapAnimation();
 
@@ -533,67 +529,6 @@ import "../styles/global.css";
                     // Refrescar ScrollTrigger para asegurar coordenadas correctas
                     ScrollTrigger.refresh();
                 }
-            }
-
-            // Temporizador de cuenta regresiva hacia las 16:20 (4:20 PM)
-            function initCountdownTimer() {
-                const timers = document.querySelectorAll('.countdown-timer');
-                if (timers.length === 0) return;
-
-                function update() {
-                    const now = new Date();
-                    const target = new Date();
-                    target.setHours(16, 20, 0, 0);
-
-                    if (now >= target) {
-                        target.setDate(target.getDate() + 1);
-                    }
-
-                    const diff = target.getTime() - now.getTime();
-                    const hours = Math.floor(diff / (1000 * 60 * 60));
-                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                    const formatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    timers.forEach(t => t.textContent = formatted);
-                }
-
-                update();
-                setInterval(update, 1000);
-            }
-
-            // Navegación de Puerta
-            function initDoorNavigation() {
-                const doors = document.querySelectorAll('.contact-door-open, .hero-door-open');
-                if (doors.length === 0) return;
-
-                function is420() {
-                    const now = new Date();
-                    return now.getHours() === 16 && now.getMinutes() === 20;
-                }
-
-                // Auto-redirección a las 16:20
-                setInterval(() => {
-                    if (is420()) {
-                        window.location.href = '/dramatic-exit?from=' + encodeURIComponent(window.location.pathname);
-                    }
-                }, 1000);
-
-                doors.forEach(door => {
-                    door.style.cursor = 'pointer';
-                    door.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const isFromHero = door.closest('.hero-exit') !== null;
-                        const returnPath = window.location.pathname + (isFromHero ? '#inicio' : '#contacto');
-                        const fromParam = '?from=' + encodeURIComponent(returnPath);
-
-                        if (is420()) {
-                            window.location.href = '/dramatic-exit' + fromParam;
-                        } else {
-                            window.location.href = '/break' + fromParam;
-                        }
-                    });
-                });
             }
 
             // Animación de Intercambio de Caracteres (Bebas Neue Text)
