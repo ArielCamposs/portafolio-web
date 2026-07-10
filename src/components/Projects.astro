@@ -1,6 +1,37 @@
 ---
 const projects = [
   {
+    title: "POSTAS DESAM",
+    category: "Gestión de Inventario",
+    desc: "Plataforma web interna para administrar el stock de medicamentos e insumos médicos en las postas rurales del departamento.",
+    img: "/images/postas-desam.png",
+    client: "DESAM La Ligua",
+    tags: ["Web App", "Inventario", "Postas rurales", "Acceso interno"],
+    features: [
+      "Control de stock por posta rural",
+      "Inventario de medicamentos e insumos médicos",
+      "Acceso seguro con usuario y contraseña",
+      "Panel interno para el equipo de salud municipal",
+    ],
+    result: "Gestión centralizada del inventario en terreno 🏥",
+  },
+  {
+    title: "CONDUCTORES DESAM",
+    category: "App Móvil",
+    desc: "Aplicación móvil para que los conductores del departamento registren su jornada, reportes y actividad operativa en terreno.",
+    img: "/images/desam-conductores.png",
+    portrait: true,
+    client: "DESAM La Ligua",
+    tags: ["App Móvil", "Conductores", "Jornadas", "Acceso interno"],
+    features: [
+      "Inicio de sesión seguro por usuario y contraseña",
+      "Registro de jornada laboral desde el celular",
+      "Envío de reportes operativos en terreno",
+      "Interfaz optimizada para uso móvil diario",
+    ],
+    result: "Control de jornadas y reportes en movilidad 🚐",
+  },
+  {
     title: "NITIV APP",
     category: "Plataforma SaaS",
     desc: "Sistema integral de gestión escolar para convivencia, orientadores y docentes.",
@@ -81,15 +112,12 @@ const projects = [
 ---
 
 <section class="projects-section" id="proyectos">
-  <!-- Contenedor sticky que se fija en pantalla mientras el usuario scrollea -->
-  <div class="projects-sticky">
-    <!-- Encabezado de Proyectos -->
+  <div class="projects-inner">
     <div class="projects-header">
       <h2 class="projects-title">
         <span class="projects-italic">Mis</span>
         <span class="projects-main">PROYECTOS</span>
       </h2>
-      <!-- Badge circular giratoria -->
       <div class="view-all-circle" id="viewAllBadge">
         <div class="view-all-inner">
           <svg class="view-all-svg" viewBox="0 0 100 100">
@@ -109,69 +137,82 @@ const projects = [
       </div>
     </div>
 
-    <!-- Carrusel de tarjetas de proyectos -->
-    <div class="projects-carousel-wrapper">
-      <div class="projects-carousel" id="projectsCarousel">
-        {
-          projects.map((project, index) => (
+    <div class="projects-grid">
+      {
+        projects.map((project, index) => (
+          <div
+            class:list={[
+              "project-card open-drawer-trigger",
+              { "project-card--portrait": project.portrait },
+            ]}
+            data-project-index={index}
+          >
             <div
-              class="project-card open-drawer-trigger"
-              data-project-index={index}
+              class:list={[
+                "project-card-image",
+                { "project-card-image--portrait": project.portrait },
+              ]}
             >
-              <div class="project-card-image">
-                <img src={project.img} alt={project.title} loading="lazy" />
-                <div class="project-card-overlay">
-                  <span class="project-card-view">VER DETALLES</span>
-                </div>
-              </div>
-              <div class="project-card-info">
-                <h3 class="project-card-title">{project.title}</h3>
-                <p class="project-card-desc">{project.category}</p>
-                
-                <!-- Badge circular interactivo -->
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-card-badge-link"
-                    onclick="event.stopPropagation()"
-                  >
-                    <div class="project-card-badge">
-                      <svg class="project-card-badge-svg" viewBox="0 0 100 100">
-                        <path
-                          id={`badgePath-${index}`}
-                          d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
-                          fill="none"
-                        ></path>
-                        <text class="project-card-badge-text">
-                          <textPath href={`#badgePath-${index}`}>
-                            VER SITIO WEB • VER SITIO WEB •
-                          </textPath>
-                        </text>
-                      </svg>
-                      <div class="project-card-badge-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <line x1="2" y1="12" x2="22" y2="12"></line>
-                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
-                      </div>
-                    </div>
-                  </a>
-                )}
-              </div>
+              <img src={project.img} alt={project.title} loading="lazy" />
             </div>
-          ))
-        }
-      </div>
+            <div class="project-card-info">
+              {
+                project.client && (
+                  <span class="project-card-client">{project.client}</span>
+                )
+              }
+              <h3 class="project-card-title">{project.title}</h3>
+              <p class="project-card-desc">{project.category}</p>
+
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-card-badge-link"
+                  onclick="event.stopPropagation()"
+                >
+                  <div class="project-card-badge">
+                    <svg class="project-card-badge-svg" viewBox="0 0 100 100">
+                      <path
+                        id={`badgePath-${index}`}
+                        d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
+                        fill="none"
+                      ></path>
+                      <text class="project-card-badge-text">
+                        <textPath href={`#badgePath-${index}`}>
+                          VER SITIO WEB • VER SITIO WEB •
+                        </textPath>
+                      </text>
+                    </svg>
+                    <div class="project-card-badge-icon">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+              )}
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <script define:vars={{ projects }}>
   window.addEventListener("loaderComplete", () => {
-    // Abrir drawer al hacer clic en tarjeta
     const cards = document.querySelectorAll(".project-card");
     cards.forEach((card) => {
       const index = parseInt(card.getAttribute("data-project-index") || "0");
@@ -186,24 +227,6 @@ const projects = [
       });
     });
 
-    // Zoom inverso con GSAP
-    const imgs = document.querySelectorAll(".project-card-image img");
-    imgs.forEach((img) => {
-      // @ts-ignore
-      gsap.set(img, { scale: 1.1 });
-      const card = img.closest(".project-card");
-      if (!card) return;
-      card.addEventListener("mouseenter", () => {
-        // @ts-ignore
-        gsap.to(img, { scale: 1, duration: 0.7, ease: "power3.out" });
-      });
-      card.addEventListener("mouseleave", () => {
-        // @ts-ignore
-        gsap.to(img, { scale: 1.1, duration: 0.5, ease: "power2.inOut" });
-      });
-    });
-
-    // Rotar badge principal del header
     const badge = document.getElementById("viewAllBadge");
     if (badge) {
       let rot = 0;
@@ -216,50 +239,6 @@ const projects = [
       rotateBadge();
     }
 
-    // ---- Scroll horizontal con GSAP ScrollTrigger (conectado a Lenis en Layout.astro) ----
-    function setupHorizontalScroll() {
-      if (window.innerWidth <= 768) return;
-      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-
-      var section = document.getElementById("proyectos");
-      var sticky = section && section.querySelector(".projects-sticky");
-      var carousel = document.getElementById("projectsCarousel");
-      if (!section || !sticky || !carousel) return;
-
-      // Registrar plugin (es seguro llamarlo varias veces)
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Calcular cuánto debe moverse el carrusel
-      var totalMove = carousel.scrollWidth - window.innerWidth;
-      if (totalMove <= 0) return;
-
-      // Animar el translateX del carrusel vinculado al scroll de la página
-      gsap.to(carousel, {
-        x: -totalMove,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=" + totalMove,
-          pin: sticky,
-          pinSpacing: true,
-          scrub: 1.5,           // Número = segundos de lag suave (efecto lerp/rubber band)
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onRefresh: function() {
-            totalMove = carousel.scrollWidth - window.innerWidth;
-          }
-        }
-      });
-
-      // Refrescar después de que ScrollTrigger calcule posiciones
-      ScrollTrigger.refresh();
-    }
-
-    // Esperar a que Lenis y el DOM estén completamente listos
-    setTimeout(setupHorizontalScroll, 400);
-
-    // Rotación de los badges en cada tarjeta
     const cardBadges = document.querySelectorAll(".project-card-badge");
     if (cardBadges.length > 0) {
       const badgeRotations = Array.from(cardBadges).map(() => 0);
@@ -283,7 +262,6 @@ const projects = [
           if (svg) {
             const speed = badgeHoverStates[i] ? 1.5 : 0.4;
             badgeRotations[i] = (badgeRotations[i] + speed) % 360;
-            // @ts-ignore
             svg.style.transform = `rotate(${badgeRotations[i]}deg)`;
           }
         });
@@ -299,38 +277,21 @@ const projects = [
     background: var(--bg-primary);
     transition: background-color 0.4s ease;
     width: 100%;
-    padding: 3.5rem 0 2.5rem; /* Solo en mobile; desktop lo sobreescribe */
+    padding: 4rem 0 5rem;
   }
 
-  /* ScrollTrigger pina este elemento automáticamente */
-  .projects-sticky {
-    background: var(--bg-primary);
-    transition: background-color 0.4s ease;
+  .projects-inner {
     width: 100%;
-    padding: 0; /* El padding lo lleva projects-section en mobile */
-  }
-
-  @media (min-width: 769px) {
-    .projects-section {
-      padding: 0;
-    }
-    .projects-sticky {
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 4rem 0 3rem;
-    }
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 max(1.5rem, calc((100vw - 1400px) / 2 + 1.5rem));
   }
 
   .projects-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 auto 1.5rem auto;
-    max-width: 100%;
-    padding: 0 max(2rem, calc((100vw - 1400px) / 2 + 2rem));
+    margin: 0 0 2.5rem 0;
     gap: 2rem;
     width: 100%;
   }
@@ -367,18 +328,20 @@ const projects = [
   }
 
   @media (max-width: 768px) {
+    .projects-section {
+      padding: 3rem 0 3.5rem;
+    }
+
     .projects-header {
-      /* En mobile: título a la izquierda, badge a la derecha en la misma fila */
       flex-direction: row;
       align-items: flex-end;
       justify-content: space-between;
       gap: 1rem;
-      padding-right: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.75rem;
     }
 
     .view-all-circle {
-      width: 64px;      /* Más pequeño en mobile */
+      width: 64px;
       height: 64px;
       flex-shrink: 0;
     }
@@ -396,7 +359,6 @@ const projects = [
     }
   }
 
-  /* Badge circular del header */
   .view-all-circle {
     width: 120px;
     height: 120px;
@@ -439,70 +401,31 @@ const projects = [
     transition: color 0.4s ease;
   }
 
-  /* Carrusel horizontal */
-  .projects-carousel-wrapper {
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
     width: 100%;
-    overflow: hidden;
+    align-items: start;
   }
 
-  .projects-carousel {
-    display: flex;
-    gap: 3.5rem;
-    padding: 1rem 0;
-    width: max-content;   /* ancho natural de todas las tarjetas */
-    padding-left: max(2rem, calc((100vw - 1400px) / 2 + 2rem));
-    padding-right: max(2rem, calc((100vw - 1400px) / 2 + 2rem));
-    user-select: none;
-    will-change: transform;
-  }
-
-  @media (max-width: 768px) {
-    .projects-carousel-wrapper {
-      overflow-x: auto;
-      overflow-y: visible;
-      scrollbar-width: none;
-    }
-    .projects-carousel-wrapper::-webkit-scrollbar {
-      display: none;
-    }
-    .projects-carousel {
-      width: max-content;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      cursor: grab;
-      will-change: auto;
-      gap: 1.5rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-      padding-top: 0.5rem;
-      padding-bottom: 1rem;
-    }
-    .project-card {
-      flex: 0 0 clamp(260px, 78vw, 400px); /* Más compactas en mobile */
+  @media (max-width: 900px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
   }
 
-  .projects-carousel::-webkit-scrollbar {
-    display: none; /* Oculta scrollbar Chrome/Safari */
-  }
-
-  .projects-carousel.active {
-    cursor: grabbing;
-  }
-
-  /* Tarjetas del proyecto */
   .project-card {
-    flex: 0 0 clamp(290px, 85vw, 620px);
-    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     cursor: none;
     position: relative;
     background: var(--bg-secondary);
-    border-radius: 16px;
+    border-radius: 18px;
     overflow: hidden;
     border: 1px solid var(--border);
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
   }
 
@@ -511,52 +434,45 @@ const projects = [
     border-color: var(--border);
   }
 
-  .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  }
-
   .project-card-image {
     width: 100%;
-    aspect-ratio: 16/9.5;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
     position: relative;
     background: var(--accent);
+  }
+
+  .project-card-image--portrait {
+    padding: 1rem 1.5rem;
+    background: #eef1f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  [data-theme="dark"] .project-card-image--portrait {
+    background: #252525;
   }
 
   .project-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
     display: block;
   }
 
-  .project-card-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(26, 26, 26, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .project-card:hover .project-card-overlay {
-    opacity: 1;
-  }
-
-  .project-card-view {
-    color: #fff;
-    font-family: var(--font-display);
-    font-size: 2.2rem;
-    font-weight: 900;
-    letter-spacing: 0.05em;
+  .project-card-image--portrait img {
+    width: auto;
+    height: 100%;
+    max-width: 38%;
+    min-width: 120px;
+    object-fit: contain;
+    object-position: center;
   }
 
   .project-card-info {
-    padding: 2.2rem;
+    padding: 2rem 2.2rem 2.4rem;
     background: var(--bg-secondary);
     position: relative;
     display: flex;
@@ -566,9 +482,23 @@ const projects = [
     border-top: 1px solid var(--border);
   }
 
+  .project-card-client {
+    font-family: var(--font-geist);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--violet);
+    width: fit-content;
+    padding: 0.35rem 0.65rem;
+    border: 1px solid rgba(161, 153, 255, 0.35);
+    border-radius: 999px;
+    margin-bottom: 0.35rem;
+  }
+
   .project-card-title {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 6vw, 4.8rem);
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
     font-weight: 900;
     color: var(--text-primary);
     text-transform: uppercase;
@@ -581,14 +511,13 @@ const projects = [
   .project-card-desc {
     font-family: var(--font-playfair);
     font-style: italic;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
     color: var(--text-primary);
     opacity: 0.7;
     margin: 0;
     transition: color 0.4s ease;
   }
 
-  /* Badge circular interactivo en tarjeta */
   .project-card-badge-link {
     position: absolute;
     bottom: 2rem;
@@ -644,7 +573,6 @@ const projects = [
     height: 100%;
   }
 
-  /* Hover del badge */
   .project-card:hover .project-card-badge {
     transform: scale(1.1);
   }

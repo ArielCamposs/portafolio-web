@@ -232,7 +232,31 @@
         display: block;
         transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .drawer-panel:hover .drawer-image-container img {
+
+    .drawer-image-container--portrait {
+        aspect-ratio: 16 / 10;
+        max-height: none;
+        padding: 1rem 1.5rem;
+        background: #eef1f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    [data-theme="dark"] .drawer-image-container--portrait {
+        background: #252525;
+    }
+
+    .drawer-image-container--portrait img {
+        width: auto;
+        height: 100%;
+        max-width: 34%;
+        min-width: 140px;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .drawer-panel:hover .drawer-image-container:not(.drawer-image-container--portrait) img {
         transform: scale(1.02);
     }
 
@@ -455,17 +479,26 @@
 
         // Populate elements
         if (drawerTitle) drawerTitle.textContent = project.title;
-        if (drawerCategory) drawerCategory.textContent = `// ${project.category.toUpperCase().replace(/ /g, "_")}`;
+        if (drawerCategory) {
+            drawerCategory.textContent = project.client
+                ? `// ${project.client.toUpperCase().replace(/ /g, "_")}`
+                : `// ${project.category.toUpperCase().replace(/ /g, "_")}`;
+        }
         if (drawerDesc) drawerDesc.textContent = project.desc;
         
         // Image
         if (drawerImage) {
+            const imageContainer = drawerImage.parentElement;
             if (project.img) {
                 drawerImage.src = project.img;
                 drawerImage.alt = project.title;
-                drawerImage.parentElement!.style.display = "block";
+                imageContainer!.style.display = "block";
+                imageContainer!.classList.toggle(
+                    "drawer-image-container--portrait",
+                    Boolean(project.portrait),
+                );
             } else {
-                drawerImage.parentElement!.style.display = "none";
+                imageContainer!.style.display = "none";
             }
         }
 
