@@ -60,46 +60,6 @@ const SOCIAL_LINKS = {
                 <a href="#contacto" class="menu-link"
                     ><div class="menu-link-inner">CONTACTO</div></a
                 >
-
-                <!-- Interruptor de Tema Móvil (visible solo en celulares) -->
-                <div class="menu-theme-toggle" id="menuThemeToggle">
-                    <div class="theme-toggle-sun">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                        >
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <line x1="12" y1="2" x2="12" y2="5"></line>
-                            <line x1="12" y1="19" x2="12" y2="22"></line>
-                            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"
-                            ></line>
-                            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"
-                            ></line>
-                            <line x1="2" y1="12" x2="5" y2="12"></line>
-                            <line x1="19" y1="12" x2="22" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"
-                            ></line>
-                            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"
-                            ></line>
-                        </svg>
-                    </div>
-                    <div class="theme-toggle-moon">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                        >
-                            <path
-                                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                            ></path>
-                        </svg>
-                    </div>
-                </div>
             </nav>
 
             <div class="menu-separator"></div>
@@ -151,7 +111,6 @@ const SOCIAL_LINKS = {
         const menuSeparator = menuCard.querySelector(".menu-separator");
         const menuFooterLinks = menuCard.querySelectorAll(".social-link");
         const menuCloseIcon = closeBtn.querySelector("svg");
-        const menuThemeToggle = document.getElementById("menuThemeToggle");
 
         // Inicializar estado de oculto
         // @ts-ignore
@@ -338,69 +297,6 @@ const SOCIAL_LINKS = {
                 if (isVisible) closeMenu();
             }
         });
-
-        // Configuración de Tema en Móvil
-        if (menuThemeToggle) {
-            menuThemeToggle.addEventListener("click", () => {
-                const current =
-                    document.documentElement.getAttribute("data-theme");
-                const next = current === "dark" ? "light" : "dark";
-                document.documentElement.setAttribute("data-theme", next);
-
-                // Actualizar interruptor móvil
-                const sun = menuThemeToggle.querySelector(
-                    ".theme-toggle-sun",
-                ) as HTMLElement;
-                const moon = menuThemeToggle.querySelector(
-                    ".theme-toggle-moon",
-                ) as HTMLElement;
-
-                // Buscar el botón de tema de escritorio para sincronizarlo
-                const desktopToggle = document.querySelector(
-                    ".theme-toggle",
-                ) as HTMLElement;
-
-                if (next === "dark") {
-                    menuThemeToggle.style.backgroundColor =
-                        "rgba(230, 225, 221, 0.3)";
-                    sun.style.backgroundColor = "transparent";
-                    moon.style.backgroundColor = "rgba(26, 26, 26, 0.8)";
-                    if (desktopToggle) {
-                        desktopToggle.style.backgroundColor =
-                            "rgba(230, 225, 221, 0.3)";
-                        (
-                            desktopToggle.querySelector(
-                                ".theme-toggle-sun",
-                            ) as HTMLElement
-                        ).style.backgroundColor = "transparent";
-                        (
-                            desktopToggle.querySelector(
-                                ".theme-toggle-moon",
-                            ) as HTMLElement
-                        ).style.backgroundColor = "rgba(26, 26, 26, 0.8)";
-                    }
-                } else {
-                    menuThemeToggle.style.backgroundColor =
-                        "rgba(26, 26, 26, 0.3)";
-                    sun.style.backgroundColor = "rgba(230, 225, 221, 0.8)";
-                    moon.style.backgroundColor = "transparent";
-                    if (desktopToggle) {
-                        desktopToggle.style.backgroundColor =
-                            "rgba(26, 26, 26, 0.3)";
-                        (
-                            desktopToggle.querySelector(
-                                ".theme-toggle-sun",
-                            ) as HTMLElement
-                        ).style.backgroundColor = "rgba(230, 225, 221, 0.8)";
-                        (
-                            desktopToggle.querySelector(
-                                ".theme-toggle-moon",
-                            ) as HTMLElement
-                        ).style.backgroundColor = "transparent";
-                    }
-                }
-            });
-        }
     }
 
     // Efecto hover letra a letra (Eszter style)

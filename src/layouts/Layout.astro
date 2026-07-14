@@ -74,6 +74,9 @@ import "../styles/global.css";
             </div>
         </div>
 
+        <!-- Barra de Progreso de Scroll -->
+        <div class="scroll-progress" id="scrollProgress"></div>
+
         <!-- Cuadrícula de Fondo (Grid lines) -->
         <div class="grid-background">
             <div class="line"></div>
@@ -98,7 +101,8 @@ import "../styles/global.css";
         <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
         <script is:inline src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
-        <!-- Lógica de Preloader (loader.js) -->
+        <!-- Lógica de Preloader simplificada: basada en tiempo, no en assets externos -->
+        <!-- Las imágenes lazy loading se cargan sin bloquear la entrada -->
         <script is:inline>
             (function() {
                 'use strict';
@@ -108,57 +112,35 @@ import "../styles/global.css";
 
                 if (!loader || !loaderCounter) return;
 
-                const images = Array.from(document.querySelectorAll('img'));
-                const bgElements = Array.from(document.querySelectorAll('[style*="background-image"]'));
-
-                // Forzar imágenes a cargar inmediatamente
-                images.forEach(img => {
-                    if (img.loading === 'lazy') {
-                        img.loading = 'eager';
-                    }
-                });
-
-                const totalAssets = images.length + bgElements.length;
-                let loadedAssets = 0;
                 let displayedPercent = 0;
+                const targetPercent = 100;
+                const isMobile = window.innerWidth <= 768;
+                // Duración total de la pseudo-animación de carga
+                const duration = isMobile ? 800 : 1500; // ms
+                const startTime = performance.now();
 
-                if (totalAssets === 0) {
-                    animateToPercent(100, completeLoader);
-                    return;
-                }
+                function animateLoader() {
+                    const elapsed = performance.now() - startTime;
+                    const progress = Math.min(1, elapsed / duration);
+                    // easeOutCubic para que parezca natural
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    displayedPercent = Math.round(eased * 100);
+                    loaderCounter.textContent = displayedPercent + '%';
 
-                function updateProgress() {
-                    loadedAssets++;
-                    const actualPercent = Math.min(100, Math.round((loadedAssets / totalAssets) * 100));
-                    animateToPercent(actualPercent, loadedAssets >= totalAssets ? completeLoader : null);
-                }
-
-                function animateToPercent(targetPercent, onComplete) {
-                    const animate = () => {
-                        if (displayedPercent < targetPercent) {
-                            displayedPercent += Math.ceil((targetPercent - displayedPercent) / 10) || 1;
-                            if (displayedPercent > targetPercent) displayedPercent = targetPercent;
-                            loaderCounter.textContent = displayedPercent + '%';
-                            requestAnimationFrame(animate);
-                        } else if (onComplete) {
-                            onComplete();
-                        }
-                    };
-                    animate();
-                }
-
-                function completeLoader() {
-                    if (typeof gsap === 'undefined') {
-                        setTimeout(completeLoader, 50);
-                        return;
+                    if (displayedPercent >= 100) {
+                        // Esperar a que GSAP esté disponible
+                        waitForGsap();
+                    } else {
+                        requestAnimationFrame(animateLoader);
                     }
-                    const decodePromises = images.map(img => {
-                        if (img.decode) {
-                            return img.decode().catch(() => {});
-                        }
-                        return Promise.resolve();
-                    });
-                    Promise.all(decodePromises).then(finishLoader);
+                }
+
+                function waitForGsap() {
+                    if (typeof gsap !== 'undefined') {
+                        finishLoader();
+                    } else {
+                        setTimeout(waitForGsap, 50);
+                    }
                 }
 
                 function finishLoader() {
@@ -196,33 +178,21 @@ import "../styles/global.css";
                     }, "-=0.2");
                 }
 
-                images.forEach(img => {
-                    if (img.complete) {
-                        updateProgress();
-                    } else {
-                        img.addEventListener('load', updateProgress);
-                        img.addEventListener('error', updateProgress);
-                    }
-                });
+                // Iniciar animación
+                animateLoader();
 
-                bgElements.forEach(el => {
-                    const style = el.getAttribute('style');
-                    const match = style.match(/url\(['"]?([^'")\s]+)['"]?\)/);
-                    if (match && match[1]) {
-                        const bgImg = new Image();
-                        bgImg.onload = updateProgress;
-                        bgImg.onerror = updateProgress;
-                        bgImg.src = match[1];
-                    } else {
-                        updateProgress();
-                    }
-                });
-
+                // Fallback absoluto: si algo falla, ocultar loader tras 6s
+                // (no asume que GSAP está cargado — usa CSS directo si es necesario)
                 setTimeout(() => {
-                    if (displayedPercent < 100) {
-                        animateToPercent(100, completeLoader);
+                    if (loader.style.display !== 'none') {
+                        if (typeof gsap !== 'undefined') {
+                            gsap.set(loader, { display: 'none' });
+                        } else {
+                            loader.style.display = 'none';
+                        }
+                        window.dispatchEvent(new CustomEvent('loaderComplete'));
                     }
-                }, 5000);
+                }, 6000);
             })();
         </script>
 
@@ -264,6 +234,21 @@ import "../styles/global.css";
 
                 // --- INTERCAMBIO DE CARACTERES ---
                 initCharSwapAnimation();
+
+                // --- ANIMACIONES DE REVELACIÓN AL SCROLL (BUFFY) ---
+                initRevealAnimations();
+
+                // --- CONTEO DE ESTADÍSTICAS (BUFFY) ---
+                initStatsCounter();
+
+                // --- ELEMENTOS MAGNÉTICOS (BUFFY) ---
+                initMagneticElements();
+
+                // --- PARALLAX EN SECCIONES (BUFFY) ---
+                initParallaxEffects();
+
+                // --- SKELETON LOADING (BUFFY) ---
+                initSkeletonLoading();
 
                 // Parallax en las líneas del Grid
                 const grid = document.querySelector(".grid-background");
@@ -498,7 +483,7 @@ import "../styles/global.css";
             }
 
             function updateThemeVisuals(isDark) {
-                const toggles = document.querySelectorAll('.theme-toggle, .menu-theme-toggle');
+                const toggles = document.querySelectorAll('.theme-toggle');
                 toggles.forEach(t => {
                     const sun = t.querySelector('.theme-toggle-sun');
                     const moon = t.querySelector('.theme-toggle-moon');
@@ -624,6 +609,221 @@ import "../styles/global.css";
                 }
 
                 animate();
+            }
+
+            // ============================================
+            // ANIMACIONES NUEVAS (BUFFY) — Scroll Reveal + Stats + Magnetic + Parallax
+            // ============================================
+
+            // Barra de progreso de scroll
+            function updateScrollProgress() {
+                const progressBar = document.getElementById('scrollProgress');
+                if (!progressBar) return;
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                progressBar.style.width = Math.min(progress, 100) + '%';
+            }
+
+            window.addEventListener('scroll', updateScrollProgress, { passive: true });
+            window.addEventListener('resize', updateScrollProgress, { passive: true });
+
+            // Animaciones de revelación al hacer scroll
+            function initRevealAnimations() {
+                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+                const revealConfigs = [
+                    { selector: '[data-reveal="fade-up"]', from: { opacity: 0, y: 50 }, to: { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' } },
+                    { selector: '[data-reveal="scale"]', from: { opacity: 0, scale: 0.92 }, to: { opacity: 1, scale: 1, duration: 1, ease: 'power3.out' } },
+                    { selector: '[data-reveal="slide-left"]', from: { opacity: 0, x: -40 }, to: { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' } },
+                ];
+
+                revealConfigs.forEach(config => {
+                    const els = document.querySelectorAll(config.selector);
+                    els.forEach(el => {
+                        // Obtener stagger si existe
+                        const staggerStr = el.getAttribute('data-reveal-stagger');
+                        const staggerDelay = staggerStr ? parseFloat(staggerStr) : 0;
+                        
+                        if (staggerDelay > 0) {
+                            // Es un contenedor con hijos que deben animarse en secuencia
+                            const children = Array.from(el.children);
+                            children.forEach((child, i) => {
+                                gsap.fromTo(child, config.from, {
+                                    ...config.to,
+                                    delay: i * staggerDelay,
+                                    scrollTrigger: {
+                                        trigger: el,
+                                        start: 'top 85%',
+                                        toggleActions: 'play none none none',
+                                    }
+                                });
+                            });
+                        } else {
+                            gsap.fromTo(el, config.from, {
+                                ...config.to,
+                                scrollTrigger: {
+                                    trigger: el,
+                                    start: 'top 85%',
+                                    toggleActions: 'play none none none',
+                                }
+                            });
+                        }
+                    });
+                });
+
+                // Separadores animados
+                const dividers = document.querySelectorAll('.section-divider--animated');
+                dividers.forEach(div => {
+                    gsap.fromTo(div, { scaleX: 0 }, {
+                        scaleX: 1,
+                        duration: 1.2,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: div,
+                            start: 'top 90%',
+                            toggleActions: 'play none none none',
+                        }
+                    });
+                });
+
+                ScrollTrigger.refresh();
+            }
+
+            // Contador de estadísticas animado (usando IntersectionObserver, más confiable en móvil)
+            function initStatsCounter() {
+                if (typeof gsap === 'undefined') return;
+                
+                const stats = document.querySelectorAll('[data-count-to]');
+                if (stats.length === 0) return;
+                
+                // Detectar cuando los stats entran al viewport usando IntersectionObserver nativo
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        
+                        const stat = entry.target;
+                        const targetValue = parseFloat(stat.getAttribute('data-count-to') || '0');
+                        const suffix = stat.getAttribute('data-count-suffix') || '';
+                        const duration = parseFloat(stat.getAttribute('data-count-duration') || '2');
+                        
+                        if (isNaN(targetValue)) return;
+                        
+                        // Animar con GSAP (sin ScrollTrigger)
+                        const obj = { val: 0 };
+                        gsap.to(obj, {
+                            val: targetValue,
+                            duration: duration,
+                            ease: 'power3.out',
+                            onUpdate: () => {
+                                if (Number.isInteger(targetValue)) {
+                                    stat.textContent = Math.round(obj.val) + suffix;
+                                } else {
+                                    stat.textContent = obj.val.toFixed(1) + suffix;
+                                }
+                            },
+                            onComplete: () => {
+                                stat.textContent = targetValue + suffix;
+                            }
+                        });
+                        
+                        // Dejar de observar después de animar (solo una vez)
+                        observer.unobserve(stat);
+                    });
+                }, { 
+                    threshold: 0.3,  // 30% visible para empezar
+                });
+                
+                stats.forEach(stat => observer.observe(stat));
+            }
+
+            // Elementos magnéticos (botones que siguen al cursor)
+            function initMagneticElements() {
+                const magnets = document.querySelectorAll('[data-magnetic]');
+                magnets.forEach(btn => {
+                    btn.addEventListener('mousemove', (e) => {
+                        const rect = btn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        gsap.to(btn, {
+                            x: x * 0.3,
+                            y: y * 0.3,
+                            duration: 0.4,
+                            ease: 'power2.out',
+                            overwrite: 'auto',
+                        });
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        gsap.to(btn, {
+                            x: 0,
+                            y: 0,
+                            duration: 0.6,
+                            ease: 'elastic.out(1, 0.4)',
+                            overwrite: 'auto',
+                        });
+                    });
+                });
+            }
+
+            // Efecto parallax sutil en imágenes y elementos
+            function initParallaxEffects() {
+                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+                
+                const parallaxEls = document.querySelectorAll('[data-parallax]');
+                parallaxEls.forEach(el => {
+                    const speed = parseFloat(el.getAttribute('data-parallax') || '0.15');
+                    gsap.fromTo(el, { y: 0 }, {
+                        y: () => -(el.offsetHeight * speed),
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: el.parentElement || el,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 1.5,
+                        }
+                    });
+                });
+            }
+
+            // ============================================
+            // SKELETON / SHIMMER LOADING (BUFFY)
+            // ============================================
+            function initSkeletonLoading() {
+                const wrappers = document.querySelectorAll('.skeleton-wrapper');
+                
+                wrappers.forEach(wrapper => {
+                    const img = wrapper.querySelector('img');
+                    const placeholder = wrapper.querySelector('.skeleton-placeholder');
+                    
+                    if (!img || !placeholder) return;
+                    
+                    // Si la imagen ya está cargada (cache) — mostrar inmediatamente
+                    if (img.complete && img.naturalWidth > 0) {
+                        img.classList.add('loaded');
+                        return;
+                    }
+                    
+                    // La imagen aún no carga — ocultarla y mostrar el skeleton
+                    img.classList.add('skeleton-loading');
+                    
+                    // Cuando la imagen se cargue, mostrar y ocultar skeleton
+                    img.addEventListener('load', () => {
+                        img.classList.remove('skeleton-loading');
+                        img.classList.add('loaded');
+                    });
+                    
+                    // Fallback: error también oculta skeleton
+                    img.addEventListener('error', () => {
+                        img.classList.remove('skeleton-loading');
+                        img.classList.add('loaded');
+                    });
+                    
+                    // Si por algún motivo ya está completa (imagen en blanco/placeholder)
+                    if (img.complete) {
+                        img.classList.remove('skeleton-loading');
+                        img.classList.add('loaded');
+                    }
+                });
             }
         </script>
     </body>

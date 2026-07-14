@@ -1,0 +1,1614 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+---
+
+<Layout title="404 - Página no encontrada | Ariel Campos">
+  <!-- Navbar flotante -->
+  <Navbar />
+
+  <main class="notfound-main">
+    <!-- Partículas de código flotantes en el fondo -->
+    <div class="notfound-particles" aria-hidden="true" id="notfoundParticles"></div>
+
+    <div class="notfound-content">
+      <!-- Número 404 animado -->
+      <div class="notfound-number-wrapper">
+        <h1 class="notfound-number" id="notfoundNumber">404</h1>
+      </div>
+
+      <!-- Línea tipo terminal -->
+      <div class="notfound-terminal-line" id="notfoundTerminal">
+        <span class="terminal-prompt">$</span>
+        <span class="terminal-command" id="terminalCommand"></span>
+        <span class="terminal-cursor">_</span>
+      </div>
+
+      <!-- Mensaje de error -->
+      <p class="notfound-message">
+        Error: La ruta solicitada no existe en el servidor.
+      </p>
+
+      <!-- Código de sugerencia -->
+      <div class="notfound-suggestion">
+        <span class="suggestion-comment">// Sugerencia:</span>
+        <span class="suggestion-code" id="suggestionCode">
+          <a href="/" class="suggestion-link">return redirect("/")</a>
+        </span>
+      </div>
+
+      <!-- Botón de volver con efecto magnético -->
+      <a href="/" class="notfound-btn" data-magnetic>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Volver al Inicio
+      </a>
+    </div>
+
+    <!-- Footer con datos técnicos -->
+    <div class="notfound-footer">
+      <span class="footer-status" id="statusCode">Status: 404</span>
+      <span class="footer-status" id="statusText">Not Found</span>
+      <span class="footer-hint" id="easterEggHint">Presiona ~ para abrir consola</span>
+    </div>
+
+    <!-- ===== EASTER EGG: Consola Oculta ===== -->
+    <div class="egg-console-overlay" id="eggConsoleOverlay">
+      <div class="egg-console" id="eggConsole">
+        <div class="egg-console-header">
+          <span class="egg-console-title">
+            <span class="egg-console-icon">&gt;_</span>
+            hidden-terminal ~/404
+          </span>
+          <button class="egg-console-close" id="eggConsoleClose" type="button" aria-label="Cerrar consola">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="egg-console-output" id="eggConsoleOutput">
+          <div class="console-line">
+            <span class="console-prompt">$</span>
+            <span class="console-text">Bienvenido a la consola oculta 🥚</span>
+          </div>
+          <div class="console-line">
+            <span class="console-prompt">$</span>
+            <span class="console-text">Escribe <span class="console-cmd">help</span> para ver los comandos disponibles.</span>
+          </div>
+        </div>
+        <div class="egg-console-input-row">
+          <span class="console-prompt">$</span>
+          <input
+            type="text"
+            class="egg-console-input"
+            id="eggConsoleInput"
+            placeholder="escribe un comando..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== EASTER EGG: Confeti Container ===== -->
+    <div class="egg-confetti-container" id="eggConfetti"></div>
+
+    <!-- ===== EASTER EGG: Mensaje Secreto ===== -->
+    <div class="egg-secret-message" id="eggSecretMessage">
+      <div class="egg-secret-inner">
+        <span class="egg-secret-icon">🥚</span>
+        <span class="egg-secret-text">¡Has encontrado el Easter Egg!</span>
+        <span class="egg-secret-sub">Presiona ~ para abrir la consola oculta</span>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  (function () {
+    // ============================================
+    // SoundManager: Sintetizador de audio con Web Audio API
+    // Sin archivos externos — todo generado con osciladores
+    // ============================================
+    const SoundManager = (function () {
+      let ctx = null;
+
+      function getCtx() {
+        if (!ctx) {
+          try {
+            ctx = new (window.AudioContext || window.webkitAudioContext)();
+          } catch (e) {
+            return null;
+          }
+        }
+        // Reanudar si está suspendido (requisito de navegadores modernos)
+        if (ctx.state === "suspended") ctx.resume();
+        return ctx;
+      }
+
+      function playTone(freq, duration, type, volume) {
+        const ac = getCtx();
+        if (!ac) return;
+        const osc = ac.createOscillator();
+        const gain = ac.createGain();
+        osc.type = type || "sine";
+        osc.frequency.setValueAtTime(freq, ac.currentTime);
+        gain.gain.setValueAtTime(volume || 0.15, ac.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ac.destination);
+        osc.start(ac.currentTime);
+        osc.stop(ac.currentTime + duration);
+      }
+
+      function playNoise(duration, volume) {
+        const ac = getCtx();
+        if (!ac) return;
+        const bufferSize = Math.floor(ac.sampleRate * duration);
+        const buffer = ac.createBuffer(1, bufferSize, ac.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+        const source = ac.createBufferSource();
+        source.buffer = buffer;
+        const gain = ac.createGain();
+        gain.gain.setValueAtTime(volume || 0.06, ac.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + duration);
+        source.connect(gain);
+        gain.connect(ac.destination);
+        source.start(ac.currentTime);
+      }
+
+      return {
+        /** Blip corto para cada click, sube tono con clickCount */
+        click: function (clickCount) {
+          const freq = 350 + Math.min(clickCount, 7) * 90;
+          playTone(freq, 0.08, "square", 0.08);
+        },
+
+        /** Arpegio ascendente tipo "logro desbloqueado" */
+        celebration: function () {
+          const ac = getCtx();
+          if (!ac) return;
+          const notes = [523, 659, 784, 1047]; // C5 E5 G5 C6
+          notes.forEach((freq, i) => {
+            const osc = ac.createOscillator();
+            const gain = ac.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(freq, ac.currentTime + i * 0.12);
+            gain.gain.setValueAtTime(0.18, ac.currentTime + i * 0.12);
+            gain.gain.exponentialRampToValueAtTime(
+              0.001,
+              ac.currentTime + i * 0.12 + 0.25,
+            );
+            osc.connect(gain);
+            gain.connect(ac.destination);
+            osc.start(ac.currentTime + i * 0.12);
+            osc.stop(ac.currentTime + i * 0.12 + 0.3);
+          });
+        },
+
+        /** Whoosh ascendente tipo sci-fi (abrir terminal) */
+        terminalOpen: function () {
+          const ac = getCtx();
+          if (!ac) return;
+          const osc = ac.createOscillator();
+          const gain = ac.createGain();
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(150, ac.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1200, ac.currentTime + 0.3);
+          gain.gain.setValueAtTime(0.06, ac.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.35);
+          osc.connect(gain);
+          gain.connect(ac.destination);
+          osc.start(ac.currentTime);
+          osc.stop(ac.currentTime + 0.4);
+          // Ruido de fondo sutil
+          playNoise(0.25, 0.03);
+        },
+
+        /** Whoosh descendente (cerrar terminal) */
+        terminalClose: function () {
+          const ac = getCtx();
+          if (!ac) return;
+          const osc = ac.createOscillator();
+          const gain = ac.createGain();
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(800, ac.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(120, ac.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.05, ac.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.25);
+          osc.connect(gain);
+          gain.connect(ac.destination);
+          osc.start(ac.currentTime);
+          osc.stop(ac.currentTime + 0.3);
+        },
+
+        /** Blip sutil de comando ejecutado */
+        command: function () {
+          playTone(660, 0.06, "sine", 0.05);
+        },
+
+        /** Error beep */
+        error: function () {
+          playTone(200, 0.15, "square", 0.06);
+          setTimeout(function () { playTone(160, 0.2, "square", 0.05); }, 150);
+        },
+
+        /** Estática glitch para Matrix */
+        matrix: function () {
+          playNoise(0.3, 0.08);
+          playTone(80, 0.3, "sawtooth", 0.04);
+        },
+
+        /** Forzar inicialización del AudioContext (requiere user gesture) */
+        init: function () {
+          getCtx();
+        },
+      };
+    })();
+
+    // Generar partículas de código flotantes (símbolos de programación)
+    function initParticles() {
+      const container = document.getElementById("notfoundParticles");
+      if (!container) return;
+
+      const symbols = [
+        "{", "}", "<", "/", ">", "(", ")", "[", "]", ";",
+        "const", "let", "var", "=>", "function", "return",
+        "if", "else", "try", "catch", "404", "null",
+        "error", "404", "route", "path", "404",
+      ];
+
+      const isMobile = window.innerWidth <= 768;
+      const count = isMobile ? 15 : 30;
+
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement("span");
+        particle.className = "notfound-particle";
+        particle.textContent =
+          symbols[Math.floor(Math.random() * symbols.length)];
+
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const size = 0.5 + Math.random() * 0.8;
+        const duration = 15 + Math.random() * 25;
+        const delay = Math.random() * 15;
+
+        particle.style.left = x + "%";
+        particle.style.top = y + "%";
+        particle.style.fontSize = size + "rem";
+        particle.style.setProperty("--duration", duration + "s");
+        particle.style.setProperty("--delay", delay + "s");
+
+        container.appendChild(particle);
+      }
+    }
+
+    // Efecto de typing en la línea de terminal
+    function initTerminalTyping() {
+      const el = document.getElementById("terminalCommand");
+      if (!el) return;
+
+      const messages = [
+        "route not found...",
+        "pagina no disponible...",
+        "page not found...",
+        "revisa la URL e intenta de nuevo...",
+      ];
+
+      let msgIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let isPaused = false;
+
+      function type() {
+        if (!el) return;
+
+        const currentMsg = messages[msgIndex];
+
+        if (isPaused) {
+          isPaused = false;
+          isDeleting = true;
+          setTimeout(type, 50);
+          return;
+        }
+
+        if (!isDeleting) {
+          // Escribiendo
+          charIndex++;
+          el.textContent = currentMsg.substring(0, charIndex);
+
+          if (charIndex === currentMsg.length) {
+            // Pausa antes de borrar
+            isPaused = true;
+            setTimeout(type, 2000);
+            return;
+          }
+          setTimeout(type, 40 + Math.random() * 60);
+        } else {
+          // Borrando
+          charIndex--;
+          el.textContent = currentMsg.substring(0, charIndex);
+
+          if (charIndex === 0) {
+            isDeleting = false;
+            msgIndex = (msgIndex + 1) % messages.length;
+            setTimeout(type, 300);
+            return;
+          }
+          setTimeout(type, 20 + Math.random() * 30);
+        }
+      }
+
+      setTimeout(type, 800);
+    }
+
+    // Animación de entrada con GSAP
+    function initEntryAnimation() {
+      // @ts-ignore
+      if (typeof gsap === "undefined") return;
+
+      const tl = gsap.timeline();
+
+      // Número 404 con efecto glitch
+      tl.fromTo(
+        "#notfoundNumber",
+        { scale: 0.3, opacity: 0, rotationX: 90 },
+        {
+          scale: 1,
+          opacity: 1,
+          rotationX: 0,
+          duration: 1.2,
+          ease: "elastic.out(1, 0.6)",
+        },
+      );
+
+      // Terminal line
+      tl.fromTo(
+        "#notfoundTerminal",
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" },
+        "-=0.4",
+      );
+
+      // Mensaje de error
+      tl.fromTo(
+        ".notfound-message",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        "-=0.3",
+      );
+
+      // Sugerencia
+      tl.fromTo(
+        ".notfound-suggestion",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        "-=0.3",
+      );
+
+      // Botón
+      tl.fromTo(
+        ".notfound-btn",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" },
+        "-=0.3",
+      );
+
+      // Footer status
+      tl.fromTo(
+        ".notfound-footer",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, ease: "power2.out" },
+        "-=0.4",
+      );
+    }
+
+    // Efecto glitch aleatorio en el número
+    function initGlitchEffect() {
+      const numEl = document.getElementById("notfoundNumber");
+      if (!numEl) return;
+
+      const originalText = "404";
+
+      function doGlitch() {
+        // Cambiar dígitos aleatoriamente
+        const glitchText = Array.from(originalText)
+          .map((c) => (Math.random() > 0.6 ? Math.floor(Math.random() * 10) : c))
+          .join("");
+
+        numEl.textContent = glitchText;
+
+        // Volver al original después de un momento
+        setTimeout(() => {
+          numEl.textContent = originalText;
+        }, 100 + Math.random() * 150);
+
+        // Programar próximo glitch
+        const nextDelay = 3000 + Math.random() * 7000;
+        setTimeout(doGlitch, nextDelay);
+      }
+
+      // Primer glitch después de 3s
+      setTimeout(doGlitch, 3000);
+    }
+
+    // Inicializar (con flag para evitar ejecución doble)
+    let animInitialized = false;
+
+    function startAnimations() {
+      if (animInitialized) return;
+      animInitialized = true;
+      initParticles();
+      initEntryAnimation();
+      initGlitchEffect();
+      initTerminalTyping();
+      initEasterEggs();
+    }
+
+    window.addEventListener("load", startAnimations);
+    window.addEventListener("loaderComplete", startAnimations);
+
+    // Redirigir links del menú a la home en la página 404
+    if (window.location.pathname !== "/") {
+      document.querySelectorAll(".menu-link").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+          link.setAttribute("href", "/" + href);
+        }
+      });
+    }
+
+    // ============================================
+    // EASTER EGG: Click counter en 404 + Celebración
+    // Se reinicia cada vez que entras a la página
+    // ============================================
+    function initEasterEggClicks() {
+      const numEl = document.getElementById("notfoundNumber");
+      const secretMsg = document.getElementById("eggSecretMessage");
+      if (!numEl || !secretMsg) return;
+
+      const eggState = { clicks: 0, activated: false };
+      let clickCount = 0;
+
+      numEl.style.cursor = "pointer";
+
+      numEl.addEventListener("click", () => {
+        clickCount++;
+        eggState.clicks = clickCount;
+
+        // 🔊 Sonido de click (tono ascendente)
+        SoundManager.click(clickCount);
+        SoundManager.init(); // Asegurar AudioContext listo
+
+        // Feedback inmediato: vibrar y escalar
+        // @ts-ignore
+        if (typeof gsap !== "undefined") {
+          gsap.fromTo(
+            numEl,
+            { scale: 1 },
+            {
+              scale: 0.92,
+              duration: 0.08,
+              yoyo: true,
+              repeat: 1,
+              ease: "power1.inOut",
+            },
+          );
+        }
+
+        // Mostrar contador de clics después del primero
+        if (clickCount === 1) {
+          const counter = document.createElement("span");
+          counter.className = "egg-click-counter";
+          counter.textContent = "🥚 " + clickCount + "/7";
+          numEl.parentElement.appendChild(counter);
+        } else if (clickCount < 7 && clickCount > 1) {
+          const existing = numEl.parentElement.querySelector(".egg-click-counter");
+          if (existing) existing.textContent = "🥚 " + clickCount + "/7";
+        }
+
+        // Escalar glitch con cada click
+        if (clickCount <= 5 && !eggState.activated) {
+          const glitchText = Array.from("404")
+            .map((c) => (Math.random() > 0.3 ? Math.floor(Math.random() * 10) : c))
+            .join("");
+          numEl.textContent = glitchText;
+          // @ts-ignore
+          if (typeof gsap !== "undefined") {
+            gsap.fromTo(
+              numEl,
+              { x: -5 * clickCount, rotation: -2 * clickCount },
+              {
+                x: 5 * clickCount,
+                rotation: 2 * clickCount,
+                duration: 0.08,
+                yoyo: true,
+                repeat: 3,
+                ease: "power1.inOut",
+                onComplete: () => {
+                  numEl.textContent = eggState.activated ? "4🥚4" : "404";
+                  gsap.set(numEl, { x: 0, rotation: 0 });
+                },
+              },
+            );
+          }
+        }
+
+        // ¡7 clicks → Easter Egg activado!
+        if (clickCount >= 7 && !eggState.activated) {
+          eggState.activated = true;
+          triggerEasterEgg();
+        }
+      });
+    }
+
+    function triggerEasterEgg() {
+      const numEl = document.getElementById("notfoundNumber");
+      const secretMsg = document.getElementById("eggSecretMessage");
+      if (!numEl || !secretMsg) return;
+
+      // Limpiar contador de clics
+      const counter = numEl.parentElement.querySelector(".egg-click-counter");
+      if (counter) counter.remove();
+
+      // 1. Explosión de glitch
+      numEl.textContent = "4🥚4";
+
+      // @ts-ignore
+      if (typeof gsap !== "undefined") {
+        // Timeline de celebración
+        const tl = gsap.timeline();
+
+        tl.to(numEl, {
+          scale: 1.3,
+          rotation: 5,
+          duration: 0.15,
+          yoyo: true,
+          repeat: 5,
+          ease: "power1.inOut",
+        })
+          .to(numEl, {
+            scale: 1,
+            rotation: 0,
+            duration: 0.3,
+            ease: "elastic.out(1, 0.3)",
+          })
+          .to(
+            numEl,
+            {
+              textShadow:
+                "2px 2px 0px #A199FF, -2px -2px 0px #25d366, 4px 4px 20px rgba(161, 153, 255, 0.5)",
+              duration: 0.3,
+            },
+            "-=0.2",
+          );
+
+        // 2. Mostrar mensaje secreto
+        tl.to(
+          secretMsg,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.2",
+        );
+
+        // 3. Ocultar después de 4s
+        tl.to(secretMsg, {
+          opacity: 0,
+          y: -30,
+          scale: 0.8,
+          duration: 0.5,
+          ease: "power2.in",
+          delay: 3,
+          onComplete: () => {
+            numEl.textContent = "404";
+            gsap.set(numEl, {
+              textShadow:
+                "2px 2px 0px var(--violet), -2px -2px 0px rgba(161, 153, 255, 0.3)",
+              clearProps: "textShadow",
+            });
+          },
+        });
+      }
+
+      // 4. 🔊 Sonido de celebración
+      SoundManager.celebration();
+
+      // 5. Lanzar confeti
+      launchConfetti();
+    }
+
+    // ===== CONFETTI =====
+    function launchConfetti() {
+      const container = document.getElementById("eggConfetti");
+      if (!container) return;
+
+      const colors = [
+        "#A199FF",
+        "#25d366",
+        "#FF6B6B",
+        "#FFD93D",
+        "#6BCB77",
+        "#4D96FF",
+      ];
+      const shapes = ["■", "●", "▲", "★", "♦", "✦"];
+
+      for (let i = 0; i < 60; i++) {
+        const confetti = document.createElement("span");
+        confetti.className = "egg-confetti-piece";
+        confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+        confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * 100 + "%";
+        confetti.style.fontSize = 0.6 + Math.random() * 0.8 + "rem";
+        confetti.style.setProperty("--confetti-delay", Math.random() * 0.5 + "s");
+        confetti.style.setProperty(
+          "--confetti-x",
+          (Math.random() - 0.5) * 300 + "px",
+        );
+        confetti.style.setProperty(
+          "--confetti-rotate",
+          Math.random() * 720 + "deg",
+        );
+        container.appendChild(confetti);
+
+        // Limpiar después de la animación
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+
+    // ============================================
+    // EASTER EGG: Terminal Oculta
+    // ============================================
+    function initHiddenTerminal() {
+      const overlay = document.getElementById("eggConsoleOverlay");
+      const input = document.getElementById("eggConsoleInput");
+      const output = document.getElementById("eggConsoleOutput");
+      const closeBtn = document.getElementById("eggConsoleClose");
+      const hintEl = document.getElementById("easterEggHint");
+      if (!overlay || !input || !output || !closeBtn || !hintEl) {
+        return;
+      }
+
+      let isOpen = false;
+
+      function openConsole() {
+        if (isOpen) return;
+        isOpen = true;
+        overlay.classList.add("active");
+        // 🔊 Sonido de apertura
+        SoundManager.terminalOpen();
+        // Animación vía CSS transition — más limpia que GSAP,
+        // evita inline styles persistentes que rompen el toggle
+        setTimeout(() => input.focus(), 150);
+      }
+
+      function closeConsole() {
+        isOpen = false;
+        // 🔊 Sonido de cierre
+        SoundManager.terminalClose();
+        overlay.classList.remove("active");
+        input.blur();
+      }
+
+      // === FORMAS DE ABRIR LA TERMINAL ===
+
+      // 1. Click en el hint del footer
+      hintEl.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (isOpen) closeConsole();
+        else openConsole();
+      });
+
+      // 2. Tecla ~ (funciona en teclados QWERTY)
+      //    En español, ~ se escribe con AltGr+4 y da e.key="~" igual
+      //    También detectar combinaciones comunes
+      document.addEventListener("keydown", function toggleByKey(e) {
+        // ~ acento, ` backtick, ° (español: AltGr+4 = ~, 
+        // también Ctrl+Space para evitar conflictos con layouts
+        if (
+          e.key === "~" ||
+          e.key === "`" ||
+          e.key === "º" ||
+          e.key === "\u00AC" ||
+          (e.key === "Dead" && !e.shiftKey) ||
+          (e.ctrlKey && e.key === "ñ")
+        ) {
+          e.preventDefault();
+          isOpen ? closeConsole() : openConsole();
+        }
+      });
+
+      // 3. Cerrar con Escape
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isOpen) closeConsole();
+      });
+
+      // Botón cerrar
+      closeBtn.addEventListener("click", closeConsole);
+
+      // Input de comandos
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const cmd = input.value.trim().toLowerCase();
+          input.value = "";
+          processCommand(cmd, output);
+        }
+      });
+    }
+
+    // Comandos de la terminal
+    function processCommand(cmd, output) {
+      if (!output) return;
+
+      // Mostrar comando escrito
+      const cmdLine = document.createElement("div");
+      cmdLine.className = "console-line";
+      cmdLine.innerHTML =
+        '<span class="console-prompt">$</span> <span class="console-input-text">' +
+        cmd +
+        "</span>";
+      output.appendChild(cmdLine);
+
+      // 🔊 Sonido de comando ejecutado (sutil)
+      SoundManager.command();
+
+      // Procesar
+      const response = document.createElement("div");
+      response.className = "console-line console-response";
+
+      const colors = [
+        "#A199FF",
+        "#25d366",
+        "#FF6B6B",
+        "#FFD93D",
+        "#6BCB77",
+        "#4D96FF",
+      ];
+
+      switch (cmd) {
+        case "help":
+          response.innerHTML = `
+            <span class="console-text">Comandos disponibles:</span>
+            <div class="console-help-grid">
+              <span class="console-cmd">help</span> — Muestra esta ayuda<br>
+              <span class="console-cmd">whoami</span> — Info del desarrollador<br>
+              <span class="console-cmd">ls</span> — Lista de habilidades<br>
+              <span class="console-cmd">theme</span> — Cambia modo oscuro/claro<br>
+              <span class="console-cmd">sudo</span> — 🤫 Intenta algo divertido<br>
+              <span class="console-cmd">secret</span> — Mensaje oculto<br>
+              <span class="console-cmd">matrix</span> — 🎬 Efecto Matrix<br>
+              <span class="console-cmd">date</span> — Fecha actual<br>
+              <span class="console-cmd">clear</span> — Limpia la consola<br>
+              <span class="console-cmd">exit</span> — Cierra la consola<br>
+            </div>
+          `;
+          break;
+
+        case "whoami":
+          response.innerHTML =
+            '<span class="console-text">Ariel Campos <span style="opacity:0.5">—</span> ' +
+            '<span style="color:' +
+            colors[0] +
+            ';font-weight:600">Analista Programador</span> &amp; ' +
+            '<span style="color:' +
+            colors[1] +
+            ';font-weight:600">Full-Stack Developer</span></span>';
+          break;
+
+        case "ls":
+          response.innerHTML =
+            '<span class="console-text">' +
+            "HTML5  CSS3  JavaScript  TypeScript  Astro  React  Next.js  " +
+            "Tailwind  PHP  Node.js  Firebase  Supabase  Git  GSAP</span>";
+          break;
+
+        case "theme":
+          const current = document.documentElement.getAttribute("data-theme");
+          const next = current === "dark" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", next);
+          // Sincronizar el toggle flotante
+          if (typeof updateThemeVisuals !== "undefined") {
+            updateThemeVisuals(next === "dark");
+          }
+          response.innerHTML =
+            '<span class="console-text">Tema cambiado a: <span style="color:' +
+            colors[2] +
+            ';font-weight:600">' +
+            next +
+            "</span></span>";
+          break;
+
+        case "sudo":
+          response.innerHTML =
+            '<span class="console-text" style="color:' +
+            colors[2] +
+            '">' +
+            "(╯°□°)╯︵ ┻━┻  Permiso denegado. " +
+            "Ni con sudo puedes romper esta página.</span>";
+          break;
+
+        case "secret":
+          response.innerHTML =
+            '<span class="console-text">🥚 <span style="color:' +
+            colors[3] +
+            ';font-weight:600">' +
+            "¡Has descubierto el secreto! Este portafolio fue construido " +
+            "con Astro, Tailwind y mucho ☕ café.</span></span>";
+          break;
+
+        case "matrix":
+          response.innerHTML =
+            '<span class="console-text" style="color:' +
+            colors[1] +
+            '">' +
+            "Iniciando Matrix... 🎬</span>";
+          triggerMatrixEffect();
+          break;
+
+        case "date":
+          const now = new Date();
+          response.innerHTML =
+            '<span class="console-text">' +
+            now.toLocaleDateString("es-CL", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            }) +
+            "</span>";
+          break;
+
+        case "clear":
+          output.innerHTML = `
+            <div class="console-line">
+              <span class="console-prompt">$</span>
+              <span class="console-text">Consola limpiada 🧹</span>
+            </div>
+          `;
+          return; // No agregar respuesta adicional
+
+        case "exit":
+          // Disparar el mismo handler que el botón de cerrar
+          document.getElementById("eggConsoleClose")?.click();
+          return;
+
+        case "":
+          return; // No hacer nada
+
+        default:
+          // 🔊 Sonido de error para comandos no reconocidos
+          SoundManager.error();
+          response.innerHTML =
+            '<span class="console-text" style="color:' +
+            colors[2] +
+            '">' +
+            "Comando no reconocido: <span class=\"console-cmd\">" +
+            cmd +
+            "</span>. Escribe <span class=\"console-cmd\">help</span> para ver los disponibles.</span>";
+      }
+
+      output.appendChild(response);
+
+      // Scroll al final
+      output.scrollTop = output.scrollHeight;
+
+      // Animación de entrada
+      // @ts-ignore
+      if (typeof gsap !== "undefined") {
+        gsap.fromTo(
+          response,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" },
+        );
+      }
+    }
+
+    // ===== EFECTO MATRIX =====
+    let matrixInterval = null;
+
+    function triggerMatrixEffect() {
+      // Limpiar interval anteriores
+      if (matrixInterval) {
+        clearInterval(matrixInterval);
+        matrixInterval = null;
+        document
+          .querySelectorAll(".matrix-char")
+          .forEach((el) => el.remove());
+        return;
+      }
+
+      const main = document.querySelector(".notfound-main");
+      if (!main) return;
+
+      const chars = "アイウエオカキクケコサシスセソタチツテトナニヌネノ";
+
+      function createRain() {
+        for (let i = 0; i < 20; i++) {
+          const char = document.createElement("span");
+          char.className = "matrix-char";
+          char.textContent = chars[Math.floor(Math.random() * chars.length)];
+          char.style.left = Math.random() * 100 + "%";
+          char.style.top = -5 + "%";
+          char.style.fontSize = 0.6 + Math.random() * 0.6 + "rem";
+          char.style.animationDuration = 1.5 + Math.random() * 2 + "s";
+          char.style.opacity = 0.3 + Math.random() * 0.5;
+          main.appendChild(char);
+
+          setTimeout(() => char.remove(), 4000);
+        }
+      }
+
+      createRain();
+      matrixInterval = setInterval(createRain, 300);
+
+      // 🔊 Sonido Matrix (estática glitch)
+      SoundManager.matrix();
+
+      // Repetir estática cada 2s mientras dure Matrix
+      const matrixSoundInterval = setInterval(function () {
+        if (matrixInterval) SoundManager.matrix();
+        else clearInterval(matrixSoundInterval);
+      }, 2000);
+
+      // Auto-detener después de 8s
+      setTimeout(() => {
+        if (matrixInterval) {
+          clearInterval(matrixInterval);
+          matrixInterval = null;
+        }
+      }, 8000);
+    }
+
+    // ============================================
+    // INICIALIZAR EASTER EGGS
+    // ============================================
+    function initEasterEggs() {
+      initEasterEggClicks();
+      initHiddenTerminal();
+    }
+
+  })();
+</script>
+
+<style>
+  /* ===== LAYOUT PRINCIPAL ===== */
+  .notfound-main {
+    position: relative;
+    width: 100%;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+    overflow: hidden;
+    padding: 8rem 2rem 6rem;
+    transition: background-color 0.4s ease;
+  }
+
+  /* ===== PARTÍCULAS DE CÓDIGO ===== */
+  .notfound-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .notfound-particle {
+    position: absolute;
+    font-family: monospace;
+    font-weight: 700;
+    color: var(--border);
+    opacity: 0.08;
+    animation: particleFloat var(--duration, 20s) ease-in-out var(--delay, 0s) infinite;
+    user-select: none;
+    transition: color 0.4s ease;
+  }
+
+  [data-theme="dark"] .notfound-particle {
+    opacity: 0.06;
+  }
+
+  @keyframes particleFloat {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0.06;
+    }
+    25% {
+      transform: translateY(-30px) rotate(5deg);
+      opacity: 0.12;
+    }
+    50% {
+      transform: translateY(-10px) rotate(-3deg);
+      opacity: 0.08;
+    }
+    75% {
+      transform: translateY(-40px) rotate(4deg);
+      opacity: 0.14;
+    }
+  }
+
+  /* ===== CONTENEDOR CENTRAL ===== */
+  .notfound-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ===== NÚMERO 404 ===== */
+  .notfound-number-wrapper {
+    perspective: 800px;
+    margin-bottom: 0.5rem;
+  }
+
+  .notfound-number {
+    font-family: var(--font-display);
+    font-size: clamp(8rem, 40vw, 22rem);
+    font-weight: 900;
+    line-height: 0.8;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
+    transition: color 0.4s ease;
+    user-select: none;
+    text-shadow: 
+      2px 2px 0px var(--violet),
+      -2px -2px 0px rgba(161, 153, 255, 0.3);
+  }
+
+  /* ===== LÍNEA DE TERMINAL ===== */
+  .notfound-terminal-line {
+    font-family: monospace;
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+    color: var(--text-primary);
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-secondary);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    width: fit-content;
+    max-width: 100%;
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+  }
+
+  .terminal-prompt {
+    color: var(--violet);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .terminal-command {
+    color: var(--text-primary);
+    opacity: 0.85;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: color 0.4s ease;
+  }
+
+  .terminal-cursor {
+    color: var(--violet);
+    font-weight: 700;
+    animation: blink 0.8s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ===== MENSAJE DE ERROR ===== */
+  .notfound-message {
+    font-family: var(--font-geist);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--text-primary);
+    opacity: 0.6;
+    margin: 0;
+    line-height: 1.6;
+    transition: color 0.4s ease;
+  }
+
+  /* ===== SUGERENCIA ===== */
+  .notfound-suggestion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: monospace;
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+  }
+
+  .suggestion-comment {
+    color: var(--text-primary);
+    opacity: 0.4;
+    font-style: italic;
+  }
+
+  .suggestion-code {
+    background: var(--bg-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+
+  .suggestion-link {
+    color: var(--violet);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .suggestion-link:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+  }
+
+  /* ===== BOTÓN DE VOLVER ===== */
+  .notfound-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    font-family: var(--font-geist);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    color: var(--bg-primary);
+    background: var(--text-primary);
+    border: 1px solid var(--text-primary);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .notfound-btn:hover {
+    background: transparent;
+    color: var(--text-primary);
+  }
+
+  .btn-arrow {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .notfound-btn:hover .btn-arrow {
+    transform: translateX(-4px);
+  }
+
+  /* ===== FOOTER CON CÓDIGOS ===== */
+  .notfound-footer {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: var(--text-primary);
+    opacity: 0.3;
+    z-index: 2;
+    transition: color 0.4s ease;
+  }
+
+  .footer-status {
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .notfound-main {
+      padding: 6rem 1.5rem 5rem;
+    }
+
+    .notfound-number {
+      font-size: clamp(6rem, 35vw, 12rem);
+    }
+
+    .notfound-terminal-line {
+      font-size: 0.75rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .notfound-footer {
+      gap: 1rem;
+      font-size: 0.6rem;
+    }
+
+    .notfound-btn {
+      font-size: 0.75rem;
+      padding: 0.85rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .notfound-number {
+      font-size: clamp(5rem, 30vw, 8rem);
+    }
+
+    .notfound-message {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* ========================================== */
+  /* EASTER EGG: Hint en footer */
+  /* ========================================== */
+  .footer-hint {
+    font-family: monospace;
+    font-size: 0.6rem;
+    color: var(--violet);
+    opacity: 0.4;
+    letter-spacing: 0.05em;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .footer-hint:hover {
+    opacity: 0.8;
+  }
+
+  /* ========================================== */
+  /* EASTER EGG: Mensaje Secreto */
+  /* ========================================== */
+  .egg-secret-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .egg-secret-inner {
+    background: var(--bg-secondary);
+    border: 2px solid var(--violet);
+    border-radius: 16px;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  .egg-click-counter {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--violet);
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    white-space: nowrap;
+    animation: fadeInUp 0.3s ease forwards;
+    pointer-events: none;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to { opacity: 0.7; transform: translateX(-50%) translateY(0); }
+  }
+
+  .notfound-number-wrapper {
+    position: relative;
+  }
+
+  .egg-secret-icon {
+    font-size: 3rem;
+    line-height: 1;
+    animation: eggBounce 1s ease-in-out infinite;
+  }
+
+  @keyframes eggBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .egg-secret-text {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .egg-secret-sub {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    opacity: 0.5;
+  }
+
+  /* ========================================== */
+  /* EASTER EGG: Confeti */
+  /* ========================================== */
+  .egg-confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99;
+    overflow: hidden;
+  }
+
+  .egg-confetti-piece {
+    position: absolute;
+    top: 40%;
+    font-size: 0.8rem;
+    animation: confettiFall 2.5s ease-out var(--confetti-delay, 0s) forwards;
+    opacity: 0;
+  }
+
+  @keyframes confettiFall {
+    0% {
+      opacity: 1;
+      transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(400px) translateX(var(--confetti-x, 100px))
+        rotate(var(--confetti-rotate, 360deg)) scale(0.3);
+    }
+  }
+
+  /* ========================================== */
+  /* EASTER EGG: Terminal Oculta */
+  /* ========================================== */
+  .egg-console-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .egg-console-overlay.active {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .egg-console {
+    width: 100%;
+    max-width: 680px;
+    max-height: 70vh;
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Color base claro para todo el contenido de la terminal */
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .egg-console-overlay.active .egg-console {
+    transform: translateY(0);
+  }
+
+  .egg-console-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .egg-console-title {
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .egg-console-icon {
+    color: var(--violet);
+    font-weight: 700;
+  }
+
+  .egg-console-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .egg-console-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .egg-console-output {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.8rem 1rem;
+    font-family: monospace;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    max-height: 50vh;
+    min-height: 120px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+
+  .egg-console-output::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .egg-console-output::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+  }
+
+  .console-line {
+    margin-bottom: 0.2rem;
+    word-break: break-word;
+  }
+
+  .console-prompt {
+    color: var(--violet);
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+
+  .console-text {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .console-input-text {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .console-response {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--violet);
+    /* Hereda color: rgba(255,255,255,0.85) de .egg-console */
+  }
+
+  .console-cmd {
+    color: var(--violet);
+    font-weight: 600;
+    background: rgba(161, 153, 255, 0.1);
+    padding: 0 0.3rem;
+    border-radius: 3px;
+  }
+
+  .console-help-grid {
+    padding: 0.3rem 0;
+    line-height: 1.8;
+  }
+
+  .egg-console-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .egg-console-input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: monospace;
+    font-size: 0.8rem;
+    caret-color: var(--violet);
+  }
+
+  .egg-console-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  /* ========================================== */
+  /* EASTER EGG: Efecto Matrix */
+  /* ========================================== */
+  .matrix-char {
+    position: fixed;
+    font-family: monospace;
+    font-weight: 700;
+    color: #25d366;
+    pointer-events: none;
+    z-index: 200;
+    animation: matrixFall linear forwards;
+    text-shadow: 0 0 8px rgba(37, 211, 102, 0.3);
+  }
+
+  @keyframes matrixFall {
+    0% {
+      transform: translateY(-100%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh);
+      opacity: 0;
+    }
+  }
+
+  /* ===== Ajustes responsive Easter Eggs ===== */
+  @media (max-width: 768px) {
+    .egg-secret-inner {
+      padding: 1.5rem;
+      max-width: 90vw;
+    }
+
+    .egg-secret-text {
+      font-size: 1.4rem;
+    }
+
+    .egg-console {
+      max-width: 100%;
+      max-height: 80vh;
+    }
+
+    .egg-console-output {
+      max-height: 55vh;
+      font-size: 0.7rem;
+    }
+
+    .egg-console-input {
+      font-size: 0.7rem;
+    }
+
+    .egg-console-overlay {
+      padding: 0.5rem;
+      align-items: flex-end;
+    }      .footer-hint {
+        opacity: 1;
+        font-size: 0.55rem;
+      }
+  }
+</style>

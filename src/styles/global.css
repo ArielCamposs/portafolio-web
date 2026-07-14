@@ -533,6 +533,285 @@ html.lenis, html.lenis body {
     overflow: visible;
 }
 
+/* ============================================ */
+/* MEJORAS DE ANIMACIONES - BUFFY */
+/* ============================================ */
+
+/* ===== SKELETON / SHIMMER LOADING ===== */
+
+.skeleton-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    overflow: hidden;
+    z-index: 2;
+    transition: opacity 0.5s ease;
+}
+
+.skeleton-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.08) 75%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.8s ease-in-out infinite;
+}
+
+[data-theme="dark"] .skeleton-placeholder::after {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.03) 25%,
+        rgba(255, 255, 255, 0.07) 50%,
+        rgba(255, 255, 255, 0.03) 75%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+}
+
+@keyframes skeletonShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Imagen con skeleton: wrapper relativo */
+.skeleton-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+/* La imagen es visible por defecto (fallback seguro si JS falla) */
+/* Solo se oculta cuando JS determina que aún no carga */
+.skeleton-wrapper img.skeleton-loading {
+    opacity: 0;
+}
+
+.skeleton-wrapper img.loaded {
+    opacity: 1;
+}
+
+.skeleton-wrapper img.loaded ~ .skeleton-placeholder {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Skeleton para elementos de texto (variante) */
+.skeleton-text {
+    display: inline-block;
+    background: var(--accent);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    color: transparent !important;
+    user-select: none;
+}
+
+.skeleton-text::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.08) 75%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.8s ease-in-out infinite;
+}
+
+[data-theme="dark"] .skeleton-text::after {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.03) 25%,
+        rgba(255, 255, 255, 0.07) 50%,
+        rgba(255, 255, 255, 0.03) 75%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+}
+
+/* Barra de progreso de scroll */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2.5px;
+    background: linear-gradient(90deg, var(--violet), #7c6dff, var(--violet));
+    background-size: 200% 100%;
+    z-index: 9999;
+    pointer-events: none;
+    transition: width 0.05s linear;
+    animation: progressGradient 2s ease infinite;
+}
+
+@keyframes progressGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animaciones de revelación al scroll */
+.reveal-fade-up {
+    opacity: 0;
+    transform: translateY(50px);
+    will-change: transform, opacity;
+}
+
+.reveal-fade-up.revealed {
+    animation: fadeUpReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUpReveal {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    will-change: transform, opacity;
+}
+
+.reveal-scale.revealed {
+    animation: scaleReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.reveal-slide-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    will-change: transform, opacity;
+}
+
+.reveal-slide-left.revealed {
+    animation: slideLeftReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideLeftReveal {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Separadores decorativos entre secciones */
+.section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--border) 15%,
+        var(--border) 85%,
+        transparent 100%
+    );
+    opacity: 0.5;
+    transform-origin: center;
+    transition: background-color 0.4s ease;
+}
+
+.section-divider--animated {
+    transform: scaleX(0);
+}
+
+.section-divider--animated.revealed {
+    animation: dividerGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dividerGrow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* Efecto de brillo magnético en hover (para botones/links) */
+[data-magnetic] {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-magnetic]::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: radial-gradient(circle, rgba(161, 153, 255, 0.15) 0%, transparent 60%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    transform: translate(-50%, -50%);
+}
+
+[data-magnetic]:hover::after {
+    opacity: 1;
+}
+
+/* Animación de números contadores */
+.stat-number {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Content-visibility: solo en secciones SIN animaciones de ScrollTrigger */
+/* ScrollTrigger necesita alturas reales de elementos para calcular posiciones */
+.techstack-section,
+.contact-marquee-wrapper {
+    content-visibility: auto;
+    contain-intrinsic-size: 400px;
+}
+
+/* Efecto de brillo spotlight al hacer hover en proyectos */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(800px circle at 50% 50%, rgba(161, 153, 255, 0.04), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
 /* Seguidor de Título de Contacto */
 .contact-title-cursor {
     position: fixed;
@@ -561,6 +840,8 @@ html.lenis, html.lenis body {
     gap: 8px;
     transition: opacity 0.3s ease;
 }
+
+
 
 .controls-container.hidden {
     opacity: 0;
@@ -635,7 +916,8 @@ html.lenis, html.lenis body {
     }
 
     .controls-container {
-        display: none !important;
+        bottom: 5em;
+        left: 1em;
     }
 
     .loader-col:nth-child(n+5) {
@@ -663,6 +945,8 @@ html.lenis, html.lenis body {
     .menu-items {
         align-items: center;
     }
+
+
 
     .menu-link {
         font-size: 22vw;

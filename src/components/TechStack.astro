@@ -68,13 +68,29 @@ const loop = [...techs, ...techs, ...techs, ...techs];
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    padding: 0 2.5rem;
+    padding: 1rem 2.5rem;
     cursor: default;
-    transition: transform 0.3s ease;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .tech-item::before {
+    content: '';
+    position: absolute;
+    inset: 0.3rem 1.5rem;
+    border-radius: 12px;
+    background: radial-gradient(circle at center, rgba(161, 153, 255, 0.12) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
   }
 
   .tech-item:hover {
-    transform: scale(1.15);
+    transform: scale(1.2);
+  }
+
+  .tech-item:hover::before {
+    opacity: 1;
   }
 
   .tech-icon {
@@ -83,11 +99,14 @@ const loop = [...techs, ...techs, ...techs, ...techs];
     object-fit: contain;
     display: block;
     filter: grayscale(30%);
-    transition: filter 0.3s ease;
+    transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    z-index: 1;
   }
 
   .tech-item:hover .tech-icon {
-    filter: grayscale(0%);
+    filter: grayscale(0%) drop-shadow(0 0 12px rgba(161, 153, 255, 0.35));
+    transform: translateY(-4px);
   }
 
   .tech-icon-invert {
@@ -95,7 +114,8 @@ const loop = [...techs, ...techs, ...techs, ...techs];
   }
 
   .tech-item:hover .tech-icon-invert {
-    filter: invert(1) grayscale(0%);
+    filter: invert(1) grayscale(0%) drop-shadow(0 0 12px rgba(161, 153, 255, 0.35));
+    transform: translateY(-4px);
   }
 
   .tech-name {
@@ -107,6 +127,14 @@ const loop = [...techs, ...techs, ...techs, ...techs];
     color: var(--text-primary);
     opacity: 0.5;
     white-space: nowrap;
+    transition: color 0.4s ease, opacity 0.4s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tech-item:hover .tech-name {
+    color: var(--violet);
+    opacity: 1;
   }
 
   .scroller {

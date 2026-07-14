@@ -137,7 +137,8 @@ const projects = [
       </div>
     </div>
 
-    <div class="projects-grid">
+    <!-- Grid Desktop -->
+    <div class="projects-grid is-desktop" data-reveal="fade-up" data-reveal-stagger="0.12">
       {
         projects.map((project, index) => (
           <div
@@ -149,11 +150,12 @@ const projects = [
           >
             <div
               class:list={[
-                "project-card-image",
+                "project-card-image skeleton-wrapper",
                 { "project-card-image--portrait": project.portrait },
               ]}
             >
               <img src={project.img} alt={project.title} loading="lazy" />
+              <div class="skeleton-placeholder"></div>
             </div>
             <div class="project-card-info">
               {
@@ -161,6 +163,7 @@ const projects = [
                   <span class="project-card-client">{project.client}</span>
                 )
               }
+              <h3 class="project-card-title">{project.title}</h3>
               <h3 class="project-card-title">{project.title}</h3>
               <p class="project-card-desc">{project.category}</p>
 
@@ -208,67 +211,272 @@ const projects = [
         ))
       }
     </div>
+
+    <!-- Swiper Móvil -->
+    <div class="swiper projects-swiper is-mobile" data-reveal="fade-up">
+      <div class="swiper-wrapper">
+        {
+          projects.map((project, index) => (
+            <div class="swiper-slide">
+              <div
+                class:list={[
+                  "project-card open-drawer-trigger",
+                  { "project-card--portrait": project.portrait },
+                ]}
+                data-project-index={index}
+              >
+                <div
+                  class:list={[
+                    "project-card-image skeleton-wrapper",
+                    { "project-card-image--portrait": project.portrait },
+                  ]}
+                >
+                  <img src={project.img} alt={project.title} loading="lazy" />
+                  <div class="skeleton-placeholder"></div>
+                </div>
+                <div class="project-card-info">
+                  {
+                    project.client && (
+                      <span class="project-card-client">{project.client}</span>
+                    )
+                  }
+                  <h3 class="project-card-title">{project.title}</h3>
+                  <p class="project-card-desc">{project.category}</p>
+
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-card-badge-link"
+                      onclick="event.stopPropagation()"
+                    >
+                      <div class="project-card-badge">
+                        <svg class="project-card-badge-svg" viewBox="0 0 100 100">
+                          <path
+                            id={`swiperBadgePath-${index}`}
+                            d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
+                            fill="none"
+                          ></path>
+                          <text class="project-card-badge-text">
+                            <textPath href={`#swiperBadgePath-${index}`}>
+                              VER SITIO WEB • VER SITIO WEB •
+                            </textPath>
+                          </text>
+                        </svg>
+                        <div class="project-card-badge-icon">
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                            ></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <!-- Paginación -->
+      <div class="swiper-pagination projects-swiper-pagination"></div>
+    </div>
+
+    <!-- Indicador de swipe en móvil -->
+    <div class="swipe-hint is-mobile" aria-hidden="true">
+      <span class="swipe-hint-text">Desliza para ver más</span>
+      <svg class="swipe-hint-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </div>
   </div>
 </section>
 
 <script define:vars={{ projects }}>
   window.addEventListener("loaderComplete", () => {
-    const cards = document.querySelectorAll(".project-card");
-    cards.forEach((card) => {
-      const index = parseInt(card.getAttribute("data-project-index") || "0");
-      const data = projects[index];
+    // --- Inicializar Swiper en móvil ---
+    const isMobile = window.innerWidth <= 768;
+    let swiperInstance = null;
 
-      card.addEventListener("click", (e) => {
-        if (e.target.closest(".project-card-badge-link")) return;
-        e.preventDefault();
-        window.dispatchEvent(
-          new CustomEvent("open-project-drawer", { detail: data }),
-        );
-      });
-    });
+    function initSwiper() {
+      const swiperEl = document.querySelector(".projects-swiper");
+      if (!swiperEl) return;
 
-    const badge = document.getElementById("viewAllBadge");
-    if (badge) {
-      let rot = 0;
-      function rotateBadge() {
-        rot += 0.4;
-        const svg = badge.querySelector(".view-all-svg");
-        if (svg) svg.style.transform = `rotate(${rot}deg)`;
-        requestAnimationFrame(rotateBadge);
+      // @ts-ignore
+      if (typeof Swiper !== "undefined") {
+        // @ts-ignore
+        swiperInstance = new Swiper(swiperEl, {
+          slidesPerView: 1.15,
+          centeredSlides: true,
+          spaceBetween: 16,
+          grabCursor: true,
+          touchRatio: 1.2,
+          speed: 400,
+          pagination: {
+            el: ".projects-swiper-pagination",
+            clickable: true,
+            dynamicBullets: true,
+          },
+          breakpoints: {
+            480: {
+              slidesPerView: 1.4,
+              spaceBetween: 20,
+            },
+          },
+          on: {
+            slideChange: function () {
+              // Ocultar hint después del primer swipe
+              const hint = document.querySelector(".swipe-hint");
+              if (hint && this.activeIndex > 0) {
+                hint.classList.add("swipe-hint--hidden");
+              }
+            },
+          },
+        });
+
+        // Animar badges del swiper
+        animateSwiperBadges();
       }
-      rotateBadge();
     }
 
-    const cardBadges = document.querySelectorAll(".project-card-badge");
-    if (cardBadges.length > 0) {
-      const badgeRotations = Array.from(cardBadges).map(() => 0);
-      const badgeHoverStates = Array.from(cardBadges).map(() => false);
+    // Animación de badges dentro del swiper
+    function animateSwiperBadges() {
+      const badges = document.querySelectorAll(".projects-swiper .project-card-badge");
+      if (badges.length === 0) return;
 
-      cardBadges.forEach((b, i) => {
-        const card = b.closest(".project-card");
-        if (card) {
-          card.addEventListener("mouseenter", () => {
-            badgeHoverStates[i] = true;
-          });
-          card.addEventListener("mouseleave", () => {
-            badgeHoverStates[i] = false;
-          });
-        }
-      });
+      const rotations = Array.from(badges).map(() => 0);
 
-      function animateCardBadges() {
-        cardBadges.forEach((b, i) => {
+      function rotate() {
+        badges.forEach((b, i) => {
           const svg = b.querySelector(".project-card-badge-svg");
           if (svg) {
-            const speed = badgeHoverStates[i] ? 1.5 : 0.4;
-            badgeRotations[i] = (badgeRotations[i] + speed) % 360;
-            svg.style.transform = `rotate(${badgeRotations[i]}deg)`;
+            rotations[i] = (rotations[i] + 0.5) % 360;
+            svg.style.transform = `rotate(${rotations[i]}deg)`;
           }
         });
-        requestAnimationFrame(animateCardBadges);
+        requestAnimationFrame(rotate);
       }
-      animateCardBadges();
+      rotate();
     }
+
+    // --- Click handlers (compartidos entre grid y swiper) ---
+    function initCardClicks() {
+      const cards = document.querySelectorAll(".project-card");
+      cards.forEach((card) => {
+        const index = parseInt(card.getAttribute("data-project-index") || "0");
+        const data = projects[index];
+
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".project-card-badge-link")) return;
+          e.preventDefault();
+          window.dispatchEvent(
+            new CustomEvent("open-project-drawer", { detail: data }),
+          );
+        });
+      });
+    }
+
+    // --- Badge de "VER PROYECTOS" (rotación) ---
+    function initViewAllBadge() {
+      const badge = document.getElementById("viewAllBadge");
+      if (badge) {
+        let rot = 0;
+        function rotateBadge() {
+          rot += 0.4;
+          const svg = badge.querySelector(".view-all-svg");
+          if (svg) svg.style.transform = `rotate(${rot}deg)`;
+          requestAnimationFrame(rotateBadge);
+        }
+        rotateBadge();
+      }
+    }
+
+    // --- Badges de cards desktop (rotación con hover) ---
+    function initCardBadges() {
+      const cardBadges = document.querySelectorAll(".projects-grid .project-card-badge");
+      if (cardBadges.length > 0) {
+        const badgeRotations = Array.from(cardBadges).map(() => 0);
+        const badgeHoverStates = Array.from(cardBadges).map(() => false);
+
+        cardBadges.forEach((b, i) => {
+          const card = b.closest(".project-card");
+          if (card) {
+            card.addEventListener("mouseenter", () => {
+              badgeHoverStates[i] = true;
+            });
+            card.addEventListener("mouseleave", () => {
+              badgeHoverStates[i] = false;
+            });
+          }
+        });
+
+        function animateCardBadges() {
+          cardBadges.forEach((b, i) => {
+            const svg = b.querySelector(".project-card-badge-svg");
+            if (svg) {
+              const speed = badgeHoverStates[i] ? 1.5 : 0.4;
+              badgeRotations[i] = (badgeRotations[i] + speed) % 360;
+              svg.style.transform = `rotate(${badgeRotations[i]}deg)`;
+            }
+          });
+          requestAnimationFrame(animateCardBadges);
+        }
+        animateCardBadges();
+      }
+    }
+
+    // --- Inicializar todo ---
+    initCardClicks();
+    initViewAllBadge();
+    initCardBadges();
+
+    if (isMobile) {
+      // Cargar Swiper dinámicamente para no bloquear el build
+      if (typeof Swiper === "undefined") {
+        // Cargar CSS de Swiper
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://cdn.jsdelivr.net/npm/swiper@12.0.3/swiper-bundle.min.css";
+        document.head.appendChild(link);
+
+        // Cargar JS de Swiper
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/swiper@12.0.3/swiper-bundle.min.js";
+        script.onload = initSwiper;
+        document.body.appendChild(script);
+      } else {
+        initSwiper();
+      }
+    }
+
+    // Re-inicializar Swiper al cambiar tamaño de pantalla
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const nowMobile = window.innerWidth <= 768;
+        if (nowMobile && !swiperInstance) {
+          // Cambió a móvil — iniciar swiper
+          if (typeof Swiper !== "undefined") {
+            initSwiper();
+          }
+        } else if (!nowMobile && swiperInstance) {
+          // Cambió a desktop — destruir swiper
+          swiperInstance.destroy(true, true);
+          swiperInstance = null;
+        }
+      }, 300);
+    });
   });
 </script>
 
@@ -579,5 +787,135 @@ const projects = [
 
   .project-card-badge:hover .project-card-badge-icon {
     transform: scale(1.15) rotate(15deg);
+  }
+
+  /* ========================================== */
+  /* Swiper Móvil - Estilos */
+  /* ========================================== */
+
+  /* Ocultar swiper en desktop, ocultar grid en móvil */
+  .is-mobile {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .is-desktop {
+      display: none !important;
+    }
+
+    .is-mobile {
+      display: block;
+    }
+  }
+
+  .projects-swiper {
+    overflow: visible !important;
+    padding: 1rem 0 3rem;
+    width: 100%;
+  }
+
+  .projects-swiper .swiper-slide {
+    height: auto;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+  }
+
+  .projects-swiper .swiper-slide-active {
+    opacity: 1;
+  }
+
+  .projects-swiper .project-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .projects-swiper .project-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .projects-swiper .swiper-slide-active .project-card-image img {
+    transform: scale(1.03);
+  }
+
+  /* Paginación del Swiper */
+  .projects-swiper-pagination {
+    bottom: 0 !important;
+    position: relative !important;
+    margin-top: 1rem;
+  }
+
+  .projects-swiper-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--border);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+
+  .projects-swiper-pagination .swiper-pagination-bullet-active {
+    width: 28px;
+    border-radius: 4px;
+    background: var(--text-primary);
+    opacity: 1;
+  }
+
+  /* dynamicBullets de Swiper maneja su propio tamaño, no sobrescribir */
+
+  /* Indicador de swipe */
+  .swipe-hint {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    opacity: 1;
+    transition: opacity 0.6s ease, transform 0.4s ease;
+  }
+
+  @media (max-width: 768px) {
+    .swipe-hint {
+      display: flex;
+    }
+  }
+
+  .swipe-hint--hidden {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+
+  .swipe-hint-text {
+    font-family: var(--font-geist);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-primary);
+    opacity: 0.4;
+  }
+
+  .swipe-hint-arrow {
+    width: 18px;
+    height: 18px;
+    color: var(--text-primary);
+    opacity: 0.4;
+    animation: swipeHintBounce 1.8s ease-in-out infinite;
+  }
+
+  @keyframes swipeHintBounce {
+    0%, 100% {
+      transform: translateX(0);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translateX(6px);
+      opacity: 0.8;
+    }
   }
 </style>
