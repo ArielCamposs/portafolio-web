@@ -8,6 +8,7 @@ const {
     description = "Ariel Campos - Analista Programador Computacional. Creando interfaces modernas, eficientes e interactivas.",
 } = Astro.props;
 
+import Analytics from "@vercel/analytics/astro";
 import ProjectDrawer from "../components/ProjectDrawer.astro";
 import "../styles/global.css";
 ---
@@ -57,6 +58,8 @@ import "../styles/global.css";
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content="/images/og-image.jpg" />
+
+        <Analytics />
     </head>
     <body class="index-page">
         <!-- Pantalla de Carga (Loader con columnas) -->
