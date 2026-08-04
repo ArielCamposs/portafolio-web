@@ -1,0 +1,102 @@
+---
+import InteractiveImageBentoGallery, {
+  type ImageItem,
+} from "./ui/bento-gallery";
+
+const projects: ImageItem[] = [
+  {
+    id: "postas-desam",
+    title: "Postas DESAM",
+    category: "Gestión de inventario",
+    desc: "Stock de medicamentos e insumos para postas rurales.",
+    url: "/images/postas-desam.png",
+    width: 1024,
+    height: 489,
+    layout: "sm:col-start-1 sm:row-start-1",
+  },
+  {
+    id: "conductores-desam",
+    title: "Conductores DESAM",
+    category: "Aplicación móvil",
+    desc: "Registro de jornadas y reportes operativos en terreno.",
+    url: "/images/desam-conductores.png",
+    width: 592,
+    height: 980,
+    portrait: true,
+    layout: "sm:col-start-2 sm:row-span-3 sm:row-start-1",
+  },
+  {
+    id: "estudio-alvear",
+    title: "Estudio Alvear",
+    category: "Landing para abogados",
+    desc: "Sitio profesional orientado a consultas y contacto directo.",
+    url: "/images/estudio-alvear.png",
+    width: 1024,
+    height: 491,
+    layout: "sm:col-start-1 sm:row-start-2",
+    href: "https://landing-page-abogados-nu.vercel.app/",
+  },
+  {
+    id: "nitiv-app",
+    title: "Nitiv App",
+    category: "Plataforma SaaS",
+    desc: "Gestión escolar para equipos de convivencia y docentes.",
+    url: "/images/nitiv-saas.webp",
+    width: 1024,
+    height: 490,
+    layout: "sm:col-start-1 sm:row-start-3",
+    href: "https://nitiv-app-three.vercel.app/login",
+  },
+  {
+    id: "nitiv-cl",
+    title: "Nitiv.cl",
+    category: "Landing corporativa",
+    desc: "Presentación de la plataforma para colegios chilenos.",
+    url: "/images/nitiv-landing.png",
+    width: 1024,
+    height: 492,
+    layout: "sm:col-start-1 sm:row-start-4",
+    href: "https://nitiv.cl",
+  },
+  {
+    id: "bitecraft",
+    title: "Bitecraft",
+    category: "E-commerce delivery",
+    desc: "Tienda de comida con carrito y gestión de pedidos.",
+    url: "/images/bitecraft.png",
+    width: 1024,
+    height: 490,
+    layout: "sm:col-start-2 sm:row-start-4",
+    href: "https://tienda-comida-six.vercel.app/",
+  },
+  {
+    id: "tienda-textil",
+    title: "Tienda textil",
+    category: "E-commerce artesanal",
+    desc: "Catálogo y carrito para una tienda de textilería.",
+    url: "/images/pura-lana.png",
+    width: 1024,
+    height: 493,
+    layout: "sm:col-start-1 sm:row-start-5",
+    href: "https://landingpage-puralana.vercel.app/",
+  },
+  {
+    id: "tienda-sushi",
+    title: "Tienda sushi",
+    category: "Restaurante delivery",
+    desc: "Pedidos, favoritos y compra directa por WhatsApp.",
+    url: "/tienda-sushi.png",
+    width: 1024,
+    height: 492,
+    layout: "sm:col-start-2 sm:row-start-5",
+    href: "https://tienda-sushi.vercel.app/",
+  },
+];
+---
+
+<InteractiveImageBentoGallery
+  client:visible
+  imageItems={projects}
+  title="Proyectos"
+  description="Una selección de plataformas, aplicaciones y tiendas desarrolladas para resolver necesidades reales."
+/>

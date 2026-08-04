@@ -38,9 +38,11 @@ const techStack = [
     <div class="about-photo">
       <div class="about-photo-inner skeleton-wrapper" data-parallax="0.12">
         <img
-          src="/generated-image.webp"
+          src="/images/ariel-sobre-mi.png"
           alt="Ariel Campos - Desarrollador"
           class="about-img"
+          width="700"
+          height="1024"
           loading="lazy"
         />
         <div class="skeleton-placeholder"></div>
@@ -171,17 +173,17 @@ const techStack = [
     if (!techStat) return;
 
     // Click toggle para móvil (el hover no es fiable en touch)
-    techStat.addEventListener('click', function(e) {
+    techStat.addEventListener('click', (e) => {
       if (window.innerWidth <= 768) {
         e.preventDefault();
-        this.classList.toggle('tech-active');
+        techStat.classList.toggle('tech-active');
       }
     });
 
     // Cerrar al tocar fuera
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', (e) => {
       if (window.innerWidth <= 768) {
-        if (!e.target.closest('.about-stat--tech')) {
+        if (!(e.target instanceof Element) || !e.target.closest('.about-stat--tech')) {
           techStat.classList.remove('tech-active');
         }
       }

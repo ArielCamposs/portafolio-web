@@ -10,14 +10,6 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'BiggerDisplay';
-    src: url('/fonts/biggerdisplay.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 :root {
     /* Colores base */
     --soft-beige: #E6E1DD;
@@ -27,6 +19,8 @@
     --darker-beige: #3F3A37;
     --black: #1A1A1A;
     --white: #FFFFFF;
+    --black-rgb: 26 26 26;
+    --white-rgb: 255 255 255;
     --warm-white: #FCF8F5;
     --violet: #A199FF;
 
@@ -79,7 +73,7 @@ html, body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: var(--font-geist);
-    overflow-x: hidden;
+    overflow-x: clip;
     transition: background-color 0.4s ease, color 0.4s ease;
     height: auto;
 }
@@ -158,14 +152,6 @@ html.lenis, html.lenis body {
 
 [data-theme="dark"] .logo-line {
     background: rgba(26, 26, 26, 0.35);
-}
-
-.logo.logo-light {
-    color: var(--soft-beige);
-}
-
-.logo.logo-dark {
-    color: var(--black);
 }
 
 .logo-link {
@@ -320,36 +306,6 @@ html.lenis, html.lenis body {
     line-height: 0.8;
 }
 
-/* Animaciones de Revelación */
-.reveal-wrapper {
-    overflow: hidden;
-    display: block;
-    line-height: 1.2;
-}
-
-.reveal-inner {
-    display: block;
-    transform: translateY(120%);
-}
-
-.reveal-wrapper-hero {
-    overflow: hidden;
-    display: block;
-    padding-top: 0.5em;
-    margin-top: -0.5em;
-    padding-bottom: 0.1em;
-}
-
-.reveal-inner-hero {
-    display: block;
-    transform: translateY(220%);
-}
-
-/* Intercambio de Caracteres */
-.char-swap-text {
-    display: inline-block;
-}
-
 .char-swap-container {
     display: inline-block;
     position: relative;
@@ -379,7 +335,7 @@ html.lenis, html.lenis body {
     width: 40px;
     height: 40px;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 30001;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
@@ -462,7 +418,7 @@ html.lenis, html.lenis body {
     border: 2px solid var(--violet); /* Violeta de la paleta */
     border-radius: 50%;
     pointer-events: none;
-    z-index: 10000;
+    z-index: 30002;
     transform: translate(-50%, -50%);
     mix-blend-mode: difference;
 }
@@ -470,7 +426,7 @@ html.lenis, html.lenis body {
 .cursor-click-particle {
     position: fixed;
     pointer-events: none;
-    z-index: 10000;
+    z-index: 30002;
     font-family: var(--font-geist);
     font-size: clamp(0.55rem, 1.2vw, 0.75rem);
     font-weight: 700;
@@ -481,9 +437,7 @@ html.lenis, html.lenis body {
     text-shadow: 0 0 4px rgba(161, 153, 255, 0.4);
 }
 
-.custom-cursor.on-project,
-.custom-cursor.on-flower-hug,
-.custom-cursor.on-contact-title {
+.custom-cursor.on-project {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
 }
@@ -509,28 +463,6 @@ html.lenis, html.lenis body {
 .view-work-cursor.visible {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-}
-
-/* Cursor de Flor Magnético */
-.flower-hug-cursor {
-    position: fixed;
-    width: 70px;
-    height: 70px;
-    pointer-events: none;
-    z-index: 9997;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.flower-hug-cursor.visible {
-    opacity: 1;
-}
-
-.purple-flower-svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
 }
 
 /* ============================================ */
@@ -604,45 +536,6 @@ html.lenis, html.lenis body {
     pointer-events: none;
 }
 
-/* Skeleton para elementos de texto (variante) */
-.skeleton-text {
-    display: inline-block;
-    background: var(--accent);
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-    color: transparent !important;
-    user-select: none;
-}
-
-.skeleton-text::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.08) 25%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.08) 75%,
-        transparent 100%
-    );
-    background-size: 200% 100%;
-    animation: skeletonShimmer 1.8s ease-in-out infinite;
-}
-
-[data-theme="dark"] .skeleton-text::after {
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.03) 25%,
-        rgba(255, 255, 255, 0.07) 50%,
-        rgba(255, 255, 255, 0.03) 75%,
-        transparent 100%
-    );
-    background-size: 200% 100%;
-}
-
 /* Barra de progreso de scroll */
 .scroll-progress {
     position: fixed;
@@ -664,70 +557,6 @@ html.lenis, html.lenis body {
     100% { background-position: 0% 50%; }
 }
 
-/* Animaciones de revelación al scroll */
-.reveal-fade-up {
-    opacity: 0;
-    transform: translateY(50px);
-    will-change: transform, opacity;
-}
-
-.reveal-fade-up.revealed {
-    animation: fadeUpReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fadeUpReveal {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.reveal-scale {
-    opacity: 0;
-    transform: scale(0.92);
-    will-change: transform, opacity;
-}
-
-.reveal-scale.revealed {
-    animation: scaleReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes scaleReveal {
-    from {
-        opacity: 0;
-        transform: scale(0.92);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.reveal-slide-left {
-    opacity: 0;
-    transform: translateX(-40px);
-    will-change: transform, opacity;
-}
-
-.reveal-slide-left.revealed {
-    animation: slideLeftReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideLeftReveal {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
 /* Separadores decorativos entre secciones */
 .section-divider {
     width: 100%;
@@ -746,15 +575,6 @@ html.lenis, html.lenis body {
 
 .section-divider--animated {
     transform: scaleX(0);
-}
-
-.section-divider--animated.revealed {
-    animation: dividerGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes dividerGrow {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
 }
 
 /* Efecto de brillo magnético en hover (para botones/links) */
@@ -787,7 +607,6 @@ html.lenis, html.lenis body {
 
 /* Content-visibility: solo en secciones SIN animaciones de ScrollTrigger */
 /* ScrollTrigger necesita alturas reales de elementos para calcular posiciones */
-.techstack-section,
 .contact-marquee-wrapper {
     content-visibility: auto;
     contain-intrinsic-size: 400px;
@@ -810,23 +629,6 @@ html.lenis, html.lenis body {
 
 .project-card:hover::before {
     opacity: 1;
-}
-
-/* Seguidor de Título de Contacto */
-.contact-title-cursor {
-    position: fixed;
-    width: 150px;
-    height: 150px;
-    pointer-events: none;
-    z-index: 9997;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.contact-title-cursor.visible {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
 }
 
 /* Contenedor de Botón de Tema (Fijo abajo a la izquierda) */
@@ -909,9 +711,7 @@ html.lenis, html.lenis body {
     }
 
     .custom-cursor,
-    .view-work-cursor,
-    .flower-hug-cursor,
-    .contact-title-cursor {
+    .view-work-cursor {
         display: none !important;
     }
 

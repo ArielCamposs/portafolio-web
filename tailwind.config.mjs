@@ -4,33 +4,16 @@ export default {
     theme: {
         extend: {
             colors: {
-                'neo-black': '#0a0a0a',
-                'neo-dark': '#151515',
-                'neo-white': '#e8e8e8',
-                'neo-gray': '#404040',
-                'neo-gold': '#b8996f', // Dorado/Oliva elegante
-                'neo-cyan': '#5a8a9a', // Teal profesional
-                'neo-purple': '#6b4f7c', // Púrpura profundo
-                'neo-pink': '#c25d85', // Rosa/Burdeos suave
-            },
-            boxShadow: {
-                'neo': '5px 5px 0px 0px rgba(64,64,64,0.5)', // Sombra suave gris
-                'neo-sm': '3px 3px 0px 0px rgba(64,64,64,0.5)',
-                'neo-color': '8px 8px 0px 0px #6b4f7c', // Sombra morada suave
-            },
-            animation: {
-                'float': 'float 4s ease-in-out infinite',
-                'shake': 'shake 0.5s ease-in-out infinite',
-            },
-            keyframes: {
-                float: {
-                    '0%, 100%': { transform: 'translateY(0)' },
-                    '50%': { transform: 'translateY(-15px)' },
-                },
-                shake: {
-                    '0%, 100%': { transform: 'rotate(-1deg)' },
-                    '50%': { transform: 'rotate(1deg)' },
-                }
+                background: 'var(--bg-primary)',
+                foreground: 'var(--text-primary)',
+                card: 'var(--bg-secondary)',
+                'card-foreground': 'var(--text-primary)',
+                muted: 'var(--accent)',
+                'muted-foreground': 'var(--text-secondary)',
+                border: 'var(--border)',
+                ring: 'var(--violet)',
+                ink: 'rgb(var(--black-rgb) / <alpha-value>)',
+                paper: 'rgb(var(--white-rgb) / <alpha-value>)',
             },
         },
     },

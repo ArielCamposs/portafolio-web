@@ -11,7 +11,6 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 import Analytics from "@vercel/analytics/astro";
-import ProjectDrawer from "../components/ProjectDrawer.astro";
 import "../styles/global.css";
 ---
 
@@ -38,7 +37,7 @@ import "../styles/global.css";
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Geist:wght@100..900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Geist:wght@100..900&display=swap" rel="stylesheet" />
 
         <!-- SEO Primario -->
         <title>{title}</title>
@@ -104,9 +103,6 @@ import "../styles/global.css";
         <!-- Contenedor de Contenido Principal -->
         <slot />
 
-        <!-- Detalles del Proyecto (Drawer de información) -->
-        <ProjectDrawer />
-
         <!-- CDN Scripts (GSAP, ScrollTrigger, Lenis) -->
         <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -124,7 +120,6 @@ import "../styles/global.css";
                 if (!loader || !loaderCounter) return;
 
                 let displayedPercent = 0;
-                const targetPercent = 100;
                 const isMobile = window.innerWidth <= 768;
                 // Duración total de la pseudo-animación de carga
                 const duration = isMobile ? 800 : 1500; // ms
@@ -293,17 +288,9 @@ import "../styles/global.css";
                 viewWorkCursor.textContent = 'VER';
                 document.body.appendChild(viewWorkCursor);
 
-                const contactTitleCursor = document.createElement('div');
-                contactTitleCursor.className = 'contact-title-cursor';
-                contactTitleCursor.innerHTML = `<img src="/images/custom-cursor-hover.svg" style="width:100%; height:100%; filter: var(--theme-filter);" alt="">`;
-                document.body.appendChild(contactTitleCursor);
-
                 let mouseX = 0, mouseY = 0;
                 let cursorX = 0, cursorY = 0;
                 let viewX = 0, viewY = 0;
-                let contactX = 0, contactY = 0;
-                let skewX = 0, skewY = 0;
-                let isOverContact = false;
 
                 document.addEventListener('mousemove', (e) => {
                     mouseX = e.clientX;
@@ -392,24 +379,6 @@ import "../styles/global.css";
                     viewWorkCursor.style.left = viewX + 'px';
                     viewWorkCursor.style.top = viewY + 'px';
 
-                    // Lerp para cursor del contacto
-                    if (isOverContact) {
-                        const cox = mouseX - contactX;
-                        const coy = mouseY - contactY;
-
-                        contactX += cox * 0.12;
-                        contactY += coy * 0.12;
-
-                        const targetSkewX = Math.max(-15, Math.min(15, cox * 0.3));
-                        const targetSkewY = Math.max(-15, Math.min(15, coy * 0.3));
-
-                        skewX += (targetSkewX - skewX) * 0.15;
-                        skewY += (targetSkewY - skewY) * 0.15;
-
-                        contactTitleCursor.style.left = contactX + 'px';
-                        contactTitleCursor.style.top = contactY + 'px';
-                        contactTitleCursor.style.transform = `translate(-50%, -50%) scale(1) skew(${skewX}deg, ${skewY}deg)`;
-                    }
                     requestAnimationFrame(updateCursors);
                 }
                 updateCursors();
@@ -531,7 +500,7 @@ import "../styles/global.css";
                 }
             }
 
-            // Animación de Intercambio de Caracteres (Bebas Neue Text)
+            // Animación de intercambio de caracteres
             function initCharSwapAnimation() {
                 const elements = document.querySelectorAll('[data-char-swap]');
                 elements.forEach(el => {
@@ -645,8 +614,6 @@ import "../styles/global.css";
 
                 const revealConfigs = [
                     { selector: '[data-reveal="fade-up"]', from: { opacity: 0, y: 50 }, to: { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' } },
-                    { selector: '[data-reveal="scale"]', from: { opacity: 0, scale: 0.92 }, to: { opacity: 1, scale: 1, duration: 1, ease: 'power3.out' } },
-                    { selector: '[data-reveal="slide-left"]', from: { opacity: 0, x: -40 }, to: { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' } },
                 ];
 
                 revealConfigs.forEach(config => {
