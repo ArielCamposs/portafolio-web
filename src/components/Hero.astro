@@ -82,6 +82,9 @@ const techs = [
         <span class="hero-word word-fullstack" data-char-swap>FULL-STACK</span>
       </div>
     </h1>
+    <p class="hero-value">
+      Desarrollo web para pymes y startups en Chile
+    </p>
   </div>
 </section>
 
@@ -283,6 +286,12 @@ const techs = [
         { scale: 0.9 },
         { scale: 1, duration: 1.4, delay: 0.05, ease: "power3.out" },
       );
+      // @ts-ignore
+      gsap.fromTo(
+        ".hero-value",
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 0.78, duration: 0.7, delay: 0.55, ease: "power2.out" },
+      );
     }
 
     // Comprobar si el loader global ya terminó de cargarse en el DOM
@@ -358,7 +367,7 @@ const techs = [
   .hero-title {
     position: relative;
     margin: 0;
-    padding: 0 5.2rem 3.9rem; /* Separación de seguridad con la esquina superior */
+    padding: 0 5.2rem 1rem;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -420,6 +429,22 @@ const techs = [
     align-items: baseline;
     transition: color 0.4s ease;
     margin-left: 0.22em; /* Separar la itálica del texto anterior */
+  }
+
+  .hero-value {
+    font-family: var(--font-geist);
+    font-style: normal;
+    font-size: clamp(0.95rem, 2.1vw, 1.2rem);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    text-align: center;
+    color: var(--text-primary);
+    opacity: 0;
+    max-width: 28rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 3.2rem;
+    overflow-wrap: anywhere;
   }
 
   /* ===== LENGUAJES FLOTANTES EN BACKGROUND ===== */
@@ -501,10 +526,15 @@ const techs = [
     .hero-title {
       align-items: center;
       text-align: center;
-      padding: 0 0.8rem;
+      padding: 0 0.8rem 0.6rem;
       justify-content: center;
       gap: 0;
       line-height: 0.82;
+    }
+
+    .hero-value {
+      padding: 0 1rem 0;
+      max-width: 22rem;
     }
 
     .title-row-first {
