@@ -108,6 +108,10 @@ import Navbar from "../components/Navbar.astro";
 </Layout>
 
 <script>
+  // @ts-nocheck — easter egg page; types are intentionally loose
+  import { gsap } from "../lib/motion";
+  import { updateThemeVisuals } from "../scripts/theme";
+
   (function () {
     // ============================================
     // SoundManager: Sintetizador de audio con Web Audio API
@@ -817,9 +821,7 @@ import Navbar from "../components/Navbar.astro";
           const next = current === "dark" ? "light" : "dark";
           document.documentElement.setAttribute("data-theme", next);
           // Sincronizar el toggle flotante
-          if (typeof updateThemeVisuals !== "undefined") {
-            updateThemeVisuals(next === "dark");
-          }
+          updateThemeVisuals(next === "dark");
           response.innerHTML =
             '<span class="console-text">Tema cambiado a: <span style="color:' +
             colors[2] +

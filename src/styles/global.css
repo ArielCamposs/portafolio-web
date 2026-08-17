@@ -4,7 +4,8 @@
 
 @font-face {
     font-family: 'MangoGrotesque';
-    src: url('/fonts/Mango-Grotesque-VF.ttf') format('truetype');
+    src: url('/fonts/Mango-Grotesque-VF.woff2') format('woff2'),
+         url('/fonts/Mango-Grotesque-VF.ttf') format('truetype');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -76,6 +77,12 @@ html, body {
     overflow-x: clip;
     transition: background-color 0.4s ease, color 0.4s ease;
     height: auto;
+}
+
+astro-island,
+astro-slot {
+    display: block;
+    width: 100%;
 }
 
 /* Desplazamiento Suave con Lenis */

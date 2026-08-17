@@ -100,7 +100,8 @@ const SOCIAL_LINKS = {
 </div>
 
 <script>
-    // Inicialización segura de scripts del menú
+    import { gsap } from "../lib/motion";
+
     function initMenuLogic() {
         const menuBtn = document.getElementById("menuBtn");
         const menuCard = document.getElementById("menuCard");
@@ -259,9 +260,8 @@ const SOCIAL_LINKS = {
                         closeMenu();
                         setTimeout(() => {
                             // @ts-ignore
-                            if (window.lenis) {
-                                // @ts-ignore
-                                window.lenis.scrollTo(targetSection, {
+                            if (window.__portfolioLenis) {
+                                window.__portfolioLenis.scrollTo(targetSection, {
                                     duration: 1.5,
                                     easing: (t: number) => 1 - Math.pow(1 - t, 4),
                                 });

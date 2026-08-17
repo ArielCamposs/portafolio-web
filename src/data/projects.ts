@@ -1,0 +1,107 @@
+import type { ImageItem } from "../components/ui/project";
+
+export const projects: ImageItem[] = [
+  {
+    id: "postas-desam",
+    title: "Postas DESAM",
+    category: "Gestión de inventario",
+    desc: "Stock de medicamentos e insumos para postas rurales.",
+    problem:
+      "Las postas rurales llevaban el inventario de medicamentos e insumos en registros dispersos. Hacía falta un sistema único para ver existencias, registrar movimientos y evitar quiebres de stock.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
+    url: "/images/postas-desam.png",
+    width: 1024,
+    height: 489,
+  },
+  {
+    id: "conductores-desam",
+    title: "Conductores DESAM",
+    category: "Aplicación móvil",
+    desc: "Registro de jornadas y reportes operativos en terreno.",
+    problem:
+      "Los conductores en terreno reportaban jornadas y novedades a destiempo o de forma incompleta. La app permite registrar el trabajo desde el celular, sin depender de planillas al final del día.",
+    tech: ["Expo", "React Native", "TypeScript"],
+    url: "/images/desam-conductores.png",
+    width: 592,
+    height: 980,
+    portrait: true,
+  },
+  {
+    id: "estudio-alvear",
+    title: "Estudio Alvear",
+    category: "Landing para abogados",
+    desc: "Sitio profesional orientado a consultas y contacto directo.",
+    problem:
+      "Un despacho pequeño necesitaba una web clara para explicar áreas de práctica y recibir consultas directas, sin una estructura de marketing pesada.",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    url: "/images/estudio-alvear.png",
+    width: 1024,
+    height: 491,
+    href: "https://landing-page-abogados-nu.vercel.app/",
+  },
+  {
+    id: "nitiv-app",
+    title: "Nitiv App",
+    category: "Plataforma SaaS",
+    desc: "Gestión escolar para equipos de convivencia y docentes.",
+    problem:
+      "Los equipos de convivencia escolar gestionaban casos en Excel y formularios sueltos. Nitiv centraliza registros, protocolos y seguimiento en un panel compartido.",
+    tech: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
+    url: "/images/nitiv-saas.webp",
+    width: 1024,
+    height: 490,
+    href: "https://nitiv-app-three.vercel.app/login",
+  },
+  {
+    id: "nitiv-cl",
+    title: "Nitiv.cl",
+    category: "Landing corporativa",
+    desc: "Presentación de la plataforma para colegios chilenos.",
+    problem:
+      "Había que explicar a colegios chilenos qué resuelve Nitiv, cómo funciona y cómo pedir una demo, en un sitio rápido y fácil de compartir.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    url: "/images/nitiv-landing.png",
+    width: 1024,
+    height: 492,
+    href: "https://nitiv.cl",
+  },
+  {
+    id: "bitecraft",
+    title: "Bitecraft",
+    category: "E-commerce delivery",
+    desc: "Tienda de comida con carrito y gestión de pedidos.",
+    problem:
+      "Un local de comida necesitaba un canal propio para mostrar el menú, armar el carrito y tomar pedidos, en lugar de depender solo de mensajes sueltos.",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    url: "/images/bitecraft.png",
+    width: 1024,
+    height: 490,
+    href: "https://tienda-comida-six.vercel.app/",
+  },
+  {
+    id: "tienda-textil",
+    title: "Tienda textil",
+    category: "E-commerce artesanal",
+    desc: "Catálogo y carrito para una tienda de textilería.",
+    problem:
+      "Una tienda artesanal de La Ligua necesitaba mostrar su catálogo, vender con carrito y coordinar pedidos y despacho a Chile por WhatsApp.",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    url: "/images/pura-lana.png",
+    width: 1024,
+    height: 493,
+    href: "https://landingpage-puralana.vercel.app/",
+  },
+  {
+    id: "tienda-sushi",
+    title: "Tienda sushi",
+    category: "Restaurante delivery",
+    desc: "Pedidos, favoritos y compra directa por WhatsApp.",
+    problem:
+      "El restaurante necesitaba un menú online con favoritos y compra directa por WhatsApp, más un aviso claro cuando el local está cerrado.",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    url: "/tienda-sushi.png",
+    width: 1024,
+    height: 492,
+    href: "https://tienda-sushi.vercel.app/",
+  },
+];
