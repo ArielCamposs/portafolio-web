@@ -1,0 +1,17 @@
+---
+/**
+ * Testimonios de ejemplo. No se monta en la página mientras
+ * `showTestimonials` sea false en src/data/site.js.
+ */
+const { items } = Astro.props;
+---
+
+<div class="quotes">
+  <p class="label"><i></i>Lo que dicen <em class="ex">EJEMPLO</em></p>
+  {items.map((t) => (
+    <figure class="quote">
+      <blockquote data-blur>“{t.quote}”</blockquote>
+      <figcaption><b>{t.who}</b> — {t.role} <em class="ex">EJEMPLO</em></figcaption>
+    </figure>
+  ))}
+</div>

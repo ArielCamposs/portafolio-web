@@ -1,43 +1,302 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
-import Hero from "../components/Hero.astro";
-import Services from "../components/Services.astro";
-import ProjectsBento from "../components/ProjectsBento.astro";
-import About from "../components/About.astro";
-import Contact from "../components/Contact.astro";
+import Base from '../layouts/Base.astro';
+import Testimonials from '../components/Testimonials.astro';
+import { services, projects, filters, WA_NUMBER, steps, plans, testimonials, stack, contact, wa, seo, showTestimonials, showCaseFigures } from '../data/site.js';
+const manifesto = [
+  ['Hola,', ''], ['soy', ''], ['Ariel.', ''], ['Analista', ''], ['programador', ''], ['y', ''], ['desarrollador', ''], ['full-stack', ''], ['en', ''], ['La', ''], ['Ligua,', ''], ['Chile.', ''],
+  ['Hago', ''], ['webs,', 'hl'], ['tiendas', 'hl'], ['con', ''], ['pedidos', ''], ['a', ''], ['WhatsApp,', ''], ['sistemas', 'hl'], ['a', ''], ['medida', ''], ['y', ''], ['apps', 'hl'],
+  ['para', ''], ['pymes', ''], ['y', ''], ['startups:', ''], ['rápidas', ''], ['en', ''], ['el', ''], ['celular', ''], ['y', ''], ['fáciles', ''], ['de', ''], ['usar.', ''],
+];
+const marquee = ['Páginas web', 'Tiendas con WhatsApp', 'Sistemas a medida', 'Apps móviles', 'Mejora de sitios'];
+const hashes = ['a1f3c07', '5be92d4', 'c07d81e', '3f9a1c6'];
 ---
+<Base title={seo.title} description={seo.description} keywords={seo.keywords}>
+  <link slot="head" rel="preload" href="/fonts/display.ttf" as="font" type="font/ttf" crossorigin />
+  <link slot="head" rel="preload" href="/fonts/mono.ttf" as="font" type="font/ttf" crossorigin />
+  <div class="grain" aria-hidden="true"></div>
 
-<Layout title="Portafolio | Analista Programador Computacional">
-	<!-- Barra de Navegación -->
-	<Navbar />
+  <!-- PRELOADER: "build" con pasos reales del sitio (contador por pasos + cortina clip-path, idea Spitzer) -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__bg"></div>
+    <div class="loader__term">
+      <p class="loader__cmd">$ camposdev build --target=negocio</p>
+      <ul class="loader__log" id="loaderLog">
+        <li><b>ok</b> leyendo servicios <i></i> {services.length}</li>
+        <li><b>ok</b> resolviendo proyectos <i></i> {projects.length}</li>
+        <li><b>ok</b> cargando stack <i></i> {stack.length} tecnologías</li>
+        <li><b>ok</b> compilando estilos y tipografías</li>
+        <li><b>ok</b> montando la escena de proyectos</li>
+        <li><b>ok</b> optimizando capturas (webp)</li>
+        <li class="is-last"><b>→</b> <span id="loaderDone">abriendo sitio</span></li>
+      </ul>
+    </div>
+    <div class="loader__row">
+      <span class="loader__label" id="loaderBar">[··············]</span>
+      <span class="loader__num"><b id="loaderNum">00</b><small>%</small></span>
+    </div>
+  </div>
 
-	<main>
-		<!-- Sección Inicio -->
-		<Hero />
+  <!-- CURSOR con texto (Nuila) -->
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><em id="cursorText"></em></span></div>
 
-		<!-- Separador decorativo -->
-		<div class="section-divider section-divider--animated" aria-hidden="true"></div>
+  <header class="top">
+    <a class="top__logo" href="#inicio" data-cursor="Inicio"><span class="top__mark">c<u>_</u></span><span data-scramble>camposdev</span></a>
+    <div class="top__mid"><span class="dot"></span><span>Disponible para proyectos</span><span class="sep">/</span><span id="clock">La Ligua, CL</span></div>
+    <a class="top__cta" href={wa('Hola Ariel!')} target="_blank" rel="noopener" data-cursor="WhatsApp" data-scramble>WhatsApp →</a>
+  </header>
 
-		<!-- Sección Servicios -->
-		<Services />
+  <nav class="dock" aria-label="Navegación">
+    <a class="dock__logo" href="#inicio" aria-label="Inicio">
+      <span class="dock__prompt" aria-hidden="true">&gt;_</span>
+    </a>
+    <div class="dock__label" id="dockLabel" aria-live="polite">01 — Inicio</div>
+    <div class="dock__count" aria-hidden="true"><span id="dockPct">000</span>%</div>
+    <a class="dock__cta" href="#contacto" data-scramble>Escríbeme</a>
+  </nav>
 
-		<!-- Separador decorativo -->
-		<div class="section-divider section-divider--animated" aria-hidden="true"></div>
+  <main id="top">
+    <!-- 01 HERO -->
+    <section class="hero" id="inicio" data-txt="01 — Inicio" data-theme="papel">
+      <canvas class="hero__stitch" id="stitch" aria-hidden="true"></canvas>
 
-		<!-- Sección Proyectos -->
-		<ProjectsBento />
+      <a class="corner corner--tl" href="#servicios" data-cursor="Ir"><i>01</i><small>servicios</small><b data-scramble>Qué construyo</b></a>
+      <a class="corner corner--tr" href="#proyectos" data-cursor="Ir"><i>02</i><small>proyectos</small><b data-scramble>Proyectos</b></a>
+      <a class="corner corner--bl" href="#proceso" data-cursor="Ir"><i>03</i><small>proceso</small><b data-scramble>Cómo trabajo</b></a>
+      <a class="corner corner--br" href="#contacto" data-cursor="Ir"><i>04</i><small>contacto</small><b data-scramble>Escríbeme</b></a>
 
-		<!-- Separador decorativo -->
-		<div class="section-divider section-divider--animated" aria-hidden="true"></div>
+      <div class="hero__body">
+        <p class="eyebrow"><span>Ariel Campos</span> · Full-stack · La Ligua, Chile</p>
+        <h1 class="hero__h1" id="heroH1">
+          <span class="ln"><span class="ln__in">Escribo</span></span>
+          <span class="ln"><span class="ln__in">software</span></span>
+          <span class="ln"><span class="ln__in">para tu</span></span>
+          <span class="ln"><span class="ln__in">negocio.</span></span>
+        </h1>
+        <span class="hero__caret" id="heroCaret" aria-hidden="true"></span>
+        <p class="hero__lede">Páginas web, tiendas con pedidos a WhatsApp, sistemas a medida y apps para pymes y startups de Chile. Rápidas en el celular y fáciles de usar.</p>
+      </div>
+      <div class="hero__scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </section>
 
-		<!-- Sección Sobre Mí -->
-		<About />
+    <!-- franja -->
+    <section class="strip" aria-label="Servicios" data-theme="tinta">
+      <div class="strip__track">
+        {[0,1].map(() => (
+          <ul class="strip__set" aria-hidden="true">
+            {marquee.map(m => <li>{m}<span class="strip__sep">/&gt;</span></li>)}
+          </ul>
+        ))}
+      </div>
+    </section>
 
-		<!-- Separador decorativo -->
-		<div class="section-divider section-divider--animated" aria-hidden="true"></div>
+    <!-- 02 MANIFIESTO -->
+    <section class="about" id="sobre-mi" data-txt="02 — Sobre mí" data-theme="papel">
+      <p class="label"><i></i>Sobre mí</p>
+      <p class="about__text" id="manifesto">
+        {manifesto.map(([w, c]) => <span class={`w ${c}`}>{w}</span>)}
+      </p>
+      <div class="about__meta">
+        <dl><dt>Ubicación</dt><dd>La Ligua, Chile</dd></dl>
+        <dl><dt>Estado</dt><dd><span class="dot"></span>Disponible para proyectos</dd></dl>
+        <dl><dt>Empresa</dt><dd>DESAM / Nitiv SpA</dd></dl>
+        <p class="about__p">Trabajo en el Departamento de Salud de La Ligua (DESAM) como informático y soy cofundador de Nitiv SpA, donde lidero el diseño y desarrollo de la infraestructura web y las aplicaciones SaaS. Aplico metodologías ágiles como SCRUM y principios de Clean Code.</p>
+      </div>
+      <div class="about__nums">
+        <div><b data-count={projects.length}>0</b><span>Proyectos</span></div>
+        <div><b data-count={services.length}>0</b><span>Servicios</span></div>
+        <div><b data-count={stack.length}>0</b><span>Tecnologías</span></div>
+      </div>
+    </section>
 
-		<!-- Sección Contacto y Footer -->
-		<Contact />
-	</main>
-</Layout>
+    <!-- 03 SERVICIOS · etiquetas colgadas (Holloway) -->
+    <section class="tags" id="servicios" data-txt="03 — Qué construyo" data-theme="azul">
+      <div class="tags__head">
+        <p class="label label--inv"><i></i>Lo que construyo</p>
+        <h2 class="h2">Cinco cosas<br />que sé <em>construir</em>.</h2>
+        <p class="tags__hint"><span class="tags__hand" aria-hidden="true">←</span> Arrastra las etiquetas. Cada una lleva a WhatsApp con el mensaje listo.</p>
+      </div>
+      <div class="tags__stage" id="tagsStage">
+        <div class="tags__rail" aria-hidden="true"></div>
+        <div class="tags__track" id="tagsTrack">
+          {services.map((s, i) => (
+            <article class={`tag tag--${s.tone}`} data-i={i}>
+              <span class="tag__ring" aria-hidden="true"></span>
+              <div class="tag__card">
+                <span class="tag__file"><i>{s.n}</i> {s.file}</span>
+                <span class="tag__sig">{s.sig}</span>
+                <h3 class="tag__t">{s.title}</h3>
+                <p class="tag__p">{s.text}</p>
+                <a class="tag__a" href={wa(s.msg)} target="_blank" rel="noopener" data-cursor="WhatsApp" data-scramble>Pedir esto →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 PROYECTOS · WebGL contenido (Landberg/Holloway) + Flip (Spitzer) -->
+    <section class="work cases" id="proyectos" data-txt="04 — Casos" data-theme="tinta">
+      <div class="cases__head">
+        <p class="label label--inv"><i></i>Proyectos</p>
+        <h2 class="h2">Casos<br />reales<em>.</em></h2>
+        <p class="cases__lede">Cada proyecto empezó como un problema de verdad en un negocio. Elige el tuyo y te muestro cómo lo resolví: del desorden al sitio funcionando.</p>
+      </div>
+
+      <div class="filters" id="filters" role="group" aria-label="Filtrar casos por tipo de negocio">
+        <div class="filters__in">
+          <span class="filters__cmd" aria-hidden="true">$ filtrar --negocio=</span>
+          <div class="filters__chips">
+            {filters.map((f) => {
+              const n = f.id === 'todo' ? projects.length : projects.filter((p) => p.tags.includes(f.id)).length;
+              return <button class="chip" type="button" data-f={f.id} aria-pressed={f.id === 'todo' ? 'true' : 'false'} data-cursor="Filtrar"><span>{f.label}</span><sup>{n}</sup></button>;
+            })}
+          </div>
+        </div>
+        <p class="filters__out" id="filtersOut" aria-live="polite">// mostrando los {projects.length} casos</p>
+      </div>
+
+      <div class="cases__list" id="casesList">
+        {projects.map((p, i) => {
+          const q = encodeURIComponent(`Hola Ariel! Vi el caso «${p.title}» en tu sitio y quiero algo así para mi negocio. Quisiera conversar contigo.`);
+          return (
+          <article class="case is-open" id={`caso-${p.id}`} data-id={p.id} data-tags={p.tags.join(' ')} data-kind={p.kind}>
+            <h3 class="case__h">
+              <button class="case__toggle" type="button" aria-expanded="true" aria-controls={`body-${p.id}`} data-cursor="Abrir/cerrar">
+                <span class="case__n">{String(i + 1).padStart(2, '0')}</span>
+                <span class="case__t" data-scramble-hover>{p.title}</span>
+                <span class="case__c">{p.category}</span>
+                <span class="case__tags">{p.tags.map((t) => `#${t}`).join(' ')}</span>
+                <span class="case__tg" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="case__body" id={`body-${p.id}`}>
+              <div class="stage" data-state="before">
+                <div class="stage__bar">
+                  <span class="stage__cmd"><b>$</b> compile <i>caso-{p.id}</i></span>
+                  <span class="stage__st" aria-hidden="true">[··········] 0%</span>
+                  <span class="stage__tabs" role="group" aria-label="Ver antes o después">
+                    <button type="button" class="stab is-on" data-s="before" aria-pressed="true">antes</button>
+                    <button type="button" class="stab" data-s="after" aria-pressed="false" data-cursor="Compilar">después</button>
+                  </span>
+                </div>
+                <div class="stage__view">
+                  <div class={`after after--${p.kind}`}>
+                    <div class={`mock mock--${p.kind}`}>
+                      <div class="mock__bar"><i></i><i></i><i></i><span>{p.host}</span></div>
+                      <div class="mock__vp"><img class="mock__img" src={p.shot} width={p.sw} height={p.sh} alt={`Captura completa de ${p.title}`} loading="lazy" decoding="async" /></div>
+                    </div>
+                  </div>
+                  <div class={`before before--${p.before.skin}`}>
+                    <div class="before__bar"><i></i><i></i><i></i><span>{p.before.file}</span></div>
+                    <pre class="before__code" aria-label={`Antes: ${p.problem}`}>{p.before.lines.map(([k, t], li) => <span class={`bl bl--${k}`} style={`--x:${(li * 37 % 5)}ch`} data-t={t}>{t}</span>)}</pre>
+                    <p class="before__note">// recreación ilustrativa del problema, no son datos reales</p>
+                  </div>
+                  <canvas class="stage__band" aria-hidden="true"></canvas>
+                </div>
+              </div>
+              <div class="info">
+                <ol class="flow">
+                  <li class="flow__i is-on" data-for="before"><span class="flow__k">// 01 problema</span><p>{p.problem}</p></li>
+                  <li class="flow__i" data-for="after"><span class="flow__k">// 02 solución</span><p>{p.solution}</p></li>
+                  <li class="flow__i" data-for="after"><span class="flow__k">// 03 resultado</span><p>{p.result}</p></li>
+                </ol>
+                <ul class="case__tech">{p.tech.map((t) => <li>{t}</li>)}</ul>
+                {showCaseFigures && <p class="case__fn">resultado cualitativo según la descripción real · cifras: por definir con el cliente <i class="ex">EJEMPLO</i></p>}
+                <div class="case__cta">
+                  <a class="btn btn--inv" href={`https://wa.me/${WA_NUMBER}?text=${q}`} target="_blank" rel="noopener" data-cursor="WhatsApp">Quiero algo así →</a>
+                  {p.href ? <a class="link" href={p.href} target="_blank" rel="noopener" data-cursor="Abrir">Ver en vivo →</a> : <span class="case__priv">// privado: acceso con login</span>}
+                </div>
+              </div>
+            </div>
+          </article>
+          );
+        })}
+        <p class="cases__div" id="casesDiv" hidden>// otros casos · toca uno para abrirlo</p>
+      </div>
+
+      <div class="work__end"><p class="h3">¿Tu negocio es<br />el próximo deploy?</p><a class="btn" href={wa('Hola Ariel! Vi tus proyectos y quiero conversar sobre el mío.')} target="_blank" rel="noopener" data-cursor="WhatsApp">Cuéntame tu idea →</a></div>
+    </section>
+
+    <!-- 05 PROCESO · git graph -->
+    <section class="process" id="proceso" data-txt="05 — Proceso" data-theme="papel">
+      <div class="process__head">
+        <p class="label"><i></i>Mi proceso</p>
+        <h2 class="h2">De la idea<br />al deploy.</h2>
+      </div>
+      <div class="process__wrap" id="processWrap">
+        <svg class="process__svg" id="processSvg" viewBox="0 0 100 400" preserveAspectRatio="none" aria-hidden="true">
+          <defs><mask id="pm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="420"><path id="pMask" d="" fill="none" stroke="#fff" stroke-width="3" /></mask></defs>
+          <path id="pGhost" d="" fill="none" stroke="currentColor" stroke-opacity=".16" stroke-width="2.4" vector-effect="non-scaling-stroke" />
+          <path id="pPath" d="" fill="none" stroke="#FF4F1F" stroke-width="3.4" stroke-linecap="round" vector-effect="non-scaling-stroke" mask="url(#pm)" />
+        </svg>
+        <div class="process__nodes" id="nodes" aria-hidden="true"></div>
+        <div class="process__needle" id="needle" aria-hidden="true"><i class="caret"></i><span>HEAD</span></div>
+        <ol class="steps">
+          {steps.map((s, i) => (
+            <li class={`step step--${i % 2 ? 'r' : 'l'}`}>
+              <span class="step__meta"><b>●</b> {hashes[i]} · {s.tag}</span>
+              <span class="step__n">{s.n}</span>
+              <h3 class="step__t">{s.title}</h3>
+              <p class="step__p">{s.text}</p>
+              <code class="step__cmd">$ {s.cmd}</code>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- 06 PLANES -->
+    <section class="plans" id="planes" data-txt="06 — Planes" data-theme="papel2">
+      <div class="plans__head">
+        <p class="label"><i></i>Mis planes</p>
+        <h2 class="h2">Recibo<br />referencial.</h2>
+        <pre class="term" aria-hidden="true">$ camposdev cotizar --planes=todos
+# precios en CLP, el valor final lo defino contigo</pre>
+      </div>
+      <ul class="ledger">
+        {plans.map((p, i) => (
+          <li class="ledger__row">
+            <span class="ledger__sign" aria-hidden="true">+</span>
+            <span class="ledger__n">{String(i + 1).padStart(2, '0')}</span>
+            <div class="ledger__t"><h3>{p.name}</h3><p>{p.for}</p>{p.note && <p class="ledger__note">+ {p.note}</p>}</div>
+            <span class="ledger__dots" aria-hidden="true"></span>
+            <span class="ledger__price"><small>desde</small> {p.price}</span>
+            <a class="ledger__a" href={wa(p.msg)} target="_blank" rel="noopener" data-cursor="WhatsApp" data-scramble>Cotizar →</a>
+          </li>
+        ))}
+      </ul>
+      <p class="ledger__foot">{plans.length} planes · CLP · exit 0</p>
+      <p class="ledger__nota">Precios referenciales: el valor final depende del alcance, y te lo confirmo yo antes de empezar.</p>
+      {showTestimonials && <Testimonials items={testimonials} />}
+    </section>
+
+    <!-- 07 CONTACTO -->
+    <section class="contact" id="contacto" data-txt="07 — Escríbeme" data-theme="naranja">
+      <div class="contact__marq" aria-hidden="true"><div class="contact__marq-in">{Array.from({length: 8}).map(() => <span>contacto <i>/&gt;</i> </span>)}</div></div>
+      <div class="contact__body">
+        <p class="label label--inv"><i></i>Contacto</p>
+        <h2 class="contact__h" aria-label="Escríbeme">
+          <span class="ln"><span class="ln__in">Escríbeme</span></span><em>.</em>
+        </h2>
+        <p class="contact__p">Cuéntame qué vendes y qué te está costando hoy. Respondo por WhatsApp y te envío una propuesta clara.</p>
+        <div class="contact__ctas">
+          <a class="pxbtn" href={wa('Hola Ariel! Vi tu página y quiero conversar sobre mi proyecto.')} target="_blank" rel="noopener" data-cursor="WhatsApp" data-px="#0E1116"><canvas aria-hidden="true"></canvas><span>Abrir WhatsApp →</span></a>
+          <a class="link" href={`mailto:${contact.email}`} data-cursor="Email" data-scramble>{contact.email}</a>
+        </div>
+      </div>
+      <footer class="foot">
+        <div class="foot__links">
+          <a href={contact.linkedin} target="_blank" rel="noopener" data-scramble>LinkedIn →</a>
+          <a href={contact.github} target="_blank" rel="noopener" data-scramble>GitHub →</a>
+          <a href={contact.instagram} target="_blank" rel="noopener" data-scramble>Instagram →</a>
+        </div>
+        <p>© {new Date().getFullYear()} Ariel Campos · La Ligua, Chile</p>
+        <a class="foot__up" href="#inicio" data-scramble>Volver arriba ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    import '../scripts/main.js';
+  </script>
+</Base>
