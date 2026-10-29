@@ -404,5 +404,25 @@ html[data-theme=naranja] .top__mark{background:var(--tinta);color:var(--naranja)
   .about__text .w.hl{color:var(--tinta);background:var(--amarillo)}
   .step{opacity:1}
   .loader{display:none!important}
+  .lab .after{clip-path:none!important}
+  .lab .before,.lab .stage__band,.lab__video{display:none!important}
+  .lab__still{display:block}
+}
+
+/* en desarrollo: debajo de los casos, fuera del filtro */
+.lab{display:grid;gap:28px;width:100%;margin-top:clamp(56px,10vh,110px);padding-top:clamp(28px,5vh,48px);border-top:1.5px solid rgba(240,238,230,.18)}
+.lab__head{display:grid;gap:18px;max-width:40rem}
+.lab__h{font:800 clamp(2.8rem,6vw,5.4rem)/.88 var(--f-d);text-transform:uppercase;letter-spacing:-.01em}
+.lab__h em{font-style:normal;color:var(--naranja)}
+.lab__p{font-size:1.12rem;max-width:46ch;opacity:.88}
+.lab .stage__view{aspect-ratio:16/10}
+.lab__vp{background:#0b0e13}
+.lab__video,.lab__still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lab__still{display:none}
+.lab .btn{justify-self:start}
+@media (max-width:760px){
+  .lab{width:100%}
+  .lab .stage__view{aspect-ratio:16/10}
+  .lab .stage__cmd{display:block;white-space:normal}
 }
 
