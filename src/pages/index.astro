@@ -14,8 +14,8 @@ const labLog = [
   ['m', 'bots.forEach((b) => b.trabajar())'],
   ['m', 'await reunion.iniciar()'],
   ['m', 'tareas.pasar({ solos: true })'],
-  ['w', 'WARN  experimento privado, sin url'],
-  ['e', 'ERR   el acceso sigue cerrado'],
+  ['w', 'WARN  oficina de bots personalizable'],
+  ['e', 'ERR   el build sigue en curso'],
 ];
 ---
 <Base title={seo.title} description={seo.description} keywords={seo.keywords}>
@@ -222,25 +222,25 @@ const labLog = [
         <p class="cases__div" id="casesDiv" hidden>// otros casos · toca uno para abrirlo</p>
       </div>
 
-      <aside class="lab" id="en-desarrollo" aria-label="En desarrollo">
+      <aside class="lab" id="en-desarrollo" aria-label="Mi oficina de bots personalizable">
         <div class="lab__head">
           <p class="label label--inv"><i></i>En desarrollo</p>
-          <h3 class="lab__h">Experimento<br />privado<em>.</em></h3>
-          <p class="lab__p">Estoy construyendo una oficina donde mis propios bots de IA trabajan, se reúnen y se pasan tareas solos.</p>
+          <h3 class="lab__h">Mi oficina de bots<br />personalizable<em>.</em></h3>
+          <p class="lab__p">Estoy construyendo mi oficina de bots personalizable. Mis bots de IA trabajan, se reúnen y se pasan tareas solos.</p>
         </div>
         <div class="stage lab__stage" data-state="before">
           <div class="stage__bar">
-            <span class="stage__cmd"><b>$</b> run experimento --privado</span>
+            <span class="stage__cmd"><b>$</b> run oficina-bots --personalizable</span>
             <span class="stage__st" aria-hidden="true">[··········] 0%</span>
             <em class="ex">EN DESARROLLO</em>
           </div>
           <div class="stage__view">
             <div class="after">
               <div class="mock">
-                <div class="mock__bar"><i></i><i></i><i></i><span>privado</span></div>
+                <div class="mock__bar"><i></i><i></i><i></i><span>oficina-bots</span></div>
                 <div class="mock__vp lab__vp">
-                  <img class="lab__still" src="/img/en-desarrollo/bots-poster.webp" width="1280" height="800" alt="Oficina 3D donde mis bots de IA trabajan, se reúnen y se pasan tareas." />
-                  <video id="labVideo" class="lab__video" autoplay muted loop playsinline preload="metadata" poster="/img/en-desarrollo/bots-poster.webp" width="1280" height="800" aria-label="Oficina 3D donde mis bots de IA trabajan, se reúnen y se pasan tareas.">
+                  <img class="lab__still" src="/img/en-desarrollo/bots-poster.webp" width="1280" height="800" alt="Mi oficina de bots personalizable, donde mis bots de IA trabajan, se reúnen y se pasan tareas." />
+                  <video id="labVideo" class="lab__video" autoplay muted loop playsinline preload="metadata" poster="/img/en-desarrollo/bots-poster.webp" width="1280" height="800" aria-label="Mi oficina de bots personalizable, donde mis bots de IA trabajan, se reúnen y se pasan tareas.">
                     <source src="/img/en-desarrollo/bots-loop.webm" type="video/webm" />
                     <source src="/img/en-desarrollo/bots-loop.mp4" type="video/mp4" />
                   </video>
@@ -248,7 +248,7 @@ const labLog = [
               </div>
             </div>
             <div class="before before--term">
-              <div class="before__bar"><i></i><i></i><i></i><span>experimento.log</span></div>
+              <div class="before__bar"><i></i><i></i><i></i><span>oficina-bots.log</span></div>
               <pre class="before__code" aria-hidden="true">{labLog.map(([k, t]) => <span class={`bl bl--${k}`} data-t={t}>{t}</span>)}</pre>
             </div>
             <canvas class="stage__band" aria-hidden="true"></canvas>
