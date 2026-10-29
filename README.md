@@ -4,7 +4,7 @@ Analista Programador Computacional de Chile. Desarrollo aplicaciones web y móvi
 
 Actualmente trabajo principalmente con **Next.js**, **React**, **TypeScript**, **Supabase/PostgreSQL**, **Tailwind CSS** y **Expo**.
 
-[Ver mi portafolio](https://camposdev.cl) · [Contacto](mailto:arielcampos.dev@gmail.com)
+[Ver mi portafolio](https://www.camposdev.cl) · [Contacto](mailto:arielcampos.dev@gmail.com)
 
 ---
 
@@ -43,4 +43,15 @@ Actualmente trabajo principalmente con **Next.js**, **React**, **TypeScript**, *
 ## Contacto
 
 - **Correo:** [arielcampos.dev@gmail.com](mailto:arielcampos.dev@gmail.com)
-- **Portafolio:** [camposdev.cl](https://camposdev.cl)
+- **Instagram:** [arielcampos.dev](https://instagram.com/arielcampos.dev)
+- **Portafolio:** [www.camposdev.cl](https://www.camposdev.cl)
+
+## Desarrollo
+
+Sitio estático en Astro. Animaciones con GSAP, scroll con Lenis y la escena de proyectos con OGL.
+
+```bash
+npm install
+npm run dev
+npm run build
+```
