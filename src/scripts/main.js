@@ -8,6 +8,7 @@ import { initScramble } from './scramble.js';
 import { initGlyphs } from './glyphs.js';
 import { initTags } from './tags.js';
 import { initWork } from './work.js';
+import { initLab } from './lab.js';
 import { initProcess } from './process.js';
 import { initManifesto, initCounters, initBlurWords, initCursor, initPixelButtons, initChrome } from './ui.js';
 
@@ -52,6 +53,7 @@ initBlurWords(reduced);
 initTags({ reduced, lenis });
 initProcess(reduced);
 await initWork({ reduced, lenis });
+initLab(reduced);
 
 /* scroll del hero */
 if (!reduced) {
